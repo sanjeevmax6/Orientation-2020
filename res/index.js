@@ -4,7 +4,7 @@ import {Text, View} from 'react-native';
 const App = () => {
   return (
     <View>
-      <Text>Hello World</Text>
+      <Text>Orientation 2021</Text>
     </View>
   );
 };
