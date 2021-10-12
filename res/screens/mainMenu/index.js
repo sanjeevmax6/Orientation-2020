@@ -3,6 +3,10 @@ import {ScrollView, View, StyleSheet} from 'react-native';
 import {Layout, Text, Card, Icon} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
+import * as eva from '@eva-design/eva';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import {AppNavigator} from '../../navigation/app-navigation';
 import {SafeAreaView} from 'react-native';
 
 const MainMenu = ({navigation}) => {

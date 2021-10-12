@@ -12,3 +12,7 @@ export const Card3Color = '#07e3be';
 export const Card4Color = '#ffcb70';
 export const Card5Color = '#d4deff';
 export const Card6Color = '#7494fc';
+export const Grey='#eaeaea';
+export const Yellow='#ffff00';
+export const Coral='#ff7f50';
+export const BlueNavy='#61dafb';
