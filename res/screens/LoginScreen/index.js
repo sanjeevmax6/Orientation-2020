@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {scale,verticalScale} from 'react-native-size-matters';
+
 import {
   Platform,
   StyleSheet,
@@ -8,7 +10,9 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+
 import {Accent, Grey, Yellow, Black, Coral, BlueNavy} from '../../utils/colors';
+import { borderRadius, borderWidth, fontSizeBig, fontSizeMedium, fontSizeSmall, paddingLeft, paddingLeftBig, paddingLeftMedium, paddingLeftSmall } from '../../utils/UIconstants';
 
 const Login = ({route}) => {
   const LoggedIn = route.params.LoggedIn;
@@ -41,63 +45,61 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 40,
+    padding: paddingLeftBig,
     backgroundColor: Grey,
   },
   textInput1: {
-    marginTop: 10,
-    padding: 10,
-    paddingLeft: 20,
-    fontSize: 20,
+    marginTop: verticalScale(paddingLeftSmall),
+    paddingLeft: scale(paddingLeftMedium),
+    fontSize: scale(fontSizeMedium),
     alignItems: 'center',
-    borderWidth: 4,
-    borderRadius: 10,
+    borderWidth: borderWidth,
+    borderRadius: borderRadius,
     textAlign: 'left',
     backgroundColor: Yellow,
     color: Black,
   },
   button: {
-    marginTop: 10,
-    padding: 5,
-    marginLeft: 80,
-    marginRight: 80,
-    paddingLeft: 20,
-    fontSize: 20,
+    marginTop: scale(paddingLeftSmall),
+    padding: scale(paddingLeftSmall/2),
+    marginLeft: scale(paddingLeftBig*2),
+    marginRight: scale(paddingLeftBig*2),
+    paddingLeft: scale(paddingLeftSmall),
+    fontSize: scale(fontSizeMedium),
     alignItems: 'center',
-    borderWidth: 4,
-    borderRadius: 10,
+    borderWidth: borderWidth,
+    borderRadius: borderRadius,
     textAlign: 'center',
     backgroundColor: Accent,
     color: Black,
   },
   textButton: {
-    fontSize: 20,
+    fontSize: scale(fontSizeMedium),
     alignItems: 'center',
-    padding: 5,
+    padding: scale(paddingLeftSmall/2),
   },
   textInput2: {
-    marginTop: 10,
-    marginBottom: 10,
-    padding: 10,
-    paddingLeft: 20,
-    fontSize: 20,
+    marginTop: verticalScale(paddingLeftSmall),
+    marginBottom: verticalScale(paddingLeftSmall),
+    paddingLeft: scale(paddingLeftMedium),
+    fontSize: scale(fontSizeMedium),
     alignItems: 'center',
-    borderWidth: 4,
-    borderRadius: 10,
+    borderWidth: borderWidth,
+    borderRadius: borderRadius,
     textAlign: 'left',
     backgroundColor: Coral,
     color: Black,
   },
   title: {
-    marginTop: 16,
-    paddingVertical: 8,
-    borderWidth: 4,
+    marginTop: verticalScale(paddingLeftSmall),
+    paddingVertical: scale(paddingLeftSmall),
+    borderWidth: borderWidth,
     borderColor: Black,
-    borderRadius: 6,
+    borderRadius: borderRadius,
     backgroundColor: BlueNavy,
     color: Black,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: scale(fontSizeBig),
     fontWeight: 'bold',
   },
 });

@@ -8,6 +8,7 @@ import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {AppNavigator} from '../../navigation/app-navigation';
 import {SafeAreaView} from 'react-native';
+import { borderRadiusLarge, fontSizeBig, fontSizeMedium, fontSizeSmall, paddingLeftMedium, paddingLeftSmall, paddingRightMedium, paddingRightSmall } from '../../utils/UIconstants';
 
 const MainMenu = ({navigation}) => {
   const data = {
@@ -221,25 +222,25 @@ const styles = StyleSheet.create({
   },
   logoutContainer: {
     marginTop: verticalScale(-30),
-    marginRight: scale(10),
+    paddingRight: scale(paddingRightMedium),
     alignItems: 'flex-end',
   },
   detailsContainer: {
     flex: 1,
-    marginLeft: scale(20),
+    paddingLeft:scale(paddingLeftMedium),
     justifyContent: 'center',
-    marginRight: scale(20),
+    paddingRight:scale(paddingRightMedium),
   },
   iconDashBoard: {
     width: scale(25),
     height: verticalScale(25),
   },
   orientationTitleText: {
-    fontSize: scale(25),
+    fontSize: scale(fontSizeBig),
     color: Colors.White,
   },
   textDashBoard: {
-    fontSize: scale(16),
+    fontSize: scale(fontSizeSmall),
     color: Colors.White,
   },
   mainMenu: {
@@ -260,16 +261,16 @@ const styles = StyleSheet.create({
     height: verticalScale(130),
     width: scale(130),
     justifyContent: 'center',
-    borderRadius: 25,
+    borderRadius: scale(borderRadiusLarge),
     backgroundColor: Colors.Card1Color,
+    marginRight: scale(paddingRightSmall),
     borderWidth: 0,
-    marginRight: scale(10),
   },
   card2: {
     height: verticalScale(90),
     width: scale(130),
-    marginLeft: scale(10),
-    borderRadius: 25,
+    marginLeft: scale(paddingLeftSmall),
+    borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.Card2Color,
@@ -278,10 +279,10 @@ const styles = StyleSheet.create({
   card3: {
     height: verticalScale(90),
     width: scale(130),
-    marginRight: scale(10),
+    marginRight: scale(paddingRightSmall),   
     marginTop: verticalScale(20),
     justifyContent: 'center',
-    borderRadius: 25,
+    borderRadius: scale(borderRadiusLarge),
     alignItems: 'center',
     backgroundColor: Colors.Card3Color,
     borderWidth: 0,
@@ -290,9 +291,9 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(-20),
     height: verticalScale(160),
     width: scale(130),
-    marginLeft: scale(10),
+    marginLeft: scale(paddingLeftSmall),
     justifyContent: 'center',
-    borderRadius: 25,
+    borderRadius: scale(borderRadiusLarge),
     alignItems: 'center',
     backgroundColor: Colors.Card4Color,
     borderWidth: 0,
@@ -301,19 +302,19 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(-10),
     height: verticalScale(140),
     width: scale(130),
-    borderRadius: 25,
+    borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.Card5Color,
     borderWidth: 0,
-    marginRight: scale(10),
+    marginRight: scale(paddingRightSmall),
   },
   card6: {
     marginTop: verticalScale(20),
     height: verticalScale(110),
     width: scale(130),
-    marginLeft: scale(10),
-    borderRadius: 25,
+    marginLeft: scale(paddingLeftSmall),
+    borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.Card6Color,
@@ -322,7 +323,7 @@ const styles = StyleSheet.create({
   textMainMenu: {
     textAlign: 'center',
     textAlignVertical: 'top',
-    fontSize: scale(15),
+    fontSize: scale(fontSizeSmall),
     color: Colors.Black,
   },
   iconMainMenu: {
