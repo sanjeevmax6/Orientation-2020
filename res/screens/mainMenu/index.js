@@ -9,11 +9,13 @@ import {
   fontSizeBig,
   fontSizeMedium,
   fontSizeSmall,
-  paddingLeftMedium,
-  paddingLeftSmall,
-  paddingRightMedium,
-  paddingRightSmall,
-} from "../../utils/UIconstants";
+  paddingMedium,
+  paddingSmall,
+  iconLarge,
+  iconSmall,
+  iconMedium,
+  fontSizeVeryLarge,
+} from "../../utils/UIConstants";
 
 const MainMenu = ({ navigation }) => {
   const data = {
@@ -322,25 +324,25 @@ const styles = StyleSheet.create({
   },
   logoutContainer: {
     marginTop: verticalScale(-30),
-    paddingRight: scale(paddingRightSmall),
+    paddingRight: scale(paddingSmall),
     alignItems: "flex-end",
   },
   detailsContainer: {
     flex: 1,
-    paddingLeft: scale(paddingLeftMedium),
+    paddingLeft: scale(paddingMedium),
     justifyContent: "center",
-    paddingRight: scale(paddingRightMedium),
+    paddingRight: scale(paddingMedium),
   },
   iconDashBoard: {
-    width: scale(25),
-    height: verticalScale(25),
+    width: scale(iconMedium),
+    height: verticalScale(iconMedium),
   },
   orientationTitleText: {
-    fontSize: scale(fontSizeBig),
+    fontSize: scale(fontSizeVeryLarge),
     color: Colors.White,
   },
   textDashBoard: {
-    fontSize: scale(fontSizeMedium) - 2,
+    fontSize: scale(fontSizeBig),
     color: Colors.White,
   },
   mainMenu: {
@@ -364,13 +366,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: scale(borderRadiusLarge),
     backgroundColor: Colors.Card1Color,
-    marginRight: scale(paddingRightSmall),
+    marginRight: scale(paddingSmall),
     borderWidth: 0,
   },
   card2: {
     height: verticalScale(90),
     width: scale(130),
-    marginLeft: scale(paddingLeftSmall),
+    marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
     justifyContent: "center",
     alignItems: "center",
@@ -380,7 +382,7 @@ const styles = StyleSheet.create({
   card3: {
     height: verticalScale(90),
     width: scale(130),
-    marginRight: scale(paddingRightSmall),
+    marginRight: scale(paddingSmall),
     marginTop: verticalScale(20),
     justifyContent: "center",
     borderRadius: scale(borderRadiusLarge),
@@ -392,7 +394,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(-20),
     height: verticalScale(160),
     width: scale(130),
-    marginLeft: scale(paddingLeftSmall),
+    marginLeft: scale(paddingSmall),
     justifyContent: "center",
     borderRadius: scale(borderRadiusLarge),
     alignItems: "center",
@@ -408,13 +410,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.Card5Color,
     borderWidth: 0,
-    marginRight: scale(paddingRightSmall),
+    marginRight: scale(paddingSmall),
   },
   card6: {
     marginTop: verticalScale(20),
     height: verticalScale(110),
     width: scale(130),
-    marginLeft: scale(paddingLeftSmall),
+    marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
     justifyContent: "center",
     alignItems: "center",
@@ -424,12 +426,12 @@ const styles = StyleSheet.create({
   textMainMenu: {
     textAlign: "center",
     textAlignVertical: "top",
-    fontSize: scale(fontSizeSmall),
+    fontSize: scale(fontSizeBig),
     color: Colors.White,
   },
   iconMainMenu: {
-    width: scale(40),
-    height: verticalScale(40),
+    width: scale(iconLarge),
+    height: verticalScale(iconLarge),
   },
 });
 
