@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { scale, verticalScale } from "react-native-size-matters";
+import React, {Component} from 'react';
+import {scale, verticalScale} from 'react-native-size-matters';
 
 import {
   Platform,
@@ -9,16 +9,9 @@ import {
   TouchableOpacityBase,
   View,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-import {
-  Accent,
-  Grey,
-  Yellow,
-  Black,
-  Coral,
-  BlueNavy,
-} from "../../utils/colors";
+import {Accent, Grey, Yellow, Black, Coral, BlueNavy} from '../../utils/colors';
 import {
   borderRadius,
   borderWidth,
@@ -29,14 +22,14 @@ import {
   paddingBig,
   paddingMedium,
   paddingSmall,
-} from "../../utils/UIConstants";
+} from '../../utils/UIConstants';
 
-const Login = ({ route }) => {
+const Login = ({route}) => {
   const LoggedIn = route.params.LoggedIn;
   const pressHandler = () => {
     LoggedIn(true);
   };
-  const Button1 = ({ title }) => {
+  const Button1 = ({title}) => {
     return (
       <TouchableOpacity style={styles.button} onPress={pressHandler}>
         <Text style={styles.textButton}>{title}</Text>
@@ -48,12 +41,10 @@ const Login = ({ route }) => {
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.textInput1}
-        placeholder={"Enter Username"}
-      ></TextInput>
+        placeholder={'Enter Username'}></TextInput>
       <TextInput
         style={styles.textInput2}
-        placeholder={"Enter Password"}
-      ></TextInput>
+        placeholder={'Enter Password'}></TextInput>
 
       <Button1 title="Login" />
     </View>
@@ -63,7 +54,7 @@ const Login = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     padding: paddingBig,
     backgroundColor: Grey,
   },
@@ -71,10 +62,10 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(paddingSmall),
     paddingLeft: scale(paddingMedium),
     fontSize: scale(fontSizeBig),
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: borderWidth,
     borderRadius: borderRadius,
-    textAlign: "left",
+    textAlign: 'left',
     backgroundColor: Yellow,
     color: Black,
   },
@@ -85,16 +76,16 @@ const styles = StyleSheet.create({
     marginRight: scale(paddingBig * 2),
     paddingLeft: scale(paddingSmall),
     fontSize: scale(fontSizeVeryLarge),
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: borderWidth,
     borderRadius: borderRadius,
-    textAlign: "center",
+    textAlign: 'center',
     backgroundColor: Accent,
     color: Black,
   },
   textButton: {
     fontSize: scale(fontSizeBig),
-    alignItems: "center",
+    alignItems: 'center',
     padding: scale(paddingSmall / 2),
   },
   textInput2: {
@@ -102,10 +93,10 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(paddingSmall),
     paddingLeft: scale(paddingMedium),
     fontSize: scale(fontSizeBig),
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: borderWidth,
     borderRadius: borderRadius,
-    textAlign: "left",
+    textAlign: 'left',
     backgroundColor: Coral,
     color: Black,
   },
@@ -117,9 +108,9 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius,
     backgroundColor: BlueNavy,
     color: Black,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: scale(fontSizeVeryLarge),
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 

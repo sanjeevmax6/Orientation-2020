@@ -1,0 +1,151 @@
+diff --git a/node_modules/react-native-calendars/src/calendar/day/basic/style.js b/node_modules/react-native-calendars/src/calendar/day/basic/style.js
+index 7de44d8..5b56e81 100644
+--- a/node_modules/react-native-calendars/src/calendar/day/basic/style.js
++++ b/node_modules/react-native-calendars/src/calendar/day/basic/style.js
+@@ -5,33 +5,41 @@ export default function styleConstructor(theme = {}) {
+     return StyleSheet.create({
+         container: {
+             alignSelf: 'stretch',
+-            alignItems: 'center'
+-        },
+-        base: {
+-            width: 32,
+-            height: 32,
+-            alignItems: 'center'
+-        },
+-        text: {
+-            marginTop: Platform.OS === 'android' ? 4 : 6,
++            alignItems: 'center',
++            marginTop: 0,
++          },
++          text: {
++            marginTop: 10,
+             fontSize: appStyle.textDayFontSize,
+             fontFamily: appStyle.textDayFontFamily,
+             fontWeight: appStyle.textDayFontWeight,
+             color: appStyle.dayTextColor,
+             backgroundColor: 'rgba(255, 255, 255, 0)',
+-            ...appStyle.textDayStyle
++            ...appStyle.textDayStyle,
++          },
++          selected: {
++            backgroundColor: appStyle.selectedDayBackgroundColor,
++            borderRadius: 45,
++            height: 45,
++            width: 45,
++          },
++          today: {
++            backgroundColor: appStyle.todayBackgroundColor,
++            borderRadius: 45,
++            height: 45,
++            width: 45,
++          },
++       
++        base: {
++            width: 32,
++            height: 32,
++            alignItems: 'center'
+         },
++        
+         alignedText: {
+             marginTop: Platform.OS === 'android' ? 4 : 6
+         },
+-        selected: {
+-            backgroundColor: appStyle.selectedDayBackgroundColor,
+-            borderRadius: 16
+-        },
+-        today: {
+-            backgroundColor: appStyle.todayBackgroundColor,
+-            borderRadius: 16
+-        },
++        
+         todayText: {
+             color: appStyle.todayTextColor
+         },
+diff --git a/node_modules/react-native-calendars/src/calendar/header/style.js b/node_modules/react-native-calendars/src/calendar/header/style.js
+index 1b6cd18..3cacf0c 100644
+--- a/node_modules/react-native-calendars/src/calendar/header/style.js
++++ b/node_modules/react-native-calendars/src/calendar/header/style.js
+@@ -8,8 +8,8 @@ export default function (theme = {}) {
+             justifyContent: 'space-between',
+             paddingLeft: 10,
+             paddingRight: 10,
++            alignItems: 'center',
+             marginTop: 6,
+-            alignItems: 'center'
+         },
+         headerContainer: {
+             flexDirection: 'row'
+@@ -38,19 +38,19 @@ export default function (theme = {}) {
+             tintColor: appStyle.disabledArrowColor
+         },
+         week: {
+-            marginTop: 7,
+-            flexDirection: 'row',
+-            justifyContent: 'space-around'
++              marginTop: 0,
++              flexDirection: 'row',
++              justifyContent: 'space-around',
+         },
+         dayHeader: {
+-            marginTop: 2,
+-            marginBottom: 7,
+-            width: 32,
+-            textAlign: 'center',
+-            fontSize: appStyle.textDayHeaderFontSize,
+-            fontFamily: appStyle.textDayHeaderFontFamily,
+-            fontWeight: appStyle.textDayHeaderFontWeight,
+-            color: appStyle.textSectionTitleColor
++            marginTop: 0,
++              marginBottom: 7,
++              width: 40,
++              textAlign: 'center',
++              fontSize: appStyle.textDayHeaderFontSize,
++              fontFamily: appStyle.textDayHeaderFontFamily,
++              fontWeight: appStyle.textDayHeaderFontWeight,
++              color: appStyle.textSectionTitleColor,
+         },
+         disabledDayHeader: {
+             color: appStyle.textSectionTitleDisabledColor
+diff --git a/node_modules/react-native-calendars/src/calendar/style.js b/node_modules/react-native-calendars/src/calendar/style.js
+index 49291d8..3a167f1 100644
+--- a/node_modules/react-native-calendars/src/calendar/style.js
++++ b/node_modules/react-native-calendars/src/calendar/style.js
+@@ -9,6 +9,7 @@ export default function getStyle(theme = {}) {
+             backgroundColor: appStyle.calendarBackground
+         },
+         dayContainer: {
++            marginTop:-1,
+             flex: 1,
+             alignItems: 'center'
+         },
+diff --git a/node_modules/react-native-calendars/src/expandableCalendar/style.js b/node_modules/react-native-calendars/src/expandableCalendar/style.js
+index 9373baa..c9598a2 100644
+--- a/node_modules/react-native-calendars/src/expandableCalendar/style.js
++++ b/node_modules/react-native-calendars/src/expandableCalendar/style.js
+@@ -30,18 +30,18 @@ export default function styleConstructor(theme = {}) {
+             position: 'absolute',
+             left: 0,
+             right: 0,
+-            height: 24,
+-            bottom: 0,
++            height: 8,
++            bottom: -4,
+             alignItems: 'center',
+             justifyContent: 'center',
+-            backgroundColor: appStyle.calendarBackground
+-        },
+-        knob: {
++            backgroundColor: appStyle.calendarBackground,
++          },
++          knob: {
+             width: 40,
+             height: 4,
+             borderRadius: 3,
+-            backgroundColor: '#e8ecf0'
+-        },
++            backgroundColor: '#e8ecf0',
++          },
+         sectionText: {
+             fontWeight: 'bold',
+             fontSize: 12,

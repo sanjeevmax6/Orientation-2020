@@ -1,23 +1,18 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { Layout, Text, Icon } from "@ui-kitten/components";
-import { SafeAreaView } from "react-native";
-import * as Colors from "../../utils/colors";
-import { Calendar } from "react-native-calendars";
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {Layout, Text, Icon} from '@ui-kitten/components';
+import {SafeAreaView} from 'react-native';
+import * as Colors from '../../utils/colors';
+import {Calendar} from 'react-native-calendars';
 import {
-  borderRadiusLarge,
   fontSizeBig,
   fontSizeMedium,
   fontSizeSmall,
-  iconLarge,
   iconMedium,
-  iconSmall,
-  paddingBig,
-  paddingMedium,
   paddingSmall,
-} from "../../utils/UIConstants";
-import moment from "moment";
-import { scale, verticalScale } from "react-native-size-matters";
+} from '../../utils/UIConstants';
+import moment from 'moment';
+import {scale, verticalScale} from 'react-native-size-matters';
 
 const data = {
   //Minimum Date : 1st October 2021
@@ -25,24 +20,24 @@ const data = {
   //Maximum Date : 30th April 2022
   maxDay: new Date(2022, 3, 30),
   //Current Date :
-  currentDay: moment().format("YYYY-MM-DD"),
+  currentDay: moment().format('YYYY-MM-DD'),
   //Title:
-  title: "Academic Calendar",
+  title: 'Academic Calendar',
 };
 
 //Function to find all Sundays between Min Day and Max Day
 function getDaysBetweenDates(start, end, dayName) {
   var sundayHoliday = {};
   var result = [];
-  var days = { sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
+  var days = {sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6};
   var day = days[dayName.toLowerCase().substr(0, 3)];
   var current = new Date(start);
   current.setDate(current.getDate() + ((day - current.getDay() + 7) % 7));
   while (current < end) {
-    result.push(moment(+current).format("YYYY-MM-DD"));
+    result.push(moment(+current).format('YYYY-MM-DD'));
     current.setDate(current.getDate() + 7);
   }
-  result.forEach((date) => {
+  result.forEach(date => {
     sundayHoliday[date] = {
       selected: true,
       selectedColor: Colors.HolidayColor,
@@ -55,10 +50,10 @@ const Timetable = () => {
   const [selectedDate, setSelectedDate] = useState(data.currentDay);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.Grey }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
       <Layout>
         <View style={styles.headingContainer}>
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text style={styles.academicCalendarText}>{data.title}</Text>
           </View>
           <View style={styles.iconHeadingContainer}>
@@ -72,7 +67,7 @@ const Timetable = () => {
         <Calendar
           minDate={data.minDay}
           maxDate={data.maxDay}
-          onDayPress={(day) => setSelectedDate(day.dateString)}
+          onDayPress={day => setSelectedDate(day.dateString)}
           hideExtraDays={true}
           firstDay={1}
           showWeekNumbers={true}
@@ -80,19 +75,21 @@ const Timetable = () => {
           markingType="multi-period"
           markedDates={{
             //Sundays are Marked as Holidays
-            ...getDaysBetweenDates(data.minDay, data.maxDay, "Sun"),
+            ...getDaysBetweenDates(data.minDay, data.maxDay, 'Sun'),
             [selectedDate]: {
               selected: true,
               selectedColor: Colors.selectedDayBackgroundColor,
             },
-            "2021-10-11": {
+            '2021-10-11': {
+              selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
-                { startingDay: true, endingDay: false, color: Colors.Accent },
-                { color: Colors.Transparent },
-                { startingDay: true, endingDay: true, color: Colors.Black },
+                {startingDay: true, endingDay: false, color: Colors.Accent},
+                {color: Colors.Transparent},
+                {startingDay: true, endingDay: true, color: Colors.Black},
               ],
             },
-            "2021-10-12": {
+            '2021-10-12': {
+              selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
                 {
                   startingDay: false,
@@ -101,7 +98,8 @@ const Timetable = () => {
                 },
               ],
             },
-            "2021-10-13": {
+            '2021-10-13': {
+              selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
                 {
                   startingDay: false,
@@ -113,13 +111,14 @@ const Timetable = () => {
           }}
           theme={{
             arrowColor: Colors.Secondary,
-            todayTextColor: Colors.Tertiary,
+            todayTextColor: Colors.todayTextColor,
             textSectionTitleColor: Colors.Tertiary,
-            textMonthFontSize: scale(fontSizeBig),
-            textDayHeaderFontSize: scale(fontSizeMedium - 1),
+            textMonthFontSize: scale(fontSizeBig + 2),
+            textDayHeaderFontSize: scale(fontSizeMedium),
+            textDayFontSize: scale(fontSizeMedium),
             selectedDayBackgroundColor: Colors.selectedDayBackgroundColor,
-            selectedDayTextColor: "#FFFFFF",
-            "stylesheet.calendar.header": {
+            selectedDayTextColor: Colors.White,
+            'stylesheet.calendar.header': {
               dayTextAtIndex6: {
                 color: Colors.Secondary,
               },
@@ -131,29 +130,28 @@ const Timetable = () => {
           }}
         />
         <View style={styles.legendContainer}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View
               style={{
-                flexDirection: "column",
-                justifyContent: "center",
+                flexDirection: 'column',
+                justifyContent: 'center',
                 marginTop: verticalScale(3),
-              }}
-            >
-              <View style={[styles.line, { backgroundColor: Colors.Accent }]} />
+              }}>
+              <View style={[styles.line, {backgroundColor: Colors.Accent}]} />
               <View
-                style={[styles.line, { backgroundColor: Colors.Transparent }]}
+                style={[styles.line, {backgroundColor: Colors.Transparent}]}
               />
-              <View style={[styles.line, { backgroundColor: Colors.Black }]} />
+              <View style={[styles.line, {backgroundColor: Colors.Black}]} />
               <View
-                style={[styles.line, { backgroundColor: Colors.Transparent }]}
+                style={[styles.line, {backgroundColor: Colors.Transparent}]}
               />
               <View
-                style={[styles.line, { backgroundColor: Colors.Secondary }]}
+                style={[styles.line, {backgroundColor: Colors.Secondary}]}
               />
             </View>
             <Text style={styles.legendText}> : Notices</Text>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={styles.circle} />
             <Text style={styles.legendText}> : Holiday</Text>
           </View>
@@ -167,7 +165,7 @@ const styles = StyleSheet.create({
   headingContainer: {
     height: verticalScale(25),
     marginTop: verticalScale(paddingSmall),
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   academicCalendarText: {
     fontSize: scale(fontSizeBig),
@@ -176,7 +174,7 @@ const styles = StyleSheet.create({
   iconHeadingContainer: {
     marginTop: verticalScale(-25),
     paddingRight: scale(paddingSmall) + 3,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   iconHeading: {
     width: scale(iconMedium),
@@ -184,9 +182,9 @@ const styles = StyleSheet.create({
   },
   legendContainer: {
     paddingBottom: verticalScale(paddingSmall / 2),
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   iconLegend: {
     width: scale(iconMedium),
@@ -194,9 +192,9 @@ const styles = StyleSheet.create({
   },
   circle: {
     marginTop: verticalScale(2),
-    width: scale(20),
-    height: verticalScale(20),
-    borderRadius: scale(20 / 2),
+    width: scale(30),
+    height: scale(30),
+    borderRadius: scale(30 / 2),
     backgroundColor: Colors.HolidayColor,
   },
   legendText: {

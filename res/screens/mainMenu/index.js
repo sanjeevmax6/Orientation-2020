@@ -1,9 +1,9 @@
-import React from "react";
-import { ScrollView, View, StyleSheet, ImageBackground } from "react-native";
-import { Layout, Text, Card, Icon } from "@ui-kitten/components";
-import * as Colors from "../../utils/colors";
-import { scale, verticalScale } from "react-native-size-matters";
-import { SafeAreaView } from "react-native";
+import React from 'react';
+import {ScrollView, View, StyleSheet, ImageBackground} from 'react-native';
+import {Layout, Text, Card, Icon} from '@ui-kitten/components';
+import * as Colors from '../../utils/colors';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {SafeAreaView} from 'react-native';
 import {
   borderRadiusLarge,
   fontSizeBig,
@@ -15,27 +15,26 @@ import {
   iconSmall,
   iconMedium,
   fontSizeVeryLarge,
-} from "../../utils/UIConstants";
+} from '../../utils/UIConstants';
 
-const MainMenu = ({ navigation }) => {
+const MainMenu = ({navigation}) => {
   const data = {
-    orientationTitle: "Orientation 2021",
-    studentName: "XYZ",
-    studentRollNo: "106120000",
-    studentBranch: "CSE",
+    orientationTitle: 'Orientation 2021',
+    studentName: 'XYZ',
+    studentRollNo: '106120000',
+    studentBranch: 'CSE',
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
+      <Layout style={{flex: 1}}>
         <View style={styles.dashboard}>
           <ImageBackground
-            source={require("../../assets/dashboardBackground.png")}
+            source={require('../../assets/dashboardBackground.png')}
             style={{
               flex: 1,
             }}
-            resizeMode="cover"
-          >
+            resizeMode="cover">
             <View style={styles.headingContainer}>
               <View style={styles.orientationTitleContainer}>
                 <Text style={styles.orientationTitleText}>
@@ -51,39 +50,37 @@ const MainMenu = ({ navigation }) => {
               </View>
             </View>
             <View style={styles.detailsContainer}>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{flexDirection: 'row'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
                   name="person-outline"
                 />
                 <ScrollView
-                  style={{ height: verticalScale(25), marginLeft: scale(10) }}
-                  horizontal={true}
-                >
+                  style={{height: verticalScale(25), marginLeft: scale(10)}}
+                  horizontal={true}>
                   <Text style={styles.textDashBoard}>{data.studentName}</Text>
                 </ScrollView>
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{flexDirection: 'row'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
                   name="hash-outline"
                 />
-                <Text style={[styles.textDashBoard, { marginLeft: scale(10) }]}>
+                <Text style={[styles.textDashBoard, {marginLeft: scale(10)}]}>
                   {data.studentRollNo}
                 </Text>
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View style={{flexDirection: 'row'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
                   name="book-outline"
                 />
                 <ScrollView
-                  style={{ height: verticalScale(25), marginLeft: scale(10) }}
-                  horizontal={true}
-                >
+                  style={{height: verticalScale(25), marginLeft: scale(10)}}
+                  horizontal={true}>
                   <Text style={styles.textDashBoard}>{data.studentBranch}</Text>
                 </ScrollView>
               </View>
@@ -95,33 +92,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card1}
               onPress={() => {
-                navigation.navigate("Scheduler");
-              }}
-            >
+                navigation.navigate('Scheduler');
+              }}>
               <ImageBackground
-                source={require("../../assets/card1.jpg")}
+                source={require('../../assets/card1.jpg')}
                 style={{
                   height: verticalScale(130),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="calendar-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Scheduler</Text>
                 </View>
               </ImageBackground>
@@ -129,33 +121,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card2}
               onPress={() => {
-                navigation.navigate("VirtualMap");
-              }}
-            >
+                navigation.navigate('VirtualMap');
+              }}>
               <ImageBackground
-                source={require("../../assets/card2.jpg")}
+                source={require('../../assets/card2.jpg')}
                 style={{
                   height: verticalScale(90),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="map-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Virtual Map</Text>
                 </View>
               </ImageBackground>
@@ -166,33 +153,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card3}
               onPress={() => {
-                navigation.navigate("Contacts");
-              }}
-            >
+                navigation.navigate('Contacts');
+              }}>
               <ImageBackground
-                source={require("../../assets/card3.jpg")}
+                source={require('../../assets/card3.jpg')}
                 style={{
                   height: verticalScale(90),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="people-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Contacts</Text>
                 </View>
               </ImageBackground>
@@ -200,33 +182,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card4}
               onPress={() => {
-                navigation.navigate("ClubsAndFests");
-              }}
-            >
+                navigation.navigate('ClubsAndFests');
+              }}>
               <ImageBackground
-                source={require("../../assets/card4.jpg")}
+                source={require('../../assets/card4.jpg')}
                 style={{
                   height: verticalScale(160),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="bulb-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Clubs & Fests</Text>
                 </View>
               </ImageBackground>
@@ -237,33 +214,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card5}
               onPress={() => {
-                navigation.navigate("MagazineAndSymposium");
-              }}
-            >
+                navigation.navigate('MagazineAndSymposium');
+              }}>
               <ImageBackground
-                source={require("../../assets/card5.jpg")}
+                source={require('../../assets/card5.jpg')}
                 style={{
                   height: verticalScale(140),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="award-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Magazine & Symposium</Text>
                 </View>
               </ImageBackground>
@@ -271,33 +243,28 @@ const MainMenu = ({ navigation }) => {
             <Card
               style={styles.card6}
               onPress={() => {
-                navigation.navigate("Timetable");
-              }}
-            >
+                navigation.navigate('Timetable');
+              }}>
               <ImageBackground
-                source={require("../../assets/card6.jpg")}
+                source={require('../../assets/card6.jpg')}
                 style={{
                   height: verticalScale(110),
                   width: scale(130),
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <View
                   style={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Icon
                     style={styles.iconMainMenu}
                     fill={Colors.White}
                     name="browser-outline"
                   />
                 </View>
-                <View
-                  style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={styles.textMainMenu}>Academic Calendar</Text>
                 </View>
               </ImageBackground>
@@ -319,18 +286,18 @@ const styles = StyleSheet.create({
   },
   orientationTitleContainer: {
     marginTop: verticalScale(15),
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logoutContainer: {
     marginTop: verticalScale(-30),
     paddingRight: scale(paddingSmall),
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   detailsContainer: {
     flex: 1,
     paddingLeft: scale(paddingMedium),
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingRight: scale(paddingMedium),
   },
   iconDashBoard: {
@@ -348,22 +315,22 @@ const styles = StyleSheet.create({
   mainMenu: {
     flex: 1,
     backgroundColor: Colors.White,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   cardGrid: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     backgroundColor: Colors.White,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   card1: {
     height: verticalScale(130),
     width: scale(130),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: scale(borderRadiusLarge),
     backgroundColor: Colors.Card1Color,
     marginRight: scale(paddingSmall),
@@ -374,8 +341,8 @@ const styles = StyleSheet.create({
     width: scale(130),
     marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.Card2Color,
     borderWidth: 0,
   },
@@ -384,9 +351,9 @@ const styles = StyleSheet.create({
     width: scale(130),
     marginRight: scale(paddingSmall),
     marginTop: verticalScale(20),
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: scale(borderRadiusLarge),
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: Colors.Card3Color,
     borderWidth: 0,
   },
@@ -395,9 +362,9 @@ const styles = StyleSheet.create({
     height: verticalScale(160),
     width: scale(130),
     marginLeft: scale(paddingSmall),
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: scale(borderRadiusLarge),
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: Colors.Card4Color,
     borderWidth: 0,
   },
@@ -406,8 +373,8 @@ const styles = StyleSheet.create({
     height: verticalScale(140),
     width: scale(130),
     borderRadius: scale(borderRadiusLarge),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.Card5Color,
     borderWidth: 0,
     marginRight: scale(paddingSmall),
@@ -418,14 +385,14 @@ const styles = StyleSheet.create({
     width: scale(130),
     marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.Card6Color,
     borderWidth: 0,
   },
   textMainMenu: {
-    textAlign: "center",
-    textAlignVertical: "top",
+    textAlign: 'center',
+    textAlignVertical: 'top',
     fontSize: scale(fontSizeBig),
     color: Colors.White,
   },
