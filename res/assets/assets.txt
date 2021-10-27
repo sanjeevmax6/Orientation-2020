@@ -1,1 +1,0 @@
-this is for holding assets like images, lottie files, etc

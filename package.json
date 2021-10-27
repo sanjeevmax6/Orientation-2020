@@ -25,6 +25,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
     "react-native-size-matters": "^0.4.0",
+    "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^9.13.6",
     "react-native-ui-kitten": "^4.4.1",
     "react-navigation": "^4.4.4",
