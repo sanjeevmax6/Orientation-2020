@@ -64,6 +64,7 @@ const Scheduler = () => {
           dotStyle: {
             width: scale(5.25),
             height: scale(5.25),
+            marginTop: verticalScale(-0.25),
           },
         }}
         markingType={'multi-dot'}
