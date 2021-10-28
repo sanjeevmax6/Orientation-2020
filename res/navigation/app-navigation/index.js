@@ -8,7 +8,7 @@ import VirtualMap from '../../screens/virtualMap';
 import MagazineAndSymposium from '../../screens/magazineAndSymposium';
 import ClubsAndFests from '../../screens/clubsAndFests';
 import Timetable from '../../screens/timetable';
-
+import Header from '../../components/header';
 const stack = createNativeStackNavigator();
 
 function AppNavigator({params}) {
@@ -42,7 +42,11 @@ function AppNavigator({params}) {
       <stack.Screen
         name="ClubsAndFests"
         component={ClubsAndFests}
-        options={{headerShown: false}}
+        // options={{headerShown: true}}
+        options={{
+          headerShown: true,
+          header: props => <Header props={props} title="Clubs and Fests" />,
+        }}
       />
       <stack.Screen
         name="Timetable"

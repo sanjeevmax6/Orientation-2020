@@ -13,7 +13,7 @@ export const Card3Color = '#07e3be';
 export const Card4Color = '#ffcb70';
 export const Card5Color = '#d4deff';
 export const Card6Color = '#7494fc';
-export const DashboardLogo = '#ffcb70';
+export const DashboardLogo = '#f4a261';
 
 //Colors for Timetable Screen
 export const HolidayColor = '#40E0D0';
