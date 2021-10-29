@@ -1,25 +1,25 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
 import {
-  Platform,
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacityBase,
   View,
   TouchableOpacity,
 } from 'react-native';
 
-import {Accent, Grey, Yellow, Black, Coral, BlueNavy} from '../../utils/colors';
+import LottieView from 'lottie-react-native';
+import loginLottie from '../../assets/lottieFiles/login.json';
+import {Icon} from '@ui-kitten/components';
+import LinearGradient from 'react-native-linear-gradient';
+
+import {Black} from '../../utils/colors';
 import {
   borderRadius,
   borderWidth,
   fontSizeBig,
-  fontSizeMedium,
-  fontSizeSmall,
   fontSizeVeryLarge,
-  paddingBig,
   paddingMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
@@ -29,86 +29,106 @@ const Login = ({route}) => {
   const pressHandler = () => {
     LoggedIn(true);
   };
-  const Button1 = ({title}) => {
-    return (
-      <TouchableOpacity style={styles.button} onPress={pressHandler}>
-        <Text style={styles.textButton}>{title}</Text>
-      </TouchableOpacity>
-    );
-  };
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.textInput1}
-        placeholder={'Enter Username'}></TextInput>
-      <TextInput
-        style={styles.textInput2}
-        placeholder={'Enter Password'}></TextInput>
 
-      <Button1 title="Login" />
+  return (
+    <View>
+      <View
+        style={{
+          height: verticalScale(310),
+          width: '100%',
+        }}>
+        <Text style={styles.title}>LOGIN</Text>
+        <TextInput style={styles.textInput} placeholder={'Enter Username'} />
+        <TextInput style={styles.textInput} placeholder={'Enter Password'} />
+        <View
+          style={{
+            height: verticalScale(30),
+            alignContent: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: scale(12),
+            }}>
+            Don't have an account
+            <Text
+              style={{
+                color: '#f13e4d',
+                fontWeight: 'bold',
+                fontSize: scale(14),
+              }}>
+              {' '}
+              SIGN UP!
+            </Text>
+          </Text>
+        </View>
+        <View
+          style={{
+            alignItems: 'flex-end',
+          }}>
+          <LinearGradient
+            start={{x: 0.0, y: 0.25}}
+            end={{x: 0.5, y: 1.0}}
+            locations={[0, 0.6, 0.8]}
+            colors={['#f13e4d', '#ff5130', '#ff512f']}
+            style={{
+              backgroundColor: 'red',
+              height: verticalScale(40),
+              width: verticalScale(40),
+              borderRadius: verticalScale(20),
+              marginRight: scale(paddingMedium),
+            }}>
+            <TouchableOpacity onPress={pressHandler}>
+              <Icon
+                fill="white"
+                style={{
+                  height: verticalScale(40),
+                  width: verticalScale(40),
+                  borderRadius: verticalScale(20),
+                }}
+                name="arrow-ios-forward-outline"
+              />
+            </TouchableOpacity>
+          </LinearGradient>
+        </View>
+      </View>
+      <View
+        style={{
+          height: verticalScale(390),
+          width: '100%',
+          alignSelf: 'center',
+          justifyContent: 'center',
+        }}>
+        <LottieView
+          source={loginLottie}
+          progress={1}
+          autoSize={false}
+          resizeMode="contain"
+          autoPlay
+          loop
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: paddingBig,
-    backgroundColor: Grey,
-  },
-  textInput1: {
+  textInput: {
     marginTop: verticalScale(paddingSmall),
-    paddingLeft: scale(paddingMedium),
+    marginHorizontal: scale(paddingMedium),
     fontSize: scale(fontSizeBig),
     alignItems: 'center',
     borderWidth: borderWidth,
     borderRadius: borderRadius,
-    textAlign: 'left',
-    backgroundColor: Yellow,
     color: Black,
   },
-  button: {
-    marginTop: scale(paddingSmall),
-    padding: scale(paddingSmall / 2),
-    marginLeft: scale(paddingBig * 2),
-    marginRight: scale(paddingBig * 2),
-    paddingLeft: scale(paddingSmall),
-    fontSize: scale(fontSizeVeryLarge),
-    alignItems: 'center',
-    borderWidth: borderWidth,
-    borderRadius: borderRadius,
-    textAlign: 'center',
-    backgroundColor: Accent,
-    color: Black,
-  },
-  textButton: {
-    fontSize: scale(fontSizeBig),
-    alignItems: 'center',
-    padding: scale(paddingSmall / 2),
-  },
-  textInput2: {
-    marginTop: verticalScale(paddingSmall),
-    marginBottom: verticalScale(paddingSmall),
-    paddingLeft: scale(paddingMedium),
-    fontSize: scale(fontSizeBig),
-    alignItems: 'center',
-    borderWidth: borderWidth,
-    borderRadius: borderRadius,
-    textAlign: 'left',
-    backgroundColor: Coral,
-    color: Black,
-  },
+
   title: {
     marginTop: verticalScale(paddingSmall),
     paddingVertical: scale(paddingSmall),
-    borderWidth: borderWidth,
-    borderColor: Black,
-    borderRadius: borderRadius,
-    backgroundColor: BlueNavy,
     color: Black,
-    textAlign: 'center',
+    paddingLeft: scale(paddingMedium),
     fontSize: scale(fontSizeVeryLarge),
     fontWeight: 'bold',
   },
