@@ -9,7 +9,6 @@ const Contacts = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Layout style={{flex: 1}}>
-        <Text>Contacts</Text>
         <View style={styles.container}>
           <ContactCard />
           <ContactCard />

@@ -5,9 +5,7 @@ import {SafeAreaView} from 'react-native';
 const VirtualMap = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Layout>
-        <Text>Virtual Map</Text>
-      </Layout>
+      <Layout></Layout>
     </SafeAreaView>
   );
 };

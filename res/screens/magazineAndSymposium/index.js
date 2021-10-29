@@ -5,9 +5,7 @@ import {SafeAreaView} from 'react-native';
 const MagazineAndSymposium = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Layout>
-        <Text>Magazine And Symposium</Text>
-      </Layout>
+      <Layout></Layout>
     </SafeAreaView>
   );
 };

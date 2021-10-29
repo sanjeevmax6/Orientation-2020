@@ -35,6 +35,7 @@ const Scheduler = () => {
   return (
     <CalendarProvider date={data.currentDay}>
       <ExpandableCalendar
+        style={{marginTop: verticalScale(-paddingSmall / 2)}}
         minDate={data.minDay}
         maxDate={data.maxDay}
         firstDay={1}

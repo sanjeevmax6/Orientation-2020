@@ -1,5 +1,11 @@
 import React from 'react';
-import {ScrollView, View, StyleSheet, ImageBackground} from 'react-native';
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {Layout, Text, Card, Icon} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -42,11 +48,13 @@ const MainMenu = ({navigation}) => {
                 </Text>
               </View>
               <View style={styles.logoutContainer}>
-                <Icon
-                  style={styles.iconDashBoard}
-                  fill={Colors.DashboardLogo}
-                  name="log-out-outline"
-                />
+                <TouchableOpacity>
+                  <Icon
+                    style={styles.iconDashBoard}
+                    fill={Colors.DashboardLogo}
+                    name="log-out-outline"
+                  />
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.detailsContainer}>
@@ -285,7 +293,7 @@ const styles = StyleSheet.create({
     height: verticalScale(50),
   },
   orientationTitleContainer: {
-    marginTop: verticalScale(15),
+    marginTop: verticalScale(10),
     alignItems: 'center',
     justifyContent: 'center',
   },

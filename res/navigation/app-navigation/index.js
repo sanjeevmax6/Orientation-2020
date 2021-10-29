@@ -22,22 +22,36 @@ function AppNavigator({params}) {
       <stack.Screen
         name="Scheduler"
         component={Scheduler}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          header: props => <Header props={props} title="Scheduler" />,
+        }}
       />
       <stack.Screen
         name="VirtualMap"
         component={VirtualMap}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          header: props => <Header props={props} title="Virtual Map" />,
+        }}
       />
       <stack.Screen
         name="Contacts"
         component={Contacts}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          header: props => <Header props={props} title="Contacts" />,
+        }}
       />
       <stack.Screen
         name="MagazineAndSymposium"
         component={MagazineAndSymposium}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          header: props => (
+            <Header props={props} title="Magazine and Symposium" />
+          ),
+        }}
       />
       <stack.Screen
         name="ClubsAndFests"
@@ -51,7 +65,10 @@ function AppNavigator({params}) {
       <stack.Screen
         name="Timetable"
         component={Timetable}
-        options={{headerShown: false}}
+        options={{
+          headerShown: true,
+          header: props => <Header props={props} title="Academic Calendar" />,
+        }}
       />
     </stack.Navigator>
   );

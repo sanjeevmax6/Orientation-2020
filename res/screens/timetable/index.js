@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Layout, Text, Icon} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native';
 import * as Colors from '../../utils/colors';
@@ -10,6 +10,8 @@ import {
   fontSizeSmall,
   iconMedium,
   paddingSmall,
+  paddingMedium,
+  paddingLarge,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -52,19 +54,8 @@ const Timetable = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
       <Layout>
-        <View style={styles.headingContainer}>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={styles.academicCalendarText}>{data.title}</Text>
-          </View>
-          <View style={styles.iconHeadingContainer}>
-            <Icon
-              style={styles.iconHeading}
-              fill={Colors.Tertiary}
-              name="download-outline"
-            />
-          </View>
-        </View>
         <Calendar
+          style={{marginTop: verticalScale(-paddingSmall / 2)}}
           minDate={data.minDay}
           maxDate={data.maxDay}
           onDayPress={day => setSelectedDate(day.dateString)}
@@ -155,6 +146,16 @@ const Timetable = () => {
             <View style={styles.circle} />
             <Text style={styles.legendText}> : Holiday</Text>
           </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity>
+              <Icon
+                style={styles.downloadIcon}
+                fill={Colors.Tertiary}
+                name="download-outline"
+              />
+            </TouchableOpacity>
+            <Text style={styles.legendText}> : PDF</Text>
+          </View>
         </View>
       </Layout>
     </SafeAreaView>
@@ -162,25 +163,12 @@ const Timetable = () => {
 };
 
 const styles = StyleSheet.create({
-  headingContainer: {
-    height: verticalScale(25),
-    marginTop: verticalScale(paddingSmall),
-    justifyContent: 'center',
-  },
-  academicCalendarText: {
-    fontSize: scale(fontSizeBig),
-    color: Colors.Black,
-  },
-  iconHeadingContainer: {
-    marginTop: verticalScale(-25),
-    paddingRight: scale(paddingSmall) + 3,
-    alignItems: 'flex-end',
-  },
-  iconHeading: {
+  downloadIcon: {
     width: scale(iconMedium),
     height: verticalScale(iconMedium),
   },
   legendContainer: {
+    marginVertical: verticalScale(7),
     paddingBottom: verticalScale(paddingSmall / 2),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -191,10 +179,9 @@ const styles = StyleSheet.create({
     height: verticalScale(iconMedium),
   },
   circle: {
-    marginTop: verticalScale(2),
-    width: scale(30),
-    height: scale(30),
-    borderRadius: scale(30 / 2),
+    width: scale(25),
+    height: scale(25),
+    borderRadius: scale(25 / 2),
     backgroundColor: Colors.HolidayColor,
   },
   legendText: {
@@ -203,7 +190,7 @@ const styles = StyleSheet.create({
   },
   line: {
     height: verticalScale(2),
-    width: scale(35),
+    width: scale(25),
   },
 });
 
