@@ -1,6 +1,5 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 import MainMenu from '../../screens/mainMenu';
 import Scheduler from '../../screens/scheduler';
 import Contacts from '../../screens/contacts';
@@ -11,7 +10,7 @@ import Timetable from '../../screens/timetable';
 import Header from '../../components/header';
 const stack = createNativeStackNavigator();
 
-function AppNavigator({params}) {
+function AppNavigator() {
   return (
     <stack.Navigator>
       <stack.Screen
@@ -24,6 +23,7 @@ function AppNavigator({params}) {
         component={Scheduler}
         options={{
           headerShown: true,
+          animation: 'slide_from_right',
           header: props => <Header props={props} title="Scheduler" />,
         }}
       />
@@ -31,6 +31,7 @@ function AppNavigator({params}) {
         name="VirtualMap"
         component={VirtualMap}
         options={{
+          animation: 'slide_from_right',
           headerShown: true,
           header: props => <Header props={props} title="Virtual Map" />,
         }}
@@ -39,6 +40,7 @@ function AppNavigator({params}) {
         name="Contacts"
         component={Contacts}
         options={{
+          animation: 'slide_from_right',
           headerShown: true,
           header: props => <Header props={props} title="Contacts" />,
         }}
@@ -47,6 +49,7 @@ function AppNavigator({params}) {
         name="MagazineAndSymposium"
         component={MagazineAndSymposium}
         options={{
+          animation: 'slide_from_right',
           headerShown: true,
           header: props => (
             <Header props={props} title="Magazine and Symposium" />
@@ -59,6 +62,7 @@ function AppNavigator({params}) {
         // options={{headerShown: true}}
         options={{
           headerShown: true,
+          animation: 'slide_from_right',
           header: props => <Header props={props} title="Clubs and Fests" />,
         }}
       />
@@ -66,6 +70,7 @@ function AppNavigator({params}) {
         name="Timetable"
         component={Timetable}
         options={{
+          animation: 'slide_from_right',
           headerShown: true,
           header: props => <Header props={props} title="Academic Calendar" />,
         }}

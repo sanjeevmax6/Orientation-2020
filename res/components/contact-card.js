@@ -1,32 +1,47 @@
 import React from 'react';
-import {Text, Card} from '@ui-kitten/components';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import {Card} from '@ui-kitten/components';
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Text,
+  PixelRatio,
+} from 'react-native';
+
+import LinearGradient from 'react-native-linear-gradient';
 import {scale, verticalScale} from 'react-native-size-matters';
+
 import {
   borderRadiusLarge,
   fontSizeMedium,
-  fontSizeBig,
   paddingMedium,
-  paddingSmall,
 } from '../utils/UIConstants';
 import {Black, White} from '../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
 
+let cardHeight = 200;
+let cardWidth = 150;
 const ContactCard = () => {
   return (
     <>
       <Card style={styles.card}>
         <ImageBackground
-          source={require('../assets/contact-card.jpg')}
+          source={{
+            uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+          }}
           resizeMode="cover"
           style={styles.image}>
           <LinearGradient
-            colors={['transparent', Black]}
+            colors={['transparent', 'rgba(10, 10, 10, 0.75)', Black]}
             style={styles.linearGradient}
-            locations={[0.3, 1.2]}></LinearGradient>
+            locations={[0.5, 0.75, 1.0]}
+          />
           <View style={styles.textContainer}>
-            <Text style={styles.textName}>Maria</Text>
-            <Text style={styles.textBody}>Designer</Text>
+            <Text numberOfLines={1} style={styles.textName}>
+              KANTI
+            </Text>
+            <Text numberOfLines={1} style={styles.textBody}>
+              BEIN
+            </Text>
           </View>
         </ImageBackground>
       </Card>
@@ -36,17 +51,17 @@ const ContactCard = () => {
 
 const styles = StyleSheet.create({
   card: {
-    height: verticalScale(160),
-    width: scale(130),
+    height: verticalScale(cardHeight),
+    width: scale(cardWidth),
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: borderRadiusLarge,
     borderWidth: 0,
-    margin: paddingMedium,
+    //margin: paddingMedium,
   },
   image: {
-    height: verticalScale(160),
-    width: scale(130),
+    height: verticalScale(cardHeight),
+    width: scale(cardWidth),
   },
   linearGradient: {
     backgroundColor: 'transparent',
@@ -55,6 +70,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    height: verticalScale(cardHeight),
+    width: scale(cardWidth),
   },
   textContainer: {
     height: verticalScale(40),
@@ -64,14 +81,14 @@ const styles = StyleSheet.create({
   },
   textName: {
     marginLeft: scale(paddingMedium),
-    fontSize: fontSizeBig,
+    fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
     color: White,
   },
   textBody: {
-    marginTop: verticalScale(-3),
     marginLeft: scale(paddingMedium),
-    fontSize: fontSizeMedium,
+    fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
     color: White,
+    marginTop: verticalScale(-3),
   },
 });
 
