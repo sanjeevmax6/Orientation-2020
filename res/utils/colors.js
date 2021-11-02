@@ -28,3 +28,7 @@ export const Grey = '#eaeaea';
 export const Yellow = '#ffff00';
 export const Coral = '#ff7f50';
 export const BlueNavy = '#61dafb';
+
+//Colors for Map Screen
+export const mapNittRegion = 'rgba(240, 240, 255, 0.3)';
+export const cardContainer = 'rgba(0,0,0,0.6)';

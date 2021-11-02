@@ -12,6 +12,7 @@ export const fontSizeSmall = 12;
 //border
 export const borderWidth = 4;
 export const borderRadius = 6;
+export const borderRadiusMedium = 10;
 export const borderRadiusLarge = 20;
 
 //icon

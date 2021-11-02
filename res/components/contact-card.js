@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     width: scale(cardWidth),
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: borderRadiusLarge,
+    borderRadius: scale(borderRadiusLarge),
     borderWidth: 0,
     //margin: paddingMedium,
   },

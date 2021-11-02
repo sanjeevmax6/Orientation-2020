@@ -5,8 +5,9 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  Text,
 } from 'react-native';
-import {Layout, Text, Card, Icon} from '@ui-kitten/components';
+import {Layout, Card, Icon} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {SafeAreaView} from 'react-native';
@@ -36,7 +37,7 @@ const MainMenu = ({navigation}) => {
       <Layout style={{flex: 1}}>
         <View style={styles.dashboard}>
           <ImageBackground
-            source={require('../../assets/dashboardBackground.png')}
+            source={require('../../assets/images/dashboardBackground.png')}
             style={{
               flex: 1,
             }}
@@ -103,7 +104,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('Scheduler');
               }}>
               <ImageBackground
-                source={require('../../assets/card1.jpg')}
+                source={require('../../assets/images/card1.jpg')}
                 style={{
                   height: verticalScale(130),
                   width: scale(130),
@@ -132,7 +133,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('VirtualMap');
               }}>
               <ImageBackground
-                source={require('../../assets/card2.jpg')}
+                source={require('../../assets/images/card2.jpg')}
                 style={{
                   height: verticalScale(90),
                   width: scale(130),
@@ -164,7 +165,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('Contacts');
               }}>
               <ImageBackground
-                source={require('../../assets/card3.jpg')}
+                source={require('../../assets/images/card3.jpg')}
                 style={{
                   height: verticalScale(90),
                   width: scale(130),
@@ -193,7 +194,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('ClubsAndFests');
               }}>
               <ImageBackground
-                source={require('../../assets/card4.jpg')}
+                source={require('../../assets/images/card4.jpg')}
                 style={{
                   height: verticalScale(160),
                   width: scale(130),
@@ -225,7 +226,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('MagazineAndSymposium');
               }}>
               <ImageBackground
-                source={require('../../assets/card5.jpg')}
+                source={require('../../assets/images/card5.jpg')}
                 style={{
                   height: verticalScale(140),
                   width: scale(130),
@@ -254,7 +255,7 @@ const MainMenu = ({navigation}) => {
                 navigation.navigate('Timetable');
               }}>
               <ImageBackground
-                source={require('../../assets/card6.jpg')}
+                source={require('../../assets/images/card6.jpg')}
                 style={{
                   height: verticalScale(110),
                   width: scale(130),
@@ -332,7 +333,7 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: 'row',
     backgroundColor: Colors.White,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   card1: {
     height: verticalScale(130),
@@ -341,13 +342,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: scale(borderRadiusLarge),
     backgroundColor: Colors.Card1Color,
-    marginRight: scale(paddingSmall),
     borderWidth: 0,
   },
   card2: {
     height: verticalScale(90),
     width: scale(130),
-    marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
@@ -357,7 +356,6 @@ const styles = StyleSheet.create({
   card3: {
     height: verticalScale(90),
     width: scale(130),
-    marginRight: scale(paddingSmall),
     marginTop: verticalScale(20),
     justifyContent: 'center',
     borderRadius: scale(borderRadiusLarge),
@@ -369,7 +367,6 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(-20),
     height: verticalScale(160),
     width: scale(130),
-    marginLeft: scale(paddingSmall),
     justifyContent: 'center',
     borderRadius: scale(borderRadiusLarge),
     alignItems: 'center',
@@ -385,13 +382,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.Card5Color,
     borderWidth: 0,
-    marginRight: scale(paddingSmall),
   },
   card6: {
     marginTop: verticalScale(20),
     height: verticalScale(110),
     width: scale(130),
-    marginLeft: scale(paddingSmall),
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
