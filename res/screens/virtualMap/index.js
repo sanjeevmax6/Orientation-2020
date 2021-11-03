@@ -69,10 +69,10 @@ const VirtualMap = () => {
     let location = places[index];
 
     _map.current.animateToRegion({
-      latitude: location.latitude,
+      latitude: location.latitude - 0.0006,
       longitude: location.longitude,
-      latitudeDelta: 0.0025,
-      longitudeDelta: 0.0025,
+      latitudeDelta: location.latitudeDelta,
+      longitudeDelta: location.longitudeDelta,
     });
 
     markers[index].showCallout();
@@ -80,10 +80,10 @@ const VirtualMap = () => {
 
   const onMarkerPressed = (location, index) => {
     _map.current.animateToRegion({
-      latitude: location.latitude,
+      latitude: location.latitude - 0.0006,
       longitude: location.longitude,
-      latitudeDelta: 0.0025,
-      longitudeDelta: 0.0025,
+      latitudeDelta: location.latitudeDelta,
+      longitudeDelta: location.longitudeDelta,
     });
     _carousel.current.snapToItem(index);
   };
@@ -139,146 +139,109 @@ const VirtualMap = () => {
           ))}
         </MapView>
         <View style={styles.dashBoard}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View style={styles.campusCardContainer}>
-              <Card
-                style={styles.campusCard}
-                onPress={() =>
-                  _map.current.animateToRegion(Coordinates.initialRegion)
-                }>
-                <ImageBackground
-                  source={require('../../assets/images/card4.jpg')}
-                  style={{
-                    height: verticalScale(categoryCardDimension),
-                    width: scale(categoryCardDimension),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon
-                      name="graduation-cap"
-                      style={styles.categoryIcons}
-                      pack="FontAwesome5"
-                    />
-                  </View>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.categoryText}>Campus</Text>
-                  </View>
-                </ImageBackground>
-              </Card>
-            </View>
-            <View style={styles.categoryCardsContainer}>
-              <Card
-                style={styles.categoryCards}
-                onPress={() => {
-                  if (0 == choice) {
-                  } else {
-                    setChoice(0);
-                    setPlaces(general);
-                    _carousel.current.snapToItem(0);
-                  }
+          <View style={styles.categoryCardsContainer}>
+            <Card
+              style={styles.categoryCards}
+              onPress={() => {
+                if (0 == choice) {
+                } else {
+                  setChoice(0);
+                  setPlaces(general);
+                  _carousel.current.snapToItem(0);
+                }
+              }}>
+              <ImageBackground
+                source={require('../../assets/images/card1.jpg')}
+                style={{
+                  height: verticalScale(categoryCardDimension),
+                  width: scale(categoryCardDimension),
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}>
-                <ImageBackground
-                  source={require('../../assets/images/card1.jpg')}
+                <View
                   style={{
-                    height: verticalScale(categoryCardDimension),
-                    width: scale(categoryCardDimension),
-                    justifyContent: 'center',
                     alignItems: 'center',
+                    justifyContent: 'center',
                   }}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon
-                      name="building"
-                      style={styles.categoryIcons}
-                      pack="FontAwesome5"
-                    />
-                  </View>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.categoryText}>General</Text>
-                  </View>
-                </ImageBackground>
-              </Card>
-              <Card
-                style={styles.categoryCards}
-                onPress={() => {
-                  if (1 == choice) {
-                  } else {
-                    setChoice(1);
-                    setPlaces(department);
-                    _carousel.current.snapToItem(0);
-                  }
+                  <Icon
+                    name="building"
+                    style={styles.categoryIcons}
+                    pack="FontAwesome5"
+                  />
+                </View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.categoryText}>General</Text>
+                </View>
+              </ImageBackground>
+            </Card>
+            <Card
+              style={styles.categoryCards}
+              onPress={() => {
+                if (1 == choice) {
+                } else {
+                  setChoice(1);
+                  setPlaces(department);
+                  _carousel.current.snapToItem(0);
+                }
+              }}>
+              <ImageBackground
+                source={require('../../assets/images/card2.jpg')}
+                style={{
+                  height: verticalScale(categoryCardDimension),
+                  width: scale(categoryCardDimension),
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}>
-                <ImageBackground
-                  source={require('../../assets/images/card2.jpg')}
+                <View
                   style={{
-                    height: verticalScale(categoryCardDimension),
-                    width: scale(categoryCardDimension),
-                    justifyContent: 'center',
                     alignItems: 'center',
+                    justifyContent: 'center',
                   }}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon
-                      name="school"
-                      style={styles.categoryIcons}
-                      pack="FontAwesome5"
-                    />
-                  </View>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.categoryText}>Dept</Text>
-                  </View>
-                </ImageBackground>
-              </Card>
-              <Card
-                style={styles.categoryCards}
-                onPress={() => {
-                  if (2 == choice) {
-                  } else {
-                    setChoice(2);
-                    setPlaces(hostel);
-                    _carousel.current.snapToItem(0);
-                  }
+                  <Icon
+                    name="school"
+                    style={styles.categoryIcons}
+                    pack="FontAwesome5"
+                  />
+                </View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.categoryText}>Dept</Text>
+                </View>
+              </ImageBackground>
+            </Card>
+            <Card
+              style={styles.categoryCards}
+              onPress={() => {
+                if (2 == choice) {
+                } else {
+                  setChoice(2);
+                  setPlaces(hostel);
+                  _carousel.current.snapToItem(0);
+                }
+              }}>
+              <ImageBackground
+                source={require('../../assets/images/card3.jpg')}
+                style={{
+                  height: verticalScale(categoryCardDimension),
+                  width: scale(categoryCardDimension),
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}>
-                <ImageBackground
-                  source={require('../../assets/images/card3.jpg')}
+                <View
                   style={{
-                    height: verticalScale(categoryCardDimension),
-                    width: scale(categoryCardDimension),
-                    justifyContent: 'center',
                     alignItems: 'center',
+                    justifyContent: 'center',
                   }}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon
-                      name="house-user"
-                      style={styles.categoryIcons}
-                      pack="FontAwesome5"
-                    />
-                  </View>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.categoryText}>Hostel</Text>
-                  </View>
-                </ImageBackground>
-              </Card>
-            </View>
+                  <Icon
+                    name="house-user"
+                    style={styles.categoryIcons}
+                    pack="FontAwesome5"
+                  />
+                </View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.categoryText}>Hostel</Text>
+                </View>
+              </ImageBackground>
+            </Card>
           </View>
           <Carousel
             ref={_carousel}
@@ -301,7 +264,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    //To hide 'Open with Google Maps' Logo
+    bottom: scale(-100),
+    left: 0,
   },
   carousel: {},
   cardContainer: {
@@ -341,6 +309,7 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(paddingMedium),
   },
   categoryCardsContainer: {
+    alignItems: 'flex-end',
     padding: scale(paddingSmall),
   },
   categoryCards: {
@@ -359,19 +328,8 @@ const styles = StyleSheet.create({
   categoryText: {
     paddingHorizontal: scale(5),
     textAlign: 'center',
-    fontSize: scale(fontSizeSmall - 3),
+    fontSize: scale(fontSizeSmall - 2),
     color: Colors.White,
-  },
-  campusCardContainer: {
-    padding: scale(paddingSmall),
-    justifyContent: 'flex-end',
-  },
-  campusCard: {
-    width: scale(categoryCardDimension),
-    height: scale(categoryCardDimension),
-    borderRadius: scale(borderRadiusLarge),
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
