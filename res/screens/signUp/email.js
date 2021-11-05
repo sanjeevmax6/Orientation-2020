@@ -10,9 +10,7 @@ import {
 } from 'react-native';
 
 import LottieView from 'lottie-react-native';
-import loginLottie from '../../assets/lottieFiles/login.json';
-import {Icon} from '@ui-kitten/components';
-import LinearGradient from 'react-native-linear-gradient';
+import loginLottie from '../../assets/lottieFiles/signup.json';
 
 import {Black} from '../../utils/colors';
 import {
@@ -23,13 +21,12 @@ import {
   paddingMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
+import Button from './button';
 
-const Login = ({route, navigation}) => {
-  const LoggedIn = route.params.LoggedIn;
-  const pressHandler = () => {
-    LoggedIn(true);
+const EmailScreen = ({index, setIndex, navigation}) => {
+  const nextHandler = () => {
+    setIndex(index + 1);
   };
-
   return (
     <View>
       <View
@@ -37,22 +34,25 @@ const Login = ({route, navigation}) => {
           height: verticalScale(310),
           width: '100%',
         }}>
-        <Text style={styles.title}>LOGIN</Text>
-        <TextInput style={styles.textInput} placeholder={'Enter Username'} />
-        <TextInput style={styles.textInput} placeholder={'Enter Password'} />
+        <Text style={styles.title}>SIGN UP</Text>
+        <TextInput
+          style={styles.textInput}
+          keyboardType="email-address"
+          placeholder={'Enter your Webmail!'}
+        />
         <View
           style={{
             height: verticalScale(30),
             alignContent: 'center',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity onPress={() => navigation.push('SignUp')}>
+          <TouchableOpacity onPress={() => navigation.push('Login')}>
             <Text
               style={{
                 textAlign: 'center',
                 fontSize: scale(12),
               }}>
-              Don't have an account
+              Already have an account?
               <Text
                 style={{
                   color: '#f13e4d',
@@ -60,7 +60,7 @@ const Login = ({route, navigation}) => {
                   fontSize: scale(14),
                 }}>
                 {' '}
-                SIGN UP!
+                LOG IN!
               </Text>
             </Text>
           </TouchableOpacity>
@@ -69,30 +69,7 @@ const Login = ({route, navigation}) => {
           style={{
             alignItems: 'flex-end',
           }}>
-          <LinearGradient
-            start={{x: 0.0, y: 0.25}}
-            end={{x: 0.5, y: 1.0}}
-            locations={[0, 0.6, 0.8]}
-            colors={['#f13e4d', '#ff5130', '#ff512f']}
-            style={{
-              backgroundColor: 'red',
-              height: verticalScale(40),
-              width: verticalScale(40),
-              borderRadius: verticalScale(20),
-              marginRight: scale(paddingMedium),
-            }}>
-            <TouchableOpacity onPress={pressHandler}>
-              <Icon
-                fill="white"
-                style={{
-                  height: verticalScale(40),
-                  width: verticalScale(40),
-                  borderRadius: verticalScale(20),
-                }}
-                name="arrow-ios-forward-outline"
-              />
-            </TouchableOpacity>
-          </LinearGradient>
+          <Button pressHandler={nextHandler} />
         </View>
       </View>
       <View
@@ -125,6 +102,7 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius,
     color: Black,
   },
+
   title: {
     marginTop: verticalScale(paddingSmall),
     paddingVertical: scale(paddingSmall),
@@ -135,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default EmailScreen;
