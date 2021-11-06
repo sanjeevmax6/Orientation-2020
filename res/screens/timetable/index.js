@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Layout, Text, Icon} from '@ui-kitten/components';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Layout, Icon} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native';
 import * as Colors from '../../utils/colors';
 import {Calendar} from 'react-native-calendars';
@@ -11,10 +11,13 @@ import {
   iconMedium,
   paddingSmall,
   paddingMedium,
-  paddingLarge,
+  paddingBig,
+  borderRadiusLarge,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
+import AcademicCalendarCard from '../../components/academicCalendar-card';
+import * as academicCalendarNotices from '../../utils/academicCalendarNotices';
 
 const data = {
   //Minimum Date : 1st October 2021
@@ -53,7 +56,7 @@ const Timetable = () => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
-      <Layout>
+      <Layout style={{flex: 1}}>
         <Calendar
           style={{marginTop: verticalScale(-paddingSmall / 2)}}
           minDate={data.minDay}
@@ -71,15 +74,16 @@ const Timetable = () => {
               selected: true,
               selectedColor: Colors.selectedDayBackgroundColor,
             },
-            '2021-10-11': {
+            '2021-11-11': {
               selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
-                {startingDay: true, endingDay: false, color: Colors.Accent},
-                {color: Colors.Transparent},
                 {startingDay: true, endingDay: true, color: Colors.Black},
+
+                {color: Colors.Transparent},
+                {startingDay: true, endingDay: false, color: Colors.Accent},
               ],
             },
-            '2021-10-12': {
+            '2021-11-12': {
               selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
                 {
@@ -89,7 +93,7 @@ const Timetable = () => {
                 },
               ],
             },
-            '2021-10-13': {
+            '2021-11-13': {
               selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
                 {
@@ -157,6 +161,16 @@ const Timetable = () => {
             <Text style={styles.legendText}> : PDF</Text>
           </View>
         </View>
+        <View style={{flex: 1}}>
+          <View style={styles.todayTextContainer}>
+            <Text style={styles.todayTitleText}>Today : </Text>
+            <Text style={styles.todayText}>{moment().format('MMM D')}</Text>
+          </View>
+
+          {academicCalendarNotices.notices.map(notice => (
+            <AcademicCalendarCard notice={notice} />
+          ))}
+        </View>
       </Layout>
     </SafeAreaView>
   );
@@ -191,6 +205,21 @@ const styles = StyleSheet.create({
   line: {
     height: verticalScale(2),
     width: scale(25),
+    borderRadius: scale(borderRadiusLarge),
+  },
+  todayTextContainer: {
+    flexDirection: 'row',
+    marginHorizontal: scale(paddingBig - paddingSmall),
+    marginBottom: verticalScale(paddingSmall),
+  },
+  todayTitleText: {
+    fontWeight: 'bold',
+    fontSize: scale(fontSizeMedium),
+    color: Colors.Black,
+  },
+  todayText: {
+    fontSize: scale(fontSizeMedium),
+    color: Colors.Secondary,
   },
 });
 

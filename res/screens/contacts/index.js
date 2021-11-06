@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Text} from '@ui-kitten/components';
+import {Layout} from '@ui-kitten/components';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ContactCard from '../../components/contact-card';
 import {scale} from 'react-native-size-matters';

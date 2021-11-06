@@ -32,3 +32,8 @@ export const BlueNavy = '#61dafb';
 //Colors for Map Screen
 export const mapNittRegion = 'rgba(240, 240, 255, 0.3)';
 export const cardContainer = 'rgba(0,0,0,0.6)';
+
+//Colors for Academic Calendar Card
+export const dateCardBackground1 = '#b2cee4';
+export const dateCardBackground2 = '#b5d4d4';
+export const dateCardBackground3 = '#c8b5d4';

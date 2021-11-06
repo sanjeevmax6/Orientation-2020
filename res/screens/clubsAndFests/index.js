@@ -1,6 +1,6 @@
 import React from 'react';
-import {Layout, Text} from '@ui-kitten/components';
-import {SafeAreaView, View, StyleSheet} from 'react-native';
+import {Layout} from '@ui-kitten/components';
+import {Text, SafeAreaView, View, StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import ClubCard from '../../components/club-card';
 import {scale, verticalScale} from 'react-native-size-matters';
