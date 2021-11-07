@@ -1,19 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import {Card, Text, Icon} from '@ui-kitten/components';
+import {Text} from '@ui-kitten/components';
 import * as Colors from '../utils/colors';
 import {
-  fontSizeBig,
   fontSizeMedium,
   fontSizeSmall,
-  iconMedium,
   paddingSmall,
   paddingMedium,
-  paddingLarge,
-  borderRadiusMedium,
   borderRadiusLarge,
-  borderRadiusBig,
-  paddingBig,
 } from '../utils/UIConstants';
 import {scale, verticalScale} from 'react-native-size-matters';
 import moment from 'moment';
@@ -71,6 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Grey,
     height: verticalScale(cardHeight),
     borderRadius: scale(borderRadiusLarge),
+    elevation: 1,
   },
   dateCard: {
     height: verticalScale(cardHeight - 2 * paddingSmall),

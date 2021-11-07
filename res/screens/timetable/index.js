@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Layout, Icon} from '@ui-kitten/components';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {Icon} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native';
 import * as Colors from '../../utils/colors';
 import {Calendar} from 'react-native-calendars';
@@ -55,8 +61,8 @@ const Timetable = () => {
   const [selectedDate, setSelectedDate] = useState(data.currentDay);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
-      <Layout style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: Colors.White}}>
+      <ScrollView>
         <Calendar
           style={{marginTop: verticalScale(-paddingSmall / 2)}}
           minDate={data.minDay}
@@ -118,10 +124,6 @@ const Timetable = () => {
                 color: Colors.Secondary,
               },
             },
-            //style
-            //disableArrowLeft={true}
-            //disableArrowRight={true}
-            //onDayPress=
           }}
         />
         <View style={styles.legendContainer}>
@@ -171,7 +173,7 @@ const Timetable = () => {
             <AcademicCalendarCard notice={notice} />
           ))}
         </View>
-      </Layout>
+      </ScrollView>
     </SafeAreaView>
   );
 };
