@@ -15,7 +15,7 @@ export const Card5Color = '#d4deff';
 export const Card6Color = '#7494fc';
 export const DashboardLogo = '#f4a261';
 
-//Colors for Timetable Screen
+//Colors for Scheduler Screen
 export const HolidayColor = '#40E0D0';
 export const selectedDayBackgroundColor = '#85edf2';
 export const todayTextColor = '#509ec7';
@@ -37,3 +37,9 @@ export const cardContainer = 'rgba(0,0,0,0.6)';
 export const dateCardBackground1 = '#b2cee4';
 export const dateCardBackground2 = '#b5d4d4';
 export const dateCardBackground3 = '#c8b5d4';
+
+//Colors for Academic Calendar Screen
+export const notice1Color = '#295E7A';
+export const notice2Color = '#FFBD00';
+export const notice3Color = '#bc4749';
+export const tickColor = '#6fd993';

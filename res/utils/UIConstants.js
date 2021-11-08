@@ -19,3 +19,6 @@ export const borderRadiusLarge = 20;
 export const iconSmall = 15;
 export const iconMedium = 25;
 export const iconLarge = 40;
+
+//academicCalendarCardHeight
+export const academicCalendarCardHeight = 75;

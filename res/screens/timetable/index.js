@@ -1,12 +1,6 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {Icon} from '@ui-kitten/components';
+import React, {useState, useRef} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {Layout, Icon} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native';
 import * as Colors from '../../utils/colors';
 import {Calendar} from 'react-native-calendars';
@@ -19,19 +13,27 @@ import {
   paddingMedium,
   paddingBig,
   borderRadiusLarge,
+  academicCalendarCardHeight,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
 import AcademicCalendarCard from '../../components/academicCalendar-card';
 import * as academicCalendarNotices from '../../utils/academicCalendarNotices';
+import {toComputedKey} from '@babel/types';
+
+function indianTime(date) {
+  var adjustedDate =
+    new Date(date).getTime() - new Date(date).getTimezoneOffset() * 60000;
+  return adjustedDate;
+}
 
 const data = {
   //Minimum Date : 1st October 2021
-  minDay: new Date(2021, 9, 1),
+  minDay: indianTime(new Date(2021, 9, 1)),
   //Maximum Date : 30th April 2022
-  maxDay: new Date(2022, 3, 30),
+  maxDay: indianTime(new Date(2022, 3, 30)),
   //Current Date :
-  currentDay: moment().format('YYYY-MM-DD'),
+  currentDay: moment(indianTime(new Date())).format('YYYY-MM-DD'),
   //Title:
   title: 'Academic Calendar',
 };
@@ -57,17 +59,66 @@ function getDaysBetweenDates(start, end, dayName) {
   return sundayHoliday;
 }
 
+//Function to find the current Notice or the upcoming notice
+function getCurrentNotice(date) {
+  var i = 0;
+
+  while (i < academicCalendarNotices.notices.length) {
+    if (academicCalendarNotices.notices[i].multipleDate) {
+      if (academicCalendarNotices.notices[i].endDate >= date) {
+        console.log('1' + academicCalendarNotices.notices[i].endDate);
+        console.log('2' + date);
+        return i;
+      }
+    } else {
+      if (academicCalendarNotices.notices[i].date >= date) {
+        console.log('1' + academicCalendarNotices.notices[i].date);
+        console.log('2' + date);
+        return i;
+      }
+    }
+    i++;
+  }
+  return 0;
+}
+
 const Timetable = () => {
+  const _flatlist = useRef();
   const [selectedDate, setSelectedDate] = useState(data.currentDay);
+  const [AcademicCalendarNoticeData, setAcademicCalendarNotices] = useState(
+    academicCalendarNotices.notices,
+  );
+  const notice1Color = Colors.notice1Color;
+  const notice2Color = Colors.notice2Color;
+  const notice3Color = Colors.notice3Color;
+  const intialIndex = getCurrentNotice(indianTime(new Date()));
+
+  //Function to check if notice is over or not
+  for (var i = 0; i < AcademicCalendarNoticeData.length; i++) {
+    if (AcademicCalendarNoticeData[i].multipleDate) {
+      if (AcademicCalendarNoticeData[i].endDate < indianTime(new Date())) {
+        AcademicCalendarNoticeData[i].deadlineOver = true;
+      }
+    } else {
+      if (AcademicCalendarNoticeData[i].date < indianTime(new Date())) {
+        AcademicCalendarNoticeData[i].deadlineOver = true;
+      }
+    }
+  }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Colors.White}}>
-      <ScrollView>
+    <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
+      <Layout style={{flex: 1}}>
         <Calendar
           style={{marginTop: verticalScale(-paddingSmall / 2)}}
           minDate={data.minDay}
           maxDate={data.maxDay}
-          onDayPress={day => setSelectedDate(day.dateString)}
+          onDayPress={day => {
+            setSelectedDate(day.dateString),
+              _flatlist.current.scrollToIndex({
+                index: getCurrentNotice(new Date(day.dateString)),
+              });
+          }}
           hideExtraDays={true}
           firstDay={1}
           showWeekNumbers={true}
@@ -83,10 +134,9 @@ const Timetable = () => {
             '2021-11-11': {
               selectedColor: Colors.selectedDayBackgroundColor,
               periods: [
-                {startingDay: true, endingDay: true, color: Colors.Black},
-
+                {startingDay: true, endingDay: false, color: notice1Color},
                 {color: Colors.Transparent},
-                {startingDay: true, endingDay: false, color: Colors.Accent},
+                {startingDay: true, endingDay: true, color: notice2Color},
               ],
             },
             '2021-11-12': {
@@ -95,7 +145,7 @@ const Timetable = () => {
                 {
                   startingDay: false,
                   endingDay: false,
-                  color: Colors.Accent,
+                  color: notice1Color,
                 },
               ],
             },
@@ -105,7 +155,7 @@ const Timetable = () => {
                 {
                   startingDay: false,
                   endingDay: true,
-                  color: Colors.Accent,
+                  color: notice1Color,
                 },
               ],
             },
@@ -124,6 +174,10 @@ const Timetable = () => {
                 color: Colors.Secondary,
               },
             },
+            //style
+            //disableArrowLeft={true}
+            //disableArrowRight={true}
+            //onDayPress=
           }}
         />
         <View style={styles.legendContainer}>
@@ -134,16 +188,20 @@ const Timetable = () => {
                 justifyContent: 'center',
                 marginTop: verticalScale(3),
               }}>
-              <View style={[styles.line, {backgroundColor: Colors.Accent}]} />
+              <View
+                style={[styles.line, {backgroundColor: Colors.notice1Color}]}
+              />
               <View
                 style={[styles.line, {backgroundColor: Colors.Transparent}]}
               />
-              <View style={[styles.line, {backgroundColor: Colors.Black}]} />
+              <View
+                style={[styles.line, {backgroundColor: Colors.notice2Color}]}
+              />
               <View
                 style={[styles.line, {backgroundColor: Colors.Transparent}]}
               />
               <View
-                style={[styles.line, {backgroundColor: Colors.Secondary}]}
+                style={[styles.line, {backgroundColor: Colors.notice3Color}]}
               />
             </View>
             <Text style={styles.legendText}> : Notices</Text>
@@ -163,17 +221,41 @@ const Timetable = () => {
             <Text style={styles.legendText}> : PDF</Text>
           </View>
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, justifyContent: 'center'}}>
           <View style={styles.todayTextContainer}>
             <Text style={styles.todayTitleText}>Today : </Text>
-            <Text style={styles.todayText}>{moment().format('MMM D')}</Text>
+            <Text style={styles.todayText}>{moment().format('MMM Do')}</Text>
           </View>
-
-          {academicCalendarNotices.notices.map(notice => (
-            <AcademicCalendarCard notice={notice} />
-          ))}
+          <View style={{flex: 1}}>
+            <FlatList
+              ref={ref => (_flatlist.current = ref)}
+              nestedScrollEnable={true}
+              data={AcademicCalendarNoticeData}
+              getItemLayout={(data, index) => ({
+                length: verticalScale(academicCalendarCardHeight),
+                // Offset:Length of one card (height+margin)
+                offset:
+                  verticalScale(
+                    academicCalendarCardHeight + paddingMedium / 2,
+                  ) * index,
+                index,
+              })}
+              initialScrollIndex={intialIndex}
+              keyExtractor={item => item.index}
+              style={{
+                marginBottom: verticalScale(paddingMedium),
+              }}
+              bounces={false}
+              bouncesZoom={false}
+              renderItem={({item, index}) => (
+                <View>
+                  <AcademicCalendarCard notice={item} />
+                </View>
+              )}
+            />
+          </View>
         </View>
-      </ScrollView>
+      </Layout>
     </SafeAreaView>
   );
 };
@@ -212,6 +294,7 @@ const styles = StyleSheet.create({
   todayTextContainer: {
     flexDirection: 'row',
     marginHorizontal: scale(paddingBig - paddingSmall),
+    alignItems: 'center',
     marginBottom: verticalScale(paddingSmall),
   },
   todayTitleText: {
