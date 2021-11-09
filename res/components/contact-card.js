@@ -1,5 +1,6 @@
-import React from 'react';
-import {Card} from '@ui-kitten/components';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {Card, Layout, Modal} from '@ui-kitten/components';
 import {
   ImageBackground,
   StyleSheet,
@@ -12,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {scale, verticalScale} from 'react-native-size-matters';
 
 import {
+  borderRadius,
   borderRadiusLarge,
   fontSizeMedium,
   paddingMedium,
@@ -20,32 +22,65 @@ import {Black, White} from '../utils/colors';
 
 let cardHeight = 200;
 let cardWidth = 150;
-const ContactCard = () => {
+const ContactCard = props => {
+  const [visible, setVisible] = useState(false);
   return (
-    <>
+    <View>
       <Card style={styles.card}>
-        <ImageBackground
-          source={{
-            uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
-          }}
-          resizeMode="cover"
-          style={styles.image}>
-          <LinearGradient
-            colors={['transparent', 'rgba(10, 10, 10, 0.75)', Black]}
-            style={styles.linearGradient}
-            locations={[0.5, 0.75, 1.0]}
-          />
-          <View style={styles.textContainer}>
-            <Text numberOfLines={1} style={styles.textName}>
-              KANTI
-            </Text>
-            <Text numberOfLines={1} style={styles.textBody}>
-              BEIN
-            </Text>
-          </View>
-        </ImageBackground>
+        <TouchableOpacity onPress={() => setVisible(true)}>
+          <ImageBackground
+            source={{
+              uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+            }}
+            resizeMode="cover"
+            style={styles.image}>
+            <LinearGradient
+              colors={['transparent', 'rgba(10, 10, 10, 0.75)', Black]}
+              style={styles.linearGradient}
+              locations={[0.5, 0.75, 1.0]}
+            />
+            <View style={styles.textContainer}>
+              <Text numberOfLines={1} style={styles.textName}>
+                {props.name}
+              </Text>
+              <Text numberOfLines={1} style={styles.textBody}>
+                {props.dept}
+              </Text>
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
       </Card>
-    </>
+      <Modal
+        backdropStyle={styles.backdrop}
+        visible={visible}
+        onBackdropPress={() => setVisible(false)}>
+        <Layout style={styles.content}>
+          <View style={styles.imageContainer}>
+            <Card style={styles.circle}>
+              <View
+                style={{
+                  marginLeft: scale(-24),
+                  marginTop: scale(-14),
+                  backgroundColor: White,
+                }}>
+                <ImageBackground
+                  source={{
+                    uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+                  }}
+                  resizeMode="cover"
+                  style={styles.image2}></ImageBackground>
+              </View>
+            </Card>
+            <View style={styles.text}>
+              <Text>{props.name}(Name)</Text>
+              <Text>{props.dept}(Department)</Text>
+              <Text>{props.intro}(Intro)</Text>
+              <Text>{props.phone}(Phone)</Text>
+            </View>
+          </View>
+        </Layout>
+      </Modal>
+    </View>
   );
 };
 
@@ -89,6 +124,41 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
     color: White,
     marginTop: verticalScale(-3),
+  },
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+    borderRadius: borderRadius,
+  },
+  text: {
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    height: verticalScale(150),
+    width: scale(180),
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  circle: {
+    height: verticalScale(70),
+    width: scale(70),
+    borderRadius: scale(1000),
+    borderWidth: scale(3),
+    marginBottom: verticalScale(10),
+  },
+  image2: {
+    height: verticalScale(70),
+    width: scale(70),
   },
 });
 
