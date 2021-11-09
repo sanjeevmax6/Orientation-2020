@@ -19,7 +19,6 @@ import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
 import AcademicCalendarCard from '../../components/academicCalendar-card';
 import * as academicCalendarNotices from '../../utils/academicCalendarNotices';
-import {toComputedKey} from '@babel/types';
 
 function indianTime(date) {
   var adjustedDate =
@@ -29,51 +28,26 @@ function indianTime(date) {
 
 const data = {
   //Minimum Date : 1st October 2021
-  minDay: indianTime(new Date(2021, 9, 1)),
+  minDay: new Date(2021, 9, 1),
   //Maximum Date : 30th April 2022
-  maxDay: indianTime(new Date(2022, 3, 30)),
+  maxDay: new Date(2022, 3, 30),
   //Current Date :
-  currentDay: moment(indianTime(new Date())).format('YYYY-MM-DD'),
+  currentDay: new Date(),
   //Title:
   title: 'Academic Calendar',
 };
 
-//Function to find all Sundays between Min Day and Max Day
-function getDaysBetweenDates(start, end, dayName) {
-  var sundayHoliday = {};
-  var result = [];
-  var days = {sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6};
-  var day = days[dayName.toLowerCase().substr(0, 3)];
-  var current = new Date(start);
-  current.setDate(current.getDate() + ((day - current.getDay() + 7) % 7));
-  while (current < end) {
-    result.push(moment(+current).format('YYYY-MM-DD'));
-    current.setDate(current.getDate() + 7);
-  }
-  result.forEach(date => {
-    sundayHoliday[date] = {
-      selected: true,
-      selectedColor: Colors.HolidayColor,
-    };
-  });
-  return sundayHoliday;
-}
-
 //Function to find the current Notice or the upcoming notice
-function getCurrentNotice(date) {
+function getCurrentNotice(date, AcademicCalendarNoticeData) {
   var i = 0;
 
-  while (i < academicCalendarNotices.notices.length) {
-    if (academicCalendarNotices.notices[i].multipleDate) {
-      if (academicCalendarNotices.notices[i].endDate >= date) {
-        console.log('1' + academicCalendarNotices.notices[i].endDate);
-        console.log('2' + date);
+  while (i < AcademicCalendarNoticeData.length) {
+    if (AcademicCalendarNoticeData[i].multipleDate) {
+      if (AcademicCalendarNoticeData[i].endDate >= date) {
         return i;
       }
     } else {
-      if (academicCalendarNotices.notices[i].date >= date) {
-        console.log('1' + academicCalendarNotices.notices[i].date);
-        console.log('2' + date);
+      if (AcademicCalendarNoticeData[i].date >= date) {
         return i;
       }
     }
@@ -82,18 +56,8 @@ function getCurrentNotice(date) {
   return 0;
 }
 
-const Timetable = () => {
-  const _flatlist = useRef();
-  const [selectedDate, setSelectedDate] = useState(data.currentDay);
-  const [AcademicCalendarNoticeData, setAcademicCalendarNotices] = useState(
-    academicCalendarNotices.notices,
-  );
-  const notice1Color = Colors.notice1Color;
-  const notice2Color = Colors.notice2Color;
-  const notice3Color = Colors.notice3Color;
-  const intialIndex = getCurrentNotice(indianTime(new Date()));
-
-  //Function to check if notice is over or not
+//Function to check if notice is over or not
+function checkDeadline(AcademicCalendarNoticeData) {
   for (var i = 0; i < AcademicCalendarNoticeData.length; i++) {
     if (AcademicCalendarNoticeData[i].multipleDate) {
       if (AcademicCalendarNoticeData[i].endDate < indianTime(new Date())) {
@@ -105,6 +69,170 @@ const Timetable = () => {
       }
     }
   }
+}
+
+function undefinedCheck(MarkedDates, temp) {
+  try {
+    console.log('TRIED1' + temp);
+    return MarkedDates[temp].periods;
+  } catch {
+    //DONT REMOVE THIS OR PROGRAM BREAKS
+    console.log('SUCCESSFULY SKIPPED');
+    return [];
+  }
+}
+
+function undefinedCheck2(MarkedDates, temp) {
+  try {
+    console.log('TRIED2' + temp);
+    return MarkedDates[temp].periods;
+  } catch {
+    //DONT REMOVE THIS OR PROGRAM BREAKS
+    console.log('SUCCESSFULY SKIPPED2');
+    return [];
+  }
+}
+
+function undefinedCheck3(MarkedDates, temp) {
+  try {
+    console.log('TRIED3' + temp);
+    return MarkedDates[temp].periods;
+  } catch {
+    //DONT REMOVE THIS OR PROGRAM BREAKS
+    console.log('SUCCESSFULY SKIPPED3');
+    return [];
+  }
+}
+
+function markDates(AcademicCalendarNoticeData, MarkedDates) {
+  for (var i = 0; i < AcademicCalendarNoticeData.length; i++) {
+    //Marking Holidays
+    if (AcademicCalendarNoticeData[i].holiday) {
+      if (AcademicCalendarNoticeData[i].multipleDate) {
+        var temp = new Date(AcademicCalendarNoticeData[i].startDate);
+        while (temp <= AcademicCalendarNoticeData[i].endDate) {
+          MarkedDates[moment(temp).format('YYYY-MM-DD')] = {
+            selected: true,
+            selectedColor: Colors.HolidayColor,
+          };
+          temp.setDate(temp.getDate() + 1);
+        }
+      } else {
+        MarkedDates[
+          moment(AcademicCalendarNoticeData[i].date).format('YYYY-MM-DD')
+        ] = {
+          selected: true,
+          selectedColor: Colors.HolidayColor,
+        };
+      }
+    } else {
+      //Marking Notice Lines
+      if (AcademicCalendarNoticeData[i].multipleDate) {
+        var temp = new Date(AcademicCalendarNoticeData[i].startDate);
+        while (temp <= AcademicCalendarNoticeData[i].endDate) {
+          if (
+            temp.getTime() == AcademicCalendarNoticeData[i].startDate.getTime()
+          ) {
+            MarkedDates[moment(temp).format('YYYY-MM-DD')] = {
+              ...MarkedDates[moment(temp).format('YYYY-MM-DD')],
+              periods: [
+                ...undefinedCheck(
+                  MarkedDates,
+                  moment(temp).format('YYYY-MM-DD'),
+                ),
+                {
+                  startingDay: true,
+                  endingDay: false,
+                  color: AcademicCalendarNoticeData[i].noticeLineColour,
+                },
+              ],
+            };
+          } else if (
+            temp.getTime() == AcademicCalendarNoticeData[i].endDate.getTime()
+          ) {
+            MarkedDates[moment(temp).format('YYYY-MM-DD')] = {
+              ...MarkedDates[moment(temp).format('YYYY-MM-DD')],
+              periods: [
+                ...undefinedCheck2(
+                  MarkedDates,
+                  moment(temp).format('YYYY-MM-DD'),
+                ),
+                {
+                  startingDay: false,
+                  endingDay: true,
+                  color: AcademicCalendarNoticeData[i].noticeLineColour,
+                },
+              ],
+            };
+          } else {
+            MarkedDates[moment(temp).format('YYYY-MM-DD')] = {
+              ...MarkedDates[moment(temp).format('YYYY-MM-DD')],
+              periods: [
+                ...undefinedCheck3(
+                  MarkedDates,
+                  moment(temp).format('YYYY-MM-DD'),
+                ),
+                {
+                  startingDay: false,
+                  endingDay: false,
+                  color: AcademicCalendarNoticeData[i].noticeLineColour,
+                },
+              ],
+            };
+          }
+          temp.setDate(temp.getDate() + 1);
+        }
+      } else {
+        MarkedDates[
+          moment(AcademicCalendarNoticeData[i].date).format('YYYY-MM-DD')
+        ] = {
+          ...MarkedDates[
+            moment(AcademicCalendarNoticeData[i].date).format('YYYY-MM-DD')
+          ],
+          periods: [
+            ...undefinedCheck(
+              MarkedDates,
+              moment(AcademicCalendarNoticeData[i].date).format('YYYY-MM-DD'),
+            ),
+            {
+              startingDay: true,
+              endingDay: true,
+              color: AcademicCalendarNoticeData[i].noticeLineColour,
+            },
+          ],
+        };
+      }
+    }
+  }
+
+  //Marking Sundays
+  var current = new Date(data.minDay);
+  current.setDate(current.getDate() + ((0 - current.getDay() + 7) % 7));
+  while (current < data.maxDay) {
+    MarkedDates[moment(+current).format('YYYY-MM-DD')] = {
+      ...MarkedDates[moment(+current).format('YYYY-MM-DD')],
+      selected: true,
+      selectedColor: Colors.HolidayColor,
+    };
+    current.setDate(current.getDate() + 7);
+  }
+
+  return MarkedDates;
+}
+
+const Timetable = () => {
+  const _flatlist = useRef();
+  const [selectedDate, setSelectedDate] = useState(data.currentDay);
+  const [AcademicCalendarNoticeData, setAcademicCalendarNotices] = useState(
+    academicCalendarNotices.notices,
+  );
+  checkDeadline(AcademicCalendarNoticeData);
+  const intialIndex = getCurrentNotice(
+    indianTime(new Date()),
+    AcademicCalendarNoticeData,
+  );
+
+  var MarkedDates = {};
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
@@ -116,7 +244,10 @@ const Timetable = () => {
           onDayPress={day => {
             setSelectedDate(day.dateString),
               _flatlist.current.scrollToIndex({
-                index: getCurrentNotice(new Date(day.dateString)),
+                index: getCurrentNotice(
+                  new Date(day.dateString),
+                  AcademicCalendarNoticeData,
+                ),
               });
           }}
           hideExtraDays={true}
@@ -125,39 +256,39 @@ const Timetable = () => {
           enableSwipeMonths={true}
           markingType="multi-period"
           markedDates={{
-            //Sundays are Marked as Holidays
-            ...getDaysBetweenDates(data.minDay, data.maxDay, 'Sun'),
+            // '2021-11-11': {
+            //   selectedColor: Colors.selectedDayBackgroundColor,
+            //   periods: [
+            //     {startingDay: true, endingDay: false, color: notice1Color},
+            //     {color: Colors.Transparent},
+            //     {startingDay: true, endingDay: true, color: notice2Color},
+            //   ],
+            // },
+            // '2021-11-12': {
+            //   selectedColor: Colors.selectedDayBackgroundColor,
+            //   periods: [
+            //     {
+            //       startingDay: false,
+            //       endingDay: false,
+            //       color: notice1Color,
+            //     },
+            //   ],
+            // },
+            // '2021-11-13': {
+            //   selectedColor: Colors.selectedDayBackgroundColor,
+            //   periods: [
+            //     {
+            //       startingDay: false,
+            //       endingDay: true,
+            //       color: notice1Color,
+            //     },
+            //   ],
+            // },
+            ...markDates(AcademicCalendarNoticeData, MarkedDates),
             [selectedDate]: {
+              ...MarkedDates[selectedDate],
               selected: true,
               selectedColor: Colors.selectedDayBackgroundColor,
-            },
-            '2021-11-11': {
-              selectedColor: Colors.selectedDayBackgroundColor,
-              periods: [
-                {startingDay: true, endingDay: false, color: notice1Color},
-                {color: Colors.Transparent},
-                {startingDay: true, endingDay: true, color: notice2Color},
-              ],
-            },
-            '2021-11-12': {
-              selectedColor: Colors.selectedDayBackgroundColor,
-              periods: [
-                {
-                  startingDay: false,
-                  endingDay: false,
-                  color: notice1Color,
-                },
-              ],
-            },
-            '2021-11-13': {
-              selectedColor: Colors.selectedDayBackgroundColor,
-              periods: [
-                {
-                  startingDay: false,
-                  endingDay: true,
-                  color: notice1Color,
-                },
-              ],
             },
           }}
           theme={{
@@ -174,10 +305,6 @@ const Timetable = () => {
                 color: Colors.Secondary,
               },
             },
-            //style
-            //disableArrowLeft={true}
-            //disableArrowRight={true}
-            //onDayPress=
           }}
         />
         <View style={styles.legendContainer}>
@@ -309,3 +436,52 @@ const styles = StyleSheet.create({
 });
 
 export default Timetable;
+
+// //Function to get holidays and mark on calendar
+// function markHoliday() {
+//   var holiday = {};
+//   var result = [];
+//   for (var i = 0; i < AcademicCalendarNoticeData.length; i++) {
+//     if (AcademicCalendarNoticeData[i].holiday) {
+//       if (AcademicCalendarNoticeData[i].multipleDate) {
+//         var temp = new Date(AcademicCalendarNoticeData[i].startDate);
+//         while (temp <= AcademicCalendarNoticeData[i].endDate) {
+//           result.push(moment(+temp).format('YYYY-MM-DD'));
+//           temp.setDate(temp.getDate() + 1);
+//         }
+//       } else {
+//         result.push(
+//           moment(+AcademicCalendarNoticeData[i].date).format('YYYY-MM-DD'),
+//         );
+//       }
+//     }
+//   }
+//   result.forEach(date => {
+//     holiday[date] = {
+//       selected: true,
+//       selectedColor: Colors.HolidayColor,
+//     };
+//   });
+//   return holiday;
+// }
+
+//Function to find all Sundays between Min Day and Max Day
+// function getDaysBetweenDates(start, end, dayName) {
+//   var sundayHoliday = {};
+//   var result = [];
+//   var days = {sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6};
+//   var day = days[dayName.toLowerCase().substr(0, 3)];
+//   var current = new Date(start);
+//   current.setDate(current.getDate() + ((day - current.getDay() + 7) % 7));
+//   while (current < end) {
+//     result.push(moment(+current).format('YYYY-MM-DD'));
+//     current.setDate(current.getDate() + 7);
+//   }
+//   result.forEach(date => {
+//     sundayHoliday[date] = {
+//       selected: true,
+//       selectedColor: Colors.HolidayColor,
+//     };
+//   });
+//   return sundayHoliday;
+// }

@@ -5,18 +5,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Platform,
   Dimensions,
   Image,
   ImageBackground,
 } from 'react-native';
-import MapView, {
-  PROVIDER_GOOGLE,
-  Marker,
-  Callout,
-  Polygon,
-  Polyline,
-} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker, Polygon} from 'react-native-maps';
 import * as Coordinates from '../../utils/coordinates';
 import * as Colors from '../../utils/colors';
 import Carousel from 'react-native-snap-carousel';

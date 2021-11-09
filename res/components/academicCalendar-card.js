@@ -35,6 +35,7 @@ const AcademicCalendarCard = ({notice}) => {
   const noticeTitle = notice.noticeTitle;
   const noticeLineColour = notice.noticeLineColour;
   const deadlineOver = notice.deadlineOver;
+  const holiday = notice.holiday;
 
   return (
     <View style={styles.container}>
@@ -69,9 +70,19 @@ const AcademicCalendarCard = ({notice}) => {
         <View
           style={[styles.noticeLine, {backgroundColor: noticeLineColour}]}
         />
-        <Text numberOfLines={2} style={styles.noticeText}>
-          {noticeTitle}
-        </Text>
+
+        {holiday ? (
+          <Text
+            numberOfLines={2}
+            style={[styles.noticeText, {color: Colors.HolidayColor}]}>
+            HOLIDAY: {noticeTitle}
+          </Text>
+        ) : (
+          <Text numberOfLines={2} style={styles.noticeText}>
+            {noticeTitle}
+          </Text>
+        )}
+
         {/* </ScrollView> */}
       </View>
       {/* Tick Mark According to if notice is over or not */}
