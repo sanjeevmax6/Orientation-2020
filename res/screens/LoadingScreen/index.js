@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/loading.json';
@@ -8,9 +8,12 @@ const LoaderPage = ({route, navigation}) => {
   const pressHandler = () => {
     LoggedIn(true);
   };
-  setTimeout(() => {
-    console.log('Lottie'), 50;
-  });
+  const [STATE, setSTATE] = useState(1);
+  const toggler = () => {
+    //force reload as there is a bug in the LF library
+    if (STATE) setSTATE(0);
+  };
+  setTimeout(toggler, 50);
   setTimeout(pressHandler, 3000);
   return (
     <View
@@ -22,7 +25,6 @@ const LoaderPage = ({route, navigation}) => {
       }}>
       <LottieView
         source={loginLottie}
-        // autoSize={false}'
         speed={0.95}
         resizeMode="contain"
         autoPlay

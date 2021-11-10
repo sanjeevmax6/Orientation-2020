@@ -49,32 +49,32 @@ function AppNavigator() {
         }}
       />
       <stack.Screen
-            name="Peers"
-            component={Peers}
-            options={{
-                headerShown:true,
-                animation:'slide_from_right',
-                header: props=><Header props={props} title="Peers"/>,
-            }}
-            />
-            <stack.Screen
-            name="Orientation"
-            component={Orientation}
-            options={{
-                headerShown:true,
-                animation:'slide_from_right',
-                header: props=><Header props={props} title="Orientation"/>,
-            }}
-            />
-            <stack.Screen
-            name="Admin"
-            component={Admin}
-            options={{
-                headerShown:true,
-                animation:'slide_from_right',
-                header: props=><Header props={props} title="Admin"/>,
-            }}
-            />
+        name="Peers"
+        component={Peers}
+        options={{
+          headerShown: true,
+          animation: 'slide_from_right',
+          header: props => <Header props={props} title="Peers" />,
+        }}
+      />
+      <stack.Screen
+        name="Orientation"
+        component={Orientation}
+        options={{
+          headerShown: true,
+          animation: 'slide_from_right',
+          header: props => <Header props={props} title="Orientation" />,
+        }}
+      />
+      <stack.Screen
+        name="Admin"
+        component={Admin}
+        options={{
+          headerShown: true,
+          animation: 'slide_from_right',
+          header: props => <Header props={props} title="Admin" />,
+        }}
+      />
       <stack.Screen
         name="MagazineAndSymposium"
         component={MagazineAndSymposium}

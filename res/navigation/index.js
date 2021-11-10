@@ -3,8 +3,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import AuthNavigator from './auth-navigation';
 import AppNavigator from './app-navigation';
-import Login from '../screens/LoginScreen';
-import MainMenu from '../screens/mainMenu';
 import {LogBox} from 'react-native';
 
 const RootStack = createNativeStackNavigator();

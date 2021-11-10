@@ -24,12 +24,10 @@ import {
   paddingSmall,
 } from '../../utils/UIConstants';
 
-const Login = ({route, navigation}) => {
-  const LoggedIn = route.params.LoggedIn;
+const Login = ({navigation}) => {
   const pressHandler = () => {
-    LoggedIn(true);
+    navigation.push('Loader');
   };
-
   return (
     <View>
       <View

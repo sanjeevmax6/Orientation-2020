@@ -1,13 +1,7 @@
 import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
@@ -51,15 +45,13 @@ const OTPScreen = ({index, setIndex, navigation}) => {
             alignContent: 'center',
             justifyContent: 'center',
           }}>
-          <TouchableOpacity onPress={() => navigation.push('Login')}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: scale(12),
-              }}>
-              An OTP has been sent to your respective Webmail!
-            </Text>
-          </TouchableOpacity>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: scale(12),
+            }}>
+            An OTP has been sent to your respective Webmail!
+          </Text>
         </View>
         <View
           style={{
