@@ -14,6 +14,7 @@ import {
   paddingBig,
   borderRadiusLarge,
   academicCalendarCardHeight,
+  iconSmall,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -233,125 +234,142 @@ const Timetable = () => {
   );
 
   var MarkedDates = {};
+  const [showCalendar, setShowCalendar] = useState(true);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
       <Layout style={{flex: 1}}>
-        <Calendar
-          style={{marginTop: verticalScale(-paddingSmall / 2)}}
-          minDate={data.minDay}
-          maxDate={data.maxDay}
-          onDayPress={day => {
-            setSelectedDate(day.dateString),
-              _flatlist.current.scrollToIndex({
-                index: getCurrentNotice(
-                  new Date(day.dateString),
-                  AcademicCalendarNoticeData,
-                ),
-              });
-          }}
-          hideExtraDays={true}
-          firstDay={1}
-          showWeekNumbers={true}
-          enableSwipeMonths={true}
-          markingType="multi-period"
-          markedDates={{
-            // '2021-11-11': {
-            //   selectedColor: Colors.selectedDayBackgroundColor,
-            //   periods: [
-            //     {startingDay: true, endingDay: false, color: notice1Color},
-            //     {color: Colors.Transparent},
-            //     {startingDay: true, endingDay: true, color: notice2Color},
-            //   ],
-            // },
-            // '2021-11-12': {
-            //   selectedColor: Colors.selectedDayBackgroundColor,
-            //   periods: [
-            //     {
-            //       startingDay: false,
-            //       endingDay: false,
-            //       color: notice1Color,
-            //     },
-            //   ],
-            // },
-            // '2021-11-13': {
-            //   selectedColor: Colors.selectedDayBackgroundColor,
-            //   periods: [
-            //     {
-            //       startingDay: false,
-            //       endingDay: true,
-            //       color: notice1Color,
-            //     },
-            //   ],
-            // },
-            ...markDates(AcademicCalendarNoticeData, MarkedDates),
-            [selectedDate]: {
-              ...MarkedDates[selectedDate],
-              selected: true,
-              selectedColor: Colors.selectedDayBackgroundColor,
-            },
-          }}
-          theme={{
-            arrowColor: Colors.Secondary,
-            todayTextColor: Colors.todayTextColor,
-            textSectionTitleColor: Colors.Tertiary,
-            textMonthFontSize: scale(fontSizeBig + 2),
-            textDayHeaderFontSize: scale(fontSizeMedium),
-            textDayFontSize: scale(fontSizeMedium),
-            selectedDayBackgroundColor: Colors.selectedDayBackgroundColor,
-            selectedDayTextColor: Colors.White,
-            'stylesheet.calendar.header': {
-              dayTextAtIndex6: {
-                color: Colors.Secondary,
-              },
-            },
-          }}
-        />
-        <View style={styles.legendContainer}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View
-              style={{
-                flexDirection: 'column',
-                justifyContent: 'center',
-                marginTop: verticalScale(3),
-              }}>
-              <View
-                style={[styles.line, {backgroundColor: Colors.notice1Color}]}
-              />
-              <View
-                style={[styles.line, {backgroundColor: Colors.Transparent}]}
-              />
-              <View
-                style={[styles.line, {backgroundColor: Colors.notice2Color}]}
-              />
-              <View
-                style={[styles.line, {backgroundColor: Colors.Transparent}]}
-              />
-              <View
-                style={[styles.line, {backgroundColor: Colors.notice3Color}]}
-              />
+        {showCalendar ? (
+          <>
+            <Calendar
+              style={{marginTop: verticalScale(-paddingSmall / 2)}}
+              minDate={data.minDay}
+              maxDate={data.maxDay}
+              onDayPress={day => {
+                setSelectedDate(day.dateString),
+                  _flatlist.current.scrollToIndex({
+                    index: getCurrentNotice(
+                      new Date(day.dateString),
+                      AcademicCalendarNoticeData,
+                    ),
+                  });
+              }}
+              hideExtraDays={true}
+              firstDay={1}
+              showWeekNumbers={true}
+              enableSwipeMonths={true}
+              markingType="multi-period"
+              markedDates={{
+                ...markDates(AcademicCalendarNoticeData, MarkedDates),
+                [selectedDate]: {
+                  ...MarkedDates[selectedDate],
+                  selected: true,
+                  selectedColor: Colors.selectedDayBackgroundColor,
+                },
+              }}
+              theme={{
+                arrowColor: Colors.Secondary,
+                todayTextColor: Colors.todayTextColor,
+                textSectionTitleColor: Colors.Tertiary,
+                textMonthFontSize: scale(fontSizeBig + 2),
+                textDayHeaderFontSize: scale(fontSizeMedium),
+                textDayFontSize: scale(fontSizeMedium),
+                selectedDayBackgroundColor: Colors.selectedDayBackgroundColor,
+                selectedDayTextColor: Colors.White,
+                'stylesheet.calendar.header': {
+                  dayTextAtIndex6: {
+                    color: Colors.Secondary,
+                  },
+                },
+              }}
+            />
+
+            <View style={styles.legendContainer}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    marginTop: verticalScale(3),
+                  }}>
+                  <View
+                    style={[
+                      styles.line,
+                      {backgroundColor: Colors.notice1Color},
+                    ]}
+                  />
+                  <View
+                    style={[styles.line, {backgroundColor: Colors.Transparent}]}
+                  />
+                  <View
+                    style={[
+                      styles.line,
+                      {backgroundColor: Colors.notice2Color},
+                    ]}
+                  />
+                  <View
+                    style={[styles.line, {backgroundColor: Colors.Transparent}]}
+                  />
+                  <View
+                    style={[
+                      styles.line,
+                      {backgroundColor: Colors.notice3Color},
+                    ]}
+                  />
+                </View>
+                <Text style={styles.legendText}> : Notices</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={styles.circle} />
+                <Text style={styles.legendText}> : Holiday</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <TouchableOpacity>
+                  <Icon
+                    style={styles.downloadIcon}
+                    fill={Colors.Tertiary}
+                    name="download-outline"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.legendText}> : PDF</Text>
+              </View>
             </View>
-            <Text style={styles.legendText}> : Notices</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View style={styles.circle} />
-            <Text style={styles.legendText}> : Holiday</Text>
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <TouchableOpacity>
-              <Icon
-                style={styles.downloadIcon}
-                fill={Colors.Tertiary}
-                name="download-outline"
-              />
-            </TouchableOpacity>
-            <Text style={styles.legendText}> : PDF</Text>
-          </View>
-        </View>
+          </>
+        ) : null}
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={styles.todayTextContainer}>
-            <Text style={styles.todayTitleText}>Today : </Text>
-            <Text style={styles.todayText}>{moment().format('MMM Do')}</Text>
+          <View style={styles.todayTextandDropDownContainer}>
+            <View style={styles.todayTextContainer}>
+              <Text style={styles.todayTitleText}>Today : </Text>
+              <Text style={styles.todayText}>{moment().format('MMM Do')}</Text>
+            </View>
+            <View>
+              {showCalendar ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowCalendar(false);
+                  }}>
+                  <Icon
+                    name="chevron-up"
+                    style={styles.arrowIcon}
+                    pack="FontAwesome5"
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowCalendar(true);
+                  }}>
+                  <Icon
+                    name="chevron-down"
+                    style={styles.arrowIcon}
+                    pack="FontAwesome5"
+                    onPress={() => {
+                      setShowCalendar(true);
+                    }}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
           <View style={{flex: 1}}>
             <FlatList
@@ -370,7 +388,7 @@ const Timetable = () => {
               initialScrollIndex={intialIndex}
               keyExtractor={item => item.index}
               style={{
-                marginBottom: verticalScale(paddingMedium),
+                marginBottom: verticalScale(paddingSmall),
               }}
               bounces={false}
               bouncesZoom={false}
@@ -393,7 +411,7 @@ const styles = StyleSheet.create({
     height: verticalScale(iconMedium),
   },
   legendContainer: {
-    marginVertical: verticalScale(7),
+    marginTop: verticalScale(7),
     paddingBottom: verticalScale(paddingSmall / 2),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -418,11 +436,16 @@ const styles = StyleSheet.create({
     width: scale(25),
     borderRadius: scale(borderRadiusLarge),
   },
+  todayTextandDropDownContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: verticalScale(paddingSmall),
+    marginHorizontal: scale(paddingMedium + paddingSmall),
+  },
   todayTextContainer: {
     flexDirection: 'row',
-    marginHorizontal: scale(paddingBig - paddingSmall),
     alignItems: 'center',
-    marginBottom: verticalScale(paddingSmall),
+    marginRight: scale(paddingMedium),
   },
   todayTitleText: {
     fontWeight: 'bold',
@@ -432,6 +455,9 @@ const styles = StyleSheet.create({
   todayText: {
     fontSize: scale(fontSizeMedium),
     color: Colors.Secondary,
+  },
+  arrowIcon: {
+    height: verticalScale(iconSmall),
   },
 });
 
