@@ -1,13 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/login.json';
@@ -25,6 +20,8 @@ import {
 } from '../../utils/UIConstants';
 
 const Login = ({navigation}) => {
+  const [rollNo, setRollNo] = useState('');
+  const [password, setPassword] = useState('');
   const pressHandler = () => {
     navigation.push('Loader');
   };
@@ -36,8 +33,36 @@ const Login = ({navigation}) => {
           width: '100%',
         }}>
         <Text style={styles.title}>LOGIN</Text>
-        <TextInput style={styles.textInput} placeholder={'Enter Username'} />
-        <TextInput style={styles.textInput} placeholder={'Enter Password'} />
+        <TextInput
+          value={rollNo}
+          style={styles.input1}
+          inputStyle={styles.inputStyle}
+          labelStyle={styles.labelStyle}
+          // textErrorStyle={styles.textErrorStyle}
+          placeholder="Roll Number"
+          placeholderTextColor="gray"
+          onChangeText={text => {
+            setRollNo(text);
+          }}
+          focusColor="black"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
+        />
+
+        <TextInput
+          value={password}
+          style={styles.input1}
+          inputStyle={styles.inputStyle}
+          labelStyle={styles.labelStyle}
+          // textErrorStyle={styles.textErrorStyle}
+          placeholder="Password"
+          placeholderTextColor="gray"
+          onChangeText={text => {
+            setPassword(text);
+          }}
+          secureTextEntry
+          focusColor="black"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
+        />
         <View
           style={{
             height: verticalScale(30),
@@ -114,15 +139,17 @@ const Login = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  textInput: {
-    marginTop: verticalScale(paddingSmall),
-    marginHorizontal: scale(paddingMedium),
-    fontSize: scale(fontSizeBig),
-    alignItems: 'center',
-    borderWidth: borderWidth,
-    borderRadius: borderRadius,
-    color: Black,
+  input1: {
+    marginHorizontal: paddingMedium,
+    marginTop: paddingSmall,
+    borderWidth: 1,
+    height: 60,
+    paddingHorizontal: 8,
+    borderRadius: 8,
   },
+  inputStyle: {fontSize: scale(fontSizeBig), color: 'black'},
+  labelStyle: {fontSize: scale(fontSizeBig)},
+  textErrorStyle: {fontSize: 16},
   title: {
     marginTop: verticalScale(paddingSmall),
     paddingVertical: scale(paddingSmall),

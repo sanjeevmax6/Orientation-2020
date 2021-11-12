@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import {Layout, Icon} from '@ui-kitten/components';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Animated} from 'react-native';
 import * as Colors from '../../utils/colors';
 import {Calendar} from 'react-native-calendars';
 import {
@@ -235,142 +235,162 @@ const Timetable = () => {
 
   var MarkedDates = {};
   const [showCalendar, setShowCalendar] = useState(true);
+  const maxHeight = verticalScale(400);
+  const animation = useRef(new Animated.Value(maxHeight)).current;
+  const [icon, setIcon] = useState('chevron-up');
+
+  const toggle = () => {
+    var ht = 0;
+    setIcon('chevron-down');
+    if (!showCalendar) {
+      ht = maxHeight;
+      setIcon('chevron-up');
+    }
+
+    Animated.spring(animation, {
+      toValue: ht,
+      useNativeDriver: false,
+    }).start();
+    setShowCalendar(!showCalendar);
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
       <Layout style={{flex: 1}}>
-        {showCalendar ? (
-          <>
-            <Calendar
-              style={{marginTop: verticalScale(-paddingSmall / 2)}}
-              minDate={data.minDay}
-              maxDate={data.maxDay}
-              onDayPress={day => {
-                setSelectedDate(day.dateString),
-                  _flatlist.current.scrollToIndex({
-                    index: getCurrentNotice(
-                      new Date(day.dateString),
-                      AcademicCalendarNoticeData,
-                    ),
-                  });
-              }}
-              hideExtraDays={true}
-              firstDay={1}
-              showWeekNumbers={true}
-              enableSwipeMonths={true}
-              markingType="multi-period"
-              markedDates={{
-                ...markDates(AcademicCalendarNoticeData, MarkedDates),
-                [selectedDate]: {
-                  ...MarkedDates[selectedDate],
-                  selected: true,
-                  selectedColor: Colors.selectedDayBackgroundColor,
-                },
-              }}
-              theme={{
-                arrowColor: Colors.Secondary,
-                todayTextColor: Colors.todayTextColor,
-                textSectionTitleColor: Colors.Tertiary,
-                textMonthFontSize: scale(fontSizeBig + 2),
-                textDayHeaderFontSize: scale(fontSizeMedium),
-                textDayFontSize: scale(fontSizeMedium),
-                selectedDayBackgroundColor: Colors.selectedDayBackgroundColor,
-                selectedDayTextColor: Colors.White,
-                'stylesheet.calendar.header': {
-                  dayTextAtIndex6: {
-                    color: Colors.Secondary,
-                  },
-                },
-              }}
-            />
+        <Animated.View style={[{height: animation}]}>
+          <View
+            onLayout={event => {
+              console.log(event.nativeEvent.layout.height);
+              var ht = event.nativeEvent.layout.height;
+              Animated.spring(animation, {
+                toValue: ht,
+                useNativeDriver: false,
+              }).start();
+            }}>
+            {showCalendar ? (
+              <>
+                <Calendar
+                  style={{marginTop: verticalScale(-paddingSmall / 2)}}
+                  minDate={data.minDay}
+                  maxDate={data.maxDay}
+                  onDayPress={day => {
+                    setSelectedDate(day.dateString),
+                      _flatlist.current.scrollToIndex({
+                        index: getCurrentNotice(
+                          new Date(day.dateString),
+                          AcademicCalendarNoticeData,
+                        ),
+                      });
+                  }}
+                  hideExtraDays={true}
+                  firstDay={1}
+                  showWeekNumbers={true}
+                  enableSwipeMonths={true}
+                  markingType="multi-period"
+                  markedDates={{
+                    ...markDates(AcademicCalendarNoticeData, MarkedDates),
+                    [selectedDate]: {
+                      ...MarkedDates[selectedDate],
+                      selected: true,
+                      selectedColor: Colors.selectedDayBackgroundColor,
+                    },
+                  }}
+                  theme={{
+                    arrowColor: Colors.Secondary,
+                    todayTextColor: Colors.todayTextColor,
+                    textSectionTitleColor: Colors.Tertiary,
+                    textMonthFontSize: scale(fontSizeBig + 2),
+                    textDayHeaderFontSize: scale(fontSizeMedium),
+                    textDayFontSize: scale(fontSizeMedium),
+                    selectedDayBackgroundColor:
+                      Colors.selectedDayBackgroundColor,
+                    selectedDayTextColor: Colors.White,
+                    'stylesheet.calendar.header': {
+                      dayTextAtIndex6: {
+                        color: Colors.Secondary,
+                      },
+                    },
+                  }}
+                />
 
-            <View style={styles.legendContainer}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    marginTop: verticalScale(3),
-                  }}>
-                  <View
-                    style={[
-                      styles.line,
-                      {backgroundColor: Colors.notice1Color},
-                    ]}
-                  />
-                  <View
-                    style={[styles.line, {backgroundColor: Colors.Transparent}]}
-                  />
-                  <View
-                    style={[
-                      styles.line,
-                      {backgroundColor: Colors.notice2Color},
-                    ]}
-                  />
-                  <View
-                    style={[styles.line, {backgroundColor: Colors.Transparent}]}
-                  />
-                  <View
-                    style={[
-                      styles.line,
-                      {backgroundColor: Colors.notice3Color},
-                    ]}
-                  />
+                <View style={styles.legendContainer}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View
+                      style={{
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        marginTop: verticalScale(3),
+                      }}>
+                      <View
+                        style={[
+                          styles.line,
+                          {backgroundColor: Colors.notice1Color},
+                        ]}
+                      />
+                      <View
+                        style={[
+                          styles.line,
+                          {backgroundColor: Colors.Transparent},
+                        ]}
+                      />
+                      <View
+                        style={[
+                          styles.line,
+                          {backgroundColor: Colors.notice2Color},
+                        ]}
+                      />
+                      <View
+                        style={[
+                          styles.line,
+                          {backgroundColor: Colors.Transparent},
+                        ]}
+                      />
+                      <View
+                        style={[
+                          styles.line,
+                          {backgroundColor: Colors.notice3Color},
+                        ]}
+                      />
+                    </View>
+                    <Text style={styles.legendText}> : Notices</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={styles.circle} />
+                    <Text style={styles.legendText}> : Holiday</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <TouchableOpacity>
+                      <Icon
+                        style={styles.downloadIcon}
+                        fill={Colors.Tertiary}
+                        name="download-outline"
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.legendText}> : PDF</Text>
+                  </View>
                 </View>
-                <Text style={styles.legendText}> : Notices</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <View style={styles.circle} />
-                <Text style={styles.legendText}> : Holiday</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity>
-                  <Icon
-                    style={styles.downloadIcon}
-                    fill={Colors.Tertiary}
-                    name="download-outline"
-                  />
-                </TouchableOpacity>
-                <Text style={styles.legendText}> : PDF</Text>
-              </View>
-            </View>
-          </>
-        ) : null}
+              </>
+            ) : null}
+          </View>
+        </Animated.View>
         <View style={{flex: 1, justifyContent: 'center'}}>
-          <View style={styles.todayTextandDropDownContainer}>
+          <TouchableOpacity
+            style={styles.todayTextandDropDownContainer}
+            onPress={toggle}>
             <View style={styles.todayTextContainer}>
               <Text style={styles.todayTitleText}>Today : </Text>
               <Text style={styles.todayText}>{moment().format('MMM Do')}</Text>
             </View>
             <View>
-              {showCalendar ? (
-                <TouchableOpacity
-                  onPress={() => {
-                    setShowCalendar(false);
-                  }}>
-                  <Icon
-                    name="chevron-up"
-                    style={styles.arrowIcon}
-                    pack="FontAwesome5"
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => {
-                    setShowCalendar(true);
-                  }}>
-                  <Icon
-                    name="chevron-down"
-                    style={styles.arrowIcon}
-                    pack="FontAwesome5"
-                    onPress={() => {
-                      setShowCalendar(true);
-                    }}
-                  />
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity onPress={toggle}>
+                <Icon
+                  name={icon}
+                  style={styles.arrowIcon}
+                  pack="FontAwesome5"
+                />
+              </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={{flex: 1}}>
             <FlatList
               ref={ref => (_flatlist.current = ref)}

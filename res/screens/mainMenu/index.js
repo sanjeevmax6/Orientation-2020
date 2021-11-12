@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   },
   mainMenu: {
     flex: 1,
-    backgroundColor: Colors.White,
+    backgroundColor: '#e7dada',
     justifyContent: 'center',
   },
   cardGrid: {
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
   },
   cardRow: {
     flexDirection: 'row',
-    backgroundColor: Colors.White,
+    backgroundColor: '#e7dada',
     justifyContent: 'space-evenly',
   },
   card1: {
