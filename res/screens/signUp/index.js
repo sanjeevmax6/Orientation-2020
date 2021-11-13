@@ -4,7 +4,6 @@ import {Text} from 'react-native';
 import EmailScreen from './email';
 import OTPScreen from './otp';
 import PasswordScreen from './setPassword';
-
 const SignUp = ({route, navigation}) => {
   const [index, setIndex] = useState(0);
   const shouldLoadComponent = curr => curr === index;

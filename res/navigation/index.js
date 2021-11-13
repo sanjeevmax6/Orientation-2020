@@ -7,7 +7,8 @@ import {LogBox} from 'react-native';
 
 const RootStack = createNativeStackNavigator();
 
-function Navigator() {
+const Navigator = () => {
+  LogBox.ignoreLogs(["EventEmitter.removeListener('change', ...)"]);
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
@@ -42,6 +43,6 @@ function Navigator() {
       </RootStack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default Navigator;

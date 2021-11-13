@@ -1,7 +1,8 @@
 import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
@@ -35,9 +36,14 @@ const OTPScreen = ({index, setIndex, navigation}) => {
         <Header title="Enter your OTP" backHandler={backHandler} />
         <TextInput
           style={styles.textInput}
-          placeholder={'Enter OTP'}
-          autoFocus={true}
+          inputStyle={{fontSize: scale(fontSizeBig), color: 'black'}}
+          labelStyle={{fontSize: scale(fontSizeBig)}}
+          placeholder="Enter OTP"
           keyboardType="numeric"
+          placeholderTextColor="gray"
+          autoFocus={true}
+          focusColor="black"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
         <View
           style={{
@@ -82,13 +88,12 @@ const OTPScreen = ({index, setIndex, navigation}) => {
 
 const styles = StyleSheet.create({
   textInput: {
-    marginTop: verticalScale(paddingSmall),
-    marginHorizontal: scale(paddingMedium),
-    fontSize: scale(fontSizeBig),
-    alignItems: 'center',
-    borderWidth: borderWidth,
-    borderRadius: borderRadius,
-    color: Black,
+    marginHorizontal: paddingMedium,
+    marginTop: paddingSmall,
+    borderWidth: scale(1),
+    height: verticalScale(55),
+    paddingHorizontal: scale(8),
+    borderRadius: scale(8),
   },
 });
 

@@ -1,13 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
@@ -22,8 +17,23 @@ import {
 } from '../../utils/UIConstants';
 import Header from './header';
 import Button from './button';
+import {BackHandler} from 'react-native';
 
 const PasswordScreen = ({index, setIndex, navigation}) => {
+  //disable back button once the user has verified email as he has to set password mandatorily
+  function handleBackButtonClick() {
+    return true;
+  }
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
   const backHandler = () => {
     setIndex(index - 1);
   };
@@ -45,12 +55,25 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
 
         <TextInput
           style={styles.textInput}
-          placeholder={'Enter Your Password'}
+          inputStyle={{fontSize: scale(fontSizeBig), color: 'black'}}
+          labelStyle={{fontSize: scale(fontSizeBig)}}
+          placeholder="Enter Your Password"
           autoFocus={true}
+          secureTextEntry
+          placeholderTextColor="gray"
+          focusColor="black"
+          autoCapitalize="none"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
         <TextInput
           style={styles.textInput}
-          placeholder={'Confirm Your Password'}
+          inputStyle={{fontSize: scale(fontSizeBig), color: 'black'}}
+          labelStyle={{fontSize: scale(fontSizeBig)}}
+          placeholder="Confirm Your Password"
+          placeholderTextColor="gray"
+          focusColor="black"
+          autoCapitalize="none"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
         <View
           style={{
@@ -97,13 +120,12 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
 
 const styles = StyleSheet.create({
   textInput: {
-    marginTop: verticalScale(paddingSmall),
-    marginHorizontal: scale(paddingMedium),
-    fontSize: scale(fontSizeBig),
-    alignItems: 'center',
-    borderWidth: borderWidth,
-    borderRadius: borderRadius,
-    color: Black,
+    marginHorizontal: paddingMedium,
+    marginTop: paddingSmall,
+    borderWidth: scale(1),
+    height: verticalScale(55),
+    paddingHorizontal: scale(8),
+    borderRadius: scale(8),
   },
 });
 

@@ -1,13 +1,8 @@
 import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
@@ -35,10 +30,24 @@ const EmailScreen = ({index, setIndex, navigation}) => {
           width: '100%',
         }}>
         <Text style={styles.title}>SIGN UP</Text>
+
         <TextInput
-          style={styles.textInput}
+          style={{
+            marginHorizontal: paddingMedium,
+            marginTop: paddingSmall,
+            borderWidth: scale(1),
+            height: verticalScale(55),
+            paddingHorizontal: scale(8),
+            borderRadius: scale(8),
+          }}
+          autoCapitalize="none"
+          inputStyle={{fontSize: scale(fontSizeBig), color: 'black'}}
+          labelStyle={{fontSize: scale(fontSizeBig)}}
+          placeholder="Enter your Webmail!"
           keyboardType="email-address"
-          placeholder={'Enter your Webmail!'}
+          placeholderTextColor="gray"
+          focusColor="black"
+          // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
         <View
           style={{
