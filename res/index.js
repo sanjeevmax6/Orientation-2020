@@ -5,15 +5,22 @@ import {FontAwesome5IconsPack} from './assets/icons/fontAwesome5-icons';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import Navigator from './navigation';
 import Status_Bar from './components/status_bar';
+import {Observer, Provider} from 'mobx-react';
+import {store} from './store';
+
 const App = () => {
   return (
-    <>
-      <Status_Bar />
-      <IconRegistry icons={[EvaIconsPack, FontAwesome5IconsPack]} />
-      <ApplicationProvider {...eva} theme={eva.light}>
-        <Navigator />
-      </ApplicationProvider>
-    </>
+    <Observer>
+      {() => (
+        <>
+          <Status_Bar />
+          <IconRegistry icons={[EvaIconsPack, FontAwesome5IconsPack]} />
+          <ApplicationProvider {...eva} theme={eva.light}>
+            <Navigator />
+          </ApplicationProvider>
+        </>
+      )}
+    </Observer>
   );
 };
 

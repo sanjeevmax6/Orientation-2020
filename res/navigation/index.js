@@ -1,28 +1,27 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
+import React from 'react';
 import AuthNavigator from './auth-navigation';
 import AppNavigator from './app-navigation';
 import {LogBox} from 'react-native';
-
+import {Login_Store} from '../mobx/loginStore';
+import {observer} from 'mobx-react';
 const RootStack = createNativeStackNavigator();
 
-const Navigator = () => {
+const Navigator = observer(() => {
   LogBox.ignoreLogs(["EventEmitter.removeListener('change', ...)"]);
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
-  const [LoggedIn, setLoggedIn] = useState(false);
 
   return (
     <NavigationContainer independent={true}>
       <RootStack.Navigator independent={true}>
-        {LoggedIn ? (
+        {Login_Store.state.isLoggedIn ? (
           <>
             <RootStack.Screen
               name="App"
               component={AppNavigator}
-              initialParams={{setLoggedIn}}
               options={{
                 headerShown: false,
               }}
@@ -33,7 +32,6 @@ const Navigator = () => {
             <RootStack.Screen
               name="Auth"
               component={AuthNavigator}
-              initialParams={{setLoggedIn}}
               options={{
                 headerShown: false,
               }}
@@ -43,6 +41,6 @@ const Navigator = () => {
       </RootStack.Navigator>
     </NavigationContainer>
   );
-};
+});
 
 export default Navigator;

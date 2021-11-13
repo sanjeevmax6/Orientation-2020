@@ -6,11 +6,11 @@ import Contacts from '../../screens/contacts';
 import VirtualMap from '../../screens/virtualMap';
 import MagazineAndSymposium from '../../screens/magazineAndSymposium';
 import ClubsAndFests from '../../screens/clubsAndFests';
-import Timetable from '../../screens/timetable';
+import Timetable from '../../screens/academicCalendar';
 import Header from '../../components/header';
-import Peers from '../../screens/peers';
-import Admin from '../../screens/admin';
-import Orientation from '../../screens/orientation';
+import Peers from '../../screens/contacts/peerContacts';
+import Admin from '../../screens/contacts/adminContacts';
+import Orientation from '../../screens/contacts/orientationContacts';
 const stack = createNativeStackNavigator();
 
 function AppNavigator() {

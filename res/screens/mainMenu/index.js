@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
+  Alert,
 } from 'react-native';
 import {Layout, Card, Icon} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
@@ -14,17 +15,35 @@ import {SafeAreaView} from 'react-native';
 import {
   borderRadiusLarge,
   fontSizeBig,
-  fontSizeMedium,
-  fontSizeSmall,
   paddingMedium,
   paddingSmall,
   iconLarge,
-  iconSmall,
   iconMedium,
   fontSizeVeryLarge,
 } from '../../utils/UIConstants';
+import {Login_Store} from '../../mobx/loginStore';
 
 const MainMenu = ({navigation}) => {
+  const logOut = () => {
+    Alert.alert(
+      'LOGOUT',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            Login_Store.logOut();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+
   const data = {
     orientationTitle: 'Orientation 2021',
     studentName: 'XYZ',
@@ -49,7 +68,7 @@ const MainMenu = ({navigation}) => {
                 </Text>
               </View>
               <View style={styles.logoutContainer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => logOut()}>
                   <Icon
                     style={styles.iconDashBoard}
                     fill={Colors.DashboardLogo}
