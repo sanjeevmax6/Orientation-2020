@@ -21,12 +21,16 @@ class StudentData {
   get token() {
     return this.state.token;
   }
+  get isUserLoggedIn() {
+    return this.state.isLoggedIn;
+  }
   constructor() {
     makeObservable(this, {
       state: observable,
       logIn: action,
       logOut: action,
       token: computed,
+      isUserLoggedIn: computed,
     });
   }
 }

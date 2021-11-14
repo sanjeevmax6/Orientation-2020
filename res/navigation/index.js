@@ -13,11 +13,10 @@ const Navigator = observer(() => {
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
-
   return (
     <NavigationContainer independent={true}>
       <RootStack.Navigator independent={true}>
-        {Login_Store.state.isLoggedIn ? (
+        {Login_Store.isUserLoggedIn ? (
           <>
             <RootStack.Screen
               name="App"
