@@ -117,185 +117,199 @@ const MainMenu = ({navigation}) => {
         </View>
         <View style={styles.mainMenu}>
           <View style={styles.cardRow}>
-            <Card
-              style={styles.card1}
-              onPress={() => {
-                navigation.navigate('Scheduler');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card1.jpg')}
-                style={{
-                  height: verticalScale(130),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
+            <Card style={styles.card1}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Scheduler');
                 }}>
-                <View
+                <ImageBackground
+                  source={require('../../assets/images/card1.jpg')}
                   style={{
-                    alignItems: 'center',
+                    height: verticalScale(130),
+                    width: scale(130),
                     justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="calendar-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Scheduler</Text>
-                </View>
-              </ImageBackground>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="calendar-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Scheduler</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
             </Card>
-            <Card
-              style={styles.card2}
-              onPress={() => {
-                navigation.navigate('VirtualMap');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card2.jpg')}
-                style={{
-                  height: verticalScale(90),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
+            <Card style={styles.card2}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('VirtualMap');
                 }}>
-                <View
+                <ImageBackground
+                  source={require('../../assets/images/card2.jpg')}
                   style={{
-                    alignItems: 'center',
+                    height: verticalScale(90),
+                    width: scale(130),
                     justifyContent: 'center',
-                  }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="map-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Virtual Map</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-          </View>
-
-          <View style={styles.cardRow}>
-            <Card
-              style={styles.card3}
-              onPress={() => {
-                navigation.navigate('Contacts');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card3.jpg')}
-                style={{
-                  height: verticalScale(90),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
                     alignItems: 'center',
-                    justifyContent: 'center',
                   }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="people-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Contacts</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-            <Card
-              style={styles.card4}
-              onPress={() => {
-                navigation.navigate('ClubsAndFests');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card4.jpg')}
-                style={{
-                  height: verticalScale(160),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="bulb-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Clubs & Fests</Text>
-                </View>
-              </ImageBackground>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="map-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Virtual Map</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
             </Card>
           </View>
 
           <View style={styles.cardRow}>
-            <Card
-              style={styles.card5}
-              onPress={() => {
-                navigation.navigate('MagazineAndSymposium');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card5.jpg')}
-                style={{
-                  height: verticalScale(140),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
+            <Card style={styles.card3}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Contacts');
                 }}>
-                <View
+                <ImageBackground
+                  source={require('../../assets/images/card3.jpg')}
                   style={{
-                    alignItems: 'center',
+                    height: verticalScale(90),
+                    width: scale(130),
                     justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="award-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Magazine & Symposium</Text>
-                </View>
-              </ImageBackground>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="people-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Contacts</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
             </Card>
-            <Card
-              style={styles.card6}
-              onPress={() => {
-                navigation.navigate('Timetable');
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card6.jpg')}
-                style={{
-                  height: verticalScale(110),
-                  width: scale(130),
-                  justifyContent: 'center',
-                  alignItems: 'center',
+            <Card style={styles.card4}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('ClubsAndFests');
                 }}>
-                <View
+                <ImageBackground
+                  source={require('../../assets/images/card4.jpg')}
                   style={{
-                    alignItems: 'center',
+                    height: verticalScale(160),
+                    width: scale(130),
                     justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                  <Icon
-                    style={styles.iconMainMenu}
-                    fill={Colors.White}
-                    name="browser-outline"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.textMainMenu}>Academic Calendar</Text>
-                </View>
-              </ImageBackground>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="bulb-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Clubs & Fests</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+            </Card>
+          </View>
+
+          <View style={styles.cardRow}>
+            <Card style={styles.card5}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('MagazineAndSymposium');
+                }}>
+                <ImageBackground
+                  source={require('../../assets/images/card5.jpg')}
+                  style={{
+                    height: verticalScale(140),
+                    width: scale(130),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="award-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>
+                      Magazine & Symposium
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+            </Card>
+            <Card style={styles.card6}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Timetable');
+                }}>
+                <ImageBackground
+                  source={require('../../assets/images/card6.jpg')}
+                  style={{
+                    height: verticalScale(110),
+                    width: scale(130),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="browser-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Academic Calendar</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
             </Card>
           </View>
         </View>

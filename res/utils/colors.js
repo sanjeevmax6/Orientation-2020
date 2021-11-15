@@ -43,3 +43,7 @@ export const notice1Color = '#295E7A';
 export const notice2Color = '#FFBD00';
 export const notice3Color = '#bc4749';
 export const tickColor = '#6fd993';
+
+//Colors for Magazines and Symposiums Screen
+export const iconColor='#347cfc';
+export const iconColorFade='#a1aabc';
