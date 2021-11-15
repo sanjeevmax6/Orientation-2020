@@ -40,7 +40,7 @@ const Peers = () => {
                 params={setVisible}
                 name="Ram Kapoor"
                 dept="CSE"
-                intro="Likes to code, draw water from well"
+                intro="Likes to code, draw water from well. Likes to code, draw water from well. Likes to code, draw water from well. Likes to code, draw water from well."
                 phone='+91 34500 34500'
               />
               <ContactCard

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {Card, Layout, Modal} from '@ui-kitten/components';
+import {Card, Layout, Modal, Icon} from '@ui-kitten/components';
 import {
   ImageBackground,
   StyleSheet,
@@ -16,6 +16,7 @@ import {
   borderRadius,
   borderRadiusLarge,
   fontSizeMedium,
+  paddingSmall,
   paddingMedium,
 } from '../utils/UIConstants';
 import {Black, White} from '../utils/colors';
@@ -71,11 +72,23 @@ const ContactCard = props => {
                   style={styles.image2}></ImageBackground>
               </View>
             </Card>
-            <View style={styles.text}>
-              <Text>{props.name}(Name)</Text>
-              <Text>{props.dept}(Department)</Text>
-              <Text>{props.intro}(Intro)</Text>
-              <Text>{props.phone}(Phone)</Text>
+            <View>
+              <View style={styles.infoContainer}>
+                <Icon style={styles.icon} fill={Black} name="person" />
+                <Text style={styles.text}>{props.name}</Text>
+              </View>
+              <View style={styles.infoContainer}>
+                <Icon style={styles.icon} fill={Black} name="home" />
+                <Text style={styles.text}>{props.dept}</Text>
+              </View>
+              <View style={styles.infoContainer}>
+                <Icon style={styles.icon} fill={Black} name="phone" />
+                <Text style={styles.text}>{props.phone}</Text>
+              </View>
+              <View style={styles.infoContainer}>
+                <Icon style={styles.icon} fill={Black} name="info" />
+                <Text style={styles.text}>{props.intro}</Text>
+              </View>
             </View>
           </View>
         </Layout>
@@ -108,6 +121,11 @@ const styles = StyleSheet.create({
     height: verticalScale(cardHeight),
     width: scale(cardWidth),
   },
+  infoContainer: {
+    flexDirection: 'row',
+    // alignItems: 'center',
+    marginVertical: 3,
+  },
   textContainer: {
     height: verticalScale(40),
     width: scale(120),
@@ -132,19 +150,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 4,
-    paddingVertical: 8,
+    paddingVertical: 4,
     borderRadius: borderRadius,
   },
   text: {
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    width: scale(cardWidth+30),
+    textAlign: 'justify'
   },
   imageContainer: {
-    height: verticalScale(150),
-    width: scale(180),
-    marginTop: verticalScale(10),
-    marginBottom: verticalScale(10),
+    // height: verticalScale(150),
+    // width: scale(200),
+    margin : verticalScale(10),
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
@@ -159,6 +178,11 @@ const styles = StyleSheet.create({
   image2: {
     height: verticalScale(70),
     width: scale(70),
+  },
+  icon: {
+    width: scale(18),
+    height: verticalScale(18),
+    marginRight: 8,
   },
 });
 
