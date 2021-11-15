@@ -2,6 +2,7 @@ import {action, makeObservable, observable, computed} from 'mobx';
 
 class StudentData {
   state = {
+    showSplash: true,
     isLoggedIn: false,
     token: null,
   };
@@ -17,12 +18,18 @@ class StudentData {
     this.state.token = token;
     console.log('USER LOGGED IN');
   };
-
+  closeSplash = () => {
+    this.state.showSplash = false;
+    console.log('Splash Closed');
+  };
   get token() {
     return this.state.token;
   }
   get isUserLoggedIn() {
     return this.state.isLoggedIn;
+  }
+  get showSplash() {
+    return this.state.showSplash;
   }
   constructor() {
     makeObservable(this, {
@@ -31,6 +38,8 @@ class StudentData {
       logOut: action,
       token: computed,
       isUserLoggedIn: computed,
+      showSplash: computed,
+      closeSplash: action,
     });
   }
 }

@@ -4,10 +4,11 @@ import * as Animatable from 'react-native-animatable';
 import {StyleSheet, View, Text, PixelRatio} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {StackActions} from '@react-navigation/native';
-const SplashScreen = ({navigation}) => {
+import {Login_Store} from '../../mobx/loginStore';
+
+const SplashScreen = () => {
   const navigate = () => {
-    navigation.dispatch(StackActions.replace('Login'));
+    Login_Store.closeSplash();
   };
 
   return (
