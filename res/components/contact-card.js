@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {Card, Layout, Modal, Icon} from '@ui-kitten/components';
+import {Card, Layout, Icon} from '@ui-kitten/components';
 import {
   ImageBackground,
   StyleSheet,
   View,
   Text,
   PixelRatio,
+  Image,
+  Modal,
+  ScrollView,
 } from 'react-native';
-
+import {Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {scale, verticalScale} from 'react-native-size-matters';
 
@@ -17,12 +20,17 @@ import {
   borderRadiusLarge,
   fontSizeMedium,
   paddingSmall,
+  Pressable,
+  paddingBig,
   paddingMedium,
 } from '../utils/UIConstants';
-import {Black, White} from '../utils/colors';
+import {Black, Grey, White} from '../utils/colors';
 
 let cardHeight = 200;
 let cardWidth = 150;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const ContactCard = props => {
   const [visible, setVisible] = useState(false);
   return (
@@ -51,47 +59,69 @@ const ContactCard = props => {
           </ImageBackground>
         </TouchableOpacity>
       </Card>
+
       <Modal
-        backdropStyle={styles.backdrop}
         visible={visible}
-        onBackdropPress={() => setVisible(false)}>
-        <Layout style={styles.content}>
-          <View style={styles.imageContainer}>
-            <Card style={styles.circle}>
-              <View
-                style={{
-                  marginLeft: scale(-24),
-                  marginTop: scale(-14),
-                  backgroundColor: White,
-                }}>
-                <ImageBackground
-                  source={{
-                    uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
-                  }}
-                  resizeMode="cover"
-                  style={styles.image2}></ImageBackground>
-              </View>
-            </Card>
-            <View>
-              <View style={styles.infoContainer}>
-                <Icon style={styles.icon} fill={Black} name="person" />
-                <Text style={styles.text}>{props.name}</Text>
-              </View>
-              <View style={styles.infoContainer}>
-                <Icon style={styles.icon} fill={Black} name="home" />
-                <Text style={styles.text}>{props.dept}</Text>
-              </View>
-              <View style={styles.infoContainer}>
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => {
+          setVisible(false);
+        }}>
+        <View style={styles.content}>
+          <View
+            style={{
+              backgroundColor: 'rgba(254,252,248, 0.97)',
+              flex: 1,
+              borderRadius: scale(borderRadius),
+            }}>
+            <Image
+              source={{
+                uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+              }}
+              resizeMode="cover"
+              style={styles.image2}
+            />
+
+            <View style={{marginLeft: scale(6), marginRight: scale(6)}}>
+              <Text numberOfLines={1} style={{fontSize: scale(30)}}>
+                {props.name}
+              </Text>
+              <View style={{flexDirection: 'row'}}>
                 <Icon style={styles.icon} fill={Black} name="phone" />
-                <Text style={styles.text}>{props.phone}</Text>
-              </View>
-              <View style={styles.infoContainer}>
-                <Icon style={styles.icon} fill={Black} name="info" />
-                <Text style={styles.text}>{props.intro}</Text>
+                <Text numberOfLines={1} style={styles.text}>
+                  {props.phone}
+                </Text>
               </View>
             </View>
+            <View
+              style={{
+                height: verticalScale(1),
+                backgroundColor: '#eaeaea',
+                marginHorizontal: scale(3),
+              }}
+            />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View
+                style={{
+                  marginTop: verticalScale(3),
+                  marginLeft: scale(6),
+                  marginRight: scale(6),
+                  borderRadius: scale(borderRadius),
+                  paddingVertical: verticalScale(paddingSmall),
+                  marginBottom: verticalScale(6),
+                }}>
+                <Text
+                  style={{
+                    fontSize: scale(16),
+                    width: '100%',
+                    textAlign: 'justify',
+                  }}>
+                  {props.intro}
+                </Text>
+              </View>
+            </ScrollView>
           </View>
-        </Layout>
+        </View>
       </Modal>
     </View>
   );
@@ -124,7 +154,6 @@ const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
     // alignItems: 'center',
-    marginVertical: 3,
   },
   textContainer: {
     height: verticalScale(40),
@@ -143,46 +172,28 @@ const styles = StyleSheet.create({
     color: White,
     marginTop: verticalScale(-3),
   },
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
+
   content: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 4,
-    paddingVertical: 4,
     borderRadius: borderRadius,
+    padding: scale(10),
+    backgroundColor: 'rgba(204, 198, 204, 0.8)',
+    flex: 1,
   },
   text: {
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    width: scale(cardWidth+30),
-    textAlign: 'justify'
+    textAlign: 'justify',
   },
-  imageContainer: {
-    // height: verticalScale(150),
-    // width: scale(200),
-    margin : verticalScale(10),
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-  circle: {
-    height: verticalScale(70),
-    width: scale(70),
-    borderRadius: scale(1000),
-    borderWidth: scale(3),
-    marginBottom: verticalScale(10),
-  },
+
   image2: {
-    height: verticalScale(70),
-    width: scale(70),
+    height: verticalScale(300),
+    borderRadius: borderRadius,
   },
   icon: {
-    width: scale(18),
-    height: verticalScale(18),
-    marginRight: 8,
+    width: scale(16),
+    height: verticalScale(16),
+    marginRight: scale(6),
   },
 });
 

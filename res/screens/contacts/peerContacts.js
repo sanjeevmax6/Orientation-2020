@@ -41,14 +41,14 @@ const Peers = () => {
                 name="Ram Kapoor"
                 dept="CSE"
                 intro="Likes to code, draw water from well. Likes to code, draw water from well. Likes to code, draw water from well. Likes to code, draw water from well."
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
               <ContactCard
                 params={setVisible}
-                name="Ankit Kumar"
+                name="TEST Kumar"
                 dept="CSE"
-                intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                intro="Blood is a body fluid in humans and other animals that delivers necessary substances such as nutrients and oxygen to the cells and transports metabolic waste products away from those same cells. In vertebrates, it is composed of blood cells suspended in blood plasma. Plasma, which constitutes 55% of blood fluid, is mostly water (92% by volume),[2] and contains proteins, glucose, mineral ions, hormones, carbon dioxide (plasma being the main medium for excretory product transportation), and blood cells themselves. Albumin is the main protein in plasma, and it functions to regulate the colloidal osmotic pressure of blood. The blood cells are mainly red blood cells (also called RBCs or erythrocytes), white blood cells (also called WBCs or leukocytes) and platelets (also called thrombocytes). The most abundant cells in vertebrate blood are red blood cells. These contain hemoglobin, an iron-containing protein, which facilitates oxygen transport by reversibly binding to this respiratory gas and greatly increasing its solubility in blood. In contrast, carbon dioxide is mostly transported extracellularly as bicarbonate ion transported in plasma. Vertebrate blood is bright red when its hemoglobin is oxygenated and dark red when it is deoxygenated. Some animals, such as crustaceans and mollusks, use hemocyanin to carry oxygen, instead of hemoglobin. Insects and some mollusks use a fluid called hemolymph instead of blood, the difference being that hemolymph is not contained in a closed circulatory system. In most insects, this blood does not contain oxygen-carrying molecules such as hemoglobin because their bodies are small enough for their tracheal system to suffice for supplying oxygen."
+                phone="+91 34500 34500"
               />
             </View>
             <Text style={styles.department}>ELECTRICAL</Text>
@@ -58,14 +58,14 @@ const Peers = () => {
                 name="Shyam Sundar"
                 dept="EEE"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
               <ContactCard
                 params={setVisible}
                 name="Ganesh Kumar"
                 dept="EEE"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
             </View>
             <Text style={styles.department}>MECHANICAL</Text>
@@ -75,14 +75,14 @@ const Peers = () => {
                 name="Rajeev Das"
                 dept="Mech"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
               <ContactCard
                 params={setVisible}
                 name="G.S. Gupta"
                 dept="Mech"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
             </View>
             <Text style={styles.department}>CHEMICAL</Text>
@@ -92,14 +92,14 @@ const Peers = () => {
                 name="Abhishek Singh"
                 dept="Chem"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
               <ContactCard
                 params={setVisible}
                 name="Nirmal Singhal"
                 dept="Chem"
                 intro="Likes to code, draw water from well"
-                phone='+91 34500 34500'
+                phone="+91 34500 34500"
               />
             </View>
           </ScrollView>
