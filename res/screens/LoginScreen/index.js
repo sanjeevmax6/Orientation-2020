@@ -68,8 +68,34 @@ const Login = ({navigation}) => {
             height: verticalScale(30),
             alignContent: 'center',
             justifyContent: 'center',
+            marginTop: 10,
+            marginBottom: 3,
           }}>
-          <TouchableOpacity onPress={() => navigation.push('SignUp')}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push('SignUp', {screenType: 'RESET PASSWORD'})
+            }>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: scale(12),
+              }}>
+              Forgot Password?
+              <Text
+                style={{
+                  color: 'darkgreen',
+                  fontWeight: 'bold',
+                  fontSize: scale(14),
+                }}>
+                {' '}
+                RESET!
+              </Text>
+            </Text>
+          </TouchableOpacity>
+          {/* <View style={{h}} /> */}
+          <TouchableOpacity
+            style={{marginTop: 3}}
+            onPress={() => navigation.push('SignUp', {screenType: 'SIGN UP'})}>
             <Text
               style={{
                 textAlign: 'center',

@@ -18,7 +18,7 @@ import {
 } from '../../utils/UIConstants';
 import Button from './button';
 
-const EmailScreen = ({index, setIndex, navigation}) => {
+const EmailScreen = ({index, setIndex, navigation, heading = 'SIGN UP'}) => {
   const nextHandler = () => {
     setIndex(index + 1);
   };
@@ -29,7 +29,7 @@ const EmailScreen = ({index, setIndex, navigation}) => {
           height: verticalScale(310),
           width: '100%',
         }}>
-        <Text style={styles.title}>SIGN UP</Text>
+        <Text style={styles.title}>{heading}</Text>
 
         <TextInput
           style={{
@@ -49,31 +49,45 @@ const EmailScreen = ({index, setIndex, navigation}) => {
           focusColor="black"
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
-        <View
-          style={{
-            height: verticalScale(30),
-            alignContent: 'center',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity onPress={() => navigation.push('Login')}>
-            <Text
+
+        {heading === 'RESET PASSWORD' ? (
+          <View
+            style={{
+              height: verticalScale(15),
+              alignContent: 'center',
+              justifyContent: 'center',
+            }}
+          />
+        ) : (
+          <>
+            <View
               style={{
-                textAlign: 'center',
-                fontSize: scale(12),
+                height: verticalScale(30),
+                alignContent: 'center',
+                justifyContent: 'center',
               }}>
-              Already have an account?
-              <Text
-                style={{
-                  color: '#f13e4d',
-                  fontWeight: 'bold',
-                  fontSize: scale(14),
-                }}>
-                {' '}
-                LOG IN!
-              </Text>
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <TouchableOpacity onPress={() => navigation.push('Login')}>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: scale(12),
+                  }}>
+                  Already have an account?
+                  <Text
+                    style={{
+                      color: '#f13e4d',
+                      fontWeight: 'bold',
+                      fontSize: scale(14),
+                    }}>
+                    {' '}
+                    LOG IN!
+                  </Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+
         <View
           style={{
             alignItems: 'flex-end',
