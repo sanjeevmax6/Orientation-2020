@@ -16,21 +16,16 @@ import Carousel from 'react-native-snap-carousel';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {
   borderRadiusLarge,
-  borderRadiusMedium,
-  borderRadiusSmall,
-  paddingBig,
   fontSizeMedium,
   paddingMedium,
   paddingSmall,
-  iconLarge,
-  iconMedium,
   iconSmall,
   fontSizeSmall,
 } from '../../utils/UIConstants';
 import GetLocation from 'react-native-get-location';
 
 const carouselCardDimension = 175;
-const categoryCardDimension = 50;
+const categoryCardDimension = 55;
 const mapStyle = Coordinates.customMapStyle;
 
 const VirtualMap = () => {
@@ -42,6 +37,7 @@ const VirtualMap = () => {
     Coordinates.departmentCoordinates,
   );
   const [hostel, setHostel] = useState(Coordinates.hostelCoordinates);
+  const [foodAndSports, setFoodAndSports] = useState(Coordinates.foodAndSports);
 
   const [markers, setMarkers] = useState([]);
   const [places, setPlaces] = useState(general);
@@ -62,8 +58,8 @@ const VirtualMap = () => {
     let location = places[index];
 
     _map.current.animateToRegion({
-      latitude: location.latitude - 0.0006,
-      longitude: location.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude + 0.00027,
       latitudeDelta: location.latitudeDelta,
       longitudeDelta: location.longitudeDelta,
     });
@@ -73,8 +69,8 @@ const VirtualMap = () => {
 
   const onMarkerPressed = (location, index) => {
     _map.current.animateToRegion({
-      latitude: location.latitude - 0.0006,
-      longitude: location.longitude,
+      latitude: location.latitude,
+      longitude: location.longitude + 0.0003,
       latitudeDelta: location.latitudeDelta,
       longitudeDelta: location.longitudeDelta,
     });
@@ -235,6 +231,52 @@ const VirtualMap = () => {
                 </View>
               </ImageBackground>
             </Card>
+            <Card
+              style={styles.categoryCards}
+              onPress={() => {
+                if (3 == choice) {
+                } else {
+                  setChoice(3);
+                  setPlaces(foodAndSports);
+                  _carousel.current.snapToItem(0);
+                }
+              }}>
+              <ImageBackground
+                source={require('../../assets/images/card4.jpg')}
+                style={{
+                  height: verticalScale(categoryCardDimension),
+                  width: scale(categoryCardDimension),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Icon
+                    name="utensils"
+                    style={[
+                      styles.categoryIcons,
+                      {marginRight: scale(paddingSmall / 4)},
+                    ]}
+                    pack="FontAwesome5"
+                  />
+                  <Icon
+                    name="baseball-ball"
+                    style={[
+                      styles.categoryIcons,
+                      {marginLeft: scale(paddingSmall / 4)},
+                    ]}
+                    pack="FontAwesome5"
+                  />
+                </View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.categoryText}>Food & Sports</Text>
+                </View>
+              </ImageBackground>
+            </Card>
           </View>
           <Carousel
             ref={_carousel}
@@ -258,10 +300,10 @@ const styles = StyleSheet.create({
   },
   map: {
     position: 'absolute',
-    right: 0,
+    right: scale(-100),
     top: 0,
     //To hide 'Open with Google Maps' Logo
-    bottom: scale(-100),
+    bottom: 0,
     left: 0,
   },
   carousel: {},

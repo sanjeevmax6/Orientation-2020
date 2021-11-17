@@ -237,14 +237,14 @@ const Timetable = () => {
   const [showCalendar, setShowCalendar] = useState(true);
   const maxHeight = verticalScale(400);
   const animation = useRef(new Animated.Value(maxHeight)).current;
-  const [icon, setIcon] = useState('chevron-up');
+  const [icon, setIcon] = useState('eye-slash');
 
   const toggle = () => {
     var ht = 0;
-    setIcon('chevron-down');
+    setIcon('eye');
     if (!showCalendar) {
       ht = maxHeight;
-      setIcon('chevron-up');
+      setIcon('eye-slash');
     }
 
     Animated.spring(animation, {
@@ -381,11 +381,17 @@ const Timetable = () => {
               <Text style={styles.todayTitleText}>Today : </Text>
               <Text style={styles.todayText}>{moment().format('MMM Do')}</Text>
             </View>
-            <View>
+            <View style={{flexDirection: 'row'}}>
+              <Icon
+                name="calendar-alt"
+                style={styles.hideCalendarIcons}
+                pack="FontAwesome5"
+              />
+              <Text> : </Text>
               <TouchableOpacity onPress={toggle}>
                 <Icon
                   name={icon}
-                  style={styles.arrowIcon}
+                  style={styles.hideCalendarIcons}
                   pack="FontAwesome5"
                 />
               </TouchableOpacity>
@@ -476,8 +482,9 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeMedium),
     color: Colors.Secondary,
   },
-  arrowIcon: {
+  hideCalendarIcons: {
     height: verticalScale(iconSmall),
+    marginHorizontal: scale(paddingSmall / 2),
   },
 });
 
