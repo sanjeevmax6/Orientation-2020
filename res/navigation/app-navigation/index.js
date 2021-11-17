@@ -11,6 +11,7 @@ import Header from '../../components/header';
 import Peers from '../../screens/contacts/peerContacts';
 import Admin from '../../screens/contacts/adminContacts';
 import Orientation from '../../screens/contacts/orientationContacts';
+import EventDescription from '../../screens/scheduler/EventDescription';
 const stack = createNativeStackNavigator();
 
 function AppNavigator() {
@@ -103,6 +104,15 @@ function AppNavigator() {
           animation: 'slide_from_right',
           headerShown: true,
           header: props => <Header props={props} title="Academic Calendar" />,
+        }}
+      />
+      <stack.Screen
+        name="Event Description"
+        component={EventDescription}
+        options={{
+          animation: 'slide_from_right',
+          headerShown: true,
+          header: props => <Header props={props} title="Event Description" />,
         }}
       />
     </stack.Navigator>
