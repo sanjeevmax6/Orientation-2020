@@ -1,104 +1,103 @@
-import {Card} from '@ui-kitten/components';
 import React from 'react';
-import {ImageBackground, StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {} from 'react-native-ui-kitten';
-import {Black, Grey, White, Yellow} from '../utils/colors';
-import {
-  borderRadiusLarge,
-  fontSizeBig,
-  fontSizeMedium,
-  fontSizeSmall,
-  paddingMedium,
-} from '../utils/UIConstants';
 
-const ClubCard = () => {
+import {Yellow} from '../utils/colors';
+import {Icon} from '@ui-kitten/components';
+import {paddingMedium, borderRadiusMedium} from '../utils/UIConstants';
+
+import {Club_Modal_Store} from '../mobx/clubModalStore';
+const ClubCard = ({
+  clubName,
+  url,
+  description,
+  website,
+  LinkedIn,
+  Youtube,
+  Instagram,
+  Medium,
+  Facebook,
+}) => {
+  const onPressHandler = () => {
+    Club_Modal_Store.openModal();
+    Club_Modal_Store.setUrl(url);
+    Club_Modal_Store.setClubName(clubName);
+    Club_Modal_Store.setDescription(description);
+    Club_Modal_Store.setWebsite(website);
+    Club_Modal_Store.setLinkedIn(LinkedIn);
+    Club_Modal_Store.setInstagram(Instagram);
+    Club_Modal_Store.setFacebook(Facebook);
+    Club_Modal_Store.setMedium(Medium);
+    Club_Modal_Store.setYoutube(Youtube);
+  };
   return (
     <>
-      <Card style={styles.card}>
+      <LinearGradient
+        start={{x: 0.0, y: 0.0}}
+        end={{x: 1.0, y: 0.0}}
+        colors={['#ff512f', '#ff5130', '#f13e4d']}
+        style={styles.card}>
+        <TouchableOpacity onPress={onPressHandler}>
+          <Image
+            style={{
+              backgroundColor: 'pink',
+              width: '100%',
+              height: verticalScale(200),
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+            }}
+            resizeMode="cover"
+            source={{
+              uri: url,
+            }}
+          />
+        </TouchableOpacity>
         <View
           style={{
-            height: verticalScale(70),
-            margin: verticalScale(-15),
-            backgroundColor: White,
-          }}>
-          <ImageBackground
-            source={require('../assets/images/spider.png')}
-            resizeMode="repeat"
-            style={styles.image}></ImageBackground>
-        </View>
-        <View style={styles.imageContainer}>
-          <Card style={styles.circle}>
-            <View
-              style={{
-                marginLeft: scale(-24),
-                marginTop: scale(-14),
-                backgroundColor: White,
-              }}>
-              <ImageBackground
-                source={require('../assets/images/spider1.jpg')}
-                resizeMode="cover"
-                style={styles.image2}></ImageBackground>
-            </View>
-          </Card>
-        </View>
-        <View
-          style={{
-            justifyContent: 'center',
+            flex: 1,
             alignItems: 'center',
-            margin: scale(10),
+            flexDirection: 'row',
+            paddingHorizontal: 10,
           }}>
-          <Text style={styles.name}>Spider R&D Club</Text>
-        </View>
-        <View style={{justifyContent: 'center', marginTop: scale(-5)}}>
-          <Text style={styles.description}>
-            It is research and development club of NIT Trichy. It has four
-            domains:App Dev,Web Dev,Tronix,Algos.
+          <Text
+            numberOfLines={1}
+            style={{
+              fontSize: 24,
+              paddingRight: 9,
+              color: 'white',
+              textTransform: 'uppercase',
+              flex: 1,
+            }}>
+            {clubName}
           </Text>
+          <TouchableOpacity onPress={onPressHandler}>
+            <Icon
+              style={{
+                width: 24,
+                height: 24,
+                backgroundColor: 'white',
+                borderRadius: 24,
+                elevation: 5,
+              }}
+              fill="black"
+              name="diagonal-arrow-right-up-outline"
+            />
+          </TouchableOpacity>
         </View>
-      </Card>
+      </LinearGradient>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadiusLarge,
+    borderRadius: borderRadiusMedium,
     backgroundColor: Yellow,
     marginTop: verticalScale(0),
-    alignItems: 'center',
-    overflow: 'hidden',
     marginLeft: scale(paddingMedium),
-    borderWidth: 3,
-    height: verticalScale(220),
-    width: scale(190),
-  },
-  image: {
-    width: scale(190),
-    height: verticalScale(70),
-  },
-  image2: {
-    height: verticalScale(70),
-    width: scale(70),
-  },
-  imageContainer: {
-    height: verticalScale(70),
-    marginTop: verticalScale(-20),
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-  circle: {
-    height: verticalScale(70),
-    width: scale(70),
-    borderRadius: scale(1000),
-    borderWidth: scale(3),
-  },
-  name: {
-    fontSize: fontSizeBig,
-  },
-  description: {
-    fontSize: fontSizeSmall,
+    height: verticalScale(250),
+    width: scale(200),
   },
 });
 
