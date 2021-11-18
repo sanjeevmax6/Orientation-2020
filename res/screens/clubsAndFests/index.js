@@ -24,6 +24,7 @@ import ClubCategory from './clubCategory';
 
 import {observer} from 'mobx-react';
 import {Club_Modal_Store} from '../../mobx/clubModalStore';
+import LinearGradient from 'react-native-linear-gradient';
 
 const data = {
   technical: [
@@ -239,11 +240,17 @@ const ClubsAndFests = observer(() => {
                   )}
                 </View>
               </View>
-              <View
+              <LinearGradient
+                start={{x: 0.0, y: 0.25}}
+                end={{x: 0.5, y: 1.0}}
+                locations={[0, 0.6, 0.8]}
+                colors={['#f13e4d', '#ff5130', '#ff512f']}
                 style={{
                   height: verticalScale(1),
                   backgroundColor: '#eaeaea',
                   marginHorizontal: scale(3),
+                  marginVertical: verticalScale(6),
+                  opacity: 0.8,
                 }}
               />
 

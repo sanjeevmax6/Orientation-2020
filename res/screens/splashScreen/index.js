@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as Animatable from 'react-native-animatable';
-import {StyleSheet, View, Text, PixelRatio} from 'react-native';
+import {StyleSheet, View, Text, PixelRatio, Platform} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Login_Store} from '../../mobx/loginStore';
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
     fontSize: scale(26) / PixelRatio.getFontScale(),
     color: 'black',
     top: verticalScale(-25),
-    fontFamily: 'Montserrat-Medium',
+    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+
     fontWeight: 'bold',
   },
 
@@ -140,7 +141,9 @@ const styles = StyleSheet.create({
     fontSize: scale(32) / PixelRatio.getFontScale(),
     color: '#f13e4d',
     top: verticalScale(-26),
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+
+    //fontFamily: 'Montserrat-Bold',
   },
 
   spiderTexts: {
@@ -152,7 +155,8 @@ const styles = StyleSheet.create({
     // fontWeight:"bold",
     color: 'darkblue',
     elevation: 1,
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+    //fontFamily: 'Montserrat-Bold',
     textAlignVertical: 'center',
   },
   bottom: {
