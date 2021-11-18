@@ -7,7 +7,7 @@ import Navigator from './navigation';
 import Status_Bar from './components/status_bar';
 import {Observer, Provider} from 'mobx-react';
 import {store} from './store';
-
+import {default as theme} from './utils/custom-theme.json';
 const App = () => {
   return (
     <Observer>
@@ -15,7 +15,7 @@ const App = () => {
         <>
           <Status_Bar />
           <IconRegistry icons={[EvaIconsPack, FontAwesome5IconsPack]} />
-          <ApplicationProvider {...eva} theme={eva.light}>
+          <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
             <Navigator />
           </ApplicationProvider>
         </>
