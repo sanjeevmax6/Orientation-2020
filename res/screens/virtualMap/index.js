@@ -22,7 +22,6 @@ import {
   iconSmall,
   fontSizeSmall,
 } from '../../utils/UIConstants';
-import GetLocation from 'react-native-get-location';
 
 const carouselCardDimension = 175;
 const categoryCardDimension = 55;
@@ -42,17 +41,6 @@ const VirtualMap = () => {
   const [markers, setMarkers] = useState([]);
   const [places, setPlaces] = useState(general);
   const [choice, setChoice] = useState(0);
-
-  //Function to get User Location
-  GetLocation.getCurrentPosition({
-    enableHighAccuracy: true,
-    timeout: 15000,
-  })
-    .then(location => {})
-    .catch(error => {
-      const {code, message} = error;
-      console.warn(code, message);
-    });
 
   const onCarouselItemChange = index => {
     let location = places[index];
@@ -101,7 +89,6 @@ const VirtualMap = () => {
           initialRegion={Coordinates.initialRegion}
           showsPointsOfInterest={false}
           showsTraffic={false}
-          showsUserLocation={true}
           showsIndoors={false}>
           <Polygon
             coordinates={Coordinates.mapBoundaries}

@@ -27,7 +27,6 @@
     "react-native-calendars": "^1.1268.0",
     "react-native-element-textinput": "^1.2.0",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-get-location": "^2.1.2",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-maps": "^0.29.3",
     "react-native-safe-area-context": "^3.3.2",
