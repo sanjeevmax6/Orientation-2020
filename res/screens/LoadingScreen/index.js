@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/loading.json';
 import {Login_Store} from '../../mobx/loginStore';
-import ErrorScreen from './errorScreen';
+import ErrorScreen from '../../components/errorScreen';
 
 const LoaderPage = ({navigation}) => {
   const pressHandler = () => {
