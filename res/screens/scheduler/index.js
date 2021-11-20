@@ -1,16 +1,19 @@
 import React, {useState} from 'react';
+import {Dimensions} from 'react-native';
 import {
   ExpandableCalendar,
   CalendarProvider,
   WeekCalendar,
 } from 'react-native-calendars';
+import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
 import * as Colors from '../../utils/colors';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {scale, verticalScale, ScaledSheet} from 'react-native-size-matters';
 import {
   fontSizeBig,
   fontSizeMedium,
   fontSizeSmall,
+  fontSizeVeryLarge,
   iconMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
@@ -19,6 +22,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from 'react-native-gesture-handler';
 import {View} from 'react-native-animatable';
 import EventCard from './EventCard';
+import Icon from 'react-native-vector-icons/Feather';
+import LinearGradient from 'react-native-linear-gradient';
 
 const data = {
   //Minimum Date : 1st October 2021
@@ -97,69 +102,104 @@ const Scheduler = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, height: ht}}>
-        <CalendarProvider date={data.currentDay}>
-          <View
-            onLayout={event => {
-              var h = event.nativeEvent.layout.height;
-              setHt(h);
-            }}>
-            <ExpandableCalendar
-              style={{
-                marginTop: verticalScale(-paddingSmall / 2),
-              }}
-              minDate={data.minDay}
-              maxDate={data.maxDay}
-              firstDay={1}
-              theme={{
-                //arrows
-                arrowColor: Colors.Secondary,
-                'stylesheet.expandable': {},
-                // 'stylesheet.day.basic': {},
-                'stylesheet.calendar.header': {
-                  dayTextAtIndex6: {
-                    color: Colors.Secondary,
-                  },
-                },
-                //days
-                textDayHeaderFontSize: scale(fontSizeMedium),
-                textSectionTitleColor: Colors.Tertiary,
-                //dates
-                textDayFontSize: scale(fontSizeMedium),
-                selectedDayTextColor: '#FFFFFF',
-                selectedDayBackgroundColor: Colors.selectedDayBackgroundColor,
-                todayTextColor: Colors.todayTextColor,
-                //month
-                textMonthFontSize: scale(fontSizeBig + 3),
-                // disabled date
-                textDisabledColor: Colors.Grey,
-                //dotStyle
-                dotStyle: {
-                  width: scale(5.25),
-                  height: scale(5.25),
-                  marginTop: verticalScale(-0.25),
-                },
-              }}
-              markingType={'multi-dot'}
-              markedDates={{
-                '2021-10-14': {
-                  dots: [event1, event2, event3],
-                },
-                '2021-10-25': {
-                  dots: [event1, event2, event3],
-                },
-                '2021-10-26': {dots: [event1, event2]},
-              }}
-            />
-          </View>
-          <FlatList
-            data={DATA}
-            renderItem={eventcard}
-            style={{flex: 1, marginVertical: verticalScale(5)}}
+        <LinearGradient
+          start={{x: 0.0, y: 0.0}}
+          end={{x: 1.0, y: 0.0}}
+          colors={['#f13e4d', '#ff5130', '#ff512f']}>
+          <CalendarStrip
+            // ref={_calendar}
+            scrollable
+            calendarAnimation={{type: 'sequence', duration: 3000}}
+            daySelectionAnimation={{
+              type: 'background',
+              duration: 0,
+              borderWidth: scale(3),
+              borderHighlightColor: Colors.daySelectionAnimationColor,
+              borderRadius: scale(20),
+            }}
+            style={styles.calendarStripContainer}
+            calendarHeaderStyle={styles.month}
+            calendarColor={Colors.CalendarColor}
+            dateNumberStyle={{
+              color: Colors.dateNumberStyleColor,
+              fontSize: fontSizeBig,
+            }}
+            dateNameStyle={{
+              color: Colors.dateNameStyleColor,
+              fontSize: fontSizeMedium,
+            }}
+            highlightDateNumberStyle={{
+              color: Colors.highlightDateNumberStyleColor,
+              fontSize: fontSizeBig,
+            }}
+            highlightDateNameStyle={{
+              color: Colors.highlightDateNameStyleColor,
+              fontSize: fontSizeSmall,
+            }}
+            disabledDateNameStyle={{
+              color: Colors.disabledDateNameStyleColor,
+              fontSize: fontSizeSmall,
+            }}
+            disabledDateNumberStyle={{
+              color: Colors.disabledDateNumberStyleColor,
+              fontSize: fontSizeBig,
+            }}
+            // datesWhitelist={datesWhitelist}
+            leftSelector={
+              <Icon
+                name="chevron-left"
+                color={Colors.PRIMARY}
+                size={scale(25)}
+              />
+            }
+            rightSelector={
+              <Icon
+                name="chevron-right"
+                color={Colors.PRIMARY}
+                size={scale(25)}
+              />
+            }
+            iconContainer={{flex: 0.1}}
+            onDateSelected={date => {
+              // props.setSelectedDate(date.format('YYYY-MM-DD'));
+            }}
           />
-        </CalendarProvider>
+        </LinearGradient>
+        <FlatList
+          data={DATA}
+          renderItem={eventcard}
+          style={{flex: 1, marginVertical: verticalScale(5)}}
+        />
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = ScaledSheet.create({
+  calendarStripContainer: {
+    width: '100%',
+    height: Dimensions.get('window').height / 8,
+    alignSelf: 'center',
+    paddingTop: verticalScale(10),
+    backgroundColor: Colors.CalendarStripcontainerColor,
+  },
+  dateContainer: {
+    backgroundColor: Colors.dateContainerColor,
+    color: Colors.BLACK,
+    elevation: 10,
+    borderWidth: scale(1),
+    borderRadius: scale(30),
+    borderColor: Colors.background_dark,
+    fontSize: fontSizeVeryLarge,
+    height: verticalScale(35),
+    width: scale(35),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  month: {
+    color: Colors.calendarHeaderStyleColor,
+    fontSize: fontSizeMedium,
+  },
+});
 
 export default Scheduler;

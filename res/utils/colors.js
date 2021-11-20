@@ -45,5 +45,22 @@ export const notice3Color = '#bc4749';
 export const tickColor = '#6fd993';
 
 //Colors for Magazines and Symposiums Screen
-export const iconColor='#347cfc';
-export const iconColorFade='#a1aabc';
+export const iconColor = '#347cfc';
+export const iconColorFade = '#a1aabc';
+
+//CalendarStrip
+export const PRIMARY = '#f6f5f5';
+export const SECONDARY = '#070d59';
+export const background_dark = Transparent;
+export const GRAY_LIGHT = '#e6e6e6';
+export const daySelectionAnimationColor = PRIMARY;
+export const calendarHeaderStyleColor = PRIMARY;
+export const CalendarColor = PRIMARY;
+export const dateNumberStyleColor = PRIMARY;
+export const dateNameStyleColor = PRIMARY;
+export const highlightDateNumberStyleColor = SECONDARY;
+export const highlightDateNameStyleColor = SECONDARY;
+export const disabledDateNameStyleColor = GRAY_LIGHT;
+export const disabledDateNumberStyleColor = GRAY_LIGHT;
+export const CalendarStripcontainerColor = background_dark;
+export const dateContainerColor = PRIMARY;
