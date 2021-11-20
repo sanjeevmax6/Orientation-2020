@@ -82,9 +82,7 @@ function AppNavigator() {
         options={{
           animation: 'slide_from_right',
           headerShown: true,
-          header: props => (
-            <Header props={props} title="Magazine and Symposium" />
-          ),
+          header: props => <Header props={props} title="Symposiums" />,
         }}
       />
       <stack.Screen

@@ -273,9 +273,7 @@ const MainMenu = ({navigation}) => {
                   </View>
                   <View
                     style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.textMainMenu}>
-                      Magazine & Symposium
-                    </Text>
+                    <Text style={styles.textMainMenu}>Symposiums</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>

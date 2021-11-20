@@ -33,48 +33,19 @@ const MagazineAndSymposium = () => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Layout style={{flex: 1}}>
-        <TabView
-          selectedIndex={selectedIndex}
-          shouldLoadComponent={shouldLoadComponent}
-          swipeEnabled={false}
-          onSelect={index => setSelectedIndex(index)}>
-          <Tab title="MAGAZINES" icon={BookIcon} style={styles.tabheader}>
-            <Layout style={styles.tabcontainer}>
-              <View style={{marginTop: Height / 9}}>
-                <Carousel
-                  layout="stack"
-                  layoutCardOffset={9}
-                  ref={isCarousel}
-                  data={magazineData}
-                  renderItem={CarouselCardItem}
-                  sliderWidth={SLIDER_WIDTH}
-                  itemWidth={ITEM_WIDTH}
-                  inactiveSlideShift={0}
-                  useScrollView={true}
-                />
-              </View>
-            </Layout>
-          </Tab>
-          <Tab title="SYMPOSIUMS" icon={BellIcon} style={styles.tabheader}>
-            <Layout style={styles.tabcontainer}>
-              <View style={{marginTop: Height / 9}}>
-                <Carousel
-                  layout="tinder"
-                  layoutCardOffset={9}
-                  ref={isCarousel}
-                  data={symposiumData}
-                  renderItem={CarouselCardItem}
-                  sliderWidth={SLIDER_WIDTH}
-                  itemWidth={ITEM_WIDTH}
-                  inactiveSlideShift={0}
-                  useScrollView={true}
-                />
-              </View>
-            </Layout>
-          </Tab>
-        </TabView>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <Layout style={styles.tabcontainer}>
+        <Carousel
+          layout="tinder"
+          layoutCardOffset={9}
+          ref={isCarousel}
+          data={symposiumData}
+          renderItem={CarouselCardItem}
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          inactiveSlideShift={0}
+          useScrollView={true}
+        />
       </Layout>
     </SafeAreaView>
   );
