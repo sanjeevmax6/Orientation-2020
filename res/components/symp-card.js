@@ -7,9 +7,13 @@ import {Yellow} from '../utils/colors';
 import {Icon} from '@ui-kitten/components';
 import {paddingMedium, borderRadiusMedium} from '../utils/UIConstants';
 
-import {Club_Modal_Store} from '../mobx/clubModalStore';
-const ClubCard = ({
-  clubName,
+import {Symp_Modal_Store} from '../mobx/symposiumModalStore';
+
+const CARD_WIDTH = 300;
+const CARD_HEIGHT = 360;
+const SympCard = ({
+  Name,
+  department,
   url,
   description,
   website,
@@ -20,16 +24,16 @@ const ClubCard = ({
   Facebook,
 }) => {
   const onPressHandler = () => {
-    Club_Modal_Store.openModal();
-    Club_Modal_Store.setUrl(url);
-    Club_Modal_Store.setClubName(clubName);
-    Club_Modal_Store.setDescription(description);
-    Club_Modal_Store.setWebsite(website);
-    Club_Modal_Store.setLinkedIn(LinkedIn);
-    Club_Modal_Store.setInstagram(Instagram);
-    Club_Modal_Store.setFacebook(Facebook);
-    Club_Modal_Store.setMedium(Medium);
-    Club_Modal_Store.setYoutube(Youtube);
+    Symp_Modal_Store.openModal();
+    Symp_Modal_Store.setUrl(url);
+    Symp_Modal_Store.setClubName(Name);
+    Symp_Modal_Store.setDescription(description);
+    Symp_Modal_Store.setWebsite(website);
+    Symp_Modal_Store.setLinkedIn(LinkedIn);
+    Symp_Modal_Store.setInstagram(Instagram);
+    Symp_Modal_Store.setFacebook(Facebook);
+    Symp_Modal_Store.setMedium(Medium);
+    Symp_Modal_Store.setYoutube(Youtube);
   };
   return (
     <>
@@ -42,8 +46,8 @@ const ClubCard = ({
           <Image
             style={{
               backgroundColor: 'pink',
-              width: '101%',
-              height: verticalScale(200),
+              width: '100%',
+              height: verticalScale(CARD_WIDTH),
               borderTopLeftRadius: 10,
               borderTopRightRadius: 10,
             }}
@@ -61,15 +65,24 @@ const ClubCard = ({
             paddingHorizontal: 10,
           }}>
           <Text
-            numberOfLines={1}
             style={{
-              fontSize: 24,
-              paddingRight: 9,
-              color: 'white',
-              textTransform: 'uppercase',
               flex: 1,
             }}>
-            {clubName}
+            <Text
+              numberOfLines={1}
+              style={{
+                fontSize: 24,
+                paddingRight: 9,
+                color: 'white',
+                textTransform: 'uppercase',
+                flex: 1,
+              }}>
+              {Name}
+            </Text>
+            <Text>{'\n'}</Text>
+            <Text style={{color: 'white', fontSize: scale(12)}}>
+              {department}
+            </Text>
           </Text>
           <TouchableOpacity onPress={onPressHandler}>
             <Icon
@@ -95,9 +108,10 @@ const styles = StyleSheet.create({
     borderRadius: borderRadiusMedium,
     backgroundColor: Yellow,
     marginTop: verticalScale(0),
-    height: verticalScale(250),
-    width: scale(200),
+    elevation: 5,
+    height: verticalScale(CARD_HEIGHT),
+    width: scale(CARD_WIDTH),
   },
 });
 
-export default ClubCard;
+export default SympCard;

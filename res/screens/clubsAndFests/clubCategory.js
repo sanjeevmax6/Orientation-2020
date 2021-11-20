@@ -1,14 +1,16 @@
 import React from 'react';
-import {Text, SafeAreaView, View, StyleSheet, FlatList} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
 import ClubCard from '../../components/club-card';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {
-  fontSizeBig,
   fontSizeVeryLarge,
   paddingMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
+
+const FlatListItemSeparator = () => {
+  return <View style={{width: verticalScale(paddingMedium)}} />;
+};
 
 const ClubCategory = ({categoryName, clubList}) => {
   return (
@@ -22,6 +24,9 @@ const ClubCategory = ({categoryName, clubList}) => {
           horizontal
           data={clubList}
           showsHorizontalScrollIndicator={false}
+          ListHeaderComponent={FlatListItemSeparator}
+          ItemSeparatorComponent={FlatListItemSeparator}
+          ListFooterComponent={FlatListItemSeparator}
           renderItem={({item}) => (
             <ClubCard
               clubName={item.name}

@@ -1,36 +1,45 @@
 import React from 'react';
-import {Dimensions, Image, Text, StyleSheet, View} from 'react-native';
-import {styles} from 'react-native-element-textinput/src/TextInput/styles';
+import {
+  Dimensions,
+  Image,
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {White} from '../../utils/colors';
 import {
   borderRadius,
+  borderRadiusMedium,
   fontSizeBig,
   fontSizeMedium,
   fontSizeVeryLarge,
 } from '../../utils/UIConstants';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.75);
 
 const CarouselCardItem = ({item, index}) => {
   return (
-    <View style={styless.container} key={index}>
+    <ScrollView style={styless.container} key={index}>
       <Image
         source={{uri: item.imgUrl}}
-        resizeMode="stretch"
+        resizeMode="cover"
         style={styless.image}
       />
+
       <Text style={styless.header}>{item.title}</Text>
       <Text style={styless.body}>{item.body}</Text>
-    </View>
+      <View style={{height: 100, width: 52}} />
+    </ScrollView>
   );
 };
 
 const styless = StyleSheet.create({
   container: {
     backgroundColor: White,
-    borderRadius: borderRadius,
+    borderRadius: borderRadiusMedium,
     width: ITEM_WIDTH,
     shadowColor: '#000',
     shadowOffset: {
@@ -42,17 +51,17 @@ const styless = StyleSheet.create({
     elevation: 7,
   },
   image: {
-    width: ITEM_WIDTH,
-    height: verticalScale(300),
-    borderTopLeftRadius: borderRadius,
-    borderTopRightRadius: borderRadius,
+    width: '100%',
+    height: verticalScale(ITEM_WIDTH),
+    borderRadius: borderRadiusMedium,
   },
   header: {
-    color: '#222',
+    color: 'black',
     fontSize: fontSizeVeryLarge,
     fontWeight: 'bold',
-    paddingTop: scale(5),
+    paddingVertical: scale(5),
     textAlign: 'center',
+    textTransform: 'uppercase',
   },
   body: {
     color: '#222',
