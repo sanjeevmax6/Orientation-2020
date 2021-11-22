@@ -18,13 +18,17 @@ import {
   paddingMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
+import {studentLogin} from './studentLoginAPI';
 
 const Login = ({navigation}) => {
   const [rollNo, setRollNo] = useState('');
   const [password, setPassword] = useState('');
-  const pressHandler = () => {
-    navigation.push('Loader');
+
+  const handleAPI_CALL = () => {
+    studentLogin(rollNo, password);
+    navigation.push('API_Loader');
   };
+
   return (
     <View>
       <View
@@ -38,6 +42,7 @@ const Login = ({navigation}) => {
           style={styles.input1}
           inputStyle={styles.inputStyle}
           labelStyle={styles.labelStyle}
+          keyboardType="number-pad"
           // textErrorStyle={styles.textErrorStyle}
           placeholder="Roll Number"
           placeholderTextColor="gray"
@@ -130,7 +135,7 @@ const Login = ({navigation}) => {
               borderRadius: verticalScale(20),
               marginRight: scale(paddingMedium),
             }}>
-            <TouchableOpacity onPress={pressHandler}>
+            <TouchableOpacity onPress={() => handleAPI_CALL()}>
               <Icon
                 fill="white"
                 style={{

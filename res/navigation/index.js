@@ -7,6 +7,7 @@ import {LogBox} from 'react-native';
 import {Login_Store} from '../mobx/loginStore';
 import {observer} from 'mobx-react';
 import SplashScreen from '../screens/splashScreen';
+import {UserData} from '../mobx/userStore';
 const RootStack = createNativeStackNavigator();
 
 const Navigator = observer(() => {
@@ -14,6 +15,11 @@ const Navigator = observer(() => {
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
   ]);
+
+  const token = UserData.token;
+  const name = UserData.name;
+  const rollNo = UserData.rollNo;
+  const department = UserData.department;
 
   return (
     <NavigationContainer independent={true}>
@@ -26,7 +32,8 @@ const Navigator = observer(() => {
               headerShown: false,
             }}
           />
-        ) : Login_Store.isUserLoggedIn ? (
+        // ) : (token && name && rollNo && department) ? (
+        ) : (token) ? ( //we're getting only token as of now
           <>
             <RootStack.Screen
               name="App"

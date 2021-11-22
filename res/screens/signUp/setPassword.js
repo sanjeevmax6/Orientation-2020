@@ -38,7 +38,8 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
     setIndex(index - 1);
   };
   const nextHandler = () => {
-    navigation.push('Loader');
+    navigation.push('API_Loader');
+    //Do the FINAL API CALL HERE
   };
   return (
     <View>

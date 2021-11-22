@@ -1,15 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import * as Animatable from 'react-native-animatable';
 import {StyleSheet, View, Text, PixelRatio, Platform} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
-
 import {Login_Store} from '../../mobx/loginStore';
+import * as KEYS from '../../utils/STORAGE_KEYS';
+import {UserData} from '../../mobx/userStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = () => {
   const navigate = () => {
     Login_Store.closeSplash();
   };
+
+  const setupMobx = () => {
+    console.log("Setting up");
+    AsyncStorage.getItem(KEYS.USER_TOKEN).then(val => {
+      if (val) UserData.setToken(val);
+      else UserData.setToken(null);
+    });
+    AsyncStorage.getItem(KEYS.USER_NAME).then(val => {
+      if (val) UserData.setName(val);
+      else UserData.setName(null);
+    });
+    AsyncStorage.getItem(KEYS.USER_ROLL_NO).then(val => {
+      if (val) UserData.setRollNo(val);
+      else UserData.setRollNo(null);
+    });
+    AsyncStorage.getItem(KEYS.USER_DEPARTMENT).then(val => {
+      if (val) UserData.setDepartment(val);
+      else UserData.setDepartment(null);
+    });
+  };
+
+  useEffect(() => {
+    setupMobx();
+  }, []);
 
   return (
     <View style={styles.top}>
@@ -132,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: scale(26) / PixelRatio.getFontScale(),
     color: 'black',
     top: verticalScale(-25),
-    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
 
     fontWeight: 'bold',
   },
@@ -141,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: scale(32) / PixelRatio.getFontScale(),
     color: '#f13e4d',
     top: verticalScale(-26),
-    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
 
     //fontFamily: 'Montserrat-Bold',
   },
@@ -155,7 +181,7 @@ const styles = StyleSheet.create({
     // fontWeight:"bold",
     color: 'darkblue',
     elevation: 1,
-    fontFamily: Platform.OS === 'ios' ? 'San Francisco' : 'serif',
+    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
     //fontFamily: 'Montserrat-Bold',
     textAlignVertical: 'center',
   },

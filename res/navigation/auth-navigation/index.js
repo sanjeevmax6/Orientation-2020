@@ -2,11 +2,10 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/LoginScreen';
 import SignUp from '../../screens/signUp';
-import LoaderPage from '../../screens/LoadingScreen';
-
+import API_LoaderPage from '../../screens/apiCallScreen';
 const stack = createNativeStackNavigator();
 
-function AuthNavigator({route}) {
+function AuthNavigator() {
   return (
     <stack.Navigator>
       <stack.Screen
@@ -20,8 +19,8 @@ function AuthNavigator({route}) {
         options={{headerShown: false, animation: 'slide_from_right'}}
       />
       <stack.Screen
-        name="Loader"
-        component={LoaderPage}
+        name="API_Loader"
+        component={API_LoaderPage}
         options={{headerShown: false}}
       />
     </stack.Navigator>

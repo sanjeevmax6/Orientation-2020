@@ -21,7 +21,9 @@ import {
   iconMedium,
   fontSizeVeryLarge,
 } from '../../utils/UIConstants';
-import {Login_Store} from '../../mobx/loginStore';
+import {UserData} from '../../mobx/userStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as KEYS from '../../utils/STORAGE_KEYS';
 
 const MainMenu = ({navigation}) => {
   const logOut = () => {
@@ -36,7 +38,8 @@ const MainMenu = ({navigation}) => {
         {
           text: 'OK',
           onPress: () => {
-            Login_Store.logOut();
+            UserData.setToken('');
+            AsyncStorage.removeItem(KEYS.USER_TOKEN);
           },
         },
       ],
@@ -46,9 +49,9 @@ const MainMenu = ({navigation}) => {
 
   const data = {
     orientationTitle: 'Orientation 2021',
-    studentName: 'XYZ',
-    studentRollNo: '106120000',
-    studentBranch: 'CSE',
+    studentName: UserData.userName,
+    studentRollNo: UserData.userRollNo,
+    studentBranch: UserData.userDepartment,
   };
 
   return (

@@ -16,9 +16,11 @@ const ErrorScreen = ({
   buttonText = 'GO BACK',
   showIconInButton = true,
   icon = 'arrow-ios-back-outline',
+  fn = () => {},
 }) => {
   const backPress = () => {
     navigation.goBack();
+    fn();
   };
   return (
     <View
