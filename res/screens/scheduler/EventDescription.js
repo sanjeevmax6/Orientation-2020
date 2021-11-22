@@ -7,20 +7,13 @@ import {
   ScaledSheet,
   verticalScale,
 } from 'react-native-size-matters';
-import {
-  fontSizeBig,
-  fontSizeVeryLarge,
-  fontSizeSmall,
-  iconMedium,
-  paddingSmall,
-  fontSizeMedium,
-} from '../../utils/UIConstants';
+import {paddingSmall, fontSizeMedium} from '../../utils/UIConstants';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Colors from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import Links from './Links';
-
+import moment from 'moment';
 const WIDTH = Dimensions.get('window').width;
 
 const EventDescription = ({route}) => {
@@ -33,25 +26,14 @@ const EventDescription = ({route}) => {
             <Image
               style={styles.img}
               source={{
-                uri: 'https://encrypted-tbn0.gstatic.com/image?q=tbn:ANd9GcRemhwHNljTo4pxynHrc7O3F-ZA6-eLUqzMLg&usqp=CAU',
+                uri: data.Image,
               }}
             />
           </View>
           <Divider />
           <View style={{paddingHorizontal: paddingSmall}}>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </Text>
+            <Text style={styles.title}>{data.Title}</Text>
+            <Text style={styles.description}>{data.Description}</Text>
             <View style={{flexDirection: 'row'}}>
               <Icon
                 name="calendar-outline"
@@ -59,7 +41,8 @@ const EventDescription = ({route}) => {
                 style={{height: verticalScale(15), width: scale(15)}}
               />
               <Text style={styles.eventDate}>
-                {data.date} | {data.time} | {data.duration}
+                {moment(data.date).format('DD/MM/YY')} | {data.Time} |{' '}
+                {data.Duration}
               </Text>
             </View>
           </View>
@@ -69,7 +52,7 @@ const EventDescription = ({route}) => {
               paddingHorizontal: paddingSmall,
               marginBottom: verticalScale(7),
             }}>
-            <Links links={data.links} />
+            <Links link={data.Link} />
           </View>
           <Divider />
           <View
@@ -85,7 +68,7 @@ const EventDescription = ({route}) => {
                 style={{height: verticalScale(15), width: scale(15)}}
               />
               <Text style={{...styles.description, marginLeft: scale(5)}}>
-                Ankur Gambir - 6969696969
+                {data.ContactName1} - {data.ContactNumber1}
               </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
@@ -95,7 +78,7 @@ const EventDescription = ({route}) => {
                 style={{height: verticalScale(15), width: scale(15)}}
               />
               <Text style={{...styles.description, marginLeft: scale(5)}}>
-                Ankur Gambir - 6969696969
+                {data.ContactName2} - {data.ContactNumber2}
               </Text>
             </View>
           </View>

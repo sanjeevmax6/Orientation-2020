@@ -29,16 +29,16 @@ const EventCard = ({item, navigation}) => {
       />
       <View style={styles.eventinfo}>
         <Text style={styles.eventName} numberOfLines={1}>
-          {item.title}
+          {item.Title}
         </Text>
         <Text>
-          Time: {item.time} | Duration: {item.duration}
+          Time: {item.Time} | Duration: {item.Duration}
         </Text>
       </View>
       <Image
         style={styles.Img}
         source={{
-          uri: 'https://encrypted-tbn0.gstatic.com/image?q=tbn:ANd9GcRemhwHNljTo4pxynHrc7O3F-ZA6-eLUqzMLg&usqp=CAU',
+          uri: item.Image,
         }}
       />
     </TouchableOpacity>
