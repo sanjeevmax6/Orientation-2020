@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
   noticeText: {
     fontWeight: 'bold',
     fontSize: scale(fontSizeSmall),
+    textTransform: 'uppercase',
   },
   noticeLine: {
     marginVertical: verticalScale(3),

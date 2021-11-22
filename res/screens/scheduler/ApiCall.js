@@ -33,7 +33,7 @@ export const apiCall = (setLoading, setError, setResponseState) => {
             setError(ERROR_MSGS.TIME_OUT);
           } else {
             console.log(error);
-            setError(ERROR_MSGS.TIME_OUT);
+            setError(ERROR_MSGS.UNEXPECTED);
           }
         });
     } else {
