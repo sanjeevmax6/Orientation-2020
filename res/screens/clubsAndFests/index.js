@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import NetInfo from '@react-native-community/netinfo';
+
 import {
   Text,
   SafeAreaView,
@@ -15,33 +15,26 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {
-  paddingMedium,
-  paddingSmall,
-  borderRadius,
-  fontSizeMedium,
-} from '../../utils/UIConstants';
+import {paddingSmall, borderRadius} from '../../utils/UIConstants';
 import {Icon, Layout} from '@ui-kitten/components';
 import ClubCategory from './clubCategory';
 
 import {observer} from 'mobx-react';
 import {Club_Modal_Store} from '../../mobx/clubModalStore';
 import LinearGradient from 'react-native-linear-gradient';
-import {clubApi} from './clubApi';
+
 import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
-import {UserData} from '../../mobx/userStore';
-import * as ERRORS from '../../utils/ERROR_MESSAGES';
-import { API_GET_CLUB_DATA, API_GET_FEST_DATA } from '../../utils/APIConstants';
+
 const category = ['Technical', 'Cultural', 'Social', 'Fests'];
 
+import {festApis, clubApis} from './API_CALLS';
 const ClubsAndFests = observer(({navigation}) => {
   const linkOpener = link => {
     Linking.canOpenURL(link).then(supported => {
       if (supported) {
         Linking.openURL(link);
       } else {
-        console.log("Don't know how to open URI: " + link);
       }
     });
   };
@@ -55,112 +48,47 @@ const ClubsAndFests = observer(({navigation}) => {
   const [isConnected, setConnectivity] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
-  const clubApis = () => {
-    const axios = require('axios');
-    NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
-        setClubLoading(true);
-        setConnectivity(true);
-        axios
-          .get(API_GET_CLUB_DATA, {
-            headers: {token: UserData.token},
-          })
-          .then(response => {
-            setClubLoading(false);
-            setSuccess(true);
-            setClubData(response.data);
-            console.log('Club data API success');
-          })
-          .catch(error => {
-            if (error.response) {
-              console.log(error.response);
-              setClubLoading(false);
-              setErrorText(error.response.data.message);
-              setSuccess(false);
-            } else if (error.request) {
-              console.log(error.request);
-              setErrorText(ERRORS.TIME_OUT);
-              setSuccess(false);
-              setClubLoading(false);
-            } else {
-              console.log(error);
-              setClubLoading(false);
-              setSuccess(false);
-              setErrorText(ERRORS.UNEXPECTED);
-            }
-          });
-      } else {
-        setSuccess(false);
-        setConnectivity(false);
-        setErrorText(ERRORS.NO_NETWORK);
-      }
-    });
-  };
-  const festApis = () => {
-    const axios = require('axios');
-    NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
-        setFestLoading(true);
-        setConnectivity(true);
-        axios
-          .get(API_GET_FEST_DATA, {
-            headers: {token: UserData.token},
-          })
-          .then(response => {
-            setFestLoading(false);
-            setFestData(response.data);
-            setSuccess(true);
-            console.log('Fest Data API Successful');
-          })
-          .catch(error => {
-            if (error.response) {
-              console.log(error.response);
-              setFestLoading(false);
-              setErrorText(error.response.data.message);
-              setSuccess(false);
-            } else if (error.request) {
-              console.log(error.request);
-              setErrorText(ERRORS.TIME_OUT);
-              setSuccess(false);
-              setFestLoading(false);
-            } else {
-              console.log(error);
-              setFestLoading(false);
-              setSuccess(false);
-              setErrorText(ERRORS.UNEXPECTED);
-            }
-          });
-      } else {
-        setErrorText(ERRORS.NO_NETWORK);
-        setSuccess(false);
-        setConnectivity(false);
-      }
-    });
-  };
-
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     setClubLoading(false);
     setFestLoading(false);
     setSuccess(false);
-    clubApis();
-    festApis();
+    clubApis(
+      setClubLoading,
+      setConnectivity,
+      setSuccess,
+      setClubData,
+      setErrorText,
+    );
+    festApis(
+      setFestLoading,
+      setConnectivity,
+      setFestData,
+      setSuccess,
+      setErrorText,
+    );
     setRefreshing(false);
   }, []);
 
   useEffect(() => {
-    clubApis();
+    clubApis(
+      setClubLoading,
+      setConnectivity,
+      setSuccess,
+      setClubData,
+      setErrorText,
+    );
   }, []);
 
   useEffect(() => {
-    festApis();
+    festApis(
+      setFestLoading,
+      setConnectivity,
+      setFestData,
+      setSuccess,
+      setErrorText,
+    );
   }, []);
-
-  if (clubLoading == false) {
-    console.log('rasheed' + JSON.stringify(festData));
-  }
-
-  console.log(Club_Modal_Store.Medium);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -182,19 +110,19 @@ const ClubsAndFests = observer(({navigation}) => {
               }>
               <View style={{flex: 1}}>
                 <ClubCategory
-                  categoryName={category[0]}
+                  categoryName={category[0] + ' Clubs'}
                   clubList={clubData.technical}
                 />
               </View>
               <View style={{flex: 1}}>
                 <ClubCategory
-                  categoryName={category[1]}
+                  categoryName={category[1] + ' Clubs'}
                   clubList={clubData.cultural}
                 />
               </View>
               <View style={{flex: 1}}>
                 <ClubCategory
-                  categoryName={category[2]}
+                  categoryName={category[2] + ' Clubs'}
                   clubList={clubData.social}
                 />
               </View>

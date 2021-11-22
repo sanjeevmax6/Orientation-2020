@@ -42,7 +42,7 @@ const ClubCard = ({
           <Image
             style={{
               backgroundColor: 'pink',
-              width: '101%',
+              width: '100%',
               height: verticalScale(200),
               borderTopLeftRadius: 10,
               borderTopRightRadius: 10,
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(0),
     height: verticalScale(250),
     width: scale(200),
+    elevation: 5,
   },
 });
 

@@ -24,6 +24,7 @@ const ClubCategory = ({categoryName, clubList}) => {
           horizontal
           data={clubList}
           showsHorizontalScrollIndicator={false}
+          //disableVirtualization={true}
           ListHeaderComponent={FlatListItemSeparator}
           ItemSeparatorComponent={FlatListItemSeparator}
           ListFooterComponent={FlatListItemSeparator}
