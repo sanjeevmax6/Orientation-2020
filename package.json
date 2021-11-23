@@ -39,7 +39,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^9.13.6",
-    "react-native-vector-icons": "^9.0.0"
+    "react-native-vector-icons": "^9.0.0",
+    "sorted-set": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.15.5",

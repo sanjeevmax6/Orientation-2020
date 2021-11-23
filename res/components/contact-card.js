@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {Card, Layout, Icon} from '@ui-kitten/components';
+import {Card, Icon} from '@ui-kitten/components';
 import {
   ImageBackground,
   StyleSheet,
@@ -9,29 +9,24 @@ import {
   PixelRatio,
   Image,
   Modal,
-  ScrollView,
 } from 'react-native';
-import {Dimensions} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {scale, verticalScale} from 'react-native-size-matters';
+import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
 import {
   borderRadius,
   borderRadiusLarge,
   fontSizeMedium,
-  paddingSmall,
-  Pressable,
-  paddingBig,
   paddingMedium,
+  fontSizeSmall,
+  fontSizeVeryLarge,
 } from '../utils/UIConstants';
-import {Black, Grey, White} from '../utils/colors';
+import {Black, White} from '../utils/colors';
 
 let cardHeight = 200;
 let cardWidth = 150;
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
-const ContactCard = props => {
+const ContactCard = ({item}) => {
   const [visible, setVisible] = useState(false);
   return (
     <View>
@@ -39,7 +34,7 @@ const ContactCard = props => {
         <TouchableOpacity onPress={() => setVisible(true)}>
           <ImageBackground
             source={{
-              uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+              uri: item.imageUrl,
             }}
             resizeMode="cover"
             style={styles.image}>
@@ -50,10 +45,10 @@ const ContactCard = props => {
             />
             <View style={styles.textContainer}>
               <Text numberOfLines={1} style={styles.textName}>
-                {props.name}
+                {item.name}
               </Text>
               <Text numberOfLines={1} style={styles.textBody}>
-                {props.dept}
+                {item.department}
               </Text>
             </View>
           </ImageBackground>
@@ -71,55 +66,36 @@ const ContactCard = props => {
           <View
             style={{
               backgroundColor: 'rgba(254,252,248, 0.97)',
-              flex: 1,
               borderRadius: scale(borderRadius),
             }}>
             <Image
               source={{
-                uri: 'https://i.pinimg.com/736x/51/62/1b/51621b2f3f79d8b25ddb8bccbbf366ca--north-india-smiling-faces.jpg',
+                uri: item.imageUrl,
               }}
               resizeMode="cover"
               style={styles.image2}
             />
 
-            <View style={{marginLeft: scale(6), marginRight: scale(6)}}>
-              <Text numberOfLines={1} style={{fontSize: scale(30)}}>
-                {props.name}
-              </Text>
-              <View style={{flexDirection: 'row'}}>
-                <Icon style={styles.icon} fill={Black} name="phone" />
-                <Text numberOfLines={1} style={styles.text}>
-                  {props.phone}
-                </Text>
-              </View>
-            </View>
             <View
               style={{
-                height: verticalScale(1),
-                backgroundColor: '#eaeaea',
-                marginHorizontal: scale(3),
-              }}
-            />
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View
-                style={{
-                  marginTop: verticalScale(3),
-                  marginLeft: scale(6),
-                  marginRight: scale(6),
-                  borderRadius: scale(borderRadius),
-                  paddingVertical: verticalScale(paddingSmall),
-                  marginBottom: verticalScale(6),
-                }}>
-                <Text
-                  style={{
-                    fontSize: scale(16),
-                    width: '100%',
-                    textAlign: 'justify',
-                  }}>
-                  {props.intro}
+                marginLeft: scale(6),
+                marginRight: scale(6),
+                alignItems: 'center',
+                paddingBottom: verticalScale(8),
+              }}>
+              <Text style={{fontSize: scale(fontSizeVeryLarge)}}>
+                {item.name}
+              </Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Icon style={styles.icon} fill={Black} name="phone" />
+                <Text style={styles.phoneText}>
+                  {item.mobile}
+                  {'   '}|{'   '}
                 </Text>
+                <Icon style={styles.icon} fill={Black} name="browser-outline" />
+                <Text style={styles.phoneText}>{item.department}</Text>
               </View>
-            </ScrollView>
+            </View>
           </View>
         </View>
       </Modal>
@@ -135,6 +111,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: scale(borderRadiusLarge),
     borderWidth: 0,
+    marginHorizontal: scale(8),
+    marginVertical: scale(8),
     //margin: paddingMedium,
   },
   image: {
@@ -165,30 +143,31 @@ const styles = StyleSheet.create({
     marginLeft: scale(paddingMedium),
     fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
     color: White,
+    fontWeight: 'bold',
   },
   textBody: {
     marginLeft: scale(paddingMedium),
-    fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
+    fontSize: scale(fontSizeSmall) / PixelRatio.getFontScale(),
     color: White,
-    marginTop: verticalScale(-3),
   },
 
   content: {
-    borderRadius: borderRadius,
+    borderTopLeftRadius: moderateScale(borderRadius),
+    borderTopRightRadius: moderateScale(borderRadius),
     padding: scale(10),
     backgroundColor: 'rgba(204, 198, 204, 0.8)',
+    justifyContent: 'center',
     flex: 1,
   },
-  text: {
+  phoneText: {
     alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    textAlign: 'justify',
+    fontSize: moderateScale(16),
   },
 
   image2: {
     height: verticalScale(300),
-    borderRadius: borderRadius,
+    borderTopLeftRadius: moderateScale(borderRadius),
+    borderTopRightRadius: moderateScale(borderRadius),
   },
   icon: {
     width: scale(16),
