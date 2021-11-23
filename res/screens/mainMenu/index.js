@@ -38,11 +38,15 @@ const MainMenu = ({navigation}) => {
         {
           text: 'OK',
           onPress: () => {
-            UserData.setToken('');
             AsyncStorage.removeItem(KEYS.USER_TOKEN);
             AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
             AsyncStorage.removeItem(KEYS.USER_NAME);
             AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
+            AsyncStorage.removeItem(KEYS.IS_USER_ADMIN);
+            UserData.setToken('');
+            UserData.setDepartment('');
+            UserData.setName('');
+            UserData.setRollNo('');
           },
         },
       ],

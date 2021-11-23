@@ -14,7 +14,7 @@ const SplashScreen = () => {
   };
 
   const setupMobx = () => {
-    console.log("Setting up");
+    console.log('Setting up');
     AsyncStorage.getItem(KEYS.USER_TOKEN).then(val => {
       if (val) UserData.setToken(val);
       else UserData.setToken(null);
@@ -30,6 +30,21 @@ const SplashScreen = () => {
     AsyncStorage.getItem(KEYS.USER_DEPARTMENT).then(val => {
       if (val) UserData.setDepartment(val);
       else UserData.setDepartment(null);
+    });
+    AsyncStorage.getItem(KEYS.IS_USER_ADMIN).then(val => {
+      if (val === 'true') {
+        UserData.setAdmin(true);
+      } else if (val === 'false') {
+        UserData.setAdmin(false);
+      } else {
+        AsyncStorage.removeItem(KEYS.USER_TOKEN);
+        AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
+        AsyncStorage.removeItem(KEYS.USER_NAME);
+        AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
+        AsyncStorage.removeItem(KEYS.IS_USER_ADMIN);
+
+        UserData.setToken('');
+      }
     });
   };
 

@@ -10,6 +10,7 @@ class User_Data {
     rollNo: '',
     name: '',
     department: '',
+    admin: '',
   };
 
   setToken = userToken => {
@@ -25,6 +26,11 @@ class User_Data {
   setRollNo = userRollNo => {
     this.state.rollNo = userRollNo;
   };
+
+  setAdmin = bool => {
+    this.state.admin = bool;
+  };
+
   get token() {
     return this.state.token;
   }
@@ -37,6 +43,9 @@ class User_Data {
   get userRollNo() {
     return this.state.rollNo;
   }
+  get getIsAdmin() {
+    return this.state.admin;
+  }
   constructor() {
     makeObservable(this, {
       state: observable,
@@ -44,11 +53,13 @@ class User_Data {
       setDepartment: action,
       setName: action,
       setRollNo: action,
+      setAdmin: action,
 
       token: computed,
       userName: computed,
       userDepartment: computed,
       userRollNo: computed,
+      getIsAdmin: computed,
     });
   }
 }

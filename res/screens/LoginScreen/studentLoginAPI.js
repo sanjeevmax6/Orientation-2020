@@ -18,14 +18,21 @@ export const studentLogin = (rollNo, password) => {
         .then(response => {
           if (response.status === 200) {
             AsyncStorage.setItem(KEYS.USER_TOKEN, response.data.token);
-            AsyncStorage.setItem('name', response.data.name);
-            AsyncStorage.setItem('rollNo', response.data.rollNo + '');
-            AsyncStorage.setItem('department', response.data.department);
+            AsyncStorage.setItem(KEYS.USER_NAME, response.data.name);
+            AsyncStorage.setItem(KEYS.USER_ROLL_NO, response.data.rollNo + '');
+            AsyncStorage.setItem(
+              KEYS.USER_DEPARTMENT,
+              response.data.department,
+            );
+            AsyncStorage.setItem(
+              KEYS.IS_USER_ADMIN,
+              response.data.isAdmin + '',
+            ); //Async can't handle bool or numbers
 
             UserData.setName(response.data.name);
             UserData.setDepartment(response.data.department);
             UserData.setRollNo(response.data.rollNo + '');
-
+            UserData.setAdmin(response.data.isAdmin);
             //once the token is set it will go to DASHBOARD
             UserData.setToken(response.data.token); // only token is coming in response as of now
           }
