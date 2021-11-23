@@ -9,68 +9,58 @@ import {ActivityIndicator, Alert} from 'react-native';
 import {contactsStore} from '../../mobx/contactsStore';
 import {observer} from 'mobx-react';
 import {verticalScale} from 'react-native-size-matters';
+import LoaderPage from '../LoadingScreen';
+import {getContacts} from './API_CALLS';
+import ErrorScreen from '../../components/errorScreen';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Contacts = observer(({navigation}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const getContacts = async () => {
-    axios
-      .get(API_GET_CONTACTS, {
-        headers: {
-          'Content-Type': 'application/json',
-          token: UserData.token,
-        },
-      })
-      .then(response => {
-        contactsStore.setIsOrientationLoading(false);
-        contactsStore.setIsAdminLoading(false);
-        contactsStore.setOrientationData(response.data.Orientation);
-        contactsStore.setAdminData(response.data.Admin);
-      })
-      .catch(err => {
-        Alert.alert(
-          'Error occured',
-          `An error occred while gathering data:\n ${err.message}`,
-          [
-            {
-              text: 'Ok',
-              onPress: () => navigation.goBack(),
-            },
-          ],
-        );
-        console.log(err);
-      });
-  };
-
+  const [isConnected, setConnectivity] = useState(false);
+  const [errorText, setErrorText] = useState(null);
   useEffect(() => {
-    getContacts();
+    getContacts(navigation, setErrorText, setConnectivity);
   }, []);
 
   return (
-    <TabView
-      selectedIndex={selectedIndex}
-      swipeEnabled={false}
-      indicatorStyle={{
-        color: '#f13e4d',
-        backgroundColor: 'red',
-      }}
-      onSelect={index => setSelectedIndex(index)}>
-      <Tab
-        title={evaProps => <Text {...evaProps}>ORIENTATION TEAM</Text>}
-        style={{height: verticalScale(30)}}>
-        {contactsStore.state.isOrientationLoading ? (
-          <ActivityIndicator style={{height: '100%'}} />
-        ) : (
-          <Orientation />
-        )}
-      </Tab>
-      <Tab title="ADMIN" style={{height: verticalScale(30)}}>
-        {contactsStore.state.isAdminLoading ? (
-          <ActivityIndicator style={{height: '100%'}} />
-        ) : (
-          <Admin />
-        )}
-      </Tab>
-    </TabView>
+    <SafeAreaView style={{flex: 1}}>
+      {isConnected == false ? (
+        <ErrorScreen
+          errorMessage={errorText}
+          navigation={navigation}
+          buttonText="GO BACK"
+          showIconInButton={true}
+        />
+      ) : (
+        <>
+          <TabView
+            selectedIndex={selectedIndex}
+            swipeEnabled={false}
+            indicatorStyle={{
+              color: '#f13e4d',
+              backgroundColor: 'red',
+            }}
+            onSelect={index => setSelectedIndex(index)}>
+            <Tab
+              title={evaProps => <Text {...evaProps}>ORIENTATION TEAM</Text>}
+              style={{height: verticalScale(30)}}>
+              {contactsStore.state.isOrientationLoading ? (
+                <LoaderPage navigation={navigation} />
+              ) : (
+                <Orientation navigation={navigation} />
+              )}
+            </Tab>
+            <Tab title="ADMIN" style={{height: verticalScale(30)}}>
+              {contactsStore.state.isAdminLoading ? (
+                <LoaderPage navigation={navigation} />
+              ) : (
+                <Admin navigation={navigation} />
+              )}
+            </Tab>
+          </TabView>
+        </>
+      )}
+    </SafeAreaView>
   );
 });
 

@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Layout} from '@ui-kitten/components';
-import {SafeAreaView, StyleSheet, View, FlatList} from 'react-native';
+import {SafeAreaView, StyleSheet, View, FlatList, RefreshControl} from 'react-native';
 import {paddingSmall} from '../../utils/UIConstants';
 import {verticalScale, scale, moderateScale} from 'react-native-size-matters';
 import {contactsStore} from '../../mobx/contactsStore';
 import GroupCard from '../../components/admin-group-card';
 import {observer} from 'mobx-react';
 import {Dimensions} from 'react-native';
+import { useCallback } from 'react';
+import { API_GET_CONTACTS } from '../../utils/APIConstants';
+import { getContacts } from './API_CALLS';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
   return <View style={{height: windowHeight / 4}} />;
 };
-const Admin = observer(() => {
+const Admin = observer(({navigation}) => {
   const categories = contactsStore.state.categories;
+  const [refreshing,setRefreshing]= useState(false);
+  const onRefresh=useCallback(()=>{
+    setRefreshing(true);
+    contactsStore.setIsAdminLoading(true);
+    getContacts(navigation);
+    setRefreshing(false);
+  },[]);
   return (
     <SafeAreaView style={{flex: 1}}>
       <Layout style={styles.container}>
@@ -20,6 +30,9 @@ const Admin = observer(() => {
           ListFooterComponent={footer}
           showsVerticalScrollIndicator={false}
           data={categories}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>
+          }
           renderItem={({item}) => <GroupCard category={item} />}
         />
       </Layout>
