@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from 'mobx';
+import {action, computed, makeObservable, observable} from 'mobx';
 import Set from 'sorted-set';
 
 class ContactsStore {
@@ -8,6 +8,19 @@ class ContactsStore {
     orientationData: [],
     adminData: [],
     categories: [],
+    isLoading: true,
+    hasErrorOccurred: false,
+    errorText: '',
+  };
+
+  setLoading = value => {
+    this.state.isLoading = value;
+  };
+  setErrorText = value => {
+    this.state.errorText = value;
+  };
+  setError = value => {
+    this.state.hasErrorOccurred = value;
   };
 
   setIsOrientationLoading = isLoading => {
@@ -31,6 +44,16 @@ class ContactsStore {
     this.state.categories = set.slice();
   };
 
+  get isLoading() {
+    return this.state.isLoading;
+  }
+
+  get ErrorStatus() {
+    return this.state.hasErrorOccurred;
+  }
+  get getErrorText() {
+    return this.state.errorText;
+  }
   constructor() {
     makeObservable(this, {
       state: observable,
@@ -39,6 +62,13 @@ class ContactsStore {
       setIsAdminLoading: action,
       setOrientationData: action,
       setAdminData: action,
+      setLoading: action,
+      setError: action,
+      setErrorText: action,
+
+      isLoading: computed,
+      ErrorStatus: computed,
+      getErrorText: computed,
     });
   }
 }

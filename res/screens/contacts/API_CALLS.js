@@ -5,12 +5,11 @@ import {UserData} from '../../mobx/userStore';
 import {API_GET_CONTACTS} from '../../utils/APIConstants';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 
-export const getContacts = ({navigation}, setErrorText,setConnectivity) => {
+export const getContacts = ({navigation}) => {
   NetInfo.fetch().then(state => {
     if (state.isConnected == true) {
       contactsStore.setIsAdminLoading(true);
       contactsStore.setIsOrientationLoading(true);
-      setConnectivity(true);
       axios
         .get(API_GET_CONTACTS, {
           headers: {
@@ -19,27 +18,34 @@ export const getContacts = ({navigation}, setErrorText,setConnectivity) => {
           },
         })
         .then(response => {
+          if (response.status === 200) {
+            contactsStore.setIsOrientationLoading(false);
+            contactsStore.setIsAdminLoading(false);
+            contactsStore.setOrientationData(response.data.Orientation);
+            contactsStore.setAdminData(response.data.Admin);
+
+            contactsStore.setError(false);
+          }
+        })
+        .catch(error => {
+          contactsStore.setError(true);
+          if (error.response) {
+            contactsStore.setErrorText(error.response.data.message);
+          } else if (error.request) {
+            contactsStore.setErrorText(ERRORS.TIME_OUT);
+          } else {
+            contactsStore.setErrorText(ERRORS.UNEXPECTED);
+          }
+
           contactsStore.setIsOrientationLoading(false);
           contactsStore.setIsAdminLoading(false);
-          contactsStore.setOrientationData(response.data.Orientation);
-          contactsStore.setAdminData(response.data.Admin);
-        })
-        .catch(err => {
-          Alert.alert(
-            'Error occured',
-            `An error occred while gathering data:\n ${err.message}`,
-            [
-              {
-                text: 'Ok',
-                onPress: () => navigation.goBack(),
-              },
-            ],
-          );
-          console.log(err);
         });
     } else {
-      setConnectivity(false);
-      setErrorText(ERRORS.NO_NETWORK);
+      contactsStore.setError(true);
+
+      contactsStore.setErrorText(ERRORS.NO_NETWORK);
+      contactsStore.setIsOrientationLoading(false);
+      contactsStore.setIsAdminLoading(false);
     }
   });
 };

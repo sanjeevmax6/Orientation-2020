@@ -2,10 +2,6 @@ import Orientation from './orientationContacts';
 import Admin from './adminContacts';
 import React, {useState, useEffect} from 'react';
 import {Tab, TabView, Text} from '@ui-kitten/components';
-import axios from 'axios';
-import {API_GET_CONTACTS} from '../../utils/APIConstants';
-import {UserData} from '../../mobx/userStore';
-import {ActivityIndicator, Alert} from 'react-native';
 import {contactsStore} from '../../mobx/contactsStore';
 import {observer} from 'mobx-react';
 import {verticalScale} from 'react-native-size-matters';
@@ -16,17 +12,18 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Contacts = observer(({navigation}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isConnected, setConnectivity] = useState(false);
-  const [errorText, setErrorText] = useState(null);
+
   useEffect(() => {
-    getContacts(navigation, setErrorText, setConnectivity);
+    contactsStore.setError(false);
+    contactsStore.setErrorText('');
+    getContacts(navigation);
   }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {isConnected == false ? (
+      {contactsStore.ErrorStatus ? (
         <ErrorScreen
-          errorMessage={errorText}
+          errorMessage={contactsStore.getErrorText}
           navigation={navigation}
           buttonText="GO BACK"
           showIconInButton={true}
