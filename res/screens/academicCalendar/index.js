@@ -478,7 +478,7 @@ const Timetable = ({navigation}) => {
                         <View style={styles.circle} />
                         <Text style={styles.legendText}> : Holiday</Text>
                       </View>
-                      <View
+                      {/* <View
                         style={{flexDirection: 'row', alignItems: 'center'}}>
                         <TouchableOpacity>
                           <Icon
@@ -488,7 +488,7 @@ const Timetable = ({navigation}) => {
                           />
                         </TouchableOpacity>
                         <Text style={styles.legendText}> : PDF</Text>
-                      </View>
+                      </View> */}
                     </View>
                   </>
                 ) : null}

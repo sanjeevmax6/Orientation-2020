@@ -98,6 +98,8 @@ const styles = StyleSheet.create({
     height: verticalScale(250),
     width: scale(200),
     elevation: 5,
+    marginBottom: verticalScale(6),
+    //marginHorizontal: scale(3),
   },
 });
 

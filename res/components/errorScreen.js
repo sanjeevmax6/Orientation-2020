@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import LottieView from 'lottie-react-native';
 import errorLottie from '../assets/lottieFiles/error.json';
@@ -22,6 +22,15 @@ const ErrorScreen = ({
     navigation.goBack();
     fn();
   };
+
+  const [STATE, setSTATE] = useState(1);
+  const toggler = () => {
+    //force reload as there is a bug in the LF library
+    if (STATE) setSTATE(0);
+  };
+
+  setTimeout(toggler, 50);
+
   return (
     <View
       style={{

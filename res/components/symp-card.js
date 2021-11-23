@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: Yellow,
     marginTop: verticalScale(0),
     elevation: 5,
+    marginHorizontal: scale(9),
     height: verticalScale(CARD_HEIGHT),
     width: scale(CARD_WIDTH),
   },

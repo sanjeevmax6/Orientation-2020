@@ -38,15 +38,7 @@ const Header = ({props, title = 'HEADER'}) => {
     </LinearGradient>
   );
 };
-const style = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor: '#2980b9',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-});
+
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',

@@ -8,7 +8,6 @@ import MagazineAndSymposium from '../../screens/magazineAndSymposium';
 import ClubsAndFests from '../../screens/clubsAndFests';
 import Timetable from '../../screens/academicCalendar';
 import Header from '../../components/header';
-import Peers from '../../screens/contacts/peerContacts';
 import Admin from '../../screens/contacts/adminContacts';
 import Orientation from '../../screens/contacts/orientationContacts';
 import EventDescription from '../../screens/scheduler/EventDescription';
@@ -26,9 +25,8 @@ function AppNavigator() {
         name="Scheduler"
         component={Scheduler}
         options={{
-          headerShown: true,
+          headerShown: false,
           animation: 'slide_from_right',
-          header: props => <Header props={props} title="Scheduler" />,
         }}
       />
       <stack.Screen
@@ -49,15 +47,7 @@ function AppNavigator() {
           header: props => <Header props={props} title="Contacts" />,
         }}
       />
-      <stack.Screen
-        name="Peers"
-        component={Peers}
-        options={{
-          headerShown: true,
-          animation: 'slide_from_right',
-          header: props => <Header props={props} title="Peers" />,
-        }}
-      />
+
       <stack.Screen
         name="Orientation"
         component={Orientation}

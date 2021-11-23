@@ -17,7 +17,6 @@ import {
   RefreshControl,
 } from 'react-native';
 
-import symposiumData from '../../utils/symposiumData';
 const Height = Dimensions.get('window').height;
 import {Symp_Modal_Store} from '../../mobx/symposiumModalStore';
 import {paddingSmall, borderRadius} from '../../utils/UIConstants';

@@ -97,7 +97,8 @@ const ClubsAndFests = observer(({navigation}) => {
           <ErrorScreen
             errorMessage={errorText}
             navigation={navigation}
-            buttonText="MENU"
+            buttonText="GO BACK"
+            showIconInButton={true}
           />
         ) : clubLoading || festLoading ? (
           <LoaderPage navigation={navigation} />
@@ -147,6 +148,24 @@ const ClubsAndFests = observer(({navigation}) => {
                       borderRadius: scale(borderRadius),
                       elevation: 5,
                     }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        Club_Modal_Store.closeModal();
+                      }}
+                      style={{
+                        position: 'absolute',
+                        zIndex: 1,
+                        right: 0,
+                        backgroundColor: '#e2e2df',
+                        margin: scale(3),
+                        borderRadius: scale(16),
+                      }}>
+                      <Icon
+                        style={{width: scale(24), height: scale(24)}}
+                        fill="black"
+                        name="close"
+                      />
+                    </TouchableOpacity>
                     <Image
                       source={{
                         uri: Club_Modal_Store.Url,

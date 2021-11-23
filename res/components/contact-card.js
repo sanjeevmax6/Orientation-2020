@@ -63,6 +63,26 @@ const ContactCard = ({item}) => {
           setVisible(false);
         }}>
         <View style={styles.content}>
+          <TouchableOpacity
+            onPress={() => {
+              setVisible(false);
+            }}
+            style={{
+              position: 'absolute',
+              zIndex: 1,
+              right: scale(6),
+              top: verticalScale(6),
+
+              backgroundColor: '#e2e2df',
+              margin: scale(3),
+              borderRadius: scale(16),
+            }}>
+            <Icon
+              style={{width: scale(24), height: scale(24)}}
+              fill="black"
+              name="close"
+            />
+          </TouchableOpacity>
           <View
             style={{
               backgroundColor: 'rgba(254,252,248, 0.97)',
@@ -113,6 +133,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     marginHorizontal: scale(8),
     marginVertical: scale(8),
+    elevation: 5,
     //margin: paddingMedium,
   },
   image: {

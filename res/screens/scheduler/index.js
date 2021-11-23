@@ -1,4 +1,9 @@
-import {Dimensions, RefreshControl} from 'react-native';
+import {
+  Dimensions,
+  RefreshControl,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import CalendarStrip from 'react-native-calendar-strip';
 import moment from 'moment';
@@ -21,6 +26,7 @@ import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
 import NoEventCard from './NoEventCard';
 import {apiCall} from './ApiCall';
+import {Icon as IC} from '@ui-kitten/components';
 
 const data = {
   //Minimum Date : 1st October 2021
@@ -77,70 +83,101 @@ const Scheduler = ({navigation}) => {
           }
           ListEmptyComponent={NoEventCard}
           ListHeaderComponent={
-            <LinearGradient
-              start={{x: 0.0, y: 0.0}}
-              end={{x: 1.0, y: 0.0}}
-              colors={['#f13e4d', '#ff5130', '#ff512f']}>
-              <CalendarStrip
-                // ref={_calendar}
-                scrollable
-                calendarAnimation={{type: 'sequence', duration: 3000}}
-                daySelectionAnimation={{
-                  type: 'background',
-                  duration: 0,
-                  borderWidth: scale(3),
-                  borderHighlightColor: Colors.daySelectionAnimationColor,
-                  borderRadius: scale(20),
+            <>
+              <TouchableOpacity
+                style={{
+                  position: 'absolute',
+                  paddingLeft: scale(4),
+                  marginTop: verticalScale(9),
+                  zIndex: 1,
                 }}
-                style={styles.calendarStripContainer}
-                calendarHeaderStyle={styles.month}
-                calendarColor={Colors.CalendarColor}
-                dateNumberStyle={{
-                  color: Colors.dateNumberStyleColor,
-                  fontSize: fontSizeBig,
-                }}
-                dateNameStyle={{
-                  color: Colors.dateNameStyleColor,
-                  fontSize: fontSizeMedium,
-                }}
-                highlightDateNumberStyle={{
-                  color: Colors.highlightDateNumberStyleColor,
-                  fontSize: fontSizeBig,
-                }}
-                highlightDateNameStyle={{
-                  color: Colors.highlightDateNameStyleColor,
-                  fontSize: fontSizeSmall,
-                }}
-                disabledDateNameStyle={{
-                  color: Colors.disabledDateNameStyleColor,
-                  fontSize: fontSizeSmall,
-                }}
-                disabledDateNumberStyle={{
-                  color: Colors.disabledDateNumberStyleColor,
-                  fontSize: fontSizeBig,
-                }}
-                // datesWhitelist={datesWhitelist}
-                leftSelector={
-                  <Icon
-                    name="chevron-left"
-                    color={Colors.PRIMARY}
-                    size={scale(25)}
+                onPress={() => navigation.goBack()}>
+                {Platform.OS === 'ios' ? (
+                  <IC
+                    fill="white"
+                    style={{
+                      width: verticalScale(30),
+                      height: verticalScale(30),
+                    }}
+                    name="arrow-ios-back-outline"
                   />
-                }
-                rightSelector={
-                  <Icon
-                    name="chevron-right"
-                    color={Colors.PRIMARY}
-                    size={scale(25)}
+                ) : (
+                  <IC
+                    fill="white"
+                    style={{
+                      width: verticalScale(30),
+                      height: verticalScale(30),
+                    }}
+                    name="arrow-back-outline"
                   />
-                }
-                iconContainer={{flex: 0.1}}
-                onDateSelected={date => {
-                  setSelDate(new Date(date));
-                }}
-                selectedDate={new Date()}
-              />
-            </LinearGradient>
+                )}
+              </TouchableOpacity>
+              <LinearGradient
+                start={{x: 0.0, y: 0.0}}
+                end={{x: 1.0, y: 0.0}}
+                colors={['#f13e4d', '#ff5130', '#ff512f']}>
+                <View style={{height: verticalScale(10)}} />
+                <CalendarStrip
+                  // ref={_calendar}
+                  scrollable
+                  calendarAnimation={{type: 'sequence', duration: 3000}}
+                  daySelectionAnimation={{
+                    type: 'background',
+                    duration: 0,
+                    borderWidth: scale(3),
+                    borderHighlightColor: Colors.daySelectionAnimationColor,
+                    borderRadius: scale(20),
+                  }}
+                  style={styles.calendarStripContainer}
+                  calendarHeaderStyle={styles.month}
+                  calendarColor={Colors.CalendarColor}
+                  dateNumberStyle={{
+                    color: Colors.dateNumberStyleColor,
+                    fontSize: fontSizeBig,
+                  }}
+                  dateNameStyle={{
+                    color: Colors.dateNameStyleColor,
+                    fontSize: fontSizeMedium,
+                  }}
+                  highlightDateNumberStyle={{
+                    color: Colors.highlightDateNumberStyleColor,
+                    fontSize: fontSizeBig,
+                  }}
+                  highlightDateNameStyle={{
+                    color: Colors.highlightDateNameStyleColor,
+                    fontSize: fontSizeSmall,
+                  }}
+                  disabledDateNameStyle={{
+                    color: Colors.disabledDateNameStyleColor,
+                    fontSize: fontSizeSmall,
+                  }}
+                  disabledDateNumberStyle={{
+                    color: Colors.disabledDateNumberStyleColor,
+                    fontSize: fontSizeBig,
+                  }}
+                  // datesWhitelist={datesWhitelist}
+                  leftSelector={
+                    <Icon
+                      name="chevron-left"
+                      color={Colors.PRIMARY}
+                      size={scale(25)}
+                    />
+                  }
+                  rightSelector={
+                    <Icon
+                      name="chevron-right"
+                      color={Colors.PRIMARY}
+                      size={scale(25)}
+                    />
+                  }
+                  iconContainer={{flex: 0.1}}
+                  onDateSelected={date => {
+                    setSelDate(new Date(date));
+                  }}
+                  selectedDate={new Date()}
+                />
+              </LinearGradient>
+            </>
           }
           data={responseState.filter(item => {
             //console.log(item.date.toDateString());
@@ -179,7 +216,9 @@ const styles = ScaledSheet.create({
   },
   month: {
     color: Colors.calendarHeaderStyleColor,
-    fontSize: fontSizeMedium,
+    fontSize: scale(18),
+    marginBottom: verticalScale(9),
+    height: verticalScale(30),
   },
 });
 
