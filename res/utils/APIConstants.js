@@ -6,4 +6,8 @@ export const API_GET_NOTICE = BASE_URL + '/api/academic_calendar';
 export const API_GET_CLUB_DATA = BASE_URL + '/api/clubs';
 export const API_GET_FEST_DATA = BASE_URL + '/api/fests';
 export const API_GET_SYMP_DATA = BASE_URL + '/api/symposiums';
+
+export const API_GET_MAP_DATA = BASE_URL + '/api/map';
+
 export const API_GET_CONTACTS = BASE_URL + '/api/contacts';
+

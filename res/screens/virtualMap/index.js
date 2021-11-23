@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {Layout, Icon, Card} from '@ui-kitten/components';
 import {
   SafeAreaView,
@@ -8,6 +8,8 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  ScrollView,
+  RefreshControl,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker, Polygon} from 'react-native-maps';
 import * as Coordinates from '../../utils/coordinates';
@@ -22,45 +24,139 @@ import {
   iconSmall,
   fontSizeSmall,
 } from '../../utils/UIConstants';
+import {API_GET_MAP_DATA} from '../../utils/APIConstants';
+import NetInfo from '@react-native-community/netinfo';
+import ErrorScreen from '../../components/errorScreen';
+import {UserData} from '../../mobx/userStore';
+import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import LoaderPage from '../LoadingScreen';
+import axios from 'axios';
 
 const carouselCardDimension = 175;
 const categoryCardDimension = 55;
 const mapStyle = Coordinates.customMapStyle;
 
-const VirtualMap = () => {
+const VirtualMap = ({navigation}) => {
   const _map = useRef();
   const _carousel = useRef();
 
-  const [general, setGeneral] = useState(Coordinates.generalCoordinates);
-  const [department, setDepartment] = useState(
-    Coordinates.departmentCoordinates,
-  );
-  const [hostel, setHostel] = useState(Coordinates.hostelCoordinates);
-  const [foodAndSports, setFoodAndSports] = useState(Coordinates.foodAndSports);
+  const [isLoading, setLoading] = useState(true);
+  const [errorText, setErrorText] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [isConnected, setConnectivity] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  //Response Data
+  const [data, setData] = useState([]);
+  const [places, setPlaces] = useState([]);
+  var general = [];
+  var department = [];
+  var hostel = [];
+  var foodAndSports = [];
+
+  const handleAPICALL = () => {
+    NetInfo.fetch().then(state => {
+      if (state.isConnected == true) {
+        setConnectivity(true);
+        setLoading(true);
+        axios
+          .get(
+            API_GET_MAP_DATA,
+            // Token from Mobux
+            {headers: {token: UserData.token}},
+          )
+          .then(response => {
+            setLoading(false);
+            setSuccess(true);
+            console.log('Virtual Map API Success');
+            console.log(response.data);
+            setData(response.data);
+            setPlaces(response.data.General);
+          })
+          .catch(error => {
+            console.log(error);
+            if (error.response) {
+              console.log(error.response);
+              setLoading(false);
+              setSuccess(false);
+              setErrorText(error.response.data.message);
+            } else if (error.request) {
+              console.log(error.request);
+              setLoading(false);
+              setSuccess(false);
+              setErrorText(ERRORS.TIME_OUT);
+            } else {
+              console.log(error);
+              setLoading(false);
+              setSuccess(false);
+              setErrorText(ERRORS.UNEXPECTED);
+            }
+          });
+      } else {
+        setSuccess(false);
+        setConnectivity(false);
+        setErrorText(ERRORS.NO_NETWORK);
+      }
+    });
+  };
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setLoading(false);
+    setSuccess(false);
+    handleAPICALL();
+    setRefreshing(false);
+  }, []);
+
+  useEffect(() => {
+    handleAPICALL();
+  }, []);
+
+  if (isLoading == false) {
+    general = data.General;
+    department = data.departments;
+    hostel = data.hostels;
+    foodAndSports = data.Sport_and_Food;
+  }
 
   const [markers, setMarkers] = useState([]);
-  const [places, setPlaces] = useState(general);
   const [choice, setChoice] = useState(0);
 
   const onCarouselItemChange = index => {
     let location = places[index];
+    //Entire Campus will be seen
+    if (location.name == 'Campus') {
+      var latDelta = 0.04;
+      var longDelta = 0.0009;
+    } else {
+      var latDelta = 0.0025;
+      var longDelta = 0.0025;
+    }
 
     _map.current.animateToRegion({
-      latitude: location.latitude,
-      longitude: location.longitude + 0.00027,
-      latitudeDelta: location.latitudeDelta,
-      longitudeDelta: location.longitudeDelta,
+      latitude: location.coordinates[0],
+      longitude: location.coordinates[1] + 0.00027,
+      latitudeDelta: latDelta,
+      longitudeDelta: longDelta,
     });
 
     markers[index].showCallout();
   };
 
   const onMarkerPressed = (location, index) => {
+    //Entire Campus will be seen
+    if (location.name == 'Campus') {
+      var latDelta = 0.04;
+      var longDelta = 0.0009;
+    } else {
+      var latDelta = 0.0025;
+      var longDelta = 0.0025;
+    }
     _map.current.animateToRegion({
-      latitude: location.latitude,
-      longitude: location.longitude + 0.0003,
-      latitudeDelta: location.latitudeDelta,
-      longitudeDelta: location.longitudeDelta,
+      latitude: location.coordinates[0],
+      longitude: location.coordinates[1] + 0.0003,
+      latitudeDelta: latDelta,
+      longitudeDelta: longDelta,
     });
     _carousel.current.snapToItem(index);
   };
@@ -70,7 +166,9 @@ const VirtualMap = () => {
       <Image
         style={styles.cardImage}
         //Change during API Integration
-        source={require('../../assets/images/dashboardBackground.png')}
+        source={{
+          uri: item.imgUrl,
+        }}
       />
       <View style={styles.cardTitleContainer}>
         <Text style={styles.cardTitleFont}>{item.name}</Text>
@@ -80,216 +178,245 @@ const VirtualMap = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Layout style={styles.container}>
-        <MapView
-          ref={_map}
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          customMapStyle={mapStyle}
-          initialRegion={Coordinates.initialRegion}
-          showsPointsOfInterest={false}
-          showsTraffic={false}
-          showsIndoors={false}>
-          <Polygon
-            coordinates={Coordinates.mapBoundaries}
-            fillColor={Colors.mapNittRegion}
-            strokeWidth={1.5}
-          />
-          {places.map((marker, index) => (
-            <Marker
+      <Layout style={{flex: 1}}>
+        {isConnected == false ? (
+          //No Internet
+          <ErrorScreen errorMessage={errorText} navigation={navigation} />
+        ) : isLoading ? (
+          <LoaderPage navigation={navigation} />
+        ) : success ? (
+          <ScrollView
+            contentContainerStyle={StyleSheet.absoluteFillObject}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
+            <MapView
+              ref={_map}
               provider={PROVIDER_GOOGLE}
-              key={marker.name}
-              ref={ref => (markers[index] = ref)}
-              onPress={() => onMarkerPressed(marker, index)}
-              coordinate={{
-                latitude: marker.latitude,
-                longitude: marker.longitude,
-              }}
-              title={marker.name}>
-              <Icon
-                name={marker.icon}
-                style={styles.icon}
-                pack="FontAwesome5"
+              style={styles.map}
+              customMapStyle={mapStyle}
+              initialRegion={Coordinates.initialRegion}
+              showsPointsOfInterest={false}
+              showsTraffic={false}
+              showsIndoors={false}>
+              <Polygon
+                coordinates={Coordinates.mapBoundaries}
+                fillColor={Colors.mapNittRegion}
+                strokeWidth={1.5}
               />
-            </Marker>
-          ))}
-        </MapView>
-        <View style={styles.dashBoard}>
-          <View style={styles.categoryCardsContainer}>
-            <Card
-              style={styles.categoryCards}
-              onPress={() => {
-                if (0 == choice) {
-                } else {
-                  setChoice(0);
-                  setPlaces(general);
-                  _carousel.current.snapToItem(0);
-                }
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card1.jpg')}
-                style={{
-                  height: verticalScale(categoryCardDimension),
-                  width: scale(categoryCardDimension),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
+              {places.map((marker, index) => (
+                <Marker
+                  provider={PROVIDER_GOOGLE}
+                  key={marker.name}
+                  ref={ref => (markers[index] = ref)}
+                  onPress={() => onMarkerPressed(marker, index)}
+                  coordinate={{
+                    latitude: marker.coordinates[0],
+                    longitude: marker.coordinates[1],
+                  }}
+                  title={marker.name}>
+                  <Icon
+                    name={marker.icon}
+                    style={styles.icon}
+                    pack="FontAwesome5"
+                  />
+                </Marker>
+              ))}
+            </MapView>
+            <View style={styles.dashBoard}>
+              <View style={styles.categoryCardsContainer}>
+                <Card
+                  style={styles.categoryCards}
+                  onPress={() => {
+                    if (0 == choice) {
+                    } else {
+                      setChoice(0);
+                      setPlaces(general);
+                      _carousel.current.snapToItem(0);
+                    }
                   }}>
-                  <Icon
-                    name="building"
-                    style={styles.categoryIcons}
-                    pack="FontAwesome5"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.categoryText}>General</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-            <Card
-              style={styles.categoryCards}
-              onPress={() => {
-                if (1 == choice) {
-                } else {
-                  setChoice(1);
-                  setPlaces(department);
-                  _carousel.current.snapToItem(0);
-                }
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card2.jpg')}
-                style={{
-                  height: verticalScale(categoryCardDimension),
-                  width: scale(categoryCardDimension),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                  <ImageBackground
+                    source={require('../../assets/images/card1.jpg')}
+                    style={{
+                      height: verticalScale(categoryCardDimension),
+                      width: scale(categoryCardDimension),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Icon
+                        name="building"
+                        style={styles.categoryIcons}
+                        pack="FontAwesome5"
+                      />
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.categoryText}>General</Text>
+                    </View>
+                  </ImageBackground>
+                </Card>
+                <Card
+                  style={styles.categoryCards}
+                  onPress={() => {
+                    if (1 == choice) {
+                    } else {
+                      setChoice(1);
+                      setPlaces(department);
+                      _carousel.current.snapToItem(0);
+                    }
                   }}>
-                  <Icon
-                    name="school"
-                    style={styles.categoryIcons}
-                    pack="FontAwesome5"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.categoryText}>Dept</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-            <Card
-              style={styles.categoryCards}
-              onPress={() => {
-                if (2 == choice) {
-                } else {
-                  setChoice(2);
-                  setPlaces(hostel);
-                  _carousel.current.snapToItem(0);
-                }
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card3.jpg')}
-                style={{
-                  height: verticalScale(categoryCardDimension),
-                  width: scale(categoryCardDimension),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                  <ImageBackground
+                    source={require('../../assets/images/card2.jpg')}
+                    style={{
+                      height: verticalScale(categoryCardDimension),
+                      width: scale(categoryCardDimension),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Icon
+                        name="school"
+                        style={styles.categoryIcons}
+                        pack="FontAwesome5"
+                      />
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.categoryText}>Dept</Text>
+                    </View>
+                  </ImageBackground>
+                </Card>
+                <Card
+                  style={styles.categoryCards}
+                  onPress={() => {
+                    if (2 == choice) {
+                    } else {
+                      setChoice(2);
+                      setPlaces(hostel);
+                      _carousel.current.snapToItem(0);
+                    }
                   }}>
-                  <Icon
-                    name="house-user"
-                    style={styles.categoryIcons}
-                    pack="FontAwesome5"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.categoryText}>Hostel</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-            <Card
-              style={styles.categoryCards}
-              onPress={() => {
-                if (3 == choice) {
-                } else {
-                  setChoice(3);
-                  setPlaces(foodAndSports);
-                  _carousel.current.snapToItem(0);
-                }
-              }}>
-              <ImageBackground
-                source={require('../../assets/images/card4.jpg')}
-                style={{
-                  height: verticalScale(categoryCardDimension),
-                  width: scale(categoryCardDimension),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                  <ImageBackground
+                    source={require('../../assets/images/card3.jpg')}
+                    style={{
+                      height: verticalScale(categoryCardDimension),
+                      width: scale(categoryCardDimension),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Icon
+                        name="house-user"
+                        style={styles.categoryIcons}
+                        pack="FontAwesome5"
+                      />
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.categoryText}>Hostel</Text>
+                    </View>
+                  </ImageBackground>
+                </Card>
+                <Card
+                  style={styles.categoryCards}
+                  onPress={() => {
+                    if (3 == choice) {
+                    } else {
+                      setChoice(3);
+                      setPlaces(foodAndSports);
+                      _carousel.current.snapToItem(0);
+                    }
                   }}>
-                  <Icon
-                    name="utensils"
-                    style={[
-                      styles.categoryIcons,
-                      {marginRight: scale(paddingSmall / 4)},
-                    ]}
-                    pack="FontAwesome5"
-                  />
-                  <Icon
-                    name="baseball-ball"
-                    style={[
-                      styles.categoryIcons,
-                      {marginLeft: scale(paddingSmall / 4)},
-                    ]}
-                    pack="FontAwesome5"
-                  />
-                </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.categoryText}>Food & Sports</Text>
-                </View>
-              </ImageBackground>
-            </Card>
-          </View>
-          <Carousel
-            ref={_carousel}
-            data={places}
-            renderItem={renderCarouselItem}
-            sliderWidth={Dimensions.get('window').width}
-            itemWidth={scale(carouselCardDimension + paddingSmall)}
-            containerCustomStyle={styles.carousel}
-            onSnapToItem={index => onCarouselItemChange(index)}
-            removeClippedSubviews={false}
-          />
-        </View>
+                  <ImageBackground
+                    source={require('../../assets/images/card4.jpg')}
+                    style={{
+                      height: verticalScale(categoryCardDimension),
+                      width: scale(categoryCardDimension),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Icon
+                        name="utensils"
+                        style={[
+                          styles.categoryIcons,
+                          {marginRight: scale(paddingSmall / 4)},
+                        ]}
+                        pack="FontAwesome5"
+                      />
+                      <Icon
+                        name="baseball-ball"
+                        style={[
+                          styles.categoryIcons,
+                          {marginLeft: scale(paddingSmall / 4)},
+                        ]}
+                        pack="FontAwesome5"
+                      />
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text style={styles.categoryText}>Sport & Food</Text>
+                    </View>
+                  </ImageBackground>
+                </Card>
+              </View>
+              <Carousel
+                ref={_carousel}
+                data={places}
+                renderItem={renderCarouselItem}
+                sliderWidth={Dimensions.get('window').width}
+                itemWidth={scale(carouselCardDimension + paddingSmall)}
+                containerCustomStyle={styles.carousel}
+                onSnapToItem={index => onCarouselItemChange(index)}
+                removeClippedSubviews={false}
+              />
+            </View>
+          </ScrollView>
+        ) : (
+          <ErrorScreen errorMessage={errorText} navigation={navigation} />
+        )}
       </Layout>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-  },
   map: {
     position: 'absolute',
+    //To hide 'Open with Google Maps' Logo
     right: scale(-100),
     top: 0,
-    //To hide 'Open with Google Maps' Logo
     bottom: 0,
     left: 0,
   },
@@ -319,6 +446,7 @@ const styles = StyleSheet.create({
     color: Colors.White,
     fontSize: scale(fontSizeMedium),
     textAlign: 'center',
+    textTransform: 'uppercase',
   },
   icon: {
     //width: scale(iconMedium - 5),
@@ -341,6 +469,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: Colors.Transparent,
   },
   categoryIcons: {
     //width: scale(iconSmall - 5),

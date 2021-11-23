@@ -379,6 +379,7 @@ const Timetable = ({navigation}) => {
                 {showCalendar ? (
                   <>
                     <ScrollView
+                      showsVerticalScrollIndicator={false}
                       style={{maxHeight: ht}}
                       refreshControl={
                         <RefreshControl
