@@ -18,22 +18,13 @@ export const studentLogin = (rollNo, password) => {
         .then(response => {
           if (response.status === 200) {
             AsyncStorage.setItem(KEYS.USER_TOKEN, response.data.token);
-            // AsyncStorage.setItem('name', response.data.name);
-            // AsyncStorage.setItem('rollNo', response.data.rollNo);
-            // AsyncStorage.setItem('department', response.data.department);
+            AsyncStorage.setItem('name', response.data.name);
+            AsyncStorage.setItem('rollNo', response.data.rollNo + '');
+            AsyncStorage.setItem('department', response.data.department);
 
-            // UserData.setName(response.data.name);
-            // UserData.setDepartment(response.data.department);
-            // UserData.setRollNo(response.data.token);
-
-            //DELETE IT
-            AsyncStorage.setItem(KEYS.USER_NAME, 'TEST');
-            AsyncStorage.setItem(KEYS.USER_ROLL_NO, '123');
-            AsyncStorage.setItem(KEYS.USER_DEPARTMENT, 'CSG');
-
-            UserData.setName('TEST');
-            UserData.setDepartment('123');
-            UserData.setRollNo('CSG');
+            UserData.setName(response.data.name);
+            UserData.setDepartment(response.data.department);
+            UserData.setRollNo(response.data.rollNo + '');
 
             //once the token is set it will go to DASHBOARD
             UserData.setToken(response.data.token); // only token is coming in response as of now

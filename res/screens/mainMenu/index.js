@@ -40,6 +40,9 @@ const MainMenu = ({navigation}) => {
           onPress: () => {
             UserData.setToken('');
             AsyncStorage.removeItem(KEYS.USER_TOKEN);
+            AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
+            AsyncStorage.removeItem(KEYS.USER_NAME);
+            AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
           },
         },
       ],
