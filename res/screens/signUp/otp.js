@@ -11,6 +11,7 @@ import Button from './button';
 import {Black} from '../../utils/colors';
 import Header from './header';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import {SIGN_UP_STORE} from '../../mobx/signUpStore';
 
 import {
   borderRadius,
@@ -28,19 +29,15 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
   const backHandler = () => {
     setIndex(index - 1);
   };
-  const [error, setError] = useState('');
+
   const nextHandler = () => {
-    handleAPICALL();
-    console.log(API_SCREEN_Store.errorText);
-    // if (API_SCREEN_Store.errorText == '') {
-    // setIndex(index + 1);
-    //  } //else navigation.push('API_Loader');
+    SIGN_UP_STORE.setDoingApiCall(true);
+    handleAPI_CALL();
   };
 
   React.useEffect(() => {
     if (inputStates.token != '') {
       console.log(inputStates.token);
-      setIndex(index + 1);
     }
   }, [inputStates.token]);
 
@@ -52,7 +49,7 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
     }
   }
 
-  const handleAPICALL = () => {
+  const handleAPI_CALL = () => {
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {
@@ -63,34 +60,36 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
             })
             .then(response => {
               if (response.data.status == 'success') {
-                // console.log(JSON.stringify(response));
                 inputStates.setToken(response.data.token);
+                setIndex(index + 1);
               } else {
-                API_SCREEN_Store.setErrorText(response.data.message);
-                API_SCREEN_Store.setError();
-                alert(response.data.message);
+                SIGN_UP_STORE.setErrorText(response.data.message);
+                SIGN_UP_STORE.setFailState(true);
               }
+              SIGN_UP_STORE.setDoingApiCall(false);
             })
             .catch(error => {
               if (error.response) {
-                console.log(error.response.data.message);
-                API_SCREEN_Store.setErrorText(error.response.data.message);
-                //  setIndex(index + 1); //remove after testing
+                SIGN_UP_STORE.setErrorText(error.response.data.message);
               } else if (error.request) {
-                console.log(error.request);
-                API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                SIGN_UP_STORE.setErrorText(ERRORS.TIME_OUT);
               } else {
-                API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                SIGN_UP_STORE.setErrorText(ERRORS.UNEXPECTED);
               }
-              API_SCREEN_Store.setError();
+              SIGN_UP_STORE.setFailState(true);
+              SIGN_UP_STORE.setDoingApiCall(false);
             });
         } else {
-          API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-          API_SCREEN_Store.setError();
+          SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+
+          SIGN_UP_STORE.setFailState(true);
+          SIGN_UP_STORE.setDoingApiCall(false);
         }
       } else {
-        API_SCREEN_Store.setError();
-        API_SCREEN_Store.setErrorText(ERRORS.NO_NETWORK);
+        SIGN_UP_STORE.setErrorText(ERRORS.NO_NETWORK);
+
+        SIGN_UP_STORE.setFailState(true);
+        SIGN_UP_STORE.setDoingApiCall(false);
       }
     });
   };

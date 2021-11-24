@@ -18,10 +18,15 @@ const ErrorScreen = ({
   showIconInButton = true,
   icon = 'arrow-ios-back-outline',
   fn = () => {},
+  useOnlyFn = false,
 }) => {
   const backPress = () => {
-    navigation.goBack();
-    fn();
+    if (useOnlyFn) {
+      fn();
+    } else {
+      navigation.goBack();
+      fn();
+    }
   };
 
   const [STATE, setSTATE] = useState(1);

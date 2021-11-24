@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
-import {StyleSheet, Text, View, TouchableOpacity, Picker} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-element-textinput';
-import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
+
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
 import {API_SEND_OTP} from '../../utils/APIConstants';
@@ -12,6 +12,7 @@ import axios from 'axios';
 import * as color from '../../utils/colors';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {SIGN_UP_STORE} from '../../mobx/signUpStore';
 
 import {
   borderRadius,
@@ -26,16 +27,9 @@ import Button from './button';
 
 const EmailScreen = observer(
   ({index, setIndex, navigation, heading = 'SIGN UP', inputStates}) => {
-    const [error, setError] = useState('');
-
     const nextHandler = () => {
-      handleAPICALL();
-      console.log(error);
-      // if (API_SCREEN_Store.errorText == '') {
-      //setIndex(index + 1);
-      //  }
-      //else
-      //navigation.push('API_Loader');
+      SIGN_UP_STORE.setDoingApiCall(true);
+      handleAPI_CALL();
     };
 
     const [open, setOpen] = useState(false);
@@ -46,9 +40,9 @@ const EmailScreen = observer(
       {label: 'ECE', value: 'ECE'},
       {label: 'EEE', value: 'EEE'},
       {label: 'Mechanical', value: 'Mech'},
-      {label: 'Instrumention & Control', value: 'ICE'},
-      {label: 'Met', value: 'Met'},
-      {label: 'Prodution', value: 'Prod'},
+      {label: 'Instrumentation & Control', value: 'ICE'},
+      {label: 'Metallurgy', value: 'Metallurgy'},
+      {label: 'Production', value: 'Prod'},
       {label: 'Chemical', value: 'Chem'},
     ]);
 
@@ -66,44 +60,47 @@ const EmailScreen = observer(
       }
     }
 
-    const handleAPICALL = () => {
+    const handleAPI_CALL = () => {
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
           if (validData()) {
-            console.log(inputStates.email);
             axios
               .post(API_SEND_OTP, {
                 email: inputStates.email,
               })
               .then(response => {
-                if (response.data.status == 'success') {
+                if (response.data.status === 'success') {
                   console.log('OTP sent from API');
                   setIndex(index + 1);
                 } else {
-                  API_SCREEN_Store.setErrorText(response.data.message);
-                  API_SCREEN_Store.setError();
-                  console.log(response.data.message);
+                  SIGN_UP_STORE.setErrorText(response.data.message);
+                  SIGN_UP_STORE.setFailState(true);
                 }
+                SIGN_UP_STORE.setDoingApiCall(false);
               })
               .catch(error => {
                 if (error.response) {
-                  API_SCREEN_Store.setErrorText(error.response.data.message);
+                  SIGN_UP_STORE.setErrorText(error.response.data.message);
                 } else if (error.request) {
-                  console.log(error.request);
-                  API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                  SIGN_UP_STORE.setErrorText(ERRORS.TIME_OUT);
                 } else {
                   // Something happened in setting up the request that triggered an Error
-                  API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                  SIGN_UP_STORE.setErrorText(ERRORS.UNEXPECTED);
                 }
-                API_SCREEN_Store.setError();
+                SIGN_UP_STORE.setFailState(true);
+                SIGN_UP_STORE.setDoingApiCall(false);
               });
           } else {
-            API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-            API_SCREEN_Store.setError();
+            SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+
+            SIGN_UP_STORE.setFailState(true);
+            SIGN_UP_STORE.setDoingApiCall(false);
           }
         } else {
-          API_SCREEN_Store.setError();
-          API_SCREEN_Store.setErrorText(ERRORS.NO_NETWORK);
+          SIGN_UP_STORE.setErrorText(ERRORS.NO_NETWORK);
+
+          SIGN_UP_STORE.setFailState(true);
+          SIGN_UP_STORE.setDoingApiCall(false);
         }
       });
     };
@@ -123,7 +120,7 @@ const EmailScreen = observer(
               marginTop: paddingSmall,
               borderWidth: scale(1),
               height: verticalScale(55),
-              fontFamily: FONT,
+              fontFamily: 'sans-serif-light',
               paddingHorizontal: scale(8),
               borderRadius: scale(8),
             }}
@@ -131,17 +128,23 @@ const EmailScreen = observer(
             inputStyle={{fontSize: scale(fontSizeBig), color: 'black'}}
             labelStyle={{fontSize: scale(fontSizeBig)}}
             placeholder="Enter your Name!"
-            keyboardType="Full Name"
             placeholderTextColor="gray"
             focusColor="black"
             value={inputStates.Name}
             onChangeText={username => {
               inputStates.setName(username);
             }}
-            // textError={rollNo.length === 0 ? 'Please enter' : ''}
           />
           <View style={{marginRight: scale(36)}}>
             <DropDownPicker
+              translation={{
+                PLACEHOLDER: 'Select your Department',
+              }}
+              placeholderStyle={{
+                color: 'grey',
+                fontFamily: 'sans-serif-light',
+                fontWeight: 'bold',
+              }}
               style={{
                 marginHorizontal: paddingMedium,
                 marginTop: paddingSmall,
@@ -149,10 +152,27 @@ const EmailScreen = observer(
                 height: verticalScale(55),
                 paddingHorizontal: scale(8),
                 borderRadius: scale(8),
+                backgroundColor: '#f2f2f2',
                 padding: scale(8),
               }}
+              dropDownContainerStyle={{
+                backgroundColor: '#f2f2f2',
+                marginHorizontal: paddingMedium,
+                fontSize: 1,
+              }}
+              listItemLabelStyle={{
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+                fontFamily: 'sans-serif-light',
+                fontSize: scale(14),
+              }}
+              selectedItemLabelStyle={{
+                color: 'grey',
+                fontFamily: 'sans-serif-light',
+                fontWeight: 'bold',
+              }}
               open={open}
-              defaultValue={inputStates.dept}
+              defaultValue={'CSE'}
               value={department}
               items={items}
               setOpen={setOpen}
@@ -168,7 +188,7 @@ const EmailScreen = observer(
               borderWidth: scale(1),
               height: verticalScale(55),
               paddingHorizontal: scale(8),
-              fontFamily: FONT,
+              fontFamily: 'sans-serif-light',
               borderRadius: scale(8),
             }}
             autoCapitalize="none"

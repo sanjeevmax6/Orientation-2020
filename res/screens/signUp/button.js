@@ -8,19 +8,19 @@ import {paddingMedium} from '../../utils/UIConstants';
 
 const Button = ({pressHandler}) => {
   return (
-    <LinearGradient
-      start={{x: 0.0, y: 0.25}}
-      end={{x: 0.5, y: 1.0}}
-      locations={[0, 0.6, 0.8]}
-      colors={['#f13e4d', '#ff5130', '#ff512f']}
-      style={{
-        backgroundColor: 'red',
-        height: verticalScale(40),
-        width: verticalScale(40),
-        borderRadius: verticalScale(20),
-        marginRight: scale(paddingMedium),
-      }}>
-      <TouchableOpacity onPress={() => pressHandler()}>
+    <TouchableOpacity onPress={() => pressHandler()}>
+      <LinearGradient
+        start={{x: 0.0, y: 0.25}}
+        end={{x: 0.5, y: 1.0}}
+        locations={[0, 0.6, 0.8]}
+        colors={['#f13e4d', '#ff5130', '#ff512f']}
+        style={{
+          backgroundColor: 'red',
+          height: verticalScale(40),
+          width: verticalScale(40),
+          borderRadius: verticalScale(20),
+          marginRight: scale(paddingMedium),
+        }}>
         <Icon
           fill="white"
           style={{
@@ -30,8 +30,8 @@ const Button = ({pressHandler}) => {
           }}
           name="arrow-ios-forward-outline"
         />
-      </TouchableOpacity>
-    </LinearGradient>
+      </LinearGradient>
+    </TouchableOpacity>
   );
 };
 
