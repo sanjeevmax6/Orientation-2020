@@ -49,6 +49,7 @@ const VirtualMap = ({navigation}) => {
   //Response Data
   const [data, setData] = useState([]);
   const [places, setPlaces] = useState([]);
+  const [zero, setZero] = useState(0);
   var general = [];
   var department = [];
   var hostel = [];
@@ -125,17 +126,21 @@ const VirtualMap = ({navigation}) => {
   const onCarouselItemChange = index => {
     let location = places[index];
     //Entire Campus will be seen
-    if (location.name == 'Campus') {
+    if (location.name == 'NIT-T Campus') {
+      var lat = 10.7555;
+      var long = 78.82;
       var latDelta = 0.04;
       var longDelta = 0.0009;
     } else {
+      var lat = location.coordinates[0];
+      var long = location.coordinates[1];
       var latDelta = 0.0025;
       var longDelta = 0.0025;
     }
 
     _map.current.animateToRegion({
-      latitude: location.coordinates[0],
-      longitude: location.coordinates[1] + 0.00027,
+      latitude: lat,
+      longitude: long + 0.00027,
       latitudeDelta: latDelta,
       longitudeDelta: longDelta,
     });
@@ -145,16 +150,20 @@ const VirtualMap = ({navigation}) => {
 
   const onMarkerPressed = (location, index) => {
     //Entire Campus will be seen
-    if (location.name == 'Campus') {
+    if (location.name == 'NIT-T Campus') {
+      var lat = 10.7555;
+      var long = 78.82;
       var latDelta = 0.04;
       var longDelta = 0.0009;
     } else {
+      var lat = location.coordinates[0];
+      var long = location.coordinates[1];
       var latDelta = 0.0025;
       var longDelta = 0.0025;
     }
     _map.current.animateToRegion({
-      latitude: location.coordinates[0],
-      longitude: location.coordinates[1] + 0.0003,
+      latitude: lat,
+      longitude: long + 0.0003,
       latitudeDelta: latDelta,
       longitudeDelta: longDelta,
     });
@@ -231,6 +240,12 @@ const VirtualMap = ({navigation}) => {
                   onPress={() => {
                     if (0 == choice) {
                     } else {
+                      _map.current.animateToRegion({
+                        latitude: 10.7555,
+                        longitude: 78.82 + 0.00027,
+                        latitudeDelta: 0.04,
+                        longitudeDelta: 0.0009,
+                      });
                       setChoice(0);
                       setPlaces(general);
                       _carousel.current.snapToItem(0);
@@ -309,6 +324,7 @@ const VirtualMap = ({navigation}) => {
                     } else {
                       setChoice(2);
                       setPlaces(hostel);
+                      setZero(0);
                       _carousel.current.snapToItem(0);
                     }
                   }}>
