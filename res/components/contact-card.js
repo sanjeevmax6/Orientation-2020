@@ -20,6 +20,7 @@ import {
   paddingMedium,
   fontSizeSmall,
   fontSizeVeryLarge,
+  FONT,
 } from '../utils/UIConstants';
 import {Black, White} from '../utils/colors';
 
@@ -103,7 +104,8 @@ const ContactCard = ({item}) => {
                 alignItems: 'center',
                 paddingBottom: verticalScale(8),
               }}>
-              <Text style={{fontSize: scale(fontSizeVeryLarge)}}>
+              <Text
+                style={{fontSize: scale(fontSizeVeryLarge), fontFamily: FONT}}>
                 {item.name}
               </Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -165,11 +167,13 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
     color: White,
     fontWeight: 'bold',
+    fontFamily: FONT,
   },
   textBody: {
     marginLeft: scale(paddingMedium),
     fontSize: scale(fontSizeSmall) / PixelRatio.getFontScale(),
     color: White,
+    fontFamily: FONT,
   },
 
   content: {
@@ -183,6 +187,7 @@ const styles = StyleSheet.create({
   phoneText: {
     alignItems: 'center',
     fontSize: moderateScale(16),
+    fontFamily: FONT,
   },
 
   image2: {

@@ -16,6 +16,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {
   borderRadius,
   borderWidth,
+  FONT,
   fontSizeBig,
   fontSizeVeryLarge,
   paddingMedium,
@@ -122,6 +123,7 @@ const EmailScreen = observer(
               marginTop: paddingSmall,
               borderWidth: scale(1),
               height: verticalScale(55),
+              fontFamily: FONT,
               paddingHorizontal: scale(8),
               borderRadius: scale(8),
             }}
@@ -166,6 +168,7 @@ const EmailScreen = observer(
               borderWidth: scale(1),
               height: verticalScale(55),
               paddingHorizontal: scale(8),
+              fontFamily: FONT,
               borderRadius: scale(8),
             }}
             autoCapitalize="none"
@@ -203,6 +206,7 @@ const EmailScreen = observer(
                     style={{
                       textAlign: 'center',
                       fontSize: scale(12),
+                      fontFamily: FONT,
                     }}>
                     Already have an account?
                     <Text
@@ -210,6 +214,7 @@ const EmailScreen = observer(
                         color: '#f13e4d',
                         fontWeight: 'bold',
                         fontSize: scale(14),
+                        fontFamily: FONT,
                       }}>
                       {' '}
                       LOG IN!
@@ -271,6 +276,7 @@ const styles = StyleSheet.create({
     paddingLeft: scale(paddingMedium),
     fontSize: scale(fontSizeVeryLarge),
     fontWeight: 'bold',
+    fontFamily: FONT,
   },
 });
 

@@ -12,6 +12,7 @@ import * as color from '../../utils/colors';
 import {
   borderRadius,
   borderWidth,
+  FONT,
   fontSizeBig,
   paddingMedium,
   paddingSmall,
@@ -177,6 +178,7 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
               style={{
                 textAlign: 'center',
                 fontSize: scale(12),
+                fontFamily: FONT,
               }}>
               Set the password of your account
             </Text>
@@ -219,6 +221,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: color.Tertiary,
     marginLeft: scale(5),
+    fontFamily: FONT,
   },
   textInput: {
     marginHorizontal: paddingMedium,
@@ -227,6 +230,7 @@ const styles = StyleSheet.create({
     height: verticalScale(55),
     paddingHorizontal: scale(8),
     borderRadius: scale(8),
+    fontFamily: FONT,
   },
 });
 

@@ -5,7 +5,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Yellow} from '../utils/colors';
 import {Icon} from '@ui-kitten/components';
-import {paddingMedium, borderRadiusMedium} from '../utils/UIConstants';
+import {paddingMedium, borderRadiusMedium, FONT} from '../utils/UIConstants';
 
 import {Club_Modal_Store} from '../mobx/clubModalStore';
 const ClubCard = ({
@@ -68,6 +68,7 @@ const ClubCard = ({
               color: 'white',
               textTransform: 'uppercase',
               flex: 1,
+              fontFamily: FONT,
             }}>
             {clubName}
           </Text>

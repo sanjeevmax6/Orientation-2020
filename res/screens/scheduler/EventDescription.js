@@ -7,7 +7,7 @@ import {
   ScaledSheet,
   verticalScale,
 } from 'react-native-size-matters';
-import {paddingSmall, fontSizeMedium} from '../../utils/UIConstants';
+import {paddingSmall, fontSizeMedium, FONT} from '../../utils/UIConstants';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Colors from '../../utils/colors';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -100,18 +100,21 @@ const styles = ScaledSheet.create({
     fontWeight: '500',
     marginVertical: verticalScale(7),
     backgroundColor: 'white',
+    fontFamily: FONT,
   },
   description: {
     fontSize: fontSizeMedium,
     marginBottom: verticalScale(7),
     backgroundColor: 'white',
     lineHeight: 22,
+    fontFamily: FONT,
   },
   eventDate: {
     fontSize: '14@s',
     marginHorizontal: '10@s',
     fontWeight: 'bold',
     marginBottom: verticalScale(7),
+    fontFamily: FONT,
   },
 });
 export default EventDescription;

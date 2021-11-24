@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
   orientationTitleText: {
     fontSize: scale(fontSizeVeryLarge),
     color: Colors.White,
-    fontFamily: 'Montserrat-Regular',
+    fontFamily: FONT,
   },
   textDashBoard: {
     fontSize: scale(fontSizeBig),

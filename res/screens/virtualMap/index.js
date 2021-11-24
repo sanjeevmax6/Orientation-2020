@@ -23,6 +23,7 @@ import {
   paddingSmall,
   iconSmall,
   fontSizeSmall,
+  FONT,
 } from '../../utils/UIConstants';
 import {API_GET_MAP_DATA} from '../../utils/APIConstants';
 import NetInfo from '@react-native-community/netinfo';
@@ -463,6 +464,7 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeMedium),
     textAlign: 'center',
     textTransform: 'uppercase',
+    fontFamily: FONT,
   },
   icon: {
     //width: scale(iconMedium - 5),
@@ -497,6 +499,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: scale(fontSizeSmall - 2),
     color: Colors.White,
+    fontFamily: FONT,
   },
 });
 

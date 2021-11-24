@@ -15,6 +15,7 @@ import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import {
   borderRadius,
   borderWidth,
+  FONT,
   fontSizeBig,
   paddingMedium,
   paddingSmall,
@@ -127,6 +128,7 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
             style={{
               textAlign: 'center',
               fontSize: scale(12),
+              fontFamily: FONT,
             }}>
             An OTP has been sent to your respective Webmail!
           </Text>
@@ -166,6 +168,7 @@ const styles = StyleSheet.create({
     height: verticalScale(55),
     paddingHorizontal: scale(8),
     borderRadius: scale(8),
+    fontFamily: FONT,
   },
 });
 

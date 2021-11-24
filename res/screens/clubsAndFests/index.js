@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {paddingSmall, borderRadius} from '../../utils/UIConstants';
+import {paddingSmall, borderRadius, FONT} from '../../utils/UIConstants';
 import {Icon, Layout} from '@ui-kitten/components';
 import ClubCategory from './clubCategory';
 
@@ -127,7 +127,7 @@ const ClubsAndFests = observer(({navigation}) => {
                   clubList={clubData.social}
                 />
               </View>
-              <View style={{flex: 1}}>
+              <View style={{flex: 1, marginBottom: verticalScale(20)}}>
                 <ClubCategory
                   categoryName={category[3]}
                   clubList={festData.data}
@@ -179,6 +179,7 @@ const ClubsAndFests = observer(({navigation}) => {
                         <Text
                           style={{
                             fontSize: scale(30) / PixelRatio.getFontScale(),
+                            fontFamily: FONT,
                           }}>
                           {Club_Modal_Store.ClubName}
                         </Text>
@@ -310,6 +311,7 @@ const ClubsAndFests = observer(({navigation}) => {
                             width: '100%',
                             textAlign: 'justify',
                             lineHeight: verticalScale(30),
+                            fontFamily: FONT,
                           }}>
                           {Club_Modal_Store.Description}
                         </Text>

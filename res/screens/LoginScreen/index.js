@@ -13,6 +13,7 @@ import {Black} from '../../utils/colors';
 import {
   borderRadius,
   borderWidth,
+  FONT,
   fontSizeBig,
   fontSizeVeryLarge,
   paddingMedium,
@@ -84,6 +85,7 @@ const Login = ({navigation}) => {
               style={{
                 textAlign: 'center',
                 fontSize: scale(12),
+                fontFamily: FONT,
               }}>
               Forgot Password?
               <Text
@@ -91,6 +93,7 @@ const Login = ({navigation}) => {
                   color: 'darkgreen',
                   fontWeight: 'bold',
                   fontSize: scale(14),
+                  fontFamily: FONT,
                 }}>
                 {' '}
                 RESET!
@@ -105,6 +108,7 @@ const Login = ({navigation}) => {
               style={{
                 textAlign: 'center',
                 fontSize: scale(12),
+                fontFamily: FONT,
               }}>
               Don't have an account
               <Text
@@ -112,6 +116,7 @@ const Login = ({navigation}) => {
                   color: '#f13e4d',
                   fontWeight: 'bold',
                   fontSize: scale(14),
+                  fontFamily: FONT,
                 }}>
                 {' '}
                 SIGN UP!
@@ -177,8 +182,9 @@ const styles = StyleSheet.create({
     height: verticalScale(55),
     paddingHorizontal: scale(8),
     borderRadius: scale(8),
+    fontFamily: FONT,
   },
-  inputStyle: {fontSize: scale(fontSizeBig), color: 'black'},
+  inputStyle: {fontSize: scale(fontSizeBig), color: 'black', fontFamily: FONT},
   labelStyle: {fontSize: scale(fontSizeBig)},
   textErrorStyle: {fontSize: 16},
   title: {
@@ -188,6 +194,7 @@ const styles = StyleSheet.create({
     paddingLeft: scale(paddingMedium),
     fontSize: scale(fontSizeVeryLarge),
     fontWeight: 'bold',
+    fontFamily: FONT,
   },
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Icon, Text} from '@ui-kitten/components';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {paddingSmall} from '../utils/UIConstants';
+import {FONT, paddingSmall} from '../utils/UIConstants';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {Black} from '../utils/colors';
 
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   text: {
     color: Black,
     fontStyle: 'normal',
+    fontFamily: FONT,
   },
 });
 

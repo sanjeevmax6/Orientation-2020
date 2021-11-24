@@ -32,7 +32,7 @@ import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
 
 const FlatListItemSeparator = () => {
-  return <View style={{height: verticalScale(8)}} />;
+  return <View style={{height: verticalScale(10)}} />;
 };
 
 const MagazineAndSymposium = observer(({navigation}) => {
@@ -170,7 +170,10 @@ const MagazineAndSymposium = observer(({navigation}) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <View style={{marginLeft: scale(6), marginRight: scale(6)}}>
                     <Text
-                      style={{fontSize: scale(30) / PixelRatio.getFontScale()}}>
+                      style={{
+                        fontSize: scale(30) / PixelRatio.getFontScale(),
+                        fontFamily: FONT,
+                      }}>
                       {Symp_Modal_Store.ClubName}
                     </Text>
 
@@ -301,7 +304,7 @@ const MagazineAndSymposium = observer(({navigation}) => {
                         width: '100%',
                         textAlign: 'justify',
                         lineHeight: verticalScale(30),
-                        fontFamily: 'Montserrat-Bold',
+                        fontFamily: FONT,
                       }}>
                       {Symp_Modal_Store.Description}
                     </Text>

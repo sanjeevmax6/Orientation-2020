@@ -9,6 +9,7 @@ import LoaderPage from '../LoadingScreen';
 import {getContacts} from './API_CALLS';
 import ErrorScreen from '../../components/errorScreen';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {FONT} from '../../utils/UIConstants';
 
 const Contacts = observer(({navigation}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -39,7 +40,11 @@ const Contacts = observer(({navigation}) => {
             }}
             onSelect={index => setSelectedIndex(index)}>
             <Tab
-              title={evaProps => <Text {...evaProps}>ORIENTATION TEAM</Text>}
+              title={evaProps => (
+                <Text {...evaProps} style={{fontFamily: FONT}}>
+                  ORIENTATION TEAM
+                </Text>
+              )}
               style={{height: verticalScale(30)}}>
               {contactsStore.state.isOrientationLoading ? (
                 <LoaderPage navigation={navigation} />

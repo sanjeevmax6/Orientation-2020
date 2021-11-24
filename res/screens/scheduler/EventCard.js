@@ -12,6 +12,7 @@ import {
   iconSmall,
 } from '../utils/UIConstants';
 import {scale, ScaledSheet, moderateScale} from 'react-native-size-matters';
+import {FONT} from '../../utils/UIConstants';
 
 const EventCard = ({item, navigation}) => {
   return (
@@ -31,7 +32,7 @@ const EventCard = ({item, navigation}) => {
         <Text style={styles.eventName} numberOfLines={1}>
           {item.Title}
         </Text>
-        <Text>
+        <Text style={{fontFamily: FONT}}>
           Time: {item.Time} | Duration: {item.Duration}
         </Text>
       </View>
@@ -73,6 +74,7 @@ const styles = ScaledSheet.create({
   eventName: {
     fontSize: '16@s',
     fontWeight: 'bold',
+    fontFamily: FONT,
   },
 });
 

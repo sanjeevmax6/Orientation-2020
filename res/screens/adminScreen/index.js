@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {TextInput} from 'react-native-element-textinput';
 import {
+  FONT,
   fontSizeBig,
   fontSizeVeryLarge,
   paddingMedium,
@@ -83,6 +84,7 @@ const AdminScreen = () => {
             fontWeight: '500',
             textTransform: 'uppercase',
             fontSize: scale(12),
+            fontFamily: FONT,
           }}>
           Users will be redirected to this link
         </Text>
@@ -112,6 +114,7 @@ const AdminScreen = () => {
                 color: 'white',
                 fontWeight: 'bold',
                 textAlign: 'center',
+                fontFamily: FONT,
               }}>
               SUBMIT
             </Text>

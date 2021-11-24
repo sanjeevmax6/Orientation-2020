@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, FlatList} from 'react-native';
 import ClubCard from '../../components/club-card';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {
+  FONT,
   fontSizeVeryLarge,
   paddingMedium,
   paddingSmall,
@@ -61,5 +62,6 @@ const styles = StyleSheet.create({
     paddingLeft: scale(paddingMedium),
     paddingBottom: verticalScale(paddingSmall),
     paddingTop: verticalScale(paddingSmall),
+    fontFamily: FONT,
   },
 });

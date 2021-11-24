@@ -10,6 +10,7 @@ import {
   borderRadiusLarge,
   academicCalendarCardHeight,
   iconSmall,
+  FONT,
 } from '../utils/UIConstants';
 import {scale, verticalScale} from 'react-native-size-matters';
 import moment from 'moment';
@@ -121,12 +122,14 @@ const styles = StyleSheet.create({
     color: Colors.White,
     fontSize: scale(fontSizeMedium),
     textAlign: 'center',
+    fontFamily: FONT,
   },
   monthText: {
     marginTop: verticalScale(-3),
     color: Colors.White,
     fontSize: scale(fontSizeSmall - 2),
     textAlign: 'center',
+    fontFamily: FONT,
   },
   noticeContainer: {
     flexDirection: 'row',
@@ -146,6 +149,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: scale(fontSizeSmall),
     textTransform: 'uppercase',
+    fontFamily: FONT,
   },
   noticeLine: {
     marginVertical: verticalScale(3),

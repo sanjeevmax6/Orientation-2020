@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Icon} from '@ui-kitten/components';
-import {fontSizeVeryLarge, paddingSmall} from '../../utils/UIConstants';
+import {FONT, fontSizeVeryLarge, paddingSmall} from '../../utils/UIConstants';
 
 const Header = ({backHandler, title = 'HEADER', showBackIcon = true}) => {
   return (
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     width: '65%',
     textAlign: 'center',
     color: 'black',
+    fontFamily: FONT,
   },
   button: {
     justifyContent: 'center',

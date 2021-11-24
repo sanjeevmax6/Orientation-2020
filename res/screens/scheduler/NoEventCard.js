@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions, Text, View} from 'react-native';
 import * as colors from '../../utils/colors';
 import {scale} from 'react-native-size-matters';
-import {fontSizeBig} from '../../utils/UIConstants';
+import {FONT, fontSizeBig} from '../../utils/UIConstants';
 const NoEventCard = () => {
   return (
     <View
@@ -19,6 +19,7 @@ const NoEventCard = () => {
           textAlignVertical: 'center',
           color: colors.Primary,
           fontSize: scale(fontSizeBig),
+          fontFamily: FONT,
         }}>
         No events scheduled
       </Text>

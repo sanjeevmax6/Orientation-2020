@@ -21,6 +21,7 @@ import {
   borderRadiusLarge,
   academicCalendarCardHeight,
   iconSmall,
+  FONT,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -415,6 +416,8 @@ const Timetable = ({navigation}) => {
                         }}
                         theme={{
                           arrowColor: Colors.Secondary,
+                          textDayFontFamily: FONT,
+                          textMonthFontFamily: FONT,
                           todayTextColor: Colors.todayTextColor,
                           textSectionTitleColor: Colors.Tertiary,
                           textMonthFontSize: scale(fontSizeBig + 2),
@@ -588,6 +591,7 @@ const styles = StyleSheet.create({
   legendText: {
     fontSize: scale(fontSizeSmall),
     color: Colors.Black,
+    fontFamily: FONT,
   },
   line: {
     height: verticalScale(2),
@@ -609,10 +613,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: scale(fontSizeMedium),
     color: Colors.Black,
+    fontFamily: FONT,
   },
   todayText: {
     fontSize: scale(fontSizeMedium),
     color: Colors.Secondary,
+    fontFamily: FONT,
   },
   hideCalendarIcons: {
     height: verticalScale(iconSmall),

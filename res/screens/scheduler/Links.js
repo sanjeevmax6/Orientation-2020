@@ -4,6 +4,7 @@ import {Text, View, TouchableOpacity, Linking} from 'react-native';
 import * as colors from '../../utils/colors';
 import {Divider, Icon} from '@ui-kitten/components';
 import {ScaledSheet, scale, verticalScale} from 'react-native-size-matters';
+import {FONT} from '../../utils/UIConstants';
 
 const Links = ({link}) => {
   return (
@@ -40,10 +41,12 @@ const styles = ScaledSheet.create({
     fontWeight: '500',
     marginVertical: verticalScale(7),
     backgroundColor: 'white',
+    fontFamily: FONT,
   },
   url: {
     color: 'blue',
     marginLeft: scale(5),
+    fontFamily: FONT,
   },
 });
 export default Links;

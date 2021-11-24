@@ -5,7 +5,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Yellow} from '../utils/colors';
 import {Icon} from '@ui-kitten/components';
-import {paddingMedium, borderRadiusMedium} from '../utils/UIConstants';
+import {paddingMedium, borderRadiusMedium, FONT} from '../utils/UIConstants';
 
 import {Symp_Modal_Store} from '../mobx/symposiumModalStore';
 
@@ -67,6 +67,7 @@ const SympCard = ({
           <Text
             style={{
               flex: 1,
+              fontFamily: FONT,
             }}>
             <Text
               numberOfLines={1}
@@ -76,11 +77,13 @@ const SympCard = ({
                 color: 'white',
                 textTransform: 'uppercase',
                 flex: 1,
+                fontFamily: FONT,
               }}>
               {Name}
             </Text>
-            <Text>{'\n'}</Text>
-            <Text style={{color: 'white', fontSize: scale(12)}}>
+            <Text style={{fontFamily: FONT}}>{'\n'}</Text>
+            <Text
+              style={{color: 'white', fontSize: scale(12), fontFamily: FONT}}>
               {department}
             </Text>
           </Text>

@@ -4,7 +4,7 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Icon} from '@ui-kitten/components';
-import {fontSizeBig, paddingSmall} from '../utils/UIConstants';
+import {FONT, fontSizeBig, paddingSmall} from '../utils/UIConstants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as KEYS from '../utils/STORAGE_KEYS';
 import {UserData} from '../mobx/userStore';
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     width: '65%',
     textAlign: 'center',
     color: 'white',
+    fontFamily: FONT,
   },
   button: {
     zIndex: 1,

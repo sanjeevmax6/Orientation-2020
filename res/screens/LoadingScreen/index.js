@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
-import loginLottie from '../../assets/lottieFiles/loading.json';
+import loginLottie from '../../assets/lottieFiles/loading2.json';
 
 const LoaderPage = ({navigation}) => {
   const [STATE, setSTATE] = useState(1);
