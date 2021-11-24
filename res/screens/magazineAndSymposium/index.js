@@ -19,7 +19,7 @@ import {
 
 const Height = Dimensions.get('window').height;
 import {Symp_Modal_Store} from '../../mobx/symposiumModalStore';
-import {paddingSmall, borderRadius} from '../../utils/UIConstants';
+import {paddingSmall, borderRadius, FONT} from '../../utils/UIConstants';
 import LinearGradient from 'react-native-linear-gradient';
 import SympCard from '../../components/symp-card';
 import {observer} from 'mobx-react';
@@ -301,6 +301,7 @@ const MagazineAndSymposium = observer(({navigation}) => {
                         width: '100%',
                         textAlign: 'justify',
                         lineHeight: verticalScale(30),
+                        fontFamily: 'Montserrat-Bold',
                       }}>
                       {Symp_Modal_Store.Description}
                     </Text>

@@ -20,6 +20,7 @@ import {
   iconLarge,
   iconMedium,
   fontSizeVeryLarge,
+  FONT,
 } from '../../utils/UIConstants';
 import {UserData} from '../../mobx/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -357,10 +358,12 @@ const styles = StyleSheet.create({
   orientationTitleText: {
     fontSize: scale(fontSizeVeryLarge),
     color: Colors.White,
+    fontFamily: 'Montserrat-Regular',
   },
   textDashBoard: {
     fontSize: scale(fontSizeBig),
     color: Colors.White,
+    fontFamily: FONT,
   },
   mainMenu: {
     flex: 1,
@@ -439,6 +442,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     fontSize: scale(fontSizeBig),
     color: Colors.White,
+    fontFamily: FONT,
   },
   iconMainMenu: {
     width: scale(iconLarge),
