@@ -221,7 +221,10 @@ const EmailScreen = observer(
               style={{
                 fontFamily: FONT,
                 fontSize: scale(16),
-                color: 'black',
+                color:
+                  SIGN_UP_STORE.getDepartment === 'Select your Department'
+                    ? 'grey'
+                    : 'black',
               }}>
               {SIGN_UP_STORE.getDepartment}
             </Text>
