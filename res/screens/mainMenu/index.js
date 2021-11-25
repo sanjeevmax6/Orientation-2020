@@ -89,7 +89,7 @@ const MainMenu = ({navigation}) => {
               </View>
             </View>
             <View style={styles.detailsContainer}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
@@ -100,7 +100,7 @@ const MainMenu = ({navigation}) => {
                   {data.studentName}
                 </Text>
               </View>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
@@ -108,7 +108,7 @@ const MainMenu = ({navigation}) => {
                 />
                 <Text style={[styles.textDashBoard]}>{data.studentRollNo}</Text>
               </View>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon
                   style={styles.iconDashBoard}
                   fill={Colors.DashboardLogo}
