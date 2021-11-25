@@ -11,7 +11,16 @@ class User_Data {
     name: '',
     department: '',
     admin: '',
+    firebaseToken: '',
   };
+
+  setFireBaseToken = value => {
+    this.state.firebaseToken = value;
+  };
+
+  get getFireBaseToken() {
+    return this.state.firebaseToken;
+  }
 
   setToken = userToken => {
     this.state.token = userToken;
@@ -60,6 +69,9 @@ class User_Data {
       userDepartment: computed,
       userRollNo: computed,
       getIsAdmin: computed,
+
+      setFireBaseToken: action,
+      getFireBaseToken: computed,
     });
   }
 }

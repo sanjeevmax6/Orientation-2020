@@ -14,6 +14,7 @@ const Navigator = observer(() => {
   LogBox.ignoreLogs(["EventEmitter.removeListener('change', ...)"]);
   LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
+    'Possible Unhandled Promise Rejection (id: 0)',
   ]);
 
   return (

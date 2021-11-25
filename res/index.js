@@ -6,7 +6,7 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import Navigator from './navigation';
 import Status_Bar from './components/status_bar';
 import {Observer, Provider} from 'mobx-react';
-import {store} from './store';
+import {UserData} from './mobx/userStore';
 import {default as theme} from './utils/custom-theme.json';
 
 import PushNotification from 'react-native-push-notification';
@@ -19,7 +19,8 @@ const App = () => {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
-        console.log('TOKEN:', token);
+        console.log('TOKEN:', token.token);
+        UserData.setFireBaseToken(token.token);
       },
 
       // (required) Called when a remote is received or opened, or local notification is opened

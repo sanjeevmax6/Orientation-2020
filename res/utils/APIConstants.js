@@ -18,3 +18,10 @@ export const API_VERIFY_OTP = BASE_URL + '/auth/verify-otp';
 
 //Reset Password
 export const API_RESET = BASE_URL + '/auth/reset';
+
+//FireBase
+export const SUBSCRIBE_NOTIFICATION =
+  BASE_URL + '/api/notification/subscribeToAll';
+
+//Admin
+export const TRIGGER_NOTIFICATION = BASE_URL + '/api/notification/sendToAll';
