@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput} from 'react-native-element-textinput';
 
@@ -8,14 +7,12 @@ import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
 
 import Button from './button';
-import {Black} from '../../utils/colors';
+
 import Header from './header';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import {SIGN_UP_STORE} from '../../mobx/signUpStore';
 
 import {
-  borderRadius,
-  borderWidth,
   FONT,
   fontSizeBig,
   paddingMedium,
@@ -25,7 +22,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {API_VERIFY_OTP} from '../../utils/APIConstants';
 import axios from 'axios';
 
-const OTPScreen = ({index, setIndex, navigation}) => {
+const OTPScreen = ({index, setIndex}) => {
   const backHandler = () => {
     setIndex(index - 1);
   };

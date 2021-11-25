@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {useState} from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {observer} from 'mobx-react';
 import {

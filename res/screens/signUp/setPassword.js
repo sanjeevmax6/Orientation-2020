@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 
-import {StyleSheet, Text, View, TouchableOpacity, Icon} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
@@ -10,8 +10,6 @@ import loginLottie from '../../assets/lottieFiles/signup.json';
 import * as color from '../../utils/colors';
 
 import {
-  borderRadius,
-  borderWidth,
   FONT,
   fontSizeBig,
   paddingMedium,
@@ -32,8 +30,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PasswordScreen = ({index, setIndex, navigation}) => {
   //disable back button once the user has verified email as he has to set password mandatorily
-  const [error, setError] = useState('');
-
   function handleBackButtonClick() {
     return true;
   }
@@ -67,13 +63,13 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
   }
 
   const nextHandler = () => {
-    handleAPICALL();
+    handleAPI_CALL();
     navigation.push('API_Loader');
   };
   //Validate
   //call API
 
-  const handleAPICALL = () => {
+  const handleAPI_CALL = () => {
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {

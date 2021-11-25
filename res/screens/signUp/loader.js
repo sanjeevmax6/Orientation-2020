@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/loading2.json';
 
-const Loader = ({navigation}) => {
+const Loader = () => {
   const [STATE, setSTATE] = useState(1);
   const toggler = () => {
     //force reload as there is a bug in the LF library
