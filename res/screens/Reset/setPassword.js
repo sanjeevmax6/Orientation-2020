@@ -20,7 +20,7 @@ import Button from './button';
 import {BackHandler} from 'react-native';
 import {UserData} from '../../mobx/userStore';
 import NetInfo from '@react-native-community/netinfo';
-import {API_REGISTER} from '../../utils/APIConstants';
+import {API_RESET} from '../../utils/APIConstants';
 import axios from 'axios';
 import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
 import * as KEYS from '../../utils/STORAGE_KEYS';
@@ -74,11 +74,9 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
       if (state.isConnected == true) {
         if (validData()) {
           axios
-            .post(
-              API_REGISTER,
+            .put(
+              API_RESET,
               {
-                name: SIGN_UP_STORE.getName,
-                department: SIGN_UP_STORE.getDepartment,
                 new_password: SIGN_UP_STORE.getPassword,
                 confirm_password: SIGN_UP_STORE.getConfirmPassword,
               },
@@ -90,30 +88,20 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
             )
             .then(response => {
               if (response.status === 200) {
-                console.log('done');
-
-                UserData.setName(SIGN_UP_STORE.getName);
-                UserData.setAdmin(false);
-                UserData.setRollNo(SIGN_UP_STORE.getEmail);
-                UserData.setDepartment(SIGN_UP_STORE.getDepartment);
-
-                AsyncStorage.setItem(KEYS.USER_TOKEN, SIGN_UP_STORE.getToken);
-
-                AsyncStorage.setItem(KEYS.USER_NAME, SIGN_UP_STORE.getName);
-                AsyncStorage.setItem(
-                  KEYS.USER_ROLL_NO,
-                  SIGN_UP_STORE.getEmail + '',
-                );
-                AsyncStorage.setItem(
-                  KEYS.USER_DEPARTMENT,
-                  SIGN_UP_STORE.getDepartment,
-                );
-                AsyncStorage.setItem(KEYS.IS_USER_ADMIN, false + '');
-
-                //once the token is set it will go to DASHBOARD
-                UserData.setToken(SIGN_UP_STORE.getToken);
+                console.log(response.data.message);
+                SIGN_UP_STORE.setDoingApiCall(false);
+                SIGN_UP_STORE.setFailState(false);
+                SIGN_UP_STORE.setErrorText('');
+                SIGN_UP_STORE.setDepartment('Select your Department');
+                SIGN_UP_STORE.setEmail('');
+                SIGN_UP_STORE.setName('');
+                SIGN_UP_STORE.setPassword('');
+                SIGN_UP_STORE.setConfirmPassword('');
+                SIGN_UP_STORE.setOTP('');
+                SIGN_UP_STORE.setToken('');
+                navigation.pop();
               } else {
-                console.log('error: ');
+                console.log('error1: ');
 
                 console.log(response.data.message);
 
@@ -123,7 +111,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
               }
             })
             .catch(error => {
-              console.log('error: ');
+              console.log('error2: ');
               console.log(error);
               if (error.response) {
                 SIGN_UP_STORE.setErrorText(error.response.data.message);
@@ -136,7 +124,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
               SIGN_UP_STORE.setDoingApiCall(false);
             });
         } else {
-          console.log('error: ' + ERRORS.SIGN_UP_FILL_ALL);
+          console.log('error3: ' + ERRORS.SIGN_UP_FILL_ALL);
 
           SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
 
@@ -188,6 +176,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
           placeholderTextColor="gray"
           focusColor="black"
           autoCapitalize="none"
+          secureTextEntry
           value={SIGN_UP_STORE.getConfirmPassword}
           onChangeText={confirmPassword => {
             SIGN_UP_STORE.setConfirmPassword(confirmPassword);
@@ -207,7 +196,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
                 fontSize: scale(12),
                 fontFamily: FONT,
               }}>
-              Set the password of your account
+              Reset the password of your account
             </Text>
           </TouchableOpacity>
         </View>

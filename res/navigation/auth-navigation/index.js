@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../../screens/LoginScreen';
 import SignUp from '../../screens/signUp';
 import API_LoaderPage from '../../screens/apiCallScreen';
+import Reset from '../../screens/Reset';
 const stack = createNativeStackNavigator();
 
 function AuthNavigator() {
@@ -16,6 +17,11 @@ function AuthNavigator() {
       <stack.Screen
         name="SignUp"
         component={SignUp}
+        options={{headerShown: false, animation: 'slide_from_right'}}
+      />
+      <stack.Screen
+        name="Reset"
+        component={Reset}
         options={{headerShown: false, animation: 'slide_from_right'}}
       />
       <stack.Screen

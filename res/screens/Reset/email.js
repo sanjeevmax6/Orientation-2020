@@ -31,7 +31,6 @@ import {
   paddingSmall,
 } from '../../utils/UIConstants';
 import Button from './button';
-import {Divider} from '@ui-kitten/components';
 
 const EmailScreen = observer(
   ({index, setIndex, navigation, heading = 'SIGN UP'}) => {
@@ -40,27 +39,8 @@ const EmailScreen = observer(
       handleAPI_CALL();
     };
 
-    const [ModalVisibility, setModalVisibility] = useState(false);
-
-    const DATA = [
-      {key: 'Architecture'},
-      {key: 'Chemical Engineering'},
-      {key: 'Civil Engineering'},
-      {key: 'Computer Science and Engineering'},
-      {key: 'Electrical and Electronics Engineering'},
-      {key: 'Electronics and Communication Engineering'},
-      {key: 'Instrumentation and Control Engineering'},
-      {key: 'Mechanical Engineering'},
-      {key: 'Metallurgical and Materials Engineering'},
-      {key: 'Production Engineering'},
-    ];
-
     function validData() {
-      if (
-        SIGN_UP_STORE.getName === '' ||
-        SIGN_UP_STORE.getDepartment === '' ||
-        SIGN_UP_STORE.getEmail === ''
-      ) {
+      if (SIGN_UP_STORE.getEmail === '') {
         return false;
       } else {
         return true;
@@ -74,6 +54,7 @@ const EmailScreen = observer(
             axios
               .post(API_SEND_OTP, {
                 email: SIGN_UP_STORE.getEmail + '@nitt.edu',
+                reset: true,
               })
               .then(response => {
                 if (response.data.status === 'success') {
@@ -117,115 +98,12 @@ const EmailScreen = observer(
     };
     return (
       <View>
-        <Modal
-          visible={ModalVisibility}
-          animationType="fade"
-          transparent={true}
-          onRequestClose={() => {
-            setModalVisibility(false);
-          }}>
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'rgba(204, 198, 204, 0.8)',
-            }}>
-            <View
-              style={{
-                width: '90%',
-                backgroundColor: 'white',
-                borderRadius: scale(10),
-              }}>
-              <FlatList
-                data={DATA}
-                ListHeaderComponent={ListHeaderComponent}
-                keyExtractor={item => item.key}
-                ItemSeparatorComponent={() => {
-                  return <Divider />;
-                }}
-                renderItem={({item}) => (
-                  <TouchableOpacity
-                    onPress={() => {
-                      SIGN_UP_STORE.setDepartment(item.key);
-                      setModalVisibility(false);
-                    }}>
-                    <Text
-                      numberOfLines={1}
-                      style={{
-                        margin: 10,
-                        padding: 5,
-                        fontFamily: FONT,
-                        fontSize: scale(16),
-                        color: 'grey',
-                      }}>
-                      {item.key}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          </View>
-        </Modal>
         <View
           style={{
             height: verticalScale(310),
             width: '100%',
           }}>
           <Text style={styles.title}>{heading}</Text>
-
-          <TextInput
-            style={{
-              marginHorizontal: paddingMedium,
-              marginTop: paddingSmall,
-              borderWidth: scale(1),
-              height: verticalScale(55),
-
-              paddingHorizontal: scale(8),
-              borderRadius: scale(8),
-            }}
-            autoCapitalize="none"
-            inputStyle={{
-              fontSize: scale(fontSizeBig),
-              color: 'black',
-              fontFamily: FONT,
-            }}
-            labelStyle={{fontSize: scale(fontSizeBig)}}
-            placeholder="Enter your Name"
-            placeholderTextColor="gray"
-            focusColor="black"
-            value={SIGN_UP_STORE.getName}
-            onChangeText={username => {
-              SIGN_UP_STORE.setName(username);
-            }}
-          />
-
-          <TouchableOpacity
-            onPress={() => {
-              setModalVisibility(true);
-            }}
-            style={{
-              marginHorizontal: paddingMedium,
-              marginTop: paddingSmall,
-              borderWidth: scale(1),
-              height: verticalScale(55),
-
-              paddingHorizontal: scale(8),
-              borderRadius: scale(8),
-
-              justifyContent: 'center',
-            }}>
-            <Text
-              numberOfLines={1}
-              style={{
-                fontFamily: FONT,
-                fontSize: scale(16),
-                color: 'black',
-              }}>
-              {SIGN_UP_STORE.getDepartment}
-            </Text>
-          </TouchableOpacity>
           <TextInput
             style={{
               marginHorizontal: paddingMedium,
@@ -266,7 +144,7 @@ const EmailScreen = observer(
                   fontSize: scale(12),
                   fontFamily: FONT,
                 }}>
-                Already have an account?
+                Go back to
                 <Text
                   style={{
                     color: '#f13e4d',

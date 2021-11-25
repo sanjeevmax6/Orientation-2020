@@ -15,3 +15,6 @@ export const API_GET_CONTACTS = BASE_URL + '/api/contacts';
 export const API_REGISTER = BASE_URL + '/auth/register';
 export const API_SEND_OTP = BASE_URL + '/auth/send-otp';
 export const API_VERIFY_OTP = BASE_URL + '/auth/verify-otp';
+
+//Reset Password
+export const API_RESET = BASE_URL + '/auth/reset';

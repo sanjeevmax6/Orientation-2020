@@ -79,7 +79,7 @@ const Login = ({navigation}) => {
           }}>
           <TouchableOpacity
             onPress={() =>
-              navigation.push('SignUp', {screenType: 'RESET PASSWORD'})
+              navigation.push('Reset', {screenType: 'RESET PASSWORD'})
             }>
             <Text
               style={{
