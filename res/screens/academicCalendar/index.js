@@ -525,6 +525,7 @@ const Timetable = ({navigation}) => {
 
               <View style={{flex: 1}}>
                 <FlatList
+                  showsVerticalScrollIndicator={false}
                   ref={ref => (_flatlist.current = ref)}
                   refreshControl={
                     <RefreshControl

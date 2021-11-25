@@ -45,7 +45,7 @@ const Scheduler = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [selDate, setSelDate] = useState(new Date());
 
-  const eventcard = item => {
+  const eventCard = item => {
     return (
       <View>
         <EventCard item={item.item} navigation={navigation} />
@@ -74,6 +74,7 @@ const Scheduler = ({navigation}) => {
         <LoaderPage navigation={navigation} />
       ) : (
         <FlatList
+          showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -185,7 +186,7 @@ const Scheduler = ({navigation}) => {
             var date = new Date(item.date);
             return new Date(item.date).toDateString() == selDate.toDateString();
           })}
-          renderItem={eventcard}
+          renderItem={eventCard}
           style={{flex: 1}}
         />
       )}

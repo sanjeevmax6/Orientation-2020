@@ -1,8 +1,7 @@
 import React from 'react';
 
 import {Text, View, TouchableOpacity, Linking} from 'react-native';
-import * as colors from '../../utils/colors';
-import {Divider, Icon} from '@ui-kitten/components';
+import {Icon} from '@ui-kitten/components';
 import {ScaledSheet, scale, verticalScale} from 'react-native-size-matters';
 import {FONT} from '../../utils/UIConstants';
 
@@ -14,7 +13,11 @@ const Links = ({link}) => {
         {/* {links.map((item, index) => { //only one link is enough
           return ( */}
         <TouchableOpacity
-          style={{flexDirection: 'row', marginBottom: verticalScale(3)}}
+          style={{
+            flexDirection: 'row',
+            marginBottom: verticalScale(3),
+            alignItems: 'center',
+          }}
           onPress={() => {
             Linking.openURL(link).catch(err =>
               console.error('Invalid URL', err),
@@ -22,7 +25,7 @@ const Links = ({link}) => {
           }}>
           <Icon
             name="link-outline"
-            fill="blue"
+            fill="#f27d00"
             style={{height: verticalScale(15), width: scale(15)}}
           />
           <Text style={styles.url} ellipsizeMode="tail" numberOfLines={1}>
@@ -44,9 +47,10 @@ const styles = ScaledSheet.create({
     fontFamily: FONT,
   },
   url: {
-    color: 'blue',
+    color: '#f27d00',
     marginLeft: scale(5),
     fontFamily: FONT,
+    fontSize: scale(13),
   },
 });
 export default Links;

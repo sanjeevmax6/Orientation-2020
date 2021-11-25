@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Image, Text, Dimensions} from 'react-native';
 import {Divider, Icon} from '@ui-kitten/components';
 import {
@@ -8,11 +8,11 @@ import {
   verticalScale,
 } from 'react-native-size-matters';
 import {paddingSmall, fontSizeMedium, FONT} from '../../utils/UIConstants';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-import * as Colors from '../../utils/colors';
+
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import Links from './Links';
+import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 const WIDTH = Dimensions.get('window').width;
 
@@ -20,7 +20,7 @@ const EventDescription = ({route}) => {
   const {data} = route.params;
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{flex: 1, backgroundColor: 'white'}}>
           <View style={{backgroundColor: '#f8faf9'}}>
             <Image
@@ -34,11 +34,19 @@ const EventDescription = ({route}) => {
           <View style={{paddingHorizontal: paddingSmall}}>
             <Text style={styles.title}>{data.Title}</Text>
             <Text style={styles.description}>{data.Description}</Text>
-            <View style={{flexDirection: 'row'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingBottom: verticalScale(9),
+              }}>
               <Icon
                 name="calendar-outline"
-                fill="black"
-                style={{height: verticalScale(15), width: scale(15)}}
+                fill="#f27d00"
+                style={{
+                  height: verticalScale(15),
+                  width: scale(15),
+                }}
               />
               <Text style={styles.eventDate}>
                 {moment(data.date).format('DD/MM/YY')} | {data.Time} |{' '}
@@ -46,7 +54,19 @@ const EventDescription = ({route}) => {
               </Text>
             </View>
           </View>
-          <Divider />
+          <LinearGradient
+            start={{x: 0.0, y: 0.25}}
+            end={{x: 0.5, y: 1.0}}
+            locations={[0, 0.6, 0.8]}
+            colors={['#f13e4d', '#ff5130', '#ff512f']}
+            style={{
+              height: verticalScale(1),
+              backgroundColor: '#eaeaea',
+              marginHorizontal: scale(3),
+              marginVertical: verticalScale(6),
+              opacity: 0.8,
+            }}
+          />
           <View
             style={{
               paddingHorizontal: paddingSmall,
@@ -54,30 +74,60 @@ const EventDescription = ({route}) => {
             }}>
             <Links link={data.Link} />
           </View>
-          <Divider />
+          <LinearGradient
+            start={{x: 0.0, y: 0.25}}
+            end={{x: 0.5, y: 1.0}}
+            locations={[0, 0.6, 0.8]}
+            colors={['#f13e4d', '#ff5130', '#ff512f']}
+            style={{
+              height: verticalScale(1),
+              backgroundColor: '#eaeaea',
+              marginHorizontal: scale(3),
+              marginVertical: verticalScale(6),
+              opacity: 0.8,
+            }}
+          />
           <View
             style={{
               paddingHorizontal: paddingSmall,
               paddingBottom: verticalScale(20),
             }}>
             <Text style={styles.title}>Contact Details</Text>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Icon
                 name="phone-call-outline"
-                fill="black"
+                fill="#f27d00"
                 style={{height: verticalScale(15), width: scale(15)}}
               />
-              <Text style={{...styles.description, marginLeft: scale(5)}}>
+              <Text
+                selectable={true}
+                selectionColor={'#f13e4d'}
+                style={{
+                  ...styles.description,
+                  marginLeft: scale(5),
+                  marginBottom: 0,
+                }}>
                 {data.ContactName1} - {data.ContactNumber1}
               </Text>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
               <Icon
                 name="phone-call-outline"
-                fill="black"
+                fill="#f27d00"
                 style={{height: verticalScale(15), width: scale(15)}}
               />
-              <Text style={{...styles.description, marginLeft: scale(5)}}>
+              <Text
+                selectable={true}
+                selectionColor={'#f13e4d'}
+                style={{
+                  ...styles.description,
+                  marginLeft: scale(5),
+                  marginBottom: 0,
+                }}>
                 {data.ContactName2} - {data.ContactNumber2}
               </Text>
             </View>
@@ -96,24 +146,25 @@ const styles = ScaledSheet.create({
     alignSelf: 'center',
   },
   title: {
-    fontSize: scale(17),
-    fontWeight: '500',
+    fontSize: scale(18),
+    fontWeight: '600',
     marginVertical: verticalScale(7),
     backgroundColor: 'white',
     fontFamily: FONT,
+    textTransform: 'uppercase',
   },
   description: {
-    fontSize: fontSizeMedium,
+    fontSize: scale(fontSizeMedium),
     marginBottom: verticalScale(7),
     backgroundColor: 'white',
-    lineHeight: 22,
+    lineHeight: verticalScale(25),
     fontFamily: FONT,
   },
   eventDate: {
-    fontSize: '14@s',
+    fontSize: '16@s',
     marginHorizontal: '10@s',
-    fontWeight: 'bold',
-    marginBottom: verticalScale(7),
+
+    color: 'black',
     fontFamily: FONT,
   },
 });

@@ -1,17 +1,9 @@
 import React from 'react';
 import {View, Image, TouchableOpacity} from 'react-native';
-import {Text, Icon} from '@ui-kitten/components';
+import {Text} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
-import {
-  fontSizeMedium,
-  fontSizeSmall,
-  paddingSmall,
-  paddingMedium,
-  borderRadiusLarge,
-  academicCalendarCardHeight,
-  iconSmall,
-} from '../utils/UIConstants';
-import {scale, ScaledSheet, moderateScale} from 'react-native-size-matters';
+
+import {scale, ScaledSheet} from 'react-native-size-matters';
 import {FONT} from '../../utils/UIConstants';
 
 const EventCard = ({item, navigation}) => {
@@ -51,7 +43,7 @@ const styles = ScaledSheet.create({
     flexDirection: 'row',
     borderColor: 'black',
     borderWidth: '1@s',
-    borderRadius: '5@s',
+    borderRadius: '6@s',
     marginTop: '5@vs',
     padding: '5@s',
     marginHorizontal: '10@s',
@@ -69,7 +61,7 @@ const styles = ScaledSheet.create({
     marginRight: '5@s',
     height: '60@msr',
     width: '60@msr',
-    borderRadius: '2@sr',
+    borderRadius: '6@sr',
   },
   eventName: {
     fontSize: '16@s',

@@ -160,6 +160,26 @@ const MagazineAndSymposium = observer(({navigation}) => {
                   borderRadius: scale(borderRadius),
                   elevation: 5,
                 }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Symp_Modal_Store.closeModal();
+                  }}
+                  style={{
+                    position: 'absolute',
+                    zIndex: 1,
+                    right: scale(6),
+                    top: verticalScale(6),
+
+                    backgroundColor: '#e2e2df',
+                    margin: scale(3),
+                    borderRadius: scale(16),
+                  }}>
+                  <Icon
+                    style={{width: scale(24), height: scale(24)}}
+                    fill="black"
+                    name="close"
+                  />
+                </TouchableOpacity>
                 <Image
                   source={{
                     uri: Symp_Modal_Store.Url,

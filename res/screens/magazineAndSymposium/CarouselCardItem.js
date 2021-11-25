@@ -10,10 +10,8 @@ import {
 import {scale, verticalScale} from 'react-native-size-matters';
 import {White} from '../../utils/colors';
 import {
-  borderRadius,
   borderRadiusMedium,
   fontSizeBig,
-  fontSizeMedium,
   fontSizeVeryLarge,
 } from '../../utils/UIConstants';
 

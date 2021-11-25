@@ -19,12 +19,22 @@ const AdminCard = ({data}) => {
         </View>
         <View style={styles.cardContainer}>
           <Icon style={styles.icon} fill={Black} name="phone" />
-          <Text style={styles.text}>{data.mobile}</Text>
+          <Text
+            selectable={true}
+            selectionColor={'#f13e4d'}
+            style={styles.text}>
+            {data.mobile}
+          </Text>
         </View>
         {data.email && (
           <View style={styles.cardContainer}>
             <Icon style={styles.icon} fill={Black} name="email" />
-            <Text style={styles.text}>{data.email}</Text>
+            <Text
+              selectable={true}
+              selectionColor={'#f13e4d'}
+              style={styles.text}>
+              {data.email}
+            </Text>
           </View>
         )}
       </Card>

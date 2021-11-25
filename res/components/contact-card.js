@@ -110,7 +110,10 @@ const ContactCard = ({item}) => {
               </Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon style={styles.icon} fill={Black} name="phone" />
-                <Text style={styles.phoneText}>
+                <Text
+                  selectable={true}
+                  selectionColor={'#f13e4d'}
+                  style={styles.phoneText}>
                   {item.mobile}
                   {'   '}|{'   '}
                 </Text>
