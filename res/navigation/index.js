@@ -16,11 +16,6 @@ const Navigator = observer(() => {
     'Non-serializable values were found in the navigation state',
   ]);
 
-  const token = UserData.token;
-  const name = UserData.name;
-  const rollNo = UserData.rollNo;
-  const department = UserData.department;
-
   return (
     <NavigationContainer independent={true}>
       <RootStack.Navigator independent={true}>
@@ -32,8 +27,8 @@ const Navigator = observer(() => {
               headerShown: false,
             }}
           />
-        // ) : (token && name && rollNo && department) ? (
-        ) : (token) ? ( //we're getting only token as of now
+        ) : // ) : (token && name && rollNo && department) ? (
+        UserData.token ? ( //we're getting only token as of now
           <>
             <RootStack.Screen
               name="App"

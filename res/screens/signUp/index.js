@@ -19,29 +19,6 @@ const SignUp = observer(({route, navigation}) => {
   };
 
   const shouldLoadComponent = curr => curr === index;
-  const [Name, setName] = useState('');
-  const [dept, setDept] = useState('');
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
-  const [token, setToken] = useState('');
-  const [password1, setPassword1] = useState('');
-  const [password2, setPassword2] = useState('');
-  const inputStates = {
-    dept,
-    setDept,
-    Name,
-    setName,
-    otp,
-    setOtp,
-    password1,
-    setPassword1,
-    password2,
-    token,
-    setToken,
-    setPassword2,
-    email,
-    setEmail,
-  };
 
   return (
     <>
@@ -72,20 +49,14 @@ const SignUp = observer(({route, navigation}) => {
                   setIndex={setIndex}
                   navigation={navigation}
                   heading={screenType}
-                  inputStates={inputStates}
                 />
 
-                <OTPScreen
-                  index={index}
-                  setIndex={setIndex}
-                  inputStates={inputStates}
-                />
+                <OTPScreen index={index} setIndex={setIndex} />
 
                 <PasswordScreen
                   index={index}
                   setIndex={setIndex}
                   navigation={navigation}
-                  inputStates={inputStates}
                 />
               </ViewPager>
             </>

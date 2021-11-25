@@ -95,11 +95,10 @@ const MainMenu = ({navigation}) => {
                   fill={Colors.DashboardLogo}
                   name="person-outline"
                 />
-                <ScrollView
-                  style={{height: verticalScale(25), marginLeft: scale(10)}}
-                  horizontal={true}>
-                  <Text style={styles.textDashBoard}>{data.studentName}</Text>
-                </ScrollView>
+
+                <Text numberOfLines={1} style={styles.textDashBoard}>
+                  {data.studentName}
+                </Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon
@@ -107,9 +106,7 @@ const MainMenu = ({navigation}) => {
                   fill={Colors.DashboardLogo}
                   name="hash-outline"
                 />
-                <Text style={[styles.textDashBoard, {marginLeft: scale(10)}]}>
-                  {data.studentRollNo}
-                </Text>
+                <Text style={[styles.textDashBoard]}>{data.studentRollNo}</Text>
               </View>
               <View style={{flexDirection: 'row'}}>
                 <Icon
@@ -117,11 +114,10 @@ const MainMenu = ({navigation}) => {
                   fill={Colors.DashboardLogo}
                   name="book-outline"
                 />
-                <ScrollView
-                  style={{height: verticalScale(25), marginLeft: scale(10)}}
-                  horizontal={true}>
-                  <Text style={styles.textDashBoard}>{data.studentBranch}</Text>
-                </ScrollView>
+
+                <Text numberOfLines={1} style={styles.textDashBoard}>
+                  {data.studentBranch}
+                </Text>
               </View>
             </View>
           </ImageBackground>

@@ -5,7 +5,62 @@ class SignUpStore {
     doingApi: false,
     fail: false,
     errorMessage: '',
+    department: 'Select your Department',
+    email: '',
+    name: '',
+    password: '',
+    confirmPassword: '',
+    otp: '',
+    token: '',
   };
+
+  setToken = val => {
+    this.state.token = val;
+  };
+
+  get getToken() {
+    return this.state.token;
+  }
+
+  setOTP = val => {
+    this.state.otp = val;
+  };
+
+  get getOTP() {
+    return this.state.otp;
+  }
+
+  setName = value => {
+    this.state.name = value;
+  };
+
+  get getName() {
+    return this.state.name;
+  }
+
+  setEmail = value => {
+    this.state.email = value;
+  };
+
+  get getEmail() {
+    return this.state.email;
+  }
+
+  setPassword = value => {
+    this.state.password = value;
+  };
+
+  get getPassword() {
+    return this.state.password;
+  }
+
+  setConfirmPassword = value => {
+    this.state.confirmPassword = value;
+  };
+
+  get getConfirmPassword() {
+    return this.state.confirmPassword;
+  }
 
   setDoingApiCall = value => {
     this.state.doingApi = value;
@@ -35,6 +90,15 @@ class SignUpStore {
     this.state.fail = false;
     this.state.errorMessage = '';
   };
+
+  setDepartment = value => {
+    this.state.department = value;
+  };
+
+  get getDepartment() {
+    return this.state.department;
+  }
+
   constructor() {
     makeObservable(this, {
       state: observable,
@@ -49,6 +113,27 @@ class SignUpStore {
       getErrorText: computed,
 
       resetStore: action,
+
+      setDepartment: action,
+      getDepartment: computed,
+
+      setEmail: action,
+      getEmail: computed,
+
+      setPassword: action,
+      getPassword: computed,
+
+      setConfirmPassword: action,
+      getConfirmPassword: computed,
+
+      setName: action,
+      getName: computed,
+
+      setOTP: action,
+      getOTP: computed,
+
+      setToken: action,
+      getToken: computed,
     });
   }
 }

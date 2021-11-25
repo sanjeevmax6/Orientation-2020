@@ -27,8 +27,10 @@ import axios from 'axios';
 import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
 import * as KEYS from '../../utils/STORAGE_KEYS';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import {SIGN_UP_STORE} from '../../mobx/signUpStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
+const PasswordScreen = ({index, setIndex, navigation}) => {
   //disable back button once the user has verified email as he has to set password mandatorily
   const [error, setError] = useState('');
 
@@ -50,10 +52,13 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
   };
 
   function validData() {
-    if (inputStates.password1 == '' || inputStates.password2 == '') {
+    if (
+      SIGN_UP_STORE.getPassword === '' ||
+      SIGN_UP_STORE.getConfirmPassword === ''
+    ) {
       API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
       return false;
-    } else if (inputStates.password1 != inputStates.password2) {
+    } else if (SIGN_UP_STORE.getPassword != SIGN_UP_STORE.getConfirmPassword) {
       API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_PASSWORD_NO_MATCH);
       return false;
     } else {
@@ -67,6 +72,7 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
   };
   //Validate
   //call API
+
   const handleAPICALL = () => {
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
@@ -75,52 +81,77 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
             .post(
               API_REGISTER,
               {
-                name: inputStates.Name,
-                department: inputStates.dept,
-                new_password: inputStates.password1,
-                confirm_password: inputStates.password2,
+                name: SIGN_UP_STORE.getName,
+                department: SIGN_UP_STORE.getDepartment,
+                new_password: SIGN_UP_STORE.getPassword,
+                confirm_password: SIGN_UP_STORE.getConfirmPassword,
               },
               {
                 headers: {
-                  //Remove hard coded
-                  token: inputStates.token,
+                  token: SIGN_UP_STORE.getToken,
                 },
               },
             )
             .then(response => {
-              if (response.data.message == 'Success, User Registered') {
-                UserData.setName(inputStates.Name);
-                UserData.setDepartment(inputStates.department);
-                //once the token is set it will go to DASHBOARD
+              if (response.status === 200) {
+                console.log('done');
 
-                UserData.setToken(inputStates.token);
-                AsyncStorage.setItem(KEYS.USER_TOKEN, inputStates.token);
+                UserData.setName(SIGN_UP_STORE.getName);
+                UserData.setAdmin(false);
+                UserData.setRollNo(SIGN_UP_STORE.getEmail);
+                UserData.setDepartment(SIGN_UP_STORE.getDepartment);
+
+                AsyncStorage.setItem(KEYS.USER_TOKEN, SIGN_UP_STORE.getToken);
+
+                AsyncStorage.setItem(KEYS.USER_NAME, SIGN_UP_STORE.getName);
+                AsyncStorage.setItem(
+                  KEYS.USER_ROLL_NO,
+                  SIGN_UP_STORE.getEmail + '',
+                );
+                AsyncStorage.setItem(
+                  KEYS.USER_DEPARTMENT,
+                  SIGN_UP_STORE.getDepartment,
+                );
+                AsyncStorage.setItem(KEYS.IS_USER_ADMIN, false + '');
+
+                //once the token is set it will go to DASHBOARD
+                UserData.setToken(SIGN_UP_STORE.getToken);
               } else {
+                console.log('error: ');
+
                 console.log(response.data.message);
-                API_SCREEN_Store.setErrorText(response.data.message);
-                API_SCREEN_Store.setError();
-                alert(response.data.message);
+
+                SIGN_UP_STORE.setErrorText(response.data.message);
+                SIGN_UP_STORE.setFailState(true);
+                SIGN_UP_STORE.setDoingApiCall(false);
               }
             })
             .catch(error => {
+              console.log('error: ');
+              console.log(error);
               if (error.response) {
-                API_SCREEN_Store.setErrorText(error.response.data.message);
+                SIGN_UP_STORE.setErrorText(error.response.data.message);
               } else if (error.request) {
-                API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                SIGN_UP_STORE.setErrorText(ERRORS.TIME_OUT);
               } else {
-                API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                SIGN_UP_STORE.setErrorText(ERRORS.UNEXPECTED);
               }
-
-              API_SCREEN_Store.setError();
+              SIGN_UP_STORE.setFailState(true);
+              SIGN_UP_STORE.setDoingApiCall(false);
             });
         } else {
-          API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-          API_SCREEN_Store.setError();
+          console.log('error: ' + ERRORS.SIGN_UP_FILL_ALL);
+
+          SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+
+          SIGN_UP_STORE.setFailState(true);
+          SIGN_UP_STORE.setDoingApiCall(false);
         }
       } else {
-        API_SCREEN_Store.setError();
+        SIGN_UP_STORE.setErrorText(ERRORS.NO_NETWORK);
 
-        API_SCREEN_Store.setErrorText(ERRORS.NO_NETWORK);
+        SIGN_UP_STORE.setFailState(true);
+        SIGN_UP_STORE.setDoingApiCall(false);
       }
     });
   };
@@ -147,9 +178,9 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
           placeholderTextColor="gray"
           focusColor="black"
           autoCapitalize="none"
-          value={inputStates.password1}
-          onChangeText={npwd1 => {
-            inputStates.setPassword1(npwd1);
+          value={SIGN_UP_STORE.getPassword}
+          onChangeText={password => {
+            SIGN_UP_STORE.setPassword(password);
           }}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
@@ -161,9 +192,9 @@ const PasswordScreen = ({index, setIndex, navigation, inputStates}) => {
           placeholderTextColor="gray"
           focusColor="black"
           autoCapitalize="none"
-          value={inputStates.password2}
-          onChangeText={npwd2 => {
-            inputStates.setPassword2(npwd2);
+          value={SIGN_UP_STORE.getConfirmPassword}
+          onChangeText={confirmPassword => {
+            SIGN_UP_STORE.setConfirmPassword(confirmPassword);
           }}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />

@@ -25,7 +25,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {API_VERIFY_OTP} from '../../utils/APIConstants';
 import axios from 'axios';
 
-const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
+const OTPScreen = ({index, setIndex, navigation}) => {
   const backHandler = () => {
     setIndex(index - 1);
   };
@@ -36,13 +36,13 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
   };
 
   React.useEffect(() => {
-    if (inputStates.token != '') {
-      console.log(inputStates.token);
+    if (SIGN_UP_STORE.getToken != '') {
+      console.log(SIGN_UP_STORE.getToken);
     }
-  }, [inputStates.token]);
+  }, [SIGN_UP_STORE.getToken]);
 
   function validData() {
-    if (inputStates.otp == '') {
+    if (SIGN_UP_STORE.getOTP == '') {
       return false;
     } else {
       return true;
@@ -55,12 +55,12 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
         if (validData()) {
           axios
             .post(API_VERIFY_OTP, {
-              email: inputStates.email,
-              otp: inputStates.otp,
+              email: SIGN_UP_STORE.getEmail + '@nitt.edu',
+              otp: SIGN_UP_STORE.getOTP,
             })
             .then(response => {
               if (response.data.status == 'success') {
-                inputStates.setToken(response.data.token);
+                SIGN_UP_STORE.setToken(response.data.token);
                 setIndex(index + 1);
               } else {
                 SIGN_UP_STORE.setErrorText(response.data.message);
@@ -111,9 +111,9 @@ const OTPScreen = ({index, setIndex, navigation, inputStates}) => {
           placeholderTextColor="gray"
           autoFocus={true}
           focusColor="black"
-          value={inputStates.otp}
+          value={SIGN_UP_STORE.getOTP}
           onChangeText={OTP => {
-            inputStates.setOtp(OTP);
+            SIGN_UP_STORE.setOTP(OTP);
           }}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
