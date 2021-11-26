@@ -67,9 +67,7 @@ const Scheduler = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       {error ? (
-        <ErrorScreen
-          navigation={navigation}
-          errorMessage={JSON.stringify(error)}></ErrorScreen>
+        <ErrorScreen navigation={navigation} errorMessage={error}></ErrorScreen>
       ) : loading ? (
         <LoaderPage navigation={navigation} />
       ) : (
