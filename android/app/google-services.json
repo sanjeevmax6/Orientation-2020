@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "805795989015",
+    "project_id": "orientation--21",
+    "storage_bucket": "orientation--21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805795989015:android:01647c53c36e9b8ad5fe52",
+        "android_client_info": {
+          "package_name": "org.spider.orientation2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805795989015-rsuk8jbfhj708soc1s1qcgqepk5tol2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLpgJiqq3UfTVr71div6nLGcxCTS1LNxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805795989015-rsuk8jbfhj708soc1s1qcgqepk5tol2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

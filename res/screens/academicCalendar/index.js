@@ -22,6 +22,7 @@ import {
   academicCalendarCardHeight,
   iconSmall,
   FONT,
+  fontSizeVeryLarge,
 } from '../../utils/UIConstants';
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -59,32 +60,32 @@ function modifyData(data) {
   var i = 0;
   data.forEach(noticeObject => {
     var notice = {};
-    notice['index'] = i;
-    notice['noticeTitle'] = noticeObject.eventName;
-    notice['holiday'] = noticeObject.holiday;
+    notice.index = i;
+    notice.noticeTitle = noticeObject.eventName;
+    notice.holiday = noticeObject.holiday;
     var startDate = indianTime(new Date(noticeObject.startDate));
     var endDate = indianTime(new Date(noticeObject.endDate));
     if (startDate.getTime() == endDate.getTime()) {
-      notice['multipleDate'] = false;
+      notice.multipleDate = false;
     } else {
-      notice['multipleDate'] = true;
+      notice.multipleDate = true;
     }
-    if (notice['multipleDate']) {
-      notice['startDate'] = startDate;
-      notice['endDate'] = endDate;
+    if (notice.multipleDate) {
+      notice.startDate = startDate;
+      notice.endDate = endDate;
     } else {
-      notice['date'] = startDate;
+      notice.date = startDate;
     }
-    notice['deadlineOver'] = false;
-    if (notice['holiday']) {
-      notice['noticeLineColour'] = Colors.HolidayColor;
+    notice.deadlineOver = false;
+    if (notice.holiday) {
+      notice.noticeLineColour = Colors.HolidayColor;
     } else {
-      if (notice['index'] % 3 == 0) {
-        notice['noticeLineColour'] = Colors.notice1Color;
-      } else if (notice['index'] % 3 == 1) {
-        notice['noticeLineColour'] = Colors.notice2Color;
+      if (notice.index % 3 == 0) {
+        notice.noticeLineColour = Colors.notice1Color;
+      } else if (notice.index % 3 == 1) {
+        notice.noticeLineColour = Colors.notice2Color;
       } else {
-        notice['noticeLineColour'] = Colors.notice3Color;
+        notice.noticeLineColour = Colors.notice3Color;
       }
     }
     noticesData[i] = notice;
@@ -264,7 +265,8 @@ const Timetable = ({navigation}) => {
 
   const [data, setData] = useState([]);
   const [showCalendar, setShowCalendar] = useState(true);
-  const [icon, setIcon] = useState('eye-slash');
+  const [icon, setIcon] = useState('angle-up');
+  const [calendarText, setCalendarText] = useState('CLOSE CALENDAR');
   const [selectedDate, setSelectedDate] = useState(data.currentDay);
 
   const _flatlist = useRef();
@@ -276,10 +278,12 @@ const Timetable = ({navigation}) => {
 
   const toggle = () => {
     var ht = 0;
-    setIcon('eye');
+    setIcon('angle-down');
+    setCalendarText('OPEN CALENDAR');
     if (!showCalendar) {
       ht = maxHeight;
-      setIcon('eye-slash');
+      setIcon('angle-up');
+      setCalendarText('CLOSE CALENDAR');
     }
 
     Animated.spring(animation, {
@@ -390,7 +394,7 @@ const Timetable = ({navigation}) => {
                         />
                       }>
                       <Calendar
-                        style={{marginTop: verticalScale(-paddingSmall / 2)}}
+                        style={{marginTop: verticalScale(-paddingSmall / 3)}}
                         minDate={data.minDay}
                         maxDate={data.maxDay}
                         onDayPress={day => {
@@ -400,7 +404,8 @@ const Timetable = ({navigation}) => {
                                 new Date(day.dateString),
                                 AcademicCalendarNoticeData,
                               ),
-                            });
+                            }),
+                            toggle();
                         }}
                         hideExtraDays={true}
                         firstDay={1}
@@ -507,21 +512,16 @@ const Timetable = ({navigation}) => {
                     {moment().format('MMM Do')}
                   </Text>
                 </View>
-                <View style={{flexDirection: 'row'}}>
+                <TouchableOpacity
+                  onPress={toggle}
+                  style={{flexDirection: 'row'}}>
+                  <Text style={styles.calendarText}> {calendarText} </Text>
                   <Icon
-                    name="calendar-alt"
+                    name={icon}
                     style={styles.hideCalendarIcons}
                     pack="FontAwesome5"
                   />
-                  <Text> : </Text>
-                  <TouchableOpacity onPress={toggle}>
-                    <Icon
-                      name={icon}
-                      style={styles.hideCalendarIcons}
-                      pack="FontAwesome5"
-                    />
-                  </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
               </View>
 
               <View style={{flex: 1}}>
@@ -602,9 +602,9 @@ const styles = StyleSheet.create({
   },
   todayTextandDropDownContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'space-between',
     marginVertical: verticalScale(paddingSmall),
-    marginHorizontal: scale(paddingMedium + paddingSmall),
+    marginHorizontal: scale(paddingMedium),
   },
   todayTextContainer: {
     flexDirection: 'row',
@@ -614,17 +614,29 @@ const styles = StyleSheet.create({
   todayTitleText: {
     fontWeight: 'bold',
     fontSize: scale(fontSizeMedium),
+    alignItems: 'center',
     color: Colors.Black,
     fontFamily: FONT,
   },
   todayText: {
     fontSize: scale(fontSizeMedium),
     color: Colors.Secondary,
+    alignItems: 'center',
+    fontFamily: FONT,
+  },
+  calendarText: {
+    fontSize: scale(fontSizeMedium),
+    marginHorizontal: scale(paddingSmall),
+    color: Colors.Black,
     fontFamily: FONT,
   },
   hideCalendarIcons: {
-    height: verticalScale(iconSmall),
+    height: verticalScale(iconSmall + 5),
+  },
+  calendarIcons: {
+    height: verticalScale(iconSmall + 10),
     marginHorizontal: scale(paddingSmall / 2),
+    display: 'none',
   },
 });
 
