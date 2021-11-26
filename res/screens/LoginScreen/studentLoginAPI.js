@@ -11,11 +11,13 @@ import * as KEYS from '../../utils/STORAGE_KEYS';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 
 export const studentLogin = (rollNo, password) => {
+  var url = UserData.getBaseUrl + API_STUDENT_LOGIN;
+  var scrburl = UserData.getBaseUrl + SUBSCRIBE_NOTIFICATION;
   NetInfo.fetch().then(state => {
     if (state.isConnected === true) {
       console.log('logging In');
       axios
-        .post(API_STUDENT_LOGIN, {
+        .post(url, {
           rollNo,
           password,
         })
@@ -25,7 +27,7 @@ export const studentLogin = (rollNo, password) => {
             console.log(response.data.token);
             axios
               .post(
-                SUBSCRIBE_NOTIFICATION,
+                scrburl,
                 {},
                 {
                   headers: {

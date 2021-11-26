@@ -57,13 +57,14 @@ const VirtualMap = ({navigation}) => {
   var foodAndSports = [];
 
   const handleAPICALL = () => {
+    var url = UserData.getBaseUrl + API_GET_MAP_DATA;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         setConnectivity(true);
         setLoading(true);
         axios
           .get(
-            API_GET_MAP_DATA,
+            url,
             // Token from Mobux
             {headers: {token: UserData.token}},
           )

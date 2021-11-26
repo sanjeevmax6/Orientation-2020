@@ -5,7 +5,7 @@ import {TextInput} from 'react-native-element-textinput';
 
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
-
+import {UserData} from '../../mobx/userStore';
 import Button from './button';
 
 import Header from './header';
@@ -47,16 +47,17 @@ const OTPScreen = ({index, setIndex}) => {
   }
 
   const handleAPI_CALL = () => {
+    var url = UserData.getBaseUrl + API_VERIFY_OTP;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {
           axios
-            .post(API_VERIFY_OTP, {
+            .post(url, {
               email: SIGN_UP_STORE.getEmail + '@nitt.edu',
               otp: SIGN_UP_STORE.getOTP,
             })
             .then(response => {
-              if (response.data.status == 'success') {
+              if (response.status === 200) {
                 SIGN_UP_STORE.setToken(response.data.token);
                 setIndex(index + 1);
               } else {

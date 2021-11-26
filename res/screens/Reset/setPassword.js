@@ -70,12 +70,13 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
   //call API
 
   const handleAPI_CALL = () => {
+    var url = UserData.getBaseUrl + API_RESET;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {
           axios
             .put(
-              API_RESET,
+              url,
               {
                 new_password: SIGN_UP_STORE.getPassword,
                 confirm_password: SIGN_UP_STORE.getConfirmPassword,
@@ -99,7 +100,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
                 SIGN_UP_STORE.setConfirmPassword('');
                 SIGN_UP_STORE.setOTP('');
                 SIGN_UP_STORE.setToken('');
-                navigation.pop();
+                SIGN_UP_STORE.setSuccessState(true);
               } else {
                 console.log('error1: ');
 

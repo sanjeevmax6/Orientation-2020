@@ -39,12 +39,13 @@ const AdminScreen = () => {
   };
 
   const Handle_API_CALL = () => {
+    var url = UserData.getBaseUrl + TRIGGER_NOTIFICATION;
     setState(1);
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         axios
           .post(
-            TRIGGER_NOTIFICATION,
+            url,
             {
               title: title,
               description: description,

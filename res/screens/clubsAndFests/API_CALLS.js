@@ -11,13 +11,14 @@ export const clubApis = (
   setClubData,
   setErrorText,
 ) => {
+  var url = UserData.getBaseUrl + API_GET_CLUB_DATA;
   const axios = require('axios');
   NetInfo.fetch().then(state => {
     if (state.isConnected == true) {
       setClubLoading(true);
       setConnectivity(true);
       axios
-        .get(API_GET_CLUB_DATA, {
+        .get(url, {
           headers: {token: UserData.token},
         })
         .then(response => {
@@ -55,13 +56,14 @@ export const festApis = (
   setSuccess,
   setErrorText,
 ) => {
+  var url = UserData.getBaseUrl + API_GET_FEST_DATA;
   const axios = require('axios');
   NetInfo.fetch().then(state => {
     if (state.isConnected == true) {
       setFestLoading(true);
       setConnectivity(true);
       axios
-        .get(API_GET_FEST_DATA, {
+        .get(url, {
           headers: {token: UserData.token},
         })
         .then(response => {

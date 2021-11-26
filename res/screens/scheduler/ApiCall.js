@@ -7,12 +7,14 @@ import * as ERROR_MSGS from '../../utils/ERROR_MESSAGES';
 
 export const apiCall = (setLoading, setError, setResponseState) => {
   //using netinfo to check if online
+  var url = UserData.getBaseUrl + API_GET_EVENTS;
+  console.log(url);
   NetInfo.fetch().then(state => {
     if (state.isConnected == true) {
       setLoading(true);
       setError(null);
       axios
-        .get(API_GET_EVENTS, {
+        .get(url, {
           headers: {
             token: UserData.token, //token from mobx store
           },

@@ -21,6 +21,7 @@ import {
 import NetInfo from '@react-native-community/netinfo';
 import {API_VERIFY_OTP} from '../../utils/APIConstants';
 import axios from 'axios';
+import {UserData} from '../../mobx/userStore';
 
 const OTPScreen = ({index, setIndex}) => {
   const backHandler = () => {
@@ -47,11 +48,12 @@ const OTPScreen = ({index, setIndex}) => {
   }
 
   const handleAPI_CALL = () => {
+    var url = UserData.getBaseUrl + API_VERIFY_OTP;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {
           axios
-            .post(API_VERIFY_OTP, {
+            .post(url, {
               email: SIGN_UP_STORE.getEmail + '@nitt.edu',
               otp: SIGN_UP_STORE.getOTP,
             })

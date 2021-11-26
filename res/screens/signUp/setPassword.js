@@ -70,12 +70,13 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
   //call API
 
   const handleAPI_CALL = () => {
+    var url = UserData.getBaseUrl + API_REGISTER;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         if (validData()) {
           axios
             .post(
-              API_REGISTER,
+              url,
               {
                 name: SIGN_UP_STORE.getName,
                 department: SIGN_UP_STORE.getDepartment,
@@ -90,28 +91,18 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
             )
             .then(response => {
               if (response.status === 200) {
-                console.log('done');
-
-                UserData.setName(SIGN_UP_STORE.getName);
-                UserData.setAdmin(false);
-                UserData.setRollNo(SIGN_UP_STORE.getEmail);
-                UserData.setDepartment(SIGN_UP_STORE.getDepartment);
-
-                AsyncStorage.setItem(KEYS.USER_TOKEN, SIGN_UP_STORE.getToken);
-
-                AsyncStorage.setItem(KEYS.USER_NAME, SIGN_UP_STORE.getName);
-                AsyncStorage.setItem(
-                  KEYS.USER_ROLL_NO,
-                  SIGN_UP_STORE.getEmail + '',
-                );
-                AsyncStorage.setItem(
-                  KEYS.USER_DEPARTMENT,
-                  SIGN_UP_STORE.getDepartment,
-                );
-                AsyncStorage.setItem(KEYS.IS_USER_ADMIN, false + '');
-
-                //once the token is set it will go to DASHBOARD
-                UserData.setToken(SIGN_UP_STORE.getToken);
+                console.log('registered');
+                SIGN_UP_STORE.setDoingApiCall(false);
+                SIGN_UP_STORE.setFailState(false);
+                SIGN_UP_STORE.setErrorText('');
+                SIGN_UP_STORE.setDepartment('Select your Department');
+                SIGN_UP_STORE.setEmail('');
+                SIGN_UP_STORE.setName('');
+                SIGN_UP_STORE.setPassword('');
+                SIGN_UP_STORE.setConfirmPassword('');
+                SIGN_UP_STORE.setOTP('');
+                SIGN_UP_STORE.setToken('');
+                SIGN_UP_STORE.setSuccessState(true);
               } else {
                 console.log('error: ');
 
@@ -188,6 +179,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
           placeholderTextColor="gray"
           focusColor="black"
           autoCapitalize="none"
+          secureTextEntry
           value={SIGN_UP_STORE.getConfirmPassword}
           onChangeText={confirmPassword => {
             SIGN_UP_STORE.setConfirmPassword(confirmPassword);

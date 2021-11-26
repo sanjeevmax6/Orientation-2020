@@ -290,13 +290,14 @@ const Timetable = ({navigation}) => {
   };
 
   const handleAPICALL = () => {
+    var url = UserData.getBaseUrl + API_GET_NOTICE;
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         setConnectivity(true);
         setLoading(true);
         axios
           .get(
-            API_GET_NOTICE,
+            url,
             // Token from Mobux
             {headers: {token: UserData.token}},
           )

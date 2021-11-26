@@ -54,13 +54,14 @@ const MagazineAndSymposium = observer(({navigation}) => {
   const [refreshing, setRefeshing] = useState(false);
 
   const sympApis = () => {
+    var url = UserData.getBaseUrl + API_GET_SYMP_DATA;
     const axios = require('axios');
     NetInfo.fetch().then(state => {
       if (state.isConnected == true) {
         setLoading(true);
         setConnectivity(true);
         axios
-          .get(API_GET_SYMP_DATA, {
+          .get(url, {
             headers: {token: UserData.token},
           })
           .then(response => {

@@ -18,6 +18,7 @@ import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import * as color from '../../utils/colors';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import {UserData} from '../../mobx/userStore';
 
 import {SIGN_UP_STORE} from '../../mobx/signUpStore';
 
@@ -68,11 +69,12 @@ const EmailScreen = observer(
     }
 
     const handleAPI_CALL = () => {
+      var url = UserData.getBaseUrl + API_SEND_OTP;
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
           if (validData()) {
             axios
-              .post(API_SEND_OTP, {
+              .post(url, {
                 email: SIGN_UP_STORE.getEmail + '@nitt.edu',
               })
               .then(response => {
@@ -185,7 +187,6 @@ const EmailScreen = observer(
               paddingHorizontal: scale(8),
               borderRadius: scale(8),
             }}
-            autoCapitalize="none"
             inputStyle={{
               fontSize: scale(fontSizeBig),
               color: 'black',

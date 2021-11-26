@@ -8,6 +8,7 @@ import {SIGN_UP_STORE} from '../../mobx/signUpStore';
 import Loader from './loader';
 import ErrorScreen from '../../components/errorScreen';
 import {observer} from 'mobx-react';
+import SuccessScreen from '../../components/successScreen';
 
 const Reset = observer(({route, navigation}) => {
   const {screenType} = route.params;
@@ -39,26 +40,41 @@ const Reset = observer(({route, navigation}) => {
             </>
           ) : (
             <>
-              <ViewPager
-                selectedIndex={index}
-                swipeEnabled={false}
-                shouldLoadComponent={shouldLoadComponent}
-                onSelect={index => setIndex(index)}>
-                <EmailScreen
-                  index={index}
-                  setIndex={setIndex}
-                  navigation={navigation}
-                  heading={screenType}
-                />
+              {SIGN_UP_STORE.getSucessState ? (
+                <>
+                  <SuccessScreen
+                    navigation="show"
+                    useOnlyFn={true}
+                    fn={() => {
+                      navigation.pop();
+                      SIGN_UP_STORE.setSuccessState(false);
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <ViewPager
+                    selectedIndex={index}
+                    swipeEnabled={false}
+                    shouldLoadComponent={shouldLoadComponent}
+                    onSelect={index => setIndex(index)}>
+                    <EmailScreen
+                      index={index}
+                      setIndex={setIndex}
+                      navigation={navigation}
+                      heading={screenType}
+                    />
 
-                <OTPScreen index={index} setIndex={setIndex} />
+                    <OTPScreen index={index} setIndex={setIndex} />
 
-                <PasswordScreen
-                  index={index}
-                  setIndex={setIndex}
-                  navigation={navigation}
-                />
-              </ViewPager>
+                    <PasswordScreen
+                      index={index}
+                      setIndex={setIndex}
+                      navigation={navigation}
+                    />
+                  </ViewPager>
+                </>
+              )}
             </>
           )}
         </>

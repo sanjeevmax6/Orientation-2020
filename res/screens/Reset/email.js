@@ -31,6 +31,7 @@ import {
   paddingSmall,
 } from '../../utils/UIConstants';
 import Button from './button';
+import {UserData} from '../../mobx/userStore';
 
 const EmailScreen = observer(
   ({index, setIndex, navigation, heading = 'SIGN UP'}) => {
@@ -48,11 +49,13 @@ const EmailScreen = observer(
     }
 
     const handleAPI_CALL = () => {
+      var url = UserData.getBaseUrl + API_SEND_OTP;
+      console.log(url);
       NetInfo.fetch().then(state => {
         if (state.isConnected == true) {
           if (validData()) {
             axios
-              .post(API_SEND_OTP, {
+              .post(url, {
                 email: SIGN_UP_STORE.getEmail + '@nitt.edu',
                 reset: true,
               })

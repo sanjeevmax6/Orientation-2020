@@ -12,6 +12,7 @@ class SignUpStore {
     confirmPassword: '',
     otp: '',
     token: '',
+    success: false,
   };
 
   setToken = val => {
@@ -77,6 +78,14 @@ class SignUpStore {
     return this.state.fail;
   }
 
+  setSuccessState = value => {
+    this.state.success = value;
+  };
+
+  get getSucessState() {
+    return this.state.success;
+  }
+
   setErrorText = value => {
     this.state.errorMessage = value;
   };
@@ -108,6 +117,9 @@ class SignUpStore {
 
       setFailState: action,
       getFailState: computed,
+
+      setSuccessState: action,
+      getSucessState: computed,
 
       setErrorText: action,
       getErrorText: computed,

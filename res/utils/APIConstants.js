@@ -1,27 +1,27 @@
-export const BASE_URL = 'https://orientation-21.herokuapp.com';
+import {UserData} from '../mobx/userStore';
+export const REF_URL = 'https://spider.nitt.edu/~selva/api_gateway.php';
 
-export const API_STUDENT_LOGIN = BASE_URL + '/auth/login';
-export const API_GET_EVENTS = BASE_URL + '/api/events/getEvents';
-export const API_GET_NOTICE = BASE_URL + '/api/academic_calendar';
-export const API_GET_CLUB_DATA = BASE_URL + '/api/clubs';
-export const API_GET_FEST_DATA = BASE_URL + '/api/fests';
-export const API_GET_SYMP_DATA = BASE_URL + '/api/symposiums';
+export const API_STUDENT_LOGIN = 'auth/login';
+export const API_GET_EVENTS = 'api/events/getEvents';
+export const API_GET_NOTICE = 'api/academic_calendar';
+export const API_GET_CLUB_DATA = 'api/clubs';
+export const API_GET_FEST_DATA = 'api/fests';
+export const API_GET_SYMP_DATA = 'api/symposiums';
 
-export const API_GET_MAP_DATA = BASE_URL + '/api/map';
+export const API_GET_MAP_DATA = 'api/map';
 
-export const API_GET_CONTACTS = BASE_URL + '/api/contacts';
+export const API_GET_CONTACTS = 'api/contacts';
 
 //Sign up
-export const API_REGISTER = BASE_URL + '/auth/register';
-export const API_SEND_OTP = BASE_URL + '/auth/send-otp';
-export const API_VERIFY_OTP = BASE_URL + '/auth/verify-otp';
+export const API_REGISTER = 'auth/register';
+export const API_SEND_OTP = 'auth/send-otp';
+export const API_VERIFY_OTP = 'auth/verify-otp';
 
 //Reset Password
-export const API_RESET = BASE_URL + '/auth/reset';
+export const API_RESET = 'auth/reset';
 
 //FireBase
-export const SUBSCRIBE_NOTIFICATION =
-  BASE_URL + '/api/notification/subscribeToAll';
+export const SUBSCRIBE_NOTIFICATION = 'api/notification/subscribeToAll';
 
 //Admin
-export const TRIGGER_NOTIFICATION = BASE_URL + '/api/notification/sendToAll';
+export const TRIGGER_NOTIFICATION = 'api/notification/sendToAll';

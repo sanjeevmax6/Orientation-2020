@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import * as Animatable from 'react-native-animatable';
 import {StyleSheet, View, Text, PixelRatio, Platform} from 'react-native';
@@ -6,11 +6,47 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import {Login_Store} from '../../mobx/loginStore';
 import * as KEYS from '../../utils/STORAGE_KEYS';
 import {UserData} from '../../mobx/userStore';
+import NetInfo from '@react-native-community/netinfo';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {REF_URL} from '../../utils/APIConstants';
+import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import ErrorScreen from '../../components/errorScreen';
 
 const SplashScreen = () => {
   const navigate = () => {
-    Login_Store.closeSplash();
+    if (UserData.getBaseUrl === '') {
+      if (UserData.getErrorText === '') {
+        UserData.setErrorText('SOMETHING WENT WRONG!');
+      }
+      UserData.setFailState(true);
+    } else {
+      Login_Store.closeSplash();
+    }
+  };
+
+  const getbaseurl = () => {
+    NetInfo.fetch().then(state => {
+      if (state.isConnected == true) {
+        axios
+          .post(REF_URL, {
+            appName: 'orientation-21',
+          })
+          .then(response => {
+            if (response.status === 200) {
+              console.log(response.data);
+              UserData.setBaseUrl(response.data);
+            } else {
+              UserData.setErrorText('SOMETHING WENT WRONG!');
+            }
+          })
+          .catch(error => {
+            UserData.setErrorText('SOMETHING WENT WRONG!');
+          });
+      } else {
+        UserData.setErrorText(ERRORS.NO_NETWORK);
+      }
+    });
   };
 
   const setupMobx = () => {
@@ -49,15 +85,26 @@ const SplashScreen = () => {
   };
 
   useEffect(() => {
+    getbaseurl();
+  }, []);
+
+  useEffect(() => {
     setupMobx();
   }, []);
+
+  const backHandler = () => {
+    UserData.resetStore();
+    console.log('back');
+  };
 
   return (
     <View style={styles.top}>
       <Animatable.View
         animation="fadeOutUp"
         delay={3300}
-        onAnimationEnd={navigate}>
+        onAnimationEnd={() => {
+          navigate();
+        }}>
         <Animatable.View animation="pulse" duration={1050} delay={2300}>
           <Animatable.View
             animation="flipInX"

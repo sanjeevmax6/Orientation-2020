@@ -12,6 +12,9 @@ class User_Data {
     department: '',
     admin: '',
     firebaseToken: '',
+    baseurl: '',
+    fail: false,
+    errorMessage: '',
   };
 
   setFireBaseToken = value => {
@@ -40,6 +43,18 @@ class User_Data {
     this.state.admin = bool;
   };
 
+  setBaseUrl = url => {
+    this.state.baseurl = url;
+  };
+
+  setFailState = value => {
+    this.state.fail = value;
+  };
+
+  setErrorText = value => {
+    this.state.errorMessage = value;
+  };
+
   get token() {
     return this.state.token;
   }
@@ -55,6 +70,23 @@ class User_Data {
   get getIsAdmin() {
     return this.state.admin;
   }
+  get getBaseUrl() {
+    return this.state.baseurl;
+  }
+
+  get getFailState() {
+    return this.state.fail;
+  }
+
+  get getErrorText() {
+    return this.state.errorMessage;
+  }
+
+  resetStore = () => {
+    this.state.fail = false;
+    this.state.errorMessage = '';
+  };
+
   constructor() {
     makeObservable(this, {
       state: observable,
@@ -63,6 +95,9 @@ class User_Data {
       setName: action,
       setRollNo: action,
       setAdmin: action,
+      setBaseUrl: action,
+      setFailState: action,
+      setErrorText: action,
 
       token: computed,
       userName: computed,
@@ -72,6 +107,9 @@ class User_Data {
 
       setFireBaseToken: action,
       getFireBaseToken: computed,
+
+      getFailState: computed,
+      getErrorText: computed,
     });
   }
 }
