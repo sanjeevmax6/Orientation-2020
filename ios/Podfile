@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'OrientationApp' do
+target 'Orientation21' do
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
   config = use_native_modules!
@@ -14,7 +14,7 @@ target 'OrientationApp' do
     :hermes_enabled => false
   )
 
-  target 'OrientationAppTests' do
+  target 'Orientation21Tests' do
     inherit! :complete
     # Pods for testing
   end

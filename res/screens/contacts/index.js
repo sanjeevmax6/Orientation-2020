@@ -33,7 +33,6 @@ const Contacts = observer(({navigation}) => {
         <>
           <TabView
             selectedIndex={selectedIndex}
-            swipeEnabled={false}
             indicatorStyle={{
               color: '#f13e4d',
               backgroundColor: 'red',
@@ -52,7 +51,12 @@ const Contacts = observer(({navigation}) => {
                 <Orientation navigation={navigation} />
               )}
             </Tab>
-            <Tab title="ADMIN" style={{height: verticalScale(30)}}>
+            <Tab
+              title={evaProps => (
+                <Text {...evaProps} style={{fontFamily: FONT}}>
+                  ADMIN
+                </Text>
+              )}>
               {contactsStore.state.isAdminLoading ? (
                 <LoaderPage navigation={navigation} />
               ) : (

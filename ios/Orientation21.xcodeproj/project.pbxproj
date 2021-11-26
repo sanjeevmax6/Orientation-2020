@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* OrientationAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OrientationAppTests.m */; };
-		0719D225715E8F08B60E31B1 /* libPods-OrientationApp-OrientationAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CABEDC6CA616C747074352DF /* libPods-OrientationApp-OrientationAppTests.a */; };
-		0F832CADC0845C5A9BAA7AE4 /* libPods-OrientationApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F957A9B532213F757A97586D /* libPods-OrientationApp.a */; };
+		00E356F31AD99517003FC87E /* Orientation21Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Orientation21Tests.m */; };
+		0719D225715E8F08B60E31B1 /* libPods-Orientation21-Orientation21Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CABEDC6CA616C747074352DF /* libPods-Orientation21-Orientation21Tests.a */; };
+		0F832CADC0845C5A9BAA7AE4 /* libPods-Orientation21.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F957A9B532213F757A97586D /* libPods-Orientation21.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -55,28 +55,28 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = OrientationApp;
+			remoteInfo = Orientation21;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* OrientationAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrientationAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* Orientation21Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Orientation21Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* OrientationAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrientationAppTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* OrientationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrientationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = OrientationApp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = OrientationApp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OrientationApp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OrientationApp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OrientationApp/main.m; sourceTree = "<group>"; };
-		4DBBB5FF2A3F08DE3D08614A /* Pods-OrientationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrientationApp.debug.xcconfig"; path = "Target Support Files/Pods-OrientationApp/Pods-OrientationApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4DDFF8226764EC6CA026C560 /* Pods-OrientationApp-OrientationAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrientationApp-OrientationAppTests.release.xcconfig"; path = "Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		717B1C1B448ED9087E2F7079 /* Pods-OrientationApp-OrientationAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrientationApp-OrientationAppTests.debug.xcconfig"; path = "Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OrientationApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CABEDC6CA616C747074352DF /* libPods-OrientationApp-OrientationAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OrientationApp-OrientationAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF1238CCB32AAB143238CCD8 /* Pods-OrientationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrientationApp.release.xcconfig"; path = "Target Support Files/Pods-OrientationApp/Pods-OrientationApp.release.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* Orientation21Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Orientation21Tests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Orientation21.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orientation21.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Orientation21/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Orientation21/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Orientation21/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Orientation21/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Orientation21/main.m; sourceTree = "<group>"; };
+		4DBBB5FF2A3F08DE3D08614A /* Pods-Orientation21.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orientation21.debug.xcconfig"; path = "Target Support Files/Pods-Orientation21/Pods-Orientation21.debug.xcconfig"; sourceTree = "<group>"; };
+		4DDFF8226764EC6CA026C560 /* Pods-Orientation21-Orientation21Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orientation21-Orientation21Tests.release.xcconfig"; path = "Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests.release.xcconfig"; sourceTree = "<group>"; };
+		717B1C1B448ED9087E2F7079 /* Pods-Orientation21-Orientation21Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orientation21-Orientation21Tests.debug.xcconfig"; path = "Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Orientation21/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CABEDC6CA616C747074352DF /* libPods-Orientation21-Orientation21Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Orientation21-Orientation21Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF1238CCB32AAB143238CCD8 /* Pods-Orientation21.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orientation21.release.xcconfig"; path = "Target Support Files/Pods-Orientation21/Pods-Orientation21.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F957A9B532213F757A97586D /* libPods-OrientationApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OrientationApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F957A9B532213F757A97586D /* libPods-Orientation21.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Orientation21.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C49B7F82C684D82B1B3B6C3 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Black.ttf"; path = "../res/assets/fonts/SourceSansPro-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E6F775EB154E46BB9D1C34E8 /* SourceSansPro-BlackItalic.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-BlackItalic.ttf"; path = "../res/assets/fonts/SourceSansPro-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5A13122B4A354D518EF0D7BC /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; name = "SourceSansPro-Bold.ttf"; path = "../res/assets/fonts/SourceSansPro-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0719D225715E8F08B60E31B1 /* libPods-OrientationApp-OrientationAppTests.a in Frameworks */,
+				0719D225715E8F08B60E31B1 /* libPods-Orientation21-Orientation21Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,20 +125,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F832CADC0845C5A9BAA7AE4 /* libPods-OrientationApp.a in Frameworks */,
+				0F832CADC0845C5A9BAA7AE4 /* libPods-Orientation21.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* OrientationAppTests */ = {
+		00E356EF1AD99517003FC87E /* Orientation21Tests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* OrientationAppTests.m */,
+				00E356F21AD99517003FC87E /* Orientation21Tests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = OrientationAppTests;
+			path = Orientation21Tests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -149,7 +149,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* OrientationApp */ = {
+		13B07FAE1A68108700A75B9A /* Orientation21 */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -159,16 +159,16 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = OrientationApp;
+			name = Orientation21;
 			sourceTree = "<group>";
 		};
 		1B32D638DB26EC06EAF7171A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4DBBB5FF2A3F08DE3D08614A /* Pods-OrientationApp.debug.xcconfig */,
-				DF1238CCB32AAB143238CCD8 /* Pods-OrientationApp.release.xcconfig */,
-				717B1C1B448ED9087E2F7079 /* Pods-OrientationApp-OrientationAppTests.debug.xcconfig */,
-				4DDFF8226764EC6CA026C560 /* Pods-OrientationApp-OrientationAppTests.release.xcconfig */,
+				4DBBB5FF2A3F08DE3D08614A /* Pods-Orientation21.debug.xcconfig */,
+				DF1238CCB32AAB143238CCD8 /* Pods-Orientation21.release.xcconfig */,
+				717B1C1B448ED9087E2F7079 /* Pods-Orientation21-Orientation21Tests.debug.xcconfig */,
+				4DDFF8226764EC6CA026C560 /* Pods-Orientation21-Orientation21Tests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				F957A9B532213F757A97586D /* libPods-OrientationApp.a */,
-				CABEDC6CA616C747074352DF /* libPods-OrientationApp-OrientationAppTests.a */,
+				F957A9B532213F757A97586D /* libPods-Orientation21.a */,
+				CABEDC6CA616C747074352DF /* libPods-Orientation21-Orientation21Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,9 +194,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* OrientationApp */,
+				13B07FAE1A68108700A75B9A /* Orientation21 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* OrientationAppTests */,
+				00E356EF1AD99517003FC87E /* Orientation21Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				1B32D638DB26EC06EAF7171A /* Pods */,
@@ -210,8 +210,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* OrientationApp.app */,
-				00E356EE1AD99517003FC87E /* OrientationAppTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Orientation21.app */,
+				00E356EE1AD99517003FC87E /* Orientation21Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,9 +260,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* OrientationAppTests */ = {
+		00E356ED1AD99517003FC87E /* Orientation21Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "OrientationAppTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "Orientation21Tests" */;
 			buildPhases = (
 				A60D757FB3B255BE356B2AB3 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -276,14 +276,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = OrientationAppTests;
-			productName = OrientationAppTests;
-			productReference = 00E356EE1AD99517003FC87E /* OrientationAppTests.xctest */;
+			name = Orientation21Tests;
+			productName = Orientation21Tests;
+			productReference = 00E356EE1AD99517003FC87E /* Orientation21Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* OrientationApp */ = {
+		13B07F861A680F5B00A75B9A /* Orientation21 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "OrientationApp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Orientation21" */;
 			buildPhases = (
 				0422C51985063E9E820778CF /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -298,9 +298,9 @@
 			);
 			dependencies = (
 			);
-			name = OrientationApp;
-			productName = OrientationApp;
-			productReference = 13B07F961A680F5B00A75B9A /* OrientationApp.app */;
+			name = Orientation21;
+			productName = Orientation21;
+			productReference = 13B07F961A680F5B00A75B9A /* Orientation21.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -320,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "OrientationApp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Orientation21" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -333,8 +333,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* OrientationApp */,
-				00E356ED1AD99517003FC87E /* OrientationAppTests */,
+				13B07F861A680F5B00A75B9A /* Orientation21 */,
+				00E356ED1AD99517003FC87E /* Orientation21Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -421,7 +421,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OrientationApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Orientation21-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -434,15 +434,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6F54FED33F797C76A2FF97C9 /* [CP] Copy Pods Resources */ = {
@@ -451,15 +451,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		799ED0470F7AFDC2C085BAEA /* [CP] Embed Pods Frameworks */ = {
@@ -468,15 +468,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OrientationApp/Pods-OrientationApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orientation21/Pods-Orientation21-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A60D757FB3B255BE356B2AB3 /* [CP] Check Pods Manifest.lock */ = {
@@ -494,7 +494,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OrientationApp-OrientationAppTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Orientation21-Orientation21Tests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -507,15 +507,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OrientationApp-OrientationAppTests/Pods-OrientationApp-OrientationAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orientation21-Orientation21Tests/Pods-Orientation21-Orientation21Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -544,7 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* OrientationAppTests.m in Sources */,
+				00E356F31AD99517003FC87E /* Orientation21Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,7 +562,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* OrientationApp */;
+			target = 13B07F861A680F5B00A75B9A /* Orientation21 */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -570,14 +570,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 717B1C1B448ED9087E2F7079 /* Pods-OrientationApp-OrientationAppTests.debug.xcconfig */;
+			baseConfigurationReference = 717B1C1B448ED9087E2F7079 /* Pods-Orientation21-Orientation21Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = OrientationAppTests/Info.plist;
+				INFOPLIST_FILE = Orientation21Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -591,17 +591,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrientationApp.app/OrientationApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Orientation21.app/Orientation21";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DDFF8226764EC6CA026C560 /* Pods-OrientationApp-OrientationAppTests.release.xcconfig */;
+			baseConfigurationReference = 4DDFF8226764EC6CA026C560 /* Pods-Orientation21-Orientation21Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = OrientationAppTests/Info.plist;
+				INFOPLIST_FILE = Orientation21Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -615,19 +615,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OrientationApp.app/OrientationApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Orientation21.app/Orientation21";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DBBB5FF2A3F08DE3D08614A /* Pods-OrientationApp.debug.xcconfig */;
+			baseConfigurationReference = 4DBBB5FF2A3F08DE3D08614A /* Pods-Orientation21.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = OrientationApp/Info.plist;
+				INFOPLIST_FILE = Orientation21/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,7 +638,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = OrientationApp;
+				PRODUCT_NAME = Orientation21;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -647,12 +647,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF1238CCB32AAB143238CCD8 /* Pods-OrientationApp.release.xcconfig */;
+			baseConfigurationReference = DF1238CCB32AAB143238CCD8 /* Pods-Orientation21.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = OrientationApp/Info.plist;
+				INFOPLIST_FILE = Orientation21/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -663,7 +663,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = OrientationApp;
+				PRODUCT_NAME = Orientation21;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -795,7 +795,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "OrientationAppTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "Orientation21Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -804,7 +804,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "OrientationApp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Orientation21" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -813,7 +813,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "OrientationApp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Orientation21" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

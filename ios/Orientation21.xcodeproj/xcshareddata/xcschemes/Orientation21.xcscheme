@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "OrientationApp.app"
-               BlueprintName = "OrientationApp"
-               ReferencedContainer = "container:OrientationApp.xcodeproj">
+               BuildableName = "Orientation21.app"
+               BlueprintName = "Orientation21"
+               ReferencedContainer = "container:Orientation21.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "OrientationAppTests.xctest"
-               BlueprintName = "OrientationAppTests"
-               ReferencedContainer = "container:OrientationApp.xcodeproj">
+               BuildableName = "Orientation21Tests.xctest"
+               BlueprintName = "Orientation21Tests"
+               ReferencedContainer = "container:Orientation21.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "OrientationApp.app"
-            BlueprintName = "OrientationApp"
-            ReferencedContainer = "container:OrientationApp.xcodeproj">
+            BuildableName = "Orientation21.app"
+            BlueprintName = "Orientation21"
+            ReferencedContainer = "container:Orientation21.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "OrientationApp.app"
-            BlueprintName = "OrientationApp"
-            ReferencedContainer = "container:OrientationApp.xcodeproj">
+            BuildableName = "Orientation21.app"
+            BlueprintName = "Orientation21"
+            ReferencedContainer = "container:Orientation21.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

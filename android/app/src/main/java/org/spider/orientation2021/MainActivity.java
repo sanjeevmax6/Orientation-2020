@@ -1,4 +1,4 @@
-package com.orientationapp;
+package org.spider.orientation2021;
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "OrientationApp";
+    return "Orientation21";
   }
 
   @Override
