@@ -11,7 +11,8 @@ import {default as theme} from './utils/custom-theme.json';
 
 import PushNotification from 'react-native-push-notification';
 import firebase from '@react-native-firebase/app';
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
+import {Linking} from 'react-native';
 
 const App = () => {
   useEffect(() => {
@@ -26,6 +27,11 @@ const App = () => {
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
         console.log('NOTIFICATION:', notification);
+
+        if (notification.data.url)
+          Linking.openURL(notification.data.url).catch(err =>
+            console.error("Couldn't load page", err),
+          );
 
         // process the notification
 
