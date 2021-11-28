@@ -58,3 +58,4 @@ buck-out/
 
 .vscode
 *.hprof
+*.keystore

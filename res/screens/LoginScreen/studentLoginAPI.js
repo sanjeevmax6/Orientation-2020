@@ -16,95 +16,100 @@ export const studentLogin = (rollNo, password) => {
   NetInfo.fetch().then(state => {
     if (state.isConnected === true) {
       console.log('logging In');
-      axios
-        .post(url, {
-          rollNo,
-          password,
-        })
-        .then(response => {
-          if (response.status === 200) {
-            console.log('Subscribing');
-            console.log(response.data.token);
-            axios
-              .post(
-                scrburl,
-                {},
-                {
-                  headers: {
-                    firebaseToken: UserData.getFireBaseToken,
-                    token: response.data.token,
+      if (password === '' || rollNo === '') {
+        API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+        API_SCREEN_Store.setError();
+      } else {
+        axios
+          .post(url, {
+            rollNo,
+            password,
+          })
+          .then(response => {
+            if (response.status === 200) {
+              console.log('Subscribing');
+              console.log(response.data.token);
+              axios
+                .post(
+                  scrburl,
+                  {},
+                  {
+                    headers: {
+                      firebaseToken: UserData.getFireBaseToken,
+                      token: response.data.token,
+                    },
                   },
-                },
-              )
-              .then(subscribe => {
-                if (subscribe.status === 200) {
-                  console.log(subscribe.data.message);
-                  AsyncStorage.setItem(KEYS.USER_TOKEN, response.data.token);
-                  AsyncStorage.setItem(KEYS.USER_NAME, response.data.name);
-                  AsyncStorage.setItem(
-                    KEYS.USER_ROLL_NO,
-                    response.data.rollNo + '',
-                  );
-                  AsyncStorage.setItem(
-                    KEYS.USER_DEPARTMENT,
-                    response.data.department,
-                  );
-                  AsyncStorage.setItem(
-                    KEYS.IS_USER_ADMIN,
-                    response.data.isAdmin + '',
-                  ); //Async can't handle bool or numbers
+                )
+                .then(subscribe => {
+                  if (subscribe.status === 200) {
+                    console.log(subscribe.data.message);
+                    AsyncStorage.setItem(KEYS.USER_TOKEN, response.data.token);
+                    AsyncStorage.setItem(KEYS.USER_NAME, response.data.name);
+                    AsyncStorage.setItem(
+                      KEYS.USER_ROLL_NO,
+                      response.data.rollNo + '',
+                    );
+                    AsyncStorage.setItem(
+                      KEYS.USER_DEPARTMENT,
+                      response.data.department,
+                    );
+                    AsyncStorage.setItem(
+                      KEYS.IS_USER_ADMIN,
+                      response.data.isAdmin + '',
+                    ); //Async can't handle bool or numbers
 
-                  UserData.setName(response.data.name);
-                  UserData.setDepartment(response.data.department);
-                  UserData.setRollNo(response.data.rollNo + '');
-                  UserData.setAdmin(response.data.isAdmin);
-                  //once the token is set it will go to DASHBOARD
-                  UserData.setToken(response.data.token); // only token is coming in response as of now
-                } else {
-                  API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                    UserData.setName(response.data.name);
+                    UserData.setDepartment(response.data.department);
+                    UserData.setRollNo(response.data.rollNo + '');
+                    UserData.setAdmin(response.data.isAdmin);
+                    //once the token is set it will go to DASHBOARD
+                    UserData.setToken(response.data.token); // only token is coming in response as of now
+                  } else {
+                    API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                    API_SCREEN_Store.setError();
+                  }
+                })
+                .catch(error => {
+                  if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+
+                    API_SCREEN_Store.setErrorText(error.response.data.message);
+                  } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+
+                    API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                  } else {
+                    // Something happened in setting up the request that triggered an Error
+                    API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                  }
+
                   API_SCREEN_Store.setError();
-                }
-              })
-              .catch(error => {
-                if (error.response) {
-                  // The request was made and the server responded with a status code
-                  // that falls out of the range of 2xx
+                });
+            }
+          })
+          .catch(error => {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
 
-                  API_SCREEN_Store.setErrorText(error.response.data.message);
-                } else if (error.request) {
-                  // The request was made but no response was received
-                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
+              API_SCREEN_Store.setErrorText(error.response.data.message);
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
 
-                  API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
-                } else {
-                  // Something happened in setting up the request that triggered an Error
-                  API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
-                }
+              API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+            }
 
-                API_SCREEN_Store.setError();
-              });
-          }
-        })
-        .catch(error => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-
-            API_SCREEN_Store.setErrorText(error.response.data.message);
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-
-            API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
-          }
-
-          API_SCREEN_Store.setError();
-        });
+            API_SCREEN_Store.setError();
+          });
+      }
     } else {
       API_SCREEN_Store.setError();
       API_SCREEN_Store.setErrorText(ERRORS.NO_NETWORK);

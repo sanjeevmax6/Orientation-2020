@@ -8,6 +8,7 @@ import Status_Bar from './components/status_bar';
 import {Observer, Provider} from 'mobx-react';
 import {UserData} from './mobx/userStore';
 import {default as theme} from './utils/custom-theme.json';
+import axios from 'axios';
 
 import PushNotification from 'react-native-push-notification';
 import firebase from '@react-native-firebase/app';
@@ -15,6 +16,8 @@ import {useEffect} from 'react';
 import {Linking} from 'react-native';
 
 const App = () => {
+  axios.defaults.timeout = 5000;
+
   useEffect(() => {
     firebase.initializeApp(this);
     PushNotification.configure({
