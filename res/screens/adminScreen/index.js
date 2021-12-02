@@ -42,7 +42,7 @@ const AdminScreen = () => {
     var url = UserData.getBaseUrl + TRIGGER_NOTIFICATION;
     setState(1);
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected === true) {
         axios
           .post(
             url,

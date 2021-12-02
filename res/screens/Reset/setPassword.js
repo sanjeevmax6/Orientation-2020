@@ -72,7 +72,7 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
   const handleAPI_CALL = () => {
     var url = UserData.getBaseUrl + API_RESET;
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected === true) {
         if (validData()) {
           axios
             .put(

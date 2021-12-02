@@ -5,6 +5,8 @@ import loginLottie from '../../assets/lottieFiles/loading2.json';
 import ErrorScreen from '../../components/errorScreen';
 import {observer} from 'mobx-react';
 import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
+import LoaderPage from '../LoadingScreen';
+import {LOADING_EXTERNAL} from '../../utils/LOADING_TYPES';
 
 const API_LoaderPage = observer(({navigation}) => {
   const [STATE, setSTATE] = useState(1);
@@ -43,21 +45,7 @@ const API_LoaderPage = observer(({navigation}) => {
           }}
         />
       ) : (
-        <View
-          style={{
-            height: '100%',
-            width: '100%',
-            alignSelf: 'center',
-            justifyContent: 'center',
-          }}>
-          <LottieView
-            source={loginLottie}
-            speed={0.95}
-            resizeMode="contain"
-            autoPlay
-            loop
-          />
-        </View>
+        <LoaderPage LoaderType={LOADING_EXTERNAL} />
       )}
     </>
   );

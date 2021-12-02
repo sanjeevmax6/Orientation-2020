@@ -296,7 +296,7 @@ const Timetable = ({navigation}) => {
   const handleAPICALL = () => {
     var url = UserData.getBaseUrl + API_GET_NOTICE;
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected === true) {
         setConnectivity(true);
         setLoading(true);
         axios

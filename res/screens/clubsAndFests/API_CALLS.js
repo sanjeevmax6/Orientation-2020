@@ -14,7 +14,7 @@ export const clubApis = (
   var url = UserData.getBaseUrl + API_GET_CLUB_DATA;
   const axios = require('axios');
   NetInfo.fetch().then(state => {
-    if (state.isConnected == true) {
+    if (state.isConnected === true) {
       setClubLoading(true);
       setConnectivity(true);
       axios

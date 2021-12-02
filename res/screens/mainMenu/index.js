@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
   },
   mainMenu: {
     flex: 1,
-    backgroundColor: '#e7dada',
+    backgroundColor: '#f2f2f2',
     justifyContent: 'center',
   },
   cardGrid: {
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
   },
   cardRow: {
     flexDirection: 'row',
-    backgroundColor: '#e7dada',
+    backgroundColor: '#f2f2f2',
     justifyContent: 'space-evenly',
   },
   card1: {

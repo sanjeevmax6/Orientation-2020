@@ -14,6 +14,7 @@ import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
 import MaintenancePage from './maintain';
+import {ERROR_NO_NETWORK, LOADING_EXTERNAL} from '../../utils/LOADING_TYPES';
 
 const SplashScreen = () => {
   const [State, setState] = useState(0);
@@ -229,7 +230,7 @@ const SplashScreen = () => {
         <>
           {State === 1 ? (
             <>
-              <LoaderPage />
+              <LoaderPage LoaderType={LOADING_EXTERNAL} />
             </>
           ) : (
             <>

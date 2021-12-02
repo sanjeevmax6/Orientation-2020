@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import LottieView from 'lottie-react-native';
 import errorLottie from '../assets/lottieFiles/err.json';
+import noNetLottie from '../assets/lottieFiles/noNet.json';
 import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from '@ui-kitten/components';
 
 import {scale, verticalScale} from 'react-native-size-matters';
 import {FONT} from '../utils/UIConstants';
+import {ERROR_ERROR, ERROR_NO_NETWORK} from '../utils/LOADING_TYPES';
+import {NO_NETWORK} from '../utils/ERROR_MESSAGES';
 
 // you need to pass the navigation if you want to show the goBack button
 // you can change the button text as well
@@ -19,6 +22,7 @@ const ErrorScreen = ({
   icon = 'arrow-ios-back-outline',
   fn = () => {},
   useOnlyFn = false,
+  ErrorType = {ERROR_ERROR},
 }) => {
   const backPress = () => {
     if (useOnlyFn) {
@@ -37,6 +41,12 @@ const ErrorScreen = ({
 
   setTimeout(toggler, 50);
 
+  const getLottie = () => {
+    if (errorMessage === NO_NETWORK) return noNetLottie;
+    else if (ErrorType === ERROR_ERROR) return errorLottie;
+    else if (ErrorType === ERROR_NO_NETWORK) return noNetLottie;
+    return errorLottie;
+  };
   return (
     <View
       style={{
@@ -49,8 +59,8 @@ const ErrorScreen = ({
       }}>
       <LottieView
         style={{marginBottom: verticalScale(50)}}
-        source={errorLottie}
-        speed={0.95}
+        source={getLottie()}
+        speed={0.99}
         resizeMode="contain"
         autoPlay
         loop

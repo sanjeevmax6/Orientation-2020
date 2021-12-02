@@ -50,7 +50,7 @@ const OTPScreen = ({index, setIndex}) => {
   const handleAPI_CALL = () => {
     var url = UserData.getBaseUrl + API_VERIFY_OTP;
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected === true) {
         if (validData()) {
           axios
             .post(url, {

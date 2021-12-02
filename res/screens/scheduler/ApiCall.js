@@ -10,7 +10,7 @@ export const apiCall = (setLoading, setError, setResponseState) => {
   var url = UserData.getBaseUrl + API_GET_EVENTS;
   console.log(url);
   NetInfo.fetch().then(state => {
-    if (state.isConnected == true) {
+    if (state.isConnected === true) {
       setLoading(true);
       setError(null);
       axios

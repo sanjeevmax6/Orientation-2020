@@ -8,7 +8,7 @@ import * as ERRORS from '../../utils/ERROR_MESSAGES';
 export const getContacts = ({navigation}) => {
   var url = UserData.getBaseUrl + API_GET_CONTACTS;
   NetInfo.fetch().then(state => {
-    if (state.isConnected == true) {
+    if (state.isConnected === true) {
       contactsStore.setIsAdminLoading(true);
       contactsStore.setIsOrientationLoading(true);
       axios

@@ -68,7 +68,6 @@ const MagazineAndSymposium = observer(({navigation}) => {
             setLoading(false);
             setSuccess(true);
             setData(response.data);
-            console.log('Symp data API success');
           })
           .catch(error => {
             if (error.response) {
@@ -108,11 +107,7 @@ const MagazineAndSymposium = observer(({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       {isConnected == false ? (
-        <ErrorScreen
-          errorMessage={errorText}
-          navigation={navigation}
-          buttonText="MENU"
-        />
+        <ErrorScreen errorMessage={errorText} navigation={navigation} />
       ) : loading ? (
         <LoaderPage navigation={navigation} />
       ) : success ? (

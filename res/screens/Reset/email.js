@@ -52,7 +52,7 @@ const EmailScreen = observer(
       var url = UserData.getBaseUrl + API_SEND_OTP;
       console.log(url);
       NetInfo.fetch().then(state => {
-        if (state.isConnected == true) {
+        if (state.isConnected === true) {
           if (validData()) {
             axios
               .post(url, {
@@ -147,7 +147,7 @@ const EmailScreen = observer(
                   fontSize: scale(12),
                   fontFamily: FONT,
                 }}>
-                Go back to
+                Have your password?
                 <Text
                   style={{
                     color: '#f13e4d',
