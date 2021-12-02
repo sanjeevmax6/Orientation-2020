@@ -27,6 +27,7 @@ import LoaderPage from '../LoadingScreen';
 import NoEventCard from './NoEventCard';
 import {apiCall} from './ApiCall';
 import {Icon as IC} from '@ui-kitten/components';
+import {FONT} from '../../utils/UIConstants';
 
 const data = {
   //Minimum Date : 1st October 2021
@@ -133,26 +134,32 @@ const Scheduler = ({navigation}) => {
                   dateNumberStyle={{
                     color: Colors.dateNumberStyleColor,
                     fontSize: fontSizeBig,
+                    fontFamily: FONT,
                   }}
                   dateNameStyle={{
                     color: Colors.dateNameStyleColor,
                     fontSize: fontSizeMedium,
+                    fontFamily: FONT,
                   }}
                   highlightDateNumberStyle={{
                     color: Colors.highlightDateNumberStyleColor,
                     fontSize: fontSizeBig,
+                    fontFamily: FONT,
                   }}
                   highlightDateNameStyle={{
                     color: Colors.highlightDateNameStyleColor,
                     fontSize: fontSizeSmall,
+                    fontFamily: FONT,
                   }}
                   disabledDateNameStyle={{
                     color: Colors.disabledDateNameStyleColor,
                     fontSize: fontSizeSmall,
+                    fontFamily: FONT,
                   }}
                   disabledDateNumberStyle={{
                     color: Colors.disabledDateNumberStyleColor,
                     fontSize: fontSizeBig,
+                    fontFamily: FONT,
                   }}
                   // datesWhitelist={datesWhitelist}
                   leftSelector={
@@ -208,6 +215,7 @@ const styles = ScaledSheet.create({
     borderRadius: scale(30),
     borderColor: Colors.background_dark,
     fontSize: fontSizeVeryLarge,
+    fontFamily: FONT,
     height: verticalScale(35),
     width: scale(35),
     justifyContent: 'center',
@@ -216,6 +224,7 @@ const styles = ScaledSheet.create({
   month: {
     color: Colors.calendarHeaderStyleColor,
     fontSize: scale(18),
+    fontFamily: FONT,
     marginBottom: verticalScale(9),
     height: verticalScale(30),
   },

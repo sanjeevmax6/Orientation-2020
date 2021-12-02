@@ -6,6 +6,7 @@ import ContactCard from '../../components/contact-card';
 import {observer} from 'mobx-react';
 import {contactsStore} from '../../mobx/contactsStore';
 import {Dimensions} from 'react-native';
+import LoaderPage from '../LoadingScreen';
 import {getContacts} from './API_CALLS';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
@@ -22,18 +23,24 @@ const Orientation = observer(({navigation}) => {
     setRefreshing(false);
   }, []);
   return (
-    <View style={styles.container}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        ListFooterComponent={footer}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        data={contactsStore.state.orientationData.slice()}
-        renderItem={({item}) => <ContactCard item={item} />}
-        numColumns={2}
-      />
-    </View>
+    <>
+      {contactsStore.state.isOrientationLoading ? (
+        <LoaderPage navigation={navigation} />
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={footer}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            data={contactsStore.state.orientationData.slice()}
+            renderItem={({item}) => <ContactCard item={item} />}
+            numColumns={2}
+          />
+        </View>
+      )}
+    </>
   );
 });
 

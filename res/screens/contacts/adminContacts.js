@@ -15,6 +15,7 @@ import {observer} from 'mobx-react';
 import {Dimensions} from 'react-native';
 import {useCallback} from 'react';
 import {getContacts} from './API_CALLS';
+import LoaderPage from '../LoadingScreen';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
   return <View style={{height: windowHeight / 4}} />;
@@ -31,19 +32,23 @@ const Admin = observer(({navigation}) => {
     setRefreshing(false);
   }, []);
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Layout style={styles.container}>
-        <FlatList
-          ListFooterComponent={footer}
-          showsVerticalScrollIndicator={false}
-          data={categories}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-          renderItem={({item}) => <GroupCard category={item} />}
-        />
-      </Layout>
-    </SafeAreaView>
+    <>
+      {contactsStore.state.isAdminLoading ? (
+        <LoaderPage navigation={navigation} />
+      ) : (
+        <SafeAreaView style={{flex: 1}}>
+          <FlatList
+            ListFooterComponent={footer}
+            showsVerticalScrollIndicator={false}
+            data={categories}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            renderItem={({item}) => <GroupCard category={item} />}
+          />
+        </SafeAreaView>
+      )}
+    </>
   );
 });
 
