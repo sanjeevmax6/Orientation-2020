@@ -75,7 +75,7 @@ const AcademicCalendarCard = ({notice}) => {
         {holiday ? (
           <Text
             numberOfLines={2}
-            style={[styles.noticeText, {color: Colors.HolidayColor}]}>
+            style={[styles.noticeText, {color: Colors.Black}]}>
             HOLIDAY: {noticeTitle}
           </Text>
         ) : (
@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     paddingRight: scale(paddingMedium),
   },
   noticeText: {
-    fontWeight: 'bold',
-    fontSize: scale(fontSizeSmall),
+    fontWeight: '900',
+    fontSize: scale(14),
     textTransform: 'uppercase',
     fontFamily: FONT,
   },

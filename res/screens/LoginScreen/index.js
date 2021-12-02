@@ -11,8 +11,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import {Black} from '../../utils/colors';
 import {
-  borderRadius,
-  borderWidth,
   FONT,
   fontSizeBig,
   fontSizeVeryLarge,
@@ -67,6 +65,7 @@ const Login = ({navigation}) => {
           }}
           secureTextEntry
           focusColor="black"
+          autoCapitalize="none"
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
         <View

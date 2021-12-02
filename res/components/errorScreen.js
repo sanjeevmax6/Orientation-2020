@@ -81,7 +81,6 @@ const ErrorScreen = ({
         <LinearGradient
           colors={['#f13e4d', '#ff5130', '#ff512f']}
           style={{
-            backgroundColor: 'green',
             padding: scale(9),
             paddingRight: scale(18),
             borderRadius: scale(24),

@@ -266,7 +266,7 @@ const Timetable = ({navigation}) => {
   const [data, setData] = useState([]);
   const [showCalendar, setShowCalendar] = useState(true);
   const [icon, setIcon] = useState('angle-up');
-  const [calendarText, setCalendarText] = useState('CLOSE CALENDAR');
+  const [calendarText, setCalendarText] = useState('Close Calendar');
   const [selectedDate, setSelectedDate] = useState(
     moment().format('YYYY-MM-DD'),
   );
@@ -280,11 +280,11 @@ const Timetable = ({navigation}) => {
   const toggle = () => {
     var ht = 0;
     setIcon('angle-down');
-    setCalendarText('OPEN CALENDAR');
+    setCalendarText('Open Calendar');
     if (!showCalendar) {
       ht = maxHeight;
       setIcon('angle-up');
-      setCalendarText('CLOSE CALENDAR');
+      setCalendarText('Close Calendar');
     }
 
     Animated.spring(animation, {
@@ -620,7 +620,7 @@ const styles = StyleSheet.create({
     marginRight: scale(paddingMedium),
   },
   todayTitleText: {
-    fontWeight: 'bold',
+    fontWeight: '900',
     fontSize: scale(fontSizeMedium),
     alignItems: 'center',
     color: Colors.Black,

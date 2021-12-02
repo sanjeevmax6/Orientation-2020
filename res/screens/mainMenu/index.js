@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ScrollView,
   View,
   StyleSheet,
   ImageBackground,
@@ -343,9 +342,9 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flex: 1,
-    paddingLeft: scale(paddingMedium),
+    paddingLeft: scale(paddingSmall),
     justifyContent: 'center',
-    paddingRight: scale(paddingMedium),
+    paddingRight: scale(paddingSmall),
   },
   iconDashBoard: {
     width: scale(iconMedium),
@@ -360,6 +359,7 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeBig),
     color: Colors.White,
     fontFamily: FONT,
+    flex: 1,
   },
   mainMenu: {
     flex: 1,

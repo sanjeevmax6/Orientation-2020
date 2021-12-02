@@ -13,7 +13,7 @@ import {FONT} from '../utils/UIConstants';
 
 const SuccessScreen = ({
   navigation = '',
-  buttonText = 'Next',
+  buttonText = 'NEXT',
   showIconInButton = true,
   icon = 'arrow-ios-forward-outline',
   fn = () => {},
@@ -48,22 +48,20 @@ const SuccessScreen = ({
       }}>
       <LottieView
         source={successLottie}
-        speed={0.95}
         resizeMode="contain"
         autoPlay
-        loop
+        loop={true}
       />
       {navigation ? (
         <LinearGradient
-          colors={['#5aff15', '#00b712']}
+          colors={['#f13e4d', '#ff5130', '#ff512f']}
           style={{
-            backgroundColor: 'green',
             borderRadius: scale(24),
             alignSelf: 'center',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            paddingVertical: scale(15),
+            paddingVertical: scale(9),
             paddingLeft: scale(20),
             paddingRight: scale(10),
             position: 'absolute',
