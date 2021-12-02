@@ -29,8 +29,8 @@ import * as KEYS from '../../utils/STORAGE_KEYS';
 const MainMenu = ({navigation}) => {
   const logOut = () => {
     Alert.alert(
-      'LOGOUT',
-      'Are you sure you want to logout?',
+      'Logout?',
+      'You will return to login screen',
       [
         {
           text: 'Cancel',
