@@ -5,7 +5,13 @@ import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Yellow} from '../utils/colors';
 import {Icon} from '@ui-kitten/components';
-import {paddingMedium, borderRadiusMedium, FONT} from '../utils/UIConstants';
+import {
+  paddingMedium,
+  borderRadiusMedium,
+  FONT,
+  fontSizeMedium,
+  fontSizeBig,
+} from '../utils/UIConstants';
 
 import {Club_Modal_Store} from '../mobx/clubModalStore';
 const ClubCard = ({
@@ -32,7 +38,7 @@ const ClubCard = ({
     Club_Modal_Store.setYoutube(Youtube);
   };
   return (
-    <>
+    <TouchableOpacity onPress={onPressHandler}>
       <LinearGradient
         start={{x: 0.0, y: 0.0}}
         end={{x: 1.0, y: 0.0}}
@@ -43,9 +49,9 @@ const ClubCard = ({
             style={{
               backgroundColor: 'pink',
               width: '100%',
-              height: verticalScale(200),
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
+              height: verticalScale(160),
+              borderTopLeftRadius: scale(10),
+              borderTopRightRadius: scale(10),
             }}
             resizeMode="cover"
             source={{
@@ -58,36 +64,21 @@ const ClubCard = ({
             flex: 1,
             alignItems: 'center',
             flexDirection: 'row',
-            paddingHorizontal: 10,
+            paddingHorizontal: scale(10),
           }}>
           <Text
             numberOfLines={1}
             style={{
-              fontSize: 24,
-              paddingRight: 9,
+              fontSize: scale(fontSizeMedium),
               color: 'white',
-              textTransform: 'uppercase',
               flex: 1,
               fontFamily: FONT,
             }}>
             {clubName}
           </Text>
-          <TouchableOpacity onPress={onPressHandler}>
-            <Icon
-              style={{
-                width: 24,
-                height: 24,
-                backgroundColor: 'white',
-                borderRadius: 24,
-                elevation: 5,
-              }}
-              fill="black"
-              name="diagonal-arrow-right-up-outline"
-            />
-          </TouchableOpacity>
         </View>
       </LinearGradient>
-    </>
+    </TouchableOpacity>
   );
 };
 
@@ -96,8 +87,8 @@ const styles = StyleSheet.create({
     borderRadius: borderRadiusMedium,
     backgroundColor: Yellow,
     marginTop: verticalScale(0),
-    height: verticalScale(250),
-    width: scale(200),
+    height: verticalScale(200),
+    width: scale(140),
     elevation: 5,
     marginBottom: verticalScale(6),
     //marginHorizontal: scale(3),

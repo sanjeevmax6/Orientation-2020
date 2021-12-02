@@ -5,7 +5,13 @@ import {scale, verticalScale} from 'react-native-size-matters';
 
 import {Yellow} from '../utils/colors';
 import {Icon} from '@ui-kitten/components';
-import {paddingMedium, borderRadiusMedium, FONT} from '../utils/UIConstants';
+import {
+  paddingMedium,
+  borderRadiusMedium,
+  FONT,
+  fontSizeMedium,
+  fontSizeVeryLarge,
+} from '../utils/UIConstants';
 
 import {Symp_Modal_Store} from '../mobx/symposiumModalStore';
 
@@ -36,7 +42,7 @@ const SympCard = ({
     Symp_Modal_Store.setYoutube(Youtube);
   };
   return (
-    <>
+    <TouchableOpacity onPress={onPressHandler}>
       <LinearGradient
         start={{x: 0.0, y: 0.0}}
         end={{x: 1.0, y: 0.0}}
@@ -48,8 +54,8 @@ const SympCard = ({
               backgroundColor: 'pink',
               width: '100%',
               height: verticalScale(CARD_WIDTH),
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
+              borderTopLeftRadius: scale(10),
+              borderTopRightRadius: scale(10),
             }}
             resizeMode="cover"
             source={{
@@ -62,7 +68,7 @@ const SympCard = ({
             flex: 1,
             alignItems: 'center',
             flexDirection: 'row',
-            paddingHorizontal: 10,
+            paddingHorizontal: scale(10),
           }}>
           <Text
             style={{
@@ -72,10 +78,9 @@ const SympCard = ({
             <Text
               numberOfLines={1}
               style={{
-                fontSize: 24,
-                paddingRight: 9,
+                fontSize: scale(fontSizeVeryLarge - 6),
+                paddingRight: scale(9),
                 color: 'white',
-                textTransform: 'uppercase',
                 flex: 1,
                 fontFamily: FONT,
               }}>
@@ -87,22 +92,9 @@ const SympCard = ({
               {department}
             </Text>
           </Text>
-          <TouchableOpacity onPress={onPressHandler}>
-            <Icon
-              style={{
-                width: 24,
-                height: 24,
-                backgroundColor: 'white',
-                borderRadius: 24,
-                elevation: 5,
-              }}
-              fill="black"
-              name="diagonal-arrow-right-up-outline"
-            />
-          </TouchableOpacity>
         </View>
       </LinearGradient>
-    </>
+    </TouchableOpacity>
   );
 };
 
@@ -110,7 +102,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: borderRadiusMedium,
     backgroundColor: Yellow,
-    marginTop: verticalScale(0),
+    marginTop: verticalScale(5),
     elevation: 5,
     marginHorizontal: scale(9),
     height: verticalScale(CARD_HEIGHT),

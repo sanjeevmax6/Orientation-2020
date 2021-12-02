@@ -150,7 +150,7 @@ const MainMenu = ({navigation}) => {
                   </View>
                   <View
                     style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.textMainMenu}>Scheduler</Text>
+                    <Text style={styles.textMainMenu}>Events</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>

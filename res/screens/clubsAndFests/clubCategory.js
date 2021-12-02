@@ -7,6 +7,7 @@ import {
   fontSizeVeryLarge,
   paddingMedium,
   paddingSmall,
+  fontSizeBig,
 } from '../../utils/UIConstants';
 
 const FlatListItemSeparator = () => {
@@ -16,10 +17,7 @@ const FlatListItemSeparator = () => {
 const ClubCategory = ({categoryName, clubList}) => {
   return (
     <View>
-      <Text style={styles.textLabel}>
-        {categoryName}
-        {': '}
-      </Text>
+      <Text style={styles.textLabel}>{categoryName}</Text>
       <View style={styles.clubContainer}>
         <FlatList
           horizontal
@@ -58,7 +56,8 @@ const styles = StyleSheet.create({
   },
 
   textLabel: {
-    fontSize: scale(fontSizeVeryLarge),
+    fontSize: scale(fontSizeBig + 2),
+    fontWeight: 'bold',
     paddingLeft: scale(paddingMedium),
     paddingBottom: verticalScale(paddingSmall),
     paddingTop: verticalScale(paddingSmall),

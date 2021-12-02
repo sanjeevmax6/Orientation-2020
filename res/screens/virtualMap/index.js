@@ -12,6 +12,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker, Polygon} from 'react-native-maps';
+import Label, {Orientation} from 'react-native-label';
+
 import * as Coordinates from '../../utils/coordinates';
 import * as Colors from '../../utils/colors';
 import Carousel from 'react-native-snap-carousel';
@@ -124,11 +126,17 @@ const VirtualMap = ({navigation}) => {
 
   const [markers, setMarkers] = useState([]);
   const [choice, setChoice] = useState(0);
+  const [choiceNames, setChoiceNames] = useState([
+    'General',
+    'Dept',
+    'Hostel',
+    'S&F',
+  ]);
 
   const onCarouselItemChange = index => {
     let location = places[index];
     //Entire Campus will be seen
-    if (location.name == 'NIT-T Campus') {
+    if (location.name === 'NIT-T Campus') {
       var lat = 10.7555;
       var long = 78.82;
       var latDelta = 0.04;
@@ -173,18 +181,34 @@ const VirtualMap = ({navigation}) => {
   };
 
   const renderCarouselItem = ({item}) => (
-    <View style={styles.cardContainer}>
-      <Image
-        style={styles.cardImage}
-        //Change during API Integration
-        source={{
-          uri: item.imgUrl,
-        }}
-      />
-      <View style={styles.cardTitleContainer}>
-        <Text style={styles.cardTitleFont}>{item.name}</Text>
+    <Label
+      orientation={Orientation.TOP_RIGHT}
+      containerStyle={styles.cardContainer}
+      style={{
+        fontSize: scale(fontSizeSmall - 5),
+        color: 'white',
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      title={choiceNames[choice]}
+      color="#ff512f"
+      distance={scale(20)}>
+      <View style={styles.cardContainer}>
+        <Image
+          style={styles.cardImage}
+          //Change during API Integration
+          source={{
+            uri: item.imgUrl,
+          }}
+        />
+        <View style={styles.cardTitleContainer}>
+          <Text numberOfLines={2} style={styles.cardTitleFont}>
+            {item.name}
+          </Text>
+        </View>
       </View>
-    </View>
+    </Label>
   );
 
   return (
@@ -199,9 +223,10 @@ const VirtualMap = ({navigation}) => {
           <ScrollView
             contentContainerStyle={StyleSheet.absoluteFillObject}
             showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }>
+            // refreshControl={
+            //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            // }
+          >
             <MapView
               ref={_map}
               provider={PROVIDER_GOOGLE}
@@ -240,7 +265,7 @@ const VirtualMap = ({navigation}) => {
                 <Card
                   style={styles.categoryCards}
                   onPress={() => {
-                    if (0 == choice) {
+                    if (choice == 0) {
                     } else {
                       _map.current.animateToRegion({
                         latitude: 10.7555,
@@ -284,7 +309,7 @@ const VirtualMap = ({navigation}) => {
                 <Card
                   style={styles.categoryCards}
                   onPress={() => {
-                    if (1 == choice) {
+                    if (choice == 1) {
                     } else {
                       setChoice(1);
                       setPlaces(department);
@@ -322,7 +347,7 @@ const VirtualMap = ({navigation}) => {
                 <Card
                   style={styles.categoryCards}
                   onPress={() => {
-                    if (2 == choice) {
+                    if (choice == 2) {
                     } else {
                       setChoice(2);
                       setPlaces(hostel);
@@ -361,10 +386,11 @@ const VirtualMap = ({navigation}) => {
                 <Card
                   style={styles.categoryCards}
                   onPress={() => {
-                    if (3 == choice) {
+                    if (choice == 3) {
                     } else {
                       setChoice(3);
                       setPlaces(foodAndSports);
+                      setZero(0);
                       _carousel.current.snapToItem(0);
                     }
                   }}>
@@ -441,6 +467,7 @@ const styles = StyleSheet.create({
   carousel: {},
   cardContainer: {
     backgroundColor: Colors.cardContainer,
+    overflow: 'hidden',
     height: verticalScale(carouselCardDimension),
     width: scale(carouselCardDimension),
     borderRadius: scale(borderRadiusLarge),
@@ -450,7 +477,7 @@ const styles = StyleSheet.create({
     width: scale(carouselCardDimension),
     borderTopLeftRadius: scale(borderRadiusLarge),
     borderTopRightRadius: scale(borderRadiusLarge),
-    opacity: 0.7,
+    opacity: 0.85,
   },
   cardTitleContainer: {
     height: verticalScale((1 / 3) * carouselCardDimension),
@@ -484,7 +511,7 @@ const styles = StyleSheet.create({
   categoryCards: {
     marginTop: verticalScale(paddingSmall / 2),
     width: scale(categoryCardDimension),
-    height: scale(categoryCardDimension),
+    height: verticalScale(categoryCardDimension),
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
