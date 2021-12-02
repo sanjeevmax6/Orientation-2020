@@ -8,3 +8,5 @@ export const TIME_OUT =
 export const SIGN_UP_FILL_ALL = 'Please fill in all the required fields';
 export const SIGN_UP_PASSWORD_NO_MATCH =
   "Password confirmation doesn't match Password";
+
+export const INVALID_NAME = 'Please enter a valid name';

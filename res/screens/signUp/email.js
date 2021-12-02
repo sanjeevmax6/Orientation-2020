@@ -62,6 +62,10 @@ const EmailScreen = observer(
         SIGN_UP_STORE.getDepartment === '' ||
         SIGN_UP_STORE.getEmail === ''
       ) {
+        SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+        return false;
+      } else if (/\d/g.test(SIGN_UP_STORE.getName)) {
+        SIGN_UP_STORE.setErrorText(ERRORS.INVALID_NAME);
         return false;
       } else {
         return true;
@@ -100,8 +104,6 @@ const EmailScreen = observer(
                 SIGN_UP_STORE.setDoingApiCall(false);
               });
           } else {
-            SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-
             SIGN_UP_STORE.setFailState(true);
             SIGN_UP_STORE.setDoingApiCall(false);
           }

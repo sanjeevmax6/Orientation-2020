@@ -48,14 +48,16 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
   };
 
   function validData() {
+    console.log(SIGN_UP_STORE.getPassword, SIGN_UP_STORE.getConfirmPassword);
+    if (SIGN_UP_STORE.getPassword !== SIGN_UP_STORE.getConfirmPassword) {
+      SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_PASSWORD_NO_MATCH);
+      return false;
+    }
     if (
       SIGN_UP_STORE.getPassword === '' ||
       SIGN_UP_STORE.getConfirmPassword === ''
     ) {
-      API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-      return false;
-    } else if (SIGN_UP_STORE.getPassword != SIGN_UP_STORE.getConfirmPassword) {
-      API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_PASSWORD_NO_MATCH);
+      SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
       return false;
     } else {
       return true;
@@ -126,8 +128,6 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
             });
         } else {
           console.log('error3: ' + ERRORS.SIGN_UP_FILL_ALL);
-
-          SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
 
           SIGN_UP_STORE.setFailState(true);
           SIGN_UP_STORE.setDoingApiCall(false);

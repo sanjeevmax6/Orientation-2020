@@ -22,11 +22,8 @@ import {UserData} from '../../mobx/userStore';
 import NetInfo from '@react-native-community/netinfo';
 import {API_REGISTER} from '../../utils/APIConstants';
 import axios from 'axios';
-import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
-import * as KEYS from '../../utils/STORAGE_KEYS';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import {SIGN_UP_STORE} from '../../mobx/signUpStore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PasswordScreen = ({index, setIndex, navigation}) => {
   //disable back button once the user has verified email as he has to set password mandatorily
@@ -52,10 +49,10 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
       SIGN_UP_STORE.getPassword === '' ||
       SIGN_UP_STORE.getConfirmPassword === ''
     ) {
-      API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+      SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
       return false;
     } else if (SIGN_UP_STORE.getPassword != SIGN_UP_STORE.getConfirmPassword) {
-      API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_PASSWORD_NO_MATCH);
+      SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_PASSWORD_NO_MATCH);
       return false;
     } else {
       return true;
@@ -127,10 +124,6 @@ const PasswordScreen = ({index, setIndex, navigation}) => {
               SIGN_UP_STORE.setDoingApiCall(false);
             });
         } else {
-          console.log('error: ' + ERRORS.SIGN_UP_FILL_ALL);
-
-          SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
-
           SIGN_UP_STORE.setFailState(true);
           SIGN_UP_STORE.setDoingApiCall(false);
         }
