@@ -31,7 +31,10 @@ const Header = ({props, title = 'HEADER'}) => {
         )}
       </TouchableOpacity>
       <View style={styles.textView}>
-        <Text numberOfLines={1} style={styles.headerText}>
+        <Text
+          allowFontScaling={false}
+          numberOfLines={1}
+          style={styles.headerText}>
           {title}
         </Text>
       </View>
@@ -62,8 +65,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     alignSelf: 'center',
-    fontSize: scale(fontSizeBig),
-    fontWeight: 'bold',
+    fontSize: scale(20),
     width: '65%',
     textAlign: 'center',
     color: 'white',

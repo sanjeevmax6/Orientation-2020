@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, TouchableOpacity} from 'react-native';
 import {Text} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
-
+import LinearGradient from 'react-native-linear-gradient';
 import {scale, ScaledSheet} from 'react-native-size-matters';
 import {FONT} from '../../utils/UIConstants';
 
@@ -13,13 +13,15 @@ const EventCard = ({item, navigation}) => {
       onPress={() => {
         navigation.navigate('Event Description', {data: item});
       }}>
-      <View
+      <LinearGradient
+        start={{x: 0.0, y: 0.0}}
+        end={{x: 0.0, y: 1.0}}
+        colors={['#ff510f', '#f13e44']}
         style={{
           width: scale(6),
-          backgroundColor: Colors.Tertiary,
           borderRadius: scale(5),
-        }}
-      />
+        }}></LinearGradient>
+
       <View style={styles.eventinfo}>
         <Text style={styles.eventName} numberOfLines={1}>
           {item.Title}
@@ -44,10 +46,11 @@ const styles = ScaledSheet.create({
     borderColor: 'black',
     borderWidth: '1@s',
     borderRadius: '6@s',
-    marginTop: '5@vs',
+    marginTop: '9@vs',
     padding: '5@s',
     marginHorizontal: '10@s',
     backgroundColor: 'white',
+    elevation: 6,
   },
   eventinfo: {
     flexDirection: 'column',
@@ -59,13 +62,13 @@ const styles = ScaledSheet.create({
     alignSelf: 'center',
     backgroundColor: 'white',
     marginRight: '5@s',
-    height: '60@msr',
-    width: '60@msr',
-    borderRadius: '6@sr',
+    height: '66@msr',
+    width: '66@msr',
+    borderRadius: '9@sr',
   },
   eventName: {
-    fontSize: '16@s',
-    fontWeight: 'bold',
+    fontSize: '18@s',
+    fontWeight: '900',
     fontFamily: FONT,
   },
 });

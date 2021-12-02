@@ -2,13 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import ClubCard from '../../components/club-card';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {
-  FONT,
-  fontSizeVeryLarge,
-  paddingMedium,
-  paddingSmall,
-  fontSizeBig,
-} from '../../utils/UIConstants';
+import {FONT, paddingMedium, paddingSmall} from '../../utils/UIConstants';
 
 const FlatListItemSeparator = () => {
   return <View style={{width: verticalScale(paddingMedium)}} />;
@@ -17,7 +11,9 @@ const FlatListItemSeparator = () => {
 const ClubCategory = ({categoryName, clubList}) => {
   return (
     <View>
-      <Text style={styles.textLabel}>{categoryName}</Text>
+      <Text allowFontScaling={false} style={styles.textLabel}>
+        {categoryName}
+      </Text>
       <View style={styles.clubContainer}>
         <FlatList
           horizontal
@@ -56,8 +52,8 @@ const styles = StyleSheet.create({
   },
 
   textLabel: {
-    fontSize: scale(fontSizeBig + 2),
-    fontWeight: 'bold',
+    fontSize: scale(20),
+    fontWeight: '900',
     paddingLeft: scale(paddingMedium),
     paddingBottom: verticalScale(paddingSmall),
     paddingTop: verticalScale(paddingSmall),

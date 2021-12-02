@@ -15,14 +15,13 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 
 import {
   borderRadius,
-  borderRadiusLarge,
-  fontSizeMedium,
   paddingMedium,
   fontSizeSmall,
   fontSizeVeryLarge,
   FONT,
+  borderRadiusMedium,
 } from '../utils/UIConstants';
-import {Black, White} from '../utils/colors';
+import {Black, White, ORANGE} from '../utils/colors';
 
 let cardHeight = 200;
 let cardWidth = 150;
@@ -96,7 +95,6 @@ const ContactCard = ({item}) => {
               resizeMode="cover"
               style={styles.image2}
             />
-
             <View
               style={{
                 marginLeft: scale(6),
@@ -109,7 +107,7 @@ const ContactCard = ({item}) => {
                 {item.name}
               </Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Icon style={styles.icon} fill={Black} name="phone" />
+                <Icon style={styles.icon} fill={ORANGE} name="phone" />
                 <Text
                   selectable={true}
                   selectionColor={'#f13e4d'}
@@ -117,7 +115,11 @@ const ContactCard = ({item}) => {
                   {item.mobile}
                   {'   '}|{'   '}
                 </Text>
-                <Icon style={styles.icon} fill={Black} name="browser-outline" />
+                <Icon
+                  style={styles.icon}
+                  fill={ORANGE}
+                  name="browser-outline"
+                />
                 <Text style={styles.phoneText}>{item.department}</Text>
               </View>
             </View>
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
     width: scale(cardWidth),
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: scale(borderRadiusLarge),
+    borderRadius: scale(borderRadiusMedium),
     borderWidth: 0,
     marginHorizontal: scale(8),
     marginVertical: scale(8),
@@ -167,9 +169,9 @@ const styles = StyleSheet.create({
   },
   textName: {
     marginLeft: scale(paddingMedium),
-    fontSize: scale(fontSizeMedium) / PixelRatio.getFontScale(),
+    fontSize: scale(16) / PixelRatio.getFontScale(),
     color: White,
-    fontWeight: 'bold',
+
     fontFamily: FONT,
   },
   textBody: {
@@ -189,6 +191,7 @@ const styles = StyleSheet.create({
   },
   phoneText: {
     alignItems: 'center',
+    color: 'black',
     fontSize: moderateScale(16),
     fontFamily: FONT,
   },

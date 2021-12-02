@@ -44,21 +44,20 @@ const ClubCard = ({
         end={{x: 1.0, y: 0.0}}
         colors={['#ff512f', '#ff5130', '#f13e4d']}
         style={styles.card}>
-        <TouchableOpacity onPress={onPressHandler}>
-          <Image
-            style={{
-              backgroundColor: 'pink',
-              width: '100%',
-              height: verticalScale(160),
-              borderTopLeftRadius: scale(10),
-              borderTopRightRadius: scale(10),
-            }}
-            resizeMode="cover"
-            source={{
-              uri: url,
-            }}
-          />
-        </TouchableOpacity>
+        <Image
+          style={{
+            backgroundColor: 'pink',
+            width: '100%',
+            height: verticalScale(160),
+            borderTopLeftRadius: scale(9),
+            borderTopRightRadius: scale(9),
+          }}
+          resizeMode="cover"
+          source={{
+            uri: url,
+          }}
+        />
+
         <View
           style={{
             flex: 1,
@@ -68,6 +67,7 @@ const ClubCard = ({
           }}>
           <Text
             numberOfLines={1}
+            allowFontScaling={false}
             style={{
               fontSize: scale(fontSizeMedium),
               color: 'white',
@@ -84,12 +84,12 @@ const ClubCard = ({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadiusMedium,
     backgroundColor: Yellow,
     marginTop: verticalScale(0),
     height: verticalScale(200),
-    width: scale(140),
+    width: scale(150),
     elevation: 5,
+    borderRadius: scale(borderRadiusMedium),
     marginBottom: verticalScale(6),
     //marginHorizontal: scale(3),
   },

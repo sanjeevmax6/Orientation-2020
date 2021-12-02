@@ -54,8 +54,8 @@ const SympCard = ({
               backgroundColor: 'pink',
               width: '100%',
               height: verticalScale(CARD_WIDTH),
-              borderTopLeftRadius: scale(10),
-              borderTopRightRadius: scale(10),
+              borderTopLeftRadius: scale(9),
+              borderTopRightRadius: scale(9),
             }}
             resizeMode="cover"
             source={{
@@ -100,7 +100,7 @@ const SympCard = ({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadiusMedium,
+    borderRadius: scale(borderRadiusMedium),
     backgroundColor: Yellow,
     marginTop: verticalScale(5),
     elevation: 5,

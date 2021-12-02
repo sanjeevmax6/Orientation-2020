@@ -14,6 +14,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Links from './Links';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
+import {ORANGE} from '../../utils/colors';
 const WIDTH = Dimensions.get('window').width;
 
 const EventDescription = ({route}) => {
@@ -42,7 +43,7 @@ const EventDescription = ({route}) => {
               }}>
               <Icon
                 name="calendar-outline"
-                fill="#f27d00"
+                fill={ORANGE}
                 style={{
                   height: verticalScale(15),
                   width: scale(15),
@@ -96,7 +97,7 @@ const EventDescription = ({route}) => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Icon
                 name="phone-call-outline"
-                fill="#f27d00"
+                fill={ORANGE}
                 style={{height: verticalScale(15), width: scale(15)}}
               />
               <Text
@@ -117,7 +118,7 @@ const EventDescription = ({route}) => {
               }}>
               <Icon
                 name="phone-call-outline"
-                fill="#f27d00"
+                fill={ORANGE}
                 style={{height: verticalScale(15), width: scale(15)}}
               />
               <Text
@@ -146,8 +147,8 @@ const styles = ScaledSheet.create({
     alignSelf: 'center',
   },
   title: {
-    fontSize: scale(18),
-    fontWeight: '600',
+    fontSize: scale(20),
+    fontWeight: '900',
     marginVertical: verticalScale(7),
     backgroundColor: 'white',
     fontFamily: FONT,
@@ -159,6 +160,8 @@ const styles = ScaledSheet.create({
     backgroundColor: 'white',
     lineHeight: verticalScale(25),
     fontFamily: FONT,
+    textAlign: 'justify',
+    fontWeight: '500',
   },
   eventDate: {
     fontSize: '16@s',

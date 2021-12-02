@@ -4,7 +4,7 @@ import {Text, View, TouchableOpacity, Linking} from 'react-native';
 import {Icon} from '@ui-kitten/components';
 import {ScaledSheet, scale, verticalScale} from 'react-native-size-matters';
 import {FONT} from '../../utils/UIConstants';
-
+import {ORANGE} from '../../utils/colors';
 const Links = ({link}) => {
   return (
     <View style={{backgroundColor: 'white'}}>
@@ -25,7 +25,7 @@ const Links = ({link}) => {
           }}>
           <Icon
             name="link-outline"
-            fill="#f27d00"
+            fill={ORANGE}
             style={{height: verticalScale(15), width: scale(15)}}
           />
           <Text style={styles.url} ellipsizeMode="tail" numberOfLines={1}>
@@ -47,7 +47,7 @@ const styles = ScaledSheet.create({
     fontFamily: FONT,
   },
   url: {
-    color: '#f27d00',
+    color: ORANGE,
     marginLeft: scale(5),
     fontFamily: FONT,
     fontSize: scale(13),

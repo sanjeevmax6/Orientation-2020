@@ -64,3 +64,6 @@ export const disabledDateNameStyleColor = GRAY_LIGHT;
 export const disabledDateNumberStyleColor = GRAY_LIGHT;
 export const CalendarStripcontainerColor = background_dark;
 export const dateContainerColor = PRIMARY;
+
+//Universal
+export const ORANGE = '#f27d00'; //icon colors
