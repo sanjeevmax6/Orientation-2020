@@ -15,6 +15,7 @@ const GroupCard = ({category}) => {
     <View>
       <MenuGroup style={styles.menuGroup} title={category}>
         <FlatList
+          removeClippedSubviews={false}
           data={contacts}
           renderItem={({item}) => <AdminCard data={item} />}
         />

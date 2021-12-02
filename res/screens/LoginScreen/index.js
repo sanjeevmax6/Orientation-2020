@@ -96,7 +96,7 @@ const Login = ({navigation}) => {
                   fontFamily: FONT,
                 }}>
                 {' '}
-                RESET!
+                RESET
               </Text>
             </Text>
           </TouchableOpacity>
@@ -110,7 +110,7 @@ const Login = ({navigation}) => {
                 fontSize: scale(12),
                 fontFamily: FONT,
               }}>
-              Don't have an account
+              Don't have an account?
               <Text
                 style={{
                   color: '#f13e4d',
@@ -119,7 +119,7 @@ const Login = ({navigation}) => {
                   fontFamily: FONT,
                 }}>
                 {' '}
-                SIGN UP!
+                SIGN UP
               </Text>
             </Text>
           </TouchableOpacity>

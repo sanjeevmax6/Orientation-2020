@@ -8,9 +8,10 @@ import {contactsStore} from '../../mobx/contactsStore';
 import {Dimensions} from 'react-native';
 import LoaderPage from '../LoadingScreen';
 import {getContacts} from './API_CALLS';
+import {verticalScale} from 'react-native-size-matters';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
-  return <View style={{height: windowHeight / 4}} />;
+  return <View style={{height: verticalScale(10)}} />;
 };
 const Orientation = observer(({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -46,6 +47,7 @@ const Orientation = observer(({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: 'white',
   },

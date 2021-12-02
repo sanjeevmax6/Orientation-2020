@@ -257,43 +257,12 @@ const MainMenu = ({navigation}) => {
             <Card style={styles.card5}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('MagazineAndSymposium');
+                  navigation.navigate('Timetable');
                 }}>
                 <ImageBackground
                   source={require('../../assets/images/card5.jpg')}
                   style={{
                     height: verticalScale(140),
-                    width: scale(130),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Icon
-                      style={styles.iconMainMenu}
-                      fill={Colors.White}
-                      name="award-outline"
-                    />
-                  </View>
-                  <View
-                    style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={styles.textMainMenu}>Symposiums</Text>
-                  </View>
-                </ImageBackground>
-              </TouchableOpacity>
-            </Card>
-            <Card style={styles.card6}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('Timetable');
-                }}>
-                <ImageBackground
-                  source={require('../../assets/images/card6.jpg')}
-                  style={{
-                    height: verticalScale(110),
                     width: scale(130),
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -312,6 +281,37 @@ const MainMenu = ({navigation}) => {
                   <View
                     style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.textMainMenu}>Academic Calendar</Text>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+            </Card>
+            <Card style={styles.card6}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('MagazineAndSymposium');
+                }}>
+                <ImageBackground
+                  source={require('../../assets/images/card6.jpg')}
+                  style={{
+                    height: verticalScale(110),
+                    width: scale(130),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Icon
+                      style={styles.iconMainMenu}
+                      fill={Colors.White}
+                      name="award-outline"
+                    />
+                  </View>
+                  <View
+                    style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={styles.textMainMenu}>Symposiums</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>

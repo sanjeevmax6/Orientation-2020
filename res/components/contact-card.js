@@ -20,6 +20,7 @@ import {
   fontSizeVeryLarge,
   FONT,
   borderRadiusMedium,
+  paddingSmall,
 } from '../utils/UIConstants';
 import {Black, White, ORANGE} from '../utils/colors';
 
@@ -139,9 +140,8 @@ const styles = StyleSheet.create({
     borderRadius: scale(borderRadiusMedium),
     borderWidth: 0,
     marginHorizontal: scale(8),
-    marginVertical: scale(8),
+    marginVertical: verticalScale(8),
     elevation: 5,
-    //margin: paddingMedium,
   },
   image: {
     height: verticalScale(cardHeight),
@@ -163,19 +163,19 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     height: verticalScale(40),
-    width: scale(120),
+    width: scale(130),
     position: 'absolute',
-    bottom: 0,
+    bottom: verticalScale(5),
   },
   textName: {
-    marginLeft: scale(paddingMedium),
+    marginLeft: scale(paddingSmall),
     fontSize: scale(16) / PixelRatio.getFontScale(),
     color: White,
-
     fontFamily: FONT,
   },
   textBody: {
-    marginLeft: scale(paddingMedium),
+    marginLeft: scale(paddingSmall),
+    marginBottom: verticalScale(paddingSmall),
     fontSize: scale(fontSizeSmall) / PixelRatio.getFontScale(),
     color: White,
     fontFamily: FONT,
@@ -195,7 +195,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     fontFamily: FONT,
   },
-
   image2: {
     height: verticalScale(300),
     borderTopLeftRadius: moderateScale(borderRadius),

@@ -73,7 +73,7 @@ const ErrorScreen = ({
           textTransform: 'uppercase',
           fontWeight: '500',
           fontFamily: FONT,
-          marginTop: verticalScale(150),
+          marginTop: verticalScale(180),
         }}>
         {errorMessage}
       </Text>

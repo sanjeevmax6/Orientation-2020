@@ -132,11 +132,17 @@ const VirtualMap = ({navigation}) => {
     'Hostel',
     'S&F',
   ]);
+  const [choiceColors, setChoiceColors] = useState([
+    '#2f6bcd',
+    '#f59838',
+    '#78b349',
+    '#6c388b',
+  ]);
 
   const onCarouselItemChange = index => {
     let location = places[index];
     //Entire Campus will be seen
-    if (location.name === 'NIT-T Campus') {
+    if (location.name === 'NITT Campus') {
       var lat = 10.7555;
       var long = 78.82;
       var latDelta = 0.04;
@@ -160,7 +166,7 @@ const VirtualMap = ({navigation}) => {
 
   const onMarkerPressed = (location, index) => {
     //Entire Campus will be seen
-    if (location.name == 'NIT-T Campus') {
+    if (location.name == 'NITT Campus') {
       var lat = 10.7555;
       var long = 78.82;
       var latDelta = 0.04;
@@ -192,7 +198,7 @@ const VirtualMap = ({navigation}) => {
         justifyContent: 'center',
       }}
       title={choiceNames[choice]}
-      color="#ff512f"
+      color={choiceColors[choice]}
       distance={scale(20)}>
       <View style={styles.cardContainer}>
         <Image

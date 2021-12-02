@@ -68,7 +68,7 @@ const Scheduler = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       {error ? (
-        <ErrorScreen navigation={navigation} errorMessage={error}></ErrorScreen>
+        <ErrorScreen navigation={navigation} errorMessage={error} />
       ) : loading ? (
         <LoaderPage navigation={navigation} />
       ) : (
@@ -180,7 +180,7 @@ const Scheduler = ({navigation}) => {
                   onDateSelected={date => {
                     setSelDate(new Date(date));
                   }}
-                  selectedDate={new Date()}
+                  selectedDate={selDate}
                 />
               </LinearGradient>
             </>

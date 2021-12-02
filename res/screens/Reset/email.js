@@ -156,7 +156,7 @@ const EmailScreen = observer(
                     fontFamily: FONT,
                   }}>
                   {' '}
-                  LOG IN!
+                  LOGIN
                 </Text>
               </Text>
             </TouchableOpacity>

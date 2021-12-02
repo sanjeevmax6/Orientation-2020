@@ -18,7 +18,7 @@ import {getContacts} from './API_CALLS';
 import LoaderPage from '../LoadingScreen';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
-  return <View style={{height: windowHeight / 4}} />;
+  return <View style={{height: verticalScale(20)}} />;
 };
 const Admin = observer(({navigation}) => {
   const categories = contactsStore.state.categories;

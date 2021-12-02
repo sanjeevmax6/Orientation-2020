@@ -267,8 +267,9 @@ const Timetable = ({navigation}) => {
   const [showCalendar, setShowCalendar] = useState(true);
   const [icon, setIcon] = useState('angle-up');
   const [calendarText, setCalendarText] = useState('CLOSE CALENDAR');
-  const [selectedDate, setSelectedDate] = useState(data.currentDay);
-
+  const [selectedDate, setSelectedDate] = useState(
+    moment().format('YYYY-MM-DD'),
+  );
   const _flatlist = useRef();
   const maxHeight = verticalScale(400);
   var ht;
@@ -395,6 +396,7 @@ const Timetable = ({navigation}) => {
                       }>
                       <Calendar
                         style={{marginTop: verticalScale(-paddingSmall / 3)}}
+                        current={selectedDate}
                         minDate={data.minDay}
                         maxDate={data.maxDay}
                         onDayPress={day => {
@@ -404,8 +406,7 @@ const Timetable = ({navigation}) => {
                                 new Date(day.dateString),
                                 AcademicCalendarNoticeData,
                               ),
-                            }),
-                            toggle();
+                            });
                         }}
                         hideExtraDays={true}
                         firstDay={1}
@@ -426,15 +427,22 @@ const Timetable = ({navigation}) => {
                           textMonthFontFamily: FONT,
                           todayTextColor: Colors.todayTextColor,
                           textSectionTitleColor: Colors.Tertiary,
-                          textMonthFontSize: scale(fontSizeBig + 2),
-                          textDayHeaderFontSize: scale(fontSizeMedium),
-                          textDayFontSize: scale(fontSizeMedium),
+                          textMonthFontSize: verticalScale(fontSizeBig + 2),
+                          textDayHeaderFontSize: verticalScale(fontSizeMedium),
+                          textDayFontSize: verticalScale(fontSizeMedium),
                           selectedDayBackgroundColor:
                             Colors.selectedDayBackgroundColor,
                           selectedDayTextColor: Colors.White,
                           'stylesheet.calendar.header': {
                             dayTextAtIndex6: {
                               color: Colors.Secondary,
+                            },
+                          },
+                          'stylesheet.calendar.main': {
+                            week: {
+                              marginVertical: verticalScale(0.5),
+                              flexDirection: 'row',
+                              justifyContent: 'center',
                             },
                           },
                         }}
@@ -507,9 +515,9 @@ const Timetable = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'center'}}>
               <View style={styles.todayTextandDropDownContainer}>
                 <View style={styles.todayTextContainer}>
-                  <Text style={styles.todayTitleText}>Today : </Text>
+                  <Text style={styles.todayTitleText}>Selected : </Text>
                   <Text style={styles.todayText}>
-                    {moment().format('MMM Do')}
+                    {moment(selectedDate).format('MMM Do')}
                   </Text>
                 </View>
                 <TouchableOpacity
