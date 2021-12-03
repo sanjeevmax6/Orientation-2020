@@ -1,4 +1,4 @@
-import {UserData} from '../mobx/userStore';
+export const DEFAULT_BASE_URL = 'https://orientation-spider.cloudns.nz/';
 export const REF_URL = 'https://spider.nitt.edu/~selva/api_gateway.php';
 
 export const API_STUDENT_LOGIN = 'auth/login';

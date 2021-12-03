@@ -9,27 +9,24 @@ import {UserData} from '../../mobx/userStore';
 import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {REF_URL} from '../../utils/APIConstants';
+import {DEFAULT_BASE_URL, REF_URL} from '../../utils/APIConstants';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
-import MaintenancePage from './maintain';
+
 import {ERROR_NO_NETWORK, LOADING_EXTERNAL} from '../../utils/LOADING_TYPES';
 
 const SplashScreen = () => {
   const [State, setState] = useState(0);
   const [URL_STATE, setURL_STATE] = useState(0);
-  console.log('Splash ho raha');
+
   const navigate = () => {
     if (URL_STATE === 1) {
       //still loading
       setState(1);
-    } else if (URL_STATE === 0) {
-      //fail - we are under maintenance
-      setState(2.2);
     } else if (URL_STATE === 2) {
       //fail - no internet connection
-      setState(2.1);
+      setState(2);
     } else if (URL_STATE === 3) {
       // all okay go ahead
       Login_Store.closeSplash();
@@ -39,24 +36,44 @@ const SplashScreen = () => {
   const getBaseURL = () => {
     setURL_STATE(1);
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
+      if (state.isConnected === true) {
         axios
-          .post(REF_URL, {
-            appName: 'orientation-21',
-          })
+          .post(
+            REF_URL,
+            {
+              appName: 'orientation-21',
+            },
+            {timeout: 5000},
+          )
           .then(response => {
             if (response.status === 200) {
               console.log(response.data);
-              UserData.setBaseUrl(response.data);
-              setURL_STATE(3);
+              if (
+                response.data === '' ||
+                response.data === null ||
+                response.data === '0' ||
+                response.data === 0
+              ) {
+                console.log('Using Default');
+                UserData.setBaseUrl(DEFAULT_BASE_URL);
+                setURL_STATE(3);
+              } else {
+                console.log('using api');
+                UserData.setBaseUrl(response.data);
+                setURL_STATE(3);
+              }
             } else {
-              UserData.setErrorText('SOMETHING WENT WRONG!');
-              setURL_STATE(0);
+              //if the response code is not 200
+              console.log('Using Default');
+              UserData.setBaseUrl(DEFAULT_BASE_URL);
+              setURL_STATE(3);
             }
           })
           .catch(error => {
-            UserData.setErrorText('SOMETHING WENT WRONG!');
-            setURL_STATE(0);
+            //incase of any error
+            console.log('Using Default');
+            UserData.setBaseUrl(DEFAULT_BASE_URL);
+            setURL_STATE(3);
           });
       } else {
         UserData.setErrorText(ERRORS.NO_NETWORK);
@@ -234,15 +251,7 @@ const SplashScreen = () => {
             </>
           ) : (
             <>
-              {State === 2.1 ? (
-                <>
-                  <ErrorScreen errorMessage={ERRORS.NO_NETWORK} />
-                </>
-              ) : (
-                <>
-                  <MaintenancePage />
-                </>
-              )}
+              <ErrorScreen errorMessage={ERRORS.NO_NETWORK} />
             </>
           )}
         </>
