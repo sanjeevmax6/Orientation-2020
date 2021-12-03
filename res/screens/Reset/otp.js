@@ -40,12 +40,21 @@ const OTPScreen = ({index, setIndex}) => {
   }, [SIGN_UP_STORE.getToken]);
 
   function validData() {
-    if (SIGN_UP_STORE.getOTP == '') {
+    if (SIGN_UP_STORE.getOTP.trim() == '') {
       return false;
     } else {
       return true;
     }
   }
+  const maskEmail = email => {
+    let rollLength = email.length;
+    email = email + '@nitt.edu';
+    let length = email.length;
+    let temp = 'x'.repeat(rollLength) + '@nitt.edu';
+    let x = length / 4;
+    let masked = email.slice(0, x) + temp.slice(x);
+    return masked;
+  };
 
   const handleAPI_CALL = () => {
     var url = UserData.getBaseUrl + API_VERIFY_OTP;
@@ -112,7 +121,7 @@ const OTPScreen = ({index, setIndex}) => {
           focusColor="black"
           value={SIGN_UP_STORE.getOTP}
           onChangeText={OTP => {
-            SIGN_UP_STORE.setOTP(OTP);
+            SIGN_UP_STORE.setOTP(OTP.trim());
           }}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
@@ -128,7 +137,7 @@ const OTPScreen = ({index, setIndex}) => {
               fontSize: scale(12),
               fontFamily: FONT,
             }}>
-            An OTP has been sent to your respective Webmail!
+            An OTP has been sent to {maskEmail(SIGN_UP_STORE.getEmail)}
           </Text>
         </View>
         <View

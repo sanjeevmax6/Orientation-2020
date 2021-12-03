@@ -58,14 +58,17 @@ const EmailScreen = observer(
 
     function validData() {
       if (
-        SIGN_UP_STORE.getName === '' ||
-        SIGN_UP_STORE.getDepartment === '' ||
-        SIGN_UP_STORE.getEmail === ''
+        SIGN_UP_STORE.getName.trim() === '' ||
+        SIGN_UP_STORE.getDepartment.trim() === '' ||
+        SIGN_UP_STORE.getEmail.trim() === ''
       ) {
         SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
         return false;
       } else if (/\d/g.test(SIGN_UP_STORE.getName)) {
         SIGN_UP_STORE.setErrorText(ERRORS.INVALID_NAME);
+        return false;
+      } else if (SIGN_UP_STORE.getEmail.replace(/[^0-9]/g, '').length !== 9) {
+        SIGN_UP_STORE.setErrorText(ERRORS.INVALID_ROLL_NUMBER);
         return false;
       } else {
         return true;
@@ -119,6 +122,9 @@ const EmailScreen = observer(
     const ListHeaderComponent = () => {
       return <View style={{height: verticalScale(12)}} />;
     };
+
+    const [email, setEmail] = useState('');
+
     return (
       <View>
         <Modal
@@ -200,7 +206,7 @@ const EmailScreen = observer(
             focusColor="black"
             value={SIGN_UP_STORE.getName}
             onChangeText={username => {
-              SIGN_UP_STORE.setName(username);
+              SIGN_UP_STORE.setName(username.trim());
             }}
           />
 
@@ -255,8 +261,9 @@ const EmailScreen = observer(
             focusColor="black"
             value={SIGN_UP_STORE.getEmail}
             onChangeText={emailId => {
-              SIGN_UP_STORE.setEmail(emailId);
+              SIGN_UP_STORE.setEmail(emailId.trim());
             }}
+            maxLength={9}
           />
 
           <View
@@ -296,7 +303,8 @@ const EmailScreen = observer(
         </View>
         <View
           style={{
-            height: verticalScale(390),
+            height: verticalScale(380),
+            marginTop: verticalScale(5),
             width: '100%',
             alignSelf: 'center',
             justifyContent: 'center',

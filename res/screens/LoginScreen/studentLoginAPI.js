@@ -16,8 +16,11 @@ export const studentLogin = (rollNo, password) => {
   NetInfo.fetch().then(state => {
     if (state.isConnected === true) {
       console.log('logging In');
-      if (password === '' || rollNo === '') {
+      if (password === '' || rollNo.trim() === '') {
         API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+        API_SCREEN_Store.setError();
+      } else if (rollNo.replace(/[^0-9]/g, '').length !== 9) {
+        API_SCREEN_Store.setErrorText(ERRORS.INVALID_ROLL_NUMBER);
         API_SCREEN_Store.setError();
       } else {
         axios

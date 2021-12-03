@@ -41,7 +41,10 @@ const EmailScreen = observer(
     };
 
     function validData() {
-      if (SIGN_UP_STORE.getEmail === '') {
+      if (
+        SIGN_UP_STORE.getEmail.trim() === '' ||
+        SIGN_UP_STORE.getEmail.replace(/[^0-9]/g, '').length !== 9
+      ) {
         return false;
       } else {
         return true;
@@ -81,6 +84,12 @@ const EmailScreen = observer(
                 SIGN_UP_STORE.setFailState(true);
                 SIGN_UP_STORE.setDoingApiCall(false);
               });
+          } else if (
+            SIGN_UP_STORE.getEmail.replace(/[^0-9]/g, '').length !== 9
+          ) {
+            SIGN_UP_STORE.setErrorText(ERRORS.INVALID_ROLL_NUMBER);
+            SIGN_UP_STORE.setFailState(true);
+            SIGN_UP_STORE.setDoingApiCall(false);
           } else {
             SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
 
@@ -130,8 +139,9 @@ const EmailScreen = observer(
             focusColor="black"
             value={SIGN_UP_STORE.getEmail}
             onChangeText={emailId => {
-              SIGN_UP_STORE.setEmail(emailId);
+              SIGN_UP_STORE.setEmail(emailId.trim());
             }}
+            maxLength={9}
           />
 
           <View
@@ -172,6 +182,7 @@ const EmailScreen = observer(
         <View
           style={{
             height: verticalScale(390),
+            marginTop: verticalScale(5),
             width: '100%',
             alignSelf: 'center',
             justifyContent: 'center',

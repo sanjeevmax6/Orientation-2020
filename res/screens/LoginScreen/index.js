@@ -49,6 +49,7 @@ const Login = ({navigation}) => {
             setRollNo(text);
           }}
           focusColor="black"
+          maxLength={9}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
 

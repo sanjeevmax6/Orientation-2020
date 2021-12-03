@@ -45,6 +45,15 @@ const OTPScreen = ({index, setIndex}) => {
       return true;
     }
   }
+  const maskEmail = email => {
+    let rollLength = email.length;
+    email = email + '@nitt.edu';
+    let length = email.length;
+    let temp = 'x'.repeat(rollLength) + '@nitt.edu';
+    let x = length / 4;
+    let masked = email.slice(0, x) + temp.slice(x);
+    return masked;
+  };
 
   const handleAPI_CALL = () => {
     var url = UserData.getBaseUrl + API_VERIFY_OTP;
@@ -127,7 +136,7 @@ const OTPScreen = ({index, setIndex}) => {
               fontSize: scale(12),
               fontFamily: FONT,
             }}>
-            An OTP has been sent to your respective Webmail!
+            An OTP has been sent to {maskEmail(SIGN_UP_STORE.getEmail)}
           </Text>
         </View>
         <View
