@@ -495,17 +495,6 @@ const Timetable = ({navigation}) => {
                         <View style={styles.circle} />
                         <Text style={styles.legendText}> : Holiday</Text>
                       </View>
-                      {/* <View
-                        style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <TouchableOpacity>
-                          <Icon
-                            style={styles.downloadIcon}
-                            fill={Colors.Tertiary}
-                            name="download-outline"
-                          />
-                        </TouchableOpacity>
-                        <Text style={styles.legendText}> : PDF</Text>
-                      </View> */}
                     </View>
                   </>
                 ) : null}
@@ -577,10 +566,6 @@ const Timetable = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  downloadIcon: {
-    width: scale(iconMedium),
-    height: verticalScale(iconMedium),
-  },
   legendContainer: {
     marginTop: verticalScale(7),
     paddingBottom: verticalScale(paddingSmall / 2),
@@ -593,9 +578,9 @@ const styles = StyleSheet.create({
     height: verticalScale(iconMedium),
   },
   circle: {
-    width: scale(25),
-    height: scale(25),
-    borderRadius: scale(25 / 2),
+    width: 25,
+    height: 25,
+    borderRadius: 25 / 2,
     backgroundColor: Colors.HolidayColor,
   },
   legendText: {
