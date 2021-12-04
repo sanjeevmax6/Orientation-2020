@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 
 import * as Animatable from 'react-native-animatable';
-import {StyleSheet, View, Text, PixelRatio, Platform} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  PixelRatio,
+  Platform,
+  Image,
+} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {Login_Store} from '../../mobx/loginStore';
 import * as KEYS from '../../utils/STORAGE_KEYS';
@@ -22,10 +29,7 @@ const SplashScreen = () => {
 
   const navigate = () => {
     console.log(URL_STATE);
-    if (URL_STATE === 1) {
-      //still loading
-      setState(1);
-    } else if (URL_STATE === 2) {
+    if (URL_STATE === 2) {
       //fail - no internet connection
       setState(2);
     } else if (URL_STATE === 3) {
@@ -128,125 +132,42 @@ const SplashScreen = () => {
 
   setTimeout(function () {
     navigate();
-  }, 3000);
+  }, 2000);
+
   return (
     <>
       {State === 0 ? (
         <>
           <View style={styles.top}>
-            <Animatable.View animation="fadeOutUp" delay={3300}>
-              <Animatable.View animation="pulse" duration={1050} delay={2300}>
-                <Animatable.View
-                  animation="flipInX"
-                  duration={1800}
-                  style={{
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1110}>
-                    O
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1220}>
-                    R
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1330}>
-                    I
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1440}>
-                    E
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1550}>
-                    N
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1660}>
-                    T
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1770}>
-                    A
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1880}>
-                    T
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={1990}>
-                    I
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={2100}>
-                    O
-                  </Animatable.Text>
-                  <Animatable.Text
-                    animation="slideInDown"
-                    style={styles.main}
-                    duration={2210}>
-                    N
-                  </Animatable.Text>
-                  <Animatable.View
-                    style={{flexDirection: 'row', marginLeft: 8}}>
-                    <Animatable.Text
-                      style={styles.num}
-                      animation="fadeInLeftBig"
-                      duration={1700}>
-                      2
-                    </Animatable.Text>
-                    <Animatable.Text
-                      style={styles.num}
-                      animation="fadeInLeftBig"
-                      duration={1700}>
-                      1
-                    </Animatable.Text>
-                  </Animatable.View>
-                </Animatable.View>
-              </Animatable.View>
-            </Animatable.View>
+            <View
+              style={{
+                alignItems: 'center',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}>
+              <Image
+                style={{
+                  height: scale(200),
+                  width: scale(200),
+                  alignSelf: 'center',
+                }}
+                source={require('../../assets/images/orientationLogo.png')}></Image>
+            </View>
             <View style={styles.bottom}>
-              <Animatable.View animation="fadeOut" delay={3300}>
-                <Animatable.View animation="pulse" duration={1050} delay={2300}>
-                  <Animatable.View
-                    animation="fadeIn"
-                    duration={2210}
-                    delay={850}
-                    style={{flexDirection: 'column', justifyContent: 'center'}}>
-                    <Animatable.Image
-                      style={{
-                        height: scale(40),
-                        width: scale(40),
-                        alignSelf: 'center',
-                      }}
-                      source={require('../../assets/images/blackSpider.png')}></Animatable.Image>
-                    <Text style={styles.spiderTexts}>S P I D E R</Text>
-                  </Animatable.View>
-                </Animatable.View>
-              </Animatable.View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  style={{
+                    height: scale(50),
+                    width: scale(100),
+                    alignSelf: 'center',
+                  }}
+                  source={require('../../assets/images/spiderLogo.png')}></Image>
+              </View>
             </View>
           </View>
         </>
@@ -293,9 +214,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: scale(16) / PixelRatio.getFontScale(),
+    fontSize: scale(14) / PixelRatio.getFontScale(),
     // fontWeight:"bold",
-    color: 'black',
+    color: 'white',
     elevation: 1,
     fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
     //fontFamily: 'Montserrat-Bold',
@@ -304,13 +225,13 @@ const styles = StyleSheet.create({
   bottom: {
     justifyContent: 'space-between',
     position: 'absolute',
-    bottom: verticalScale(10), //
+    bottom: verticalScale(30), //
     width: '100%',
   },
   top: {
     flex: 1,
     alignContent: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#130e0b',
   },
 });
