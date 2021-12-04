@@ -77,7 +77,7 @@ export const studentLogin = (rollNo, password) => {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
 
-                    API_SCREEN_Store.setErrorText(error.response.data.message);
+                    API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
                   } else if (error.request) {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

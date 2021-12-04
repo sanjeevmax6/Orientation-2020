@@ -21,6 +21,7 @@ const SplashScreen = () => {
   const [URL_STATE, setURL_STATE] = useState(0);
 
   const navigate = () => {
+    console.log(URL_STATE);
     if (URL_STATE === 1) {
       //still loading
       setState(1);
@@ -125,17 +126,15 @@ const SplashScreen = () => {
     setupMobx();
   }, []);
 
+  setTimeout(function () {
+    navigate();
+  }, 3000);
   return (
     <>
       {State === 0 ? (
         <>
           <View style={styles.top}>
-            <Animatable.View
-              animation="fadeOutUp"
-              delay={3300}
-              onAnimationEnd={() => {
-                navigate();
-              }}>
+            <Animatable.View animation="fadeOutUp" delay={3300}>
               <Animatable.View animation="pulse" duration={1050} delay={2300}>
                 <Animatable.View
                   animation="flipInX"
@@ -230,13 +229,21 @@ const SplashScreen = () => {
               </Animatable.View>
             </Animatable.View>
             <View style={styles.bottom}>
-              <Animatable.View animation="fadeOutDown" delay={3300}>
+              <Animatable.View animation="fadeOut" delay={3300}>
                 <Animatable.View animation="pulse" duration={1050} delay={2300}>
                   <Animatable.View
-                    animation="slideInUp"
+                    animation="fadeIn"
                     duration={2210}
+                    delay={850}
                     style={{flexDirection: 'column', justifyContent: 'center'}}>
-                    <Text style={styles.spiderTexts}>Spider R&D</Text>
+                    <Animatable.Image
+                      style={{
+                        height: scale(40),
+                        width: scale(40),
+                        alignSelf: 'center',
+                      }}
+                      source={require('../../assets/images/blackSpider.png')}></Animatable.Image>
+                    <Text style={styles.spiderTexts}>S P I D E R</Text>
                   </Animatable.View>
                 </Animatable.View>
               </Animatable.View>
@@ -266,7 +273,7 @@ const styles = StyleSheet.create({
   main: {
     fontSize: scale(26) / PixelRatio.getFontScale(),
     color: 'black',
-    top: verticalScale(-25),
+    top: verticalScale(-35),
     fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
 
     fontWeight: 'bold',
@@ -275,7 +282,7 @@ const styles = StyleSheet.create({
   num: {
     fontSize: scale(32) / PixelRatio.getFontScale(),
     color: '#f13e4d',
-    top: verticalScale(-26),
+    top: verticalScale(-36),
     fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
 
     //fontFamily: 'Montserrat-Bold',
@@ -288,7 +295,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: scale(16) / PixelRatio.getFontScale(),
     // fontWeight:"bold",
-    color: 'darkblue',
+    color: 'black',
     elevation: 1,
     fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
     //fontFamily: 'Montserrat-Bold',
