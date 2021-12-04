@@ -303,7 +303,7 @@ const EmailScreen = observer(
         </View>
         <View
           style={{
-            height: verticalScale(380),
+            height: verticalScale(390),
             marginTop: verticalScale(5),
             width: '100%',
             alignSelf: 'center',
