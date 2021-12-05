@@ -12,13 +12,14 @@ import {
   TouchableOpacity,
   Linking,
   RefreshControl,
+  ToastAndroid,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {paddingSmall, borderRadius, FONT} from '../../utils/UIConstants';
 import {Icon, Layout} from '@ui-kitten/components';
 import ClubCategory from './clubCategory';
-
 import {observer} from 'mobx-react';
 import {Club_Modal_Store} from '../../mobx/clubModalStore';
 import LinearGradient from 'react-native-linear-gradient';
@@ -31,11 +32,14 @@ const category = ['Technical', 'Cultural', 'Social', 'Fests'];
 import {festApis, clubApis} from './API_CALLS';
 const ClubsAndFests = observer(({navigation}) => {
   const linkOpener = link => {
+    link = link.trim();
     Linking.canOpenURL(link).then(supported => {
       if (supported) {
         Linking.openURL(link);
       } else {
         console.log('Cannot open ' + link);
+        Clipboard.setString(link);
+        ToastAndroid.show('Copied link to clipboard', ToastAndroid.LONG);
       }
     });
   };

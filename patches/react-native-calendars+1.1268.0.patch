@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-calendars/src/calendar/day/basic/style.js b/node_modules/react-native-calendars/src/calendar/day/basic/style.js
-index 7de44d8..f955c5d 100644
+index 7de44d8..5b56e81 100644
 --- a/node_modules/react-native-calendars/src/calendar/day/basic/style.js
 +++ b/node_modules/react-native-calendars/src/calendar/day/basic/style.js
 @@ -5,33 +5,41 @@ export default function styleConstructor(theme = {}) {
@@ -19,7 +19,7 @@ index 7de44d8..f955c5d 100644
 +            marginTop: 0,
 +          },
 +          text: {
-+            marginTop: 5,
++            marginTop: 10,
              fontSize: appStyle.textDayFontSize,
              fontFamily: appStyle.textDayFontFamily,
              fontWeight: appStyle.textDayFontWeight,
@@ -30,15 +30,15 @@ index 7de44d8..f955c5d 100644
 +          },
 +          selected: {
 +            backgroundColor: appStyle.selectedDayBackgroundColor,
-+            borderRadius: 15,
-+             height: 30,
-+             width: 30
++            borderRadius: 45,
++            height: 45,
++            width: 45,
 +          },
 +          today: {
 +            backgroundColor: appStyle.todayBackgroundColor,
-+            borderRadius: 15,
-+             height: 30,
-+             width: 30
++            borderRadius: 45,
++            height: 45,
++            width: 45,
 +          },
 +       
 +        base: {
