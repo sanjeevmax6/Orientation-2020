@@ -511,7 +511,7 @@ const Timetable = ({navigation}) => {
                 </View>
                 <TouchableOpacity
                   onPress={toggle}
-                  style={{flexDirection: 'row'}}>
+                  style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Text style={styles.calendarText}> {calendarText} </Text>
                   <Icon
                     name={icon}
@@ -624,7 +624,8 @@ const styles = StyleSheet.create({
     fontFamily: FONT,
   },
   hideCalendarIcons: {
-    height: verticalScale(iconSmall + 5),
+    height: scale(fontSizeMedium),
+    width: scale(fontSizeMedium),
   },
   calendarIcons: {
     height: verticalScale(iconSmall + 10),
