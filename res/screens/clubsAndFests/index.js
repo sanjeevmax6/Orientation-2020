@@ -35,6 +35,7 @@ const ClubsAndFests = observer(({navigation}) => {
       if (supported) {
         Linking.openURL(link);
       } else {
+        console.log('Cannot open ' + link);
       }
     });
   };
