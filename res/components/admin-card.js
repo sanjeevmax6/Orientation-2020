@@ -1,16 +1,21 @@
 import React from 'react';
 import {Card, Icon, Text} from '@ui-kitten/components';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {FONT, paddingSmall} from '../utils/UIConstants';
+import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {Black} from '../utils/colors';
+import {useToast} from 'react-native-toast-notifications';
 
 const AdminCard = ({data}) => {
+  const toast = useToast();
+
   return (
     <SafeAreaView>
       <Card style={styles.card}>
         <View style={styles.cardContainer}>
           <Icon style={styles.icon} fill={Black} name="person" />
+
           <Text style={styles.text}>{data.name}</Text>
         </View>
         <View style={styles.cardContainer}>
@@ -19,22 +24,36 @@ const AdminCard = ({data}) => {
         </View>
         <View style={styles.cardContainer}>
           <Icon style={styles.icon} fill={Black} name="phone" />
-          <Text
-            selectable={true}
-            selectionColor={'#f13e4d'}
-            style={styles.text}>
-            {data.mobile}
-          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              Clipboard.setString(data.mobile + '');
+              toast.show(`Copied ${data.name}'s phone number to clipboard`, {
+                type: 'success',
+                placement: 'top',
+                duration: 1500,
+                offsetTop: verticalScale(1000),
+                animationType: 'slide-in',
+              });
+            }}>
+            <Text style={styles.text}>{data.mobile}</Text>
+          </TouchableOpacity>
         </View>
         {data.email && (
           <View style={styles.cardContainer}>
             <Icon style={styles.icon} fill={Black} name="email" />
-            <Text
-              selectable={true}
-              selectionColor={'#f13e4d'}
-              style={styles.text}>
-              {data.email}
-            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                Clipboard.setString(data.email + '');
+                toast.show(`Copied ${data.name}'s email to clipboard`, {
+                  type: 'success',
+                  placement: 'top',
+                  duration: 1500,
+                  offsetTop: verticalScale(1000),
+                  animationType: 'slide-in',
+                });
+              }}>
+              <Text style={styles.text}>{data.email}</Text>
+            </TouchableOpacity>
           </View>
         )}
       </Card>

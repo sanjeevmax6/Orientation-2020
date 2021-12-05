@@ -67,3 +67,4 @@ export const dateContainerColor = PRIMARY;
 
 //Universal
 export const ORANGE = '#f27d00'; //icon colors
+export const TOAST_COLOR = '#DA5844';

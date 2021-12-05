@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useEffect, useState} from 'react';
 
 import {
@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
   Linking,
   RefreshControl,
-  ToastAndroid,
 } from 'react-native';
+import Toast from 'react-native-toast-notifications';
 import {ScrollView} from 'react-native-gesture-handler';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -23,7 +23,7 @@ import ClubCategory from './clubCategory';
 import {observer} from 'mobx-react';
 import {Club_Modal_Store} from '../../mobx/clubModalStore';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {TOAST_COLOR} from '../../utils/colors';
 import ErrorScreen from '../../components/errorScreen';
 import LoaderPage from '../LoadingScreen';
 
@@ -31,15 +31,21 @@ const category = ['Technical', 'Cultural', 'Social', 'Fests'];
 
 import {festApis, clubApis} from './API_CALLS';
 const ClubsAndFests = observer(({navigation}) => {
+  const toastRef = useRef();
   const linkOpener = link => {
     link = link.trim();
+
     Linking.canOpenURL(link).then(supported => {
       if (supported) {
         Linking.openURL(link);
       } else {
         console.log('Cannot open ' + link);
         Clipboard.setString(link);
-        ToastAndroid.show('Copied link to clipboard', ToastAndroid.LONG);
+        toastRef.current.show(`Copied link to clipboard`, {
+          type: 'success',
+          placement: 'top',
+          animationType: 'slide-in',
+        });
       }
     });
   };
@@ -324,6 +330,13 @@ const ClubsAndFests = observer(({navigation}) => {
                     </ScrollView>
                   </View>
                 </View>
+                <Toast
+                  successColor={TOAST_COLOR}
+                  ref={toastRef}
+                  offset={verticalScale(35)}
+                  duration={1500}
+                  textStyle={{fontFamily: FONT, fontSize: scale(14)}}
+                />
               </Modal>
             </ScrollView>
           </>

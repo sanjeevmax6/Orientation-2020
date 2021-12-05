@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Card, Icon} from '@ui-kitten/components';
 import {
@@ -12,7 +12,8 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-
+import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-toast-notifications';
 import {
   borderRadius,
   paddingMedium,
@@ -22,12 +23,13 @@ import {
   borderRadiusMedium,
   paddingSmall,
 } from '../utils/UIConstants';
-import {Black, White, ORANGE} from '../utils/colors';
+import {Black, White, ORANGE, TOAST_COLOR} from '../utils/colors';
 
 let cardHeight = 200;
 let cardWidth = 150;
 
 const ContactCard = ({item}) => {
+  const toastRef = useRef();
   const [visible, setVisible] = useState(false);
   return (
     <View>
@@ -109,13 +111,23 @@ const ContactCard = ({item}) => {
               </Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon style={styles.icon} fill={ORANGE} name="phone" />
-                <Text
-                  selectable={true}
-                  selectionColor={'#f13e4d'}
-                  style={styles.phoneText}>
-                  {item.mobile}
-                  {'   '}|{'   '}
-                </Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    Clipboard.setString(item.mobile + '');
+                    toastRef.current.show(
+                      `Copied ${item.name}'s phone number to clipboard`,
+                      {
+                        type: 'success',
+                        placement: 'top',
+                        animationType: 'slide-in',
+                      },
+                    );
+                  }}>
+                  <Text style={styles.phoneText}>
+                    {item.mobile} {'   '}|{'   '}
+                  </Text>
+                </TouchableOpacity>
+
                 <Icon
                   style={styles.icon}
                   fill={ORANGE}
@@ -126,6 +138,13 @@ const ContactCard = ({item}) => {
             </View>
           </View>
         </View>
+        <Toast
+          successColor={TOAST_COLOR}
+          ref={toastRef}
+          offset={verticalScale(35)}
+          duration={1500}
+          textStyle={{fontFamily: FONT, fontSize: scale(14)}}
+        />
       </Modal>
     </View>
   );

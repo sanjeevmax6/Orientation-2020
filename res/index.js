@@ -5,7 +5,7 @@ import {FontAwesome5IconsPack} from './assets/icons/fontAwesome5-icons';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import Navigator from './navigation';
 import Status_Bar from './components/status_bar';
-import {Observer, Provider} from 'mobx-react';
+import {Observer} from 'mobx-react';
 import {UserData} from './mobx/userStore';
 import {default as theme} from './utils/custom-theme.json';
 import axios from 'axios';
@@ -14,7 +14,10 @@ import PushNotification from 'react-native-push-notification';
 import firebase from '@react-native-firebase/app';
 import {useEffect} from 'react';
 import {Linking} from 'react-native';
-
+import {ToastProvider} from 'react-native-toast-notifications';
+import {TOAST_COLOR} from './utils/colors';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {FONT} from './utils/UIConstants';
 const App = () => {
   axios.defaults.timeout = 5000;
 
@@ -73,8 +76,14 @@ const App = () => {
         <>
           <Status_Bar />
           <IconRegistry icons={[EvaIconsPack, FontAwesome5IconsPack]} />
+
           <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-            <Navigator />
+            <ToastProvider
+              successColor={TOAST_COLOR}
+              textStyle={{fontFamily: FONT, fontSize: scale(14)}}
+              offsetTop={verticalScale(50)}>
+              <Navigator />
+            </ToastProvider>
           </ApplicationProvider>
         </>
       )}
