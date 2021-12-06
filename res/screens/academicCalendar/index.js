@@ -94,6 +94,33 @@ function modifyData(data) {
   return noticesData;
 }
 
+//Function to get the initial Notice or the upcoming notice
+function getInitialNotice(date, AcademicCalendarNoticeData) {
+  var i = 0;
+
+  while (i < AcademicCalendarNoticeData.length) {
+    if (AcademicCalendarNoticeData[i].multipleDate) {
+      if (
+        new Date(
+          AcademicCalendarNoticeData[i].endDate.valueOf() + 1000 * 3600 * 24,
+        ) >= date
+      ) {
+        return i;
+      }
+    } else {
+      if (
+        new Date(
+          AcademicCalendarNoticeData[i].date.valueOf() + 1000 * 3600 * 24,
+        ) >= date
+      ) {
+        return i;
+      }
+    }
+    i++;
+  }
+  return i - 1;
+}
+
 //Function to get the current Notice or the upcoming notice
 function getCurrentNotice(date, AcademicCalendarNoticeData) {
   var i = 0;
@@ -117,11 +144,19 @@ function getCurrentNotice(date, AcademicCalendarNoticeData) {
 function checkDeadline(AcademicCalendarNoticeData) {
   for (var i = 0; i < AcademicCalendarNoticeData.length; i++) {
     if (AcademicCalendarNoticeData[i].multipleDate) {
-      if (AcademicCalendarNoticeData[i].endDate < indianTime(new Date())) {
+      if (
+        new Date(
+          AcademicCalendarNoticeData[i].endDate.valueOf() + 1000 * 3600 * 24,
+        ) < indianTime(new Date())
+      ) {
         AcademicCalendarNoticeData[i].deadlineOver = true;
       }
     } else {
-      if (AcademicCalendarNoticeData[i].date < indianTime(new Date())) {
+      if (
+        new Date(
+          AcademicCalendarNoticeData[i].date.valueOf() + 1000 * 3600 * 24,
+        ) < indianTime(new Date())
+      ) {
         AcademicCalendarNoticeData[i].deadlineOver = true;
       }
     }
@@ -357,7 +392,7 @@ const Timetable = ({navigation}) => {
   if (isLoading == false) {
     AcademicCalendarNoticeData = modifyData(data);
     checkDeadline(AcademicCalendarNoticeData);
-    intialIndex = getCurrentNotice(
+    intialIndex = getInitialNotice(
       indianTime(new Date()),
       AcademicCalendarNoticeData,
     );
