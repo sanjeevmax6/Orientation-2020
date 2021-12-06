@@ -191,6 +191,8 @@ const ClubsAndFests = observer(({navigation}) => {
                           style={{
                             fontSize: scale(30) / PixelRatio.getFontScale(),
                             fontFamily: FONT,
+                            paddingHorizontal: scale(6),
+                            fontWeight: '900',
                           }}>
                           {Club_Modal_Store.ClubName}
                         </Text>
@@ -301,7 +303,7 @@ const ClubsAndFests = observer(({navigation}) => {
                         style={{
                           height: verticalScale(1),
                           backgroundColor: '#eaeaea',
-                          marginHorizontal: scale(3),
+                          marginHorizontal: scale(5),
                           marginVertical: verticalScale(6),
                           opacity: 0.8,
                         }}
@@ -323,6 +325,7 @@ const ClubsAndFests = observer(({navigation}) => {
                             textAlign: 'justify',
                             lineHeight: verticalScale(30),
                             fontFamily: FONT,
+                            paddingHorizontal: scale(6),
                           }}>
                           {Club_Modal_Store.Description}
                         </Text>

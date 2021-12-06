@@ -490,7 +490,7 @@ const Timetable = ({navigation}) => {
                           style={{
                             flexDirection: 'column',
                             justifyContent: 'center',
-                            marginTop: verticalScale(3),
+                            marginTop: verticalScale(0),
                           }}>
                           <View
                             style={[
@@ -514,6 +514,8 @@ const Timetable = ({navigation}) => {
                             style={[
                               styles.line,
                               {backgroundColor: Colors.Transparent},
+
+                              {alignItems: 'center'},
                             ]}
                           />
                           <View
@@ -523,14 +525,24 @@ const Timetable = ({navigation}) => {
                             ]}
                           />
                         </View>
-                        <Text style={styles.legendText}> : Notices</Text>
+                        <Text style={styles.legendText}> Notices</Text>
                       </View>
+
                       <View
                         style={{flexDirection: 'row', alignItems: 'center'}}>
                         <View style={styles.circle} />
-                        <Text style={styles.legendText}> : Holiday</Text>
+                        <Text style={styles.legendText}> Holiday</Text>
                       </View>
                     </View>
+                    <View
+                      style={{
+                        height: 1,
+                        marginTop: verticalScale(6),
+                        marginRight: scale(15),
+                        marginLeft: scale(15),
+                        backgroundColor: '#d3d3d3',
+                      }}
+                    />
                   </>
                 ) : null}
               </View>
@@ -617,6 +629,7 @@ const styles = StyleSheet.create({
     height: verticalScale(iconMedium),
   },
   circle: {
+    //not scaled on purpose
     width: 25,
     height: 25,
     borderRadius: 25 / 2,

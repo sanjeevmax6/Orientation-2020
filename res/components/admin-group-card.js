@@ -4,7 +4,7 @@ import {MenuGroup} from '@ui-kitten/components';
 import AdminCard from './admin-card';
 import {contactsStore} from '../mobx/contactsStore';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
-import {paddingSmall} from '../utils/UIConstants';
+import {borderRadiusMedium, paddingSmall} from '../utils/UIConstants';
 
 const GroupCard = ({category}) => {
   const data = contactsStore.state.adminData;
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(paddingSmall),
     backgroundColor: 'whitesmoke',
     height: verticalScale(60),
-    elevation: moderateScale(5),
+    elevation: 3,
+    borderRadius: scale(borderRadiusMedium),
   },
 });
 

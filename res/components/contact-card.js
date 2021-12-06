@@ -109,7 +109,12 @@ const ContactCard = ({item}) => {
                 style={{fontSize: scale(fontSizeVeryLarge), fontFamily: FONT}}>
                 {item.name}
               </Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginTop: verticalScale(9),
+                }}>
                 <Icon style={styles.icon} fill={ORANGE} name="phone" />
                 <TouchableOpacity
                   onPress={() => {

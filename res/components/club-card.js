@@ -38,7 +38,7 @@ const ClubCard = ({
     Club_Modal_Store.setYoutube(Youtube);
   };
   return (
-    <TouchableOpacity onPress={onPressHandler}>
+    <TouchableOpacity activeOpacity={0.8} onPress={onPressHandler}>
       <LinearGradient
         start={{x: 0.0, y: 0.0}}
         end={{x: 1.0, y: 0.0}}

@@ -43,14 +43,14 @@ const EventCard = ({item, navigation}) => {
 const styles = ScaledSheet.create({
   cardcontainer: {
     flexDirection: 'row',
-    borderColor: 'black',
-    borderWidth: '1@s',
+    borderColor: '#666666',
+    borderWidth: '0.5@s',
     borderRadius: '6@s',
-    marginTop: '9@vs',
     padding: '5@s',
     marginHorizontal: '10@s',
     backgroundColor: 'white',
-    elevation: 6,
+    elevation: 3,
+    marginVertical: '9@vs',
   },
   eventinfo: {
     flexDirection: 'column',

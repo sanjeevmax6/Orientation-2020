@@ -6,6 +6,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {Black} from '../utils/colors';
 import {useToast} from 'react-native-toast-notifications';
+import {borderRadiusMedium} from '../utils/UIConstants';
 
 const AdminCard = ({data}) => {
   const toast = useToast();
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(5),
     marginHorizontal: scale(paddingSmall),
     backgroundColor: 'coral',
+    borderRadius: scale(borderRadiusMedium),
   },
   icon: {
     width: scale(20),
