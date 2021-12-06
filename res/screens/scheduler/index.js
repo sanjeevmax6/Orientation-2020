@@ -133,32 +133,32 @@ const Scheduler = ({navigation}) => {
                   calendarColor={Colors.CalendarColor}
                   dateNumberStyle={{
                     color: Colors.dateNumberStyleColor,
-                    fontSize: fontSizeBig,
+                    fontSize: scale(fontSizeBig - 2),
                     fontFamily: FONT,
                   }}
                   dateNameStyle={{
                     color: Colors.dateNameStyleColor,
-                    fontSize: fontSizeMedium,
+                    fontSize: scale(fontSizeMedium - 2),
                     fontFamily: FONT,
                   }}
                   highlightDateNumberStyle={{
                     color: Colors.highlightDateNumberStyleColor,
-                    fontSize: fontSizeBig,
+                    fontSize: scale(fontSizeBig),
                     fontFamily: FONT,
                   }}
                   highlightDateNameStyle={{
                     color: Colors.highlightDateNameStyleColor,
-                    fontSize: fontSizeSmall,
+                    fontSize: scale(fontSizeSmall),
                     fontFamily: FONT,
                   }}
                   disabledDateNameStyle={{
                     color: Colors.disabledDateNameStyleColor,
-                    fontSize: fontSizeSmall,
+                    fontSize: scale(fontSizeSmall),
                     fontFamily: FONT,
                   }}
                   disabledDateNumberStyle={{
                     color: Colors.disabledDateNumberStyleColor,
-                    fontSize: fontSizeBig,
+                    fontSize: scale(fontSizeBig - 2),
                     fontFamily: FONT,
                   }}
                   // datesWhitelist={datesWhitelist}

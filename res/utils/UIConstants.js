@@ -21,7 +21,7 @@ export const iconMedium = 25;
 export const iconLarge = 40;
 
 //academicCalendarCardHeight
-export const academicCalendarCardHeight = 75;
+export const academicCalendarCardHeight = 80;
 
 //Font Name
 export const FONT = 'SourceSansPro-Regular';

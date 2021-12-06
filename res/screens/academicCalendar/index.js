@@ -539,8 +539,12 @@ const Timetable = ({navigation}) => {
             <View style={{flex: 1, justifyContent: 'center'}}>
               <View style={styles.todayTextandDropDownContainer}>
                 <View style={styles.todayTextContainer}>
-                  <Text style={styles.todayTitleText}>Selected : </Text>
-                  <Text style={styles.todayText}>
+                  <Icon
+                    name="calendar-day"
+                    style={styles.selectedDateIcon}
+                    pack="FontAwesome5"
+                  />
+                  <Text style={styles.selectedDate}>
                     {moment(selectedDate).format('MMM Do')}
                   </Text>
                 </View>
@@ -550,7 +554,7 @@ const Timetable = ({navigation}) => {
                   <Text style={styles.calendarText}> {calendarText} </Text>
                   <Icon
                     name={icon}
-                    style={styles.hideCalendarIcons}
+                    style={styles.hideCalendarIcon}
                     pack="FontAwesome5"
                   />
                 </TouchableOpacity>
@@ -646,11 +650,17 @@ const styles = StyleSheet.create({
     color: Colors.Black,
     fontFamily: FONT,
   },
-  todayText: {
+  selectedDate: {
     fontSize: scale(fontSizeMedium),
-    color: Colors.Secondary,
+    color: Colors.selectedDayBackgroundColor,
     alignItems: 'center',
     fontFamily: FONT,
+    marginLeft: scale(paddingSmall - 2),
+  },
+  selectedDateIcon: {
+    height: scale(fontSizeMedium),
+    width: scale(fontSizeMedium),
+    color: Colors.selectedDayBackgroundColor,
   },
   calendarText: {
     fontSize: scale(fontSizeMedium),
@@ -658,14 +668,9 @@ const styles = StyleSheet.create({
     color: Colors.Black,
     fontFamily: FONT,
   },
-  hideCalendarIcons: {
+  hideCalendarIcon: {
     height: scale(fontSizeMedium),
     width: scale(fontSizeMedium),
-  },
-  calendarIcons: {
-    height: verticalScale(iconSmall + 10),
-    marginHorizontal: scale(paddingSmall / 2),
-    display: 'none',
   },
 });
 

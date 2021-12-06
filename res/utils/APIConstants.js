@@ -1,5 +1,5 @@
 export const DEFAULT_BASE_URL = 'https://orientation-spider.cloudns.nz/';
-export const REF_URL = 'https://spider.nitt.edu/~selva/api_gateway.php';
+export const REF_URL = 'https://nsi319.github.io/orientation/';
 
 export const API_STUDENT_LOGIN = 'auth/login';
 export const API_GET_EVENTS = 'api/events/getEvents';
