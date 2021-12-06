@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, Dimensions} from 'react-native';
+import {View, Image, Text, Dimensions, TouchableOpacity} from 'react-native';
 import {Divider, Icon} from '@ui-kitten/components';
 import {
   moderateScale,
@@ -8,6 +8,7 @@ import {
   verticalScale,
 } from 'react-native-size-matters';
 import {paddingSmall, fontSizeMedium, FONT} from '../../utils/UIConstants';
+import {useToast} from 'react-native-toast-notifications';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -15,9 +16,11 @@ import Links from './Links';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import {ORANGE} from '../../utils/colors';
+import Clipboard from '@react-native-clipboard/clipboard';
 const WIDTH = Dimensions.get('window').width;
 
 const EventDescription = ({route}) => {
+  const toast = useToast();
   const {data} = route.params;
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -100,16 +103,29 @@ const EventDescription = ({route}) => {
                 fill={ORANGE}
                 style={{height: verticalScale(15), width: scale(15)}}
               />
-              <Text
-                selectable={true}
-                selectionColor={'#f13e4d'}
-                style={{
-                  ...styles.description,
-                  marginLeft: scale(5),
-                  marginBottom: 0,
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(data.ContactNumber1 + '');
+                  toast.show(
+                    `Copied ${data.ContactName1}'s phone number to clipboard`,
+                    {
+                      type: 'success',
+                      placement: 'top',
+                      duration: 1500,
+                      offsetTop: verticalScale(1000),
+                      animationType: 'slide-in',
+                    },
+                  );
                 }}>
-                {data.ContactName1} - {data.ContactNumber1}
-              </Text>
+                <Text
+                  style={{
+                    ...styles.description,
+                    marginLeft: scale(5),
+                    marginBottom: 0,
+                  }}>
+                  {data.ContactName1} - {data.ContactNumber1}
+                </Text>
+              </TouchableOpacity>
             </View>
             <View
               style={{
@@ -121,16 +137,29 @@ const EventDescription = ({route}) => {
                 fill={ORANGE}
                 style={{height: verticalScale(15), width: scale(15)}}
               />
-              <Text
-                selectable={true}
-                selectionColor={'#f13e4d'}
-                style={{
-                  ...styles.description,
-                  marginLeft: scale(5),
-                  marginBottom: 0,
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(data.ContactNumber2 + '');
+                  toast.show(
+                    `Copied ${data.ContactName2}'s phone number to clipboard`,
+                    {
+                      type: 'success',
+                      placement: 'top',
+                      duration: 1500,
+                      offsetTop: verticalScale(1000),
+                      animationType: 'slide-in',
+                    },
+                  );
                 }}>
-                {data.ContactName2} - {data.ContactNumber2}
-              </Text>
+                <Text
+                  style={{
+                    ...styles.description,
+                    marginLeft: scale(5),
+                    marginBottom: 0,
+                  }}>
+                  {data.ContactName2} - {data.ContactNumber2}
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
