@@ -577,10 +577,12 @@ const Timetable = ({navigation}) => {
                   showsVerticalScrollIndicator={false}
                   ref={ref => (_flatlist.current = ref)}
                   refreshControl={
-                    <RefreshControl
-                      refreshing={refreshing}
-                      onRefresh={onRefresh}
-                    />
+                    !showCalendar ? (
+                      <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                      />
+                    ) : null
                   }
                   data={AcademicCalendarNoticeData}
                   getItemLayout={(data, index) => ({
