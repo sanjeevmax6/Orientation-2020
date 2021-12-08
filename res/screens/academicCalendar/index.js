@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  ScrollView,
+  Pressable,
 } from 'react-native';
 import {Layout, Icon} from '@ui-kitten/components';
 import {SafeAreaView, Animated} from 'react-native';
@@ -27,10 +29,10 @@ import {
 import moment from 'moment';
 import {scale, verticalScale} from 'react-native-size-matters';
 import AcademicCalendarCard from '../../components/academicCalendar-card';
+import CustomAlert from '../../components/customAlert';
 import {API_GET_NOTICE} from '../../utils/APIConstants';
 import NetInfo from '@react-native-community/netinfo';
 import ErrorScreen from '../../components/errorScreen';
-import {ScrollView} from 'react-native-gesture-handler';
 import {UserData} from '../../mobx/userStore';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import LoaderPage from '../LoadingScreen';
@@ -305,6 +307,10 @@ const Timetable = ({navigation}) => {
   const [selectedDate, setSelectedDate] = useState(
     moment().format('YYYY-MM-DD'),
   );
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+
   const _flatlist = useRef();
   const maxHeight = verticalScale(400);
   var ht;
@@ -382,6 +388,26 @@ const Timetable = ({navigation}) => {
     setRefreshing(false);
   }, []);
 
+  const onNoticePress = notice => {
+    console.log(notice.date);
+    const multipleDate = notice.multipleDate;
+    if (multipleDate) {
+      var startDate = notice.startDate;
+      var endDate = notice.endDate;
+    }
+    var noticeTitle = multipleDate
+      ? moment(startDate).format("Do MMM 'YY") +
+        ' - ' +
+        moment(endDate).format("Do MMM 'YY")
+      : moment(notice.date).format("Do MMM 'YY");
+    setModalTitle(noticeTitle);
+    var noticeMessage = notice.holiday
+      ? 'HOLIDAY: ' + notice.noticeTitle
+      : notice.noticeTitle;
+    setModalMessage(noticeMessage);
+    setModalVisible(true);
+  };
+
   useEffect(() => {
     handleAPICALL();
   }, []);
@@ -400,6 +426,17 @@ const Timetable = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.Grey}}>
+      <CustomAlert
+        title={modalTitle}
+        message={modalMessage}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        buttons={[
+          {
+            text: 'CLOSE',
+          },
+        ]}
+      />
       <Layout style={{flex: 1, justifyContent: 'center'}}>
         {isConnected == false ? (
           //No Internet
@@ -602,9 +639,9 @@ const Timetable = ({navigation}) => {
                   bounces={false}
                   bouncesZoom={false}
                   renderItem={({item, index}) => (
-                    <View>
+                    <Pressable onPress={() => onNoticePress(item)}>
                       <AcademicCalendarCard notice={item} />
-                    </View>
+                    </Pressable>
                   )}
                 />
               </View>
