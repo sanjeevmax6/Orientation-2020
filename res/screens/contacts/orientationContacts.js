@@ -36,6 +36,7 @@ const Orientation = observer(({navigation}) => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             data={contactsStore.state.orientationData.slice()}
+            columnWrapperStyle={styles.row}
             renderItem={({item}) => <ContactCard item={item} />}
             numColumns={2}
           />
@@ -50,6 +51,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  row: {
+    flex: 1,
+    justifyContent: 'space-around',
   },
 });
 export default Orientation;

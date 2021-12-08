@@ -88,7 +88,8 @@ const CustomAlert = props => {
           },
         ]}
         onLayout={e => {
-          if (e.nativeEvent.layout.height > 60) setButtonLayoutHorizontal(0);
+          if (e.nativeEvent.layout.height > verticalScale(60))
+            setButtonLayoutHorizontal(0);
         }}>
         {buttonProps.map((item, index) => {
           if (index > 2) return null;
