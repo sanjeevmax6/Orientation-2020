@@ -83,6 +83,7 @@ const EmailScreen = observer(
             axios
               .post(url, {
                 email: SIGN_UP_STORE.getEmail + '@nitt.edu',
+                name: SIGN_UP_STORE.getName,
               })
               .then(response => {
                 if (response.data.status === 'success') {
