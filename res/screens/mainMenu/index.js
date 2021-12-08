@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   Text,
   Alert,
+  Linking,
 } from 'react-native';
+import CustomAlert from '../../components/customAlert';
 import {Layout, Card, Icon} from '@ui-kitten/components';
 import * as Colors from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
@@ -20,39 +22,16 @@ import {
   iconMedium,
   fontSizeVeryLarge,
   FONT,
+  fontSizeMedium,
 } from '../../utils/UIConstants';
 import {UserData} from '../../mobx/userStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as KEYS from '../../utils/STORAGE_KEYS';
+import VersionCheck from 'react-native-version-check';
+import {APP_PLAYSTORE_URL} from '../../utils/APIConstants';
 
 const MainMenu = ({navigation}) => {
-  const logOut = () => {
-    Alert.alert(
-      'Logout?',
-      'You will return to login screen',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {
-            AsyncStorage.removeItem(KEYS.USER_TOKEN);
-            AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
-            AsyncStorage.removeItem(KEYS.USER_NAME);
-            AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
-            AsyncStorage.removeItem(KEYS.IS_USER_ADMIN);
-            UserData.setToken('');
-            UserData.setDepartment('');
-            UserData.setName('');
-            UserData.setRollNo('');
-          },
-        },
-      ],
-      {cancelable: false},
-    );
-  };
+  const [logoutVisible, setLogoutVisible] = useState(false);
 
   const data = {
     orientationTitle: 'Orientation 2021',
@@ -64,6 +43,31 @@ const MainMenu = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <Layout style={{flex: 1}}>
+        <CustomAlert
+          title={'Logout?'}
+          message={'You will return to login screen'}
+          modalVisible={logoutVisible}
+          setModalVisible={setLogoutVisible}
+          buttons={[
+            {
+              text: 'NO',
+            },
+            {
+              text: 'YES',
+              func: () => {
+                AsyncStorage.removeItem(KEYS.USER_TOKEN);
+                AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
+                AsyncStorage.removeItem(KEYS.USER_NAME);
+                AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
+                AsyncStorage.removeItem(KEYS.IS_USER_ADMIN);
+                UserData.setToken('');
+                UserData.setDepartment('');
+                UserData.setName('');
+                UserData.setRollNo('');
+              },
+            },
+          ]}
+        />
         <View style={styles.dashboard}>
           <ImageBackground
             source={require('../../assets/images/dashboardBackground.png')}
@@ -78,7 +82,7 @@ const MainMenu = ({navigation}) => {
                 </Text>
               </View>
               <View style={styles.logoutContainer}>
-                <TouchableOpacity onPress={() => logOut()}>
+                <TouchableOpacity onPress={() => setLogoutVisible(true)}>
                   <Icon
                     style={styles.iconDashBoard}
                     fill={Colors.DashboardLogo}
@@ -113,7 +117,6 @@ const MainMenu = ({navigation}) => {
                   fill={Colors.DashboardLogo}
                   name="book-outline"
                 />
-
                 <Text numberOfLines={1} style={styles.textDashBoard}>
                   {data.studentBranch}
                 </Text>

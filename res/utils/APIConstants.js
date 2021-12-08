@@ -1,5 +1,7 @@
 export const DEFAULT_BASE_URL = 'https://orientation-spider.cloudns.nz/';
 export const REF_URL = 'https://nsi319.github.io/orientation/';
+export const APP_PLAYSTORE_URL =
+  'https://play.google.com/store/apps/details?id=org.spider.orientation2021';
 
 export const API_STUDENT_LOGIN = 'auth/login';
 export const API_GET_EVENTS = 'api/events/getEvents';

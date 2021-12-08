@@ -8,6 +8,7 @@ import {
   PixelRatio,
   Platform,
   Image,
+  Linking,
 } from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {Login_Store} from '../../mobx/loginStore';
@@ -16,9 +17,15 @@ import {UserData} from '../../mobx/userStore';
 import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {DEFAULT_BASE_URL, REF_URL} from '../../utils/APIConstants';
+import {
+  DEFAULT_BASE_URL,
+  REF_URL,
+  APP_PLAYSTORE_URL,
+} from '../../utils/APIConstants';
+import VersionCheck from 'react-native-version-check';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import ErrorScreen from '../../components/errorScreen';
+import CustomAlert from '../../components/customAlert';
 import LoaderPage from '../LoadingScreen';
 
 import {ERROR_NO_NETWORK, LOADING_EXTERNAL} from '../../utils/LOADING_TYPES';
@@ -26,6 +33,7 @@ import {ERROR_NO_NETWORK, LOADING_EXTERNAL} from '../../utils/LOADING_TYPES';
 const SplashScreen = () => {
   const [State, setState] = useState(0);
   const [URL_STATE, setURL_STATE] = useState(0);
+  const [updateVisible, setUpdateVisible] = useState(false);
 
   const navigate = () => {
     console.log(URL_STATE);
@@ -131,7 +139,15 @@ const SplashScreen = () => {
   }, []);
 
   setTimeout(function () {
-    navigate();
+    VersionCheck.needUpdate({
+      depth: 3,
+    }).then(res => {
+      if (res.isNeeded) {
+        setUpdateVisible(true);
+      } else {
+        navigate();
+      }
+    });
   }, 2000);
 
   return (
@@ -139,6 +155,30 @@ const SplashScreen = () => {
       {State === 0 ? (
         <>
           <View style={styles.top}>
+            <CustomAlert
+              image={require('../../assets/images/orientationLogo.png')}
+              message={
+                'We have made some changes to improve the app performance. Please update your app to the latest version.'
+              }
+              modalVisible={updateVisible}
+              setModalVisible={setUpdateVisible}
+              buttons={[
+                {
+                  text: 'CANCEL',
+                  func: () => {
+                    setUpdateVisible(false);
+                    navigate();
+                  },
+                },
+                {
+                  text: 'UPDATE',
+                  func: () => {
+                    Linking.openURL(APP_PLAYSTORE_URL);
+                    navigate();
+                  },
+                },
+              ]}
+            />
             <View
               style={{
                 alignItems: 'center',

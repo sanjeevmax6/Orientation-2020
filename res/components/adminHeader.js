@@ -12,15 +12,15 @@ import {UserData} from '../mobx/userStore';
 const AdminHeader = ({props, title = 'HEADER'}) => {
   const logOut = () => {
     Alert.alert(
-      'LOGOUT',
-      'Are you sure you want to logout?',
+      'Logout?',
+      'You will return to login screen',
       [
         {
-          text: 'Cancel',
+          text: 'NO',
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: 'YES',
           onPress: () => {
             AsyncStorage.removeItem(KEYS.USER_TOKEN);
             AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
