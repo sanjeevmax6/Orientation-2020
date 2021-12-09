@@ -239,7 +239,11 @@ const ClubsAndFests = observer(({navigation}) => {
                                 linkOpener(Club_Modal_Store.Youtube);
                               }}>
                               <Icon
-                                style={styles.icon}
+                                style={{
+                                  width: scale(23),
+                                  height: verticalScale(18),
+                                  marginHorizontal: scale(2),
+                                }}
                                 fill="black"
                                 name="youtube"
                                 pack="FontAwesome5"
