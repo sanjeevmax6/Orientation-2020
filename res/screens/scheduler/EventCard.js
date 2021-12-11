@@ -7,6 +7,11 @@ import {scale, ScaledSheet} from 'react-native-size-matters';
 import {FONT} from '../../utils/UIConstants';
 
 const EventCard = ({item, navigation}) => {
+  var d = new Date(item.date);
+  let minutes = d.getMinutes();
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
   return (
     <TouchableOpacity
       style={styles.cardcontainer}
@@ -27,7 +32,7 @@ const EventCard = ({item, navigation}) => {
           {item.Title}
         </Text>
         <Text style={{fontFamily: FONT}}>
-          Time: {item.Time} | Duration: {item.Duration}
+          Time: {d.getHours()}:{minutes} | Duration: {item.Duration}
         </Text>
       </View>
       <Image

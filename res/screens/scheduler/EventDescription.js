@@ -22,6 +22,12 @@ const WIDTH = Dimensions.get('window').width;
 const EventDescription = ({route}) => {
   const toast = useToast();
   const {data} = route.params;
+  var s = new Date(data.date);
+  let minutes = s.getMinutes();
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+  let time = '' + s.getHours() + ':' + minutes;
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -53,8 +59,7 @@ const EventDescription = ({route}) => {
                 }}
               />
               <Text style={styles.eventDate}>
-                {moment(data.date).format('DD/MM/YY')} | {data.Time} |{' '}
-                {data.Duration}
+                {s.toDateString()} | {time} | {data.Duration}
               </Text>
             </View>
           </View>
@@ -173,10 +178,11 @@ const styles = ScaledSheet.create({
     width: WIDTH - moderateScale(30),
     marginTop: moderateScale(20),
     marginBottom: moderateScale(20),
+    borderRadius: scale(9),
     alignSelf: 'center',
   },
   title: {
-    fontSize: scale(20),
+    fontSize: scale(21),
     fontWeight: '900',
     marginVertical: verticalScale(7),
     backgroundColor: 'white',
@@ -195,7 +201,6 @@ const styles = ScaledSheet.create({
   eventDate: {
     fontSize: '16@s',
     marginHorizontal: '10@s',
-
     color: 'black',
     fontFamily: FONT,
   },

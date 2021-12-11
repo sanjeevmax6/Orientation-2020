@@ -51,7 +51,7 @@ const SplashScreen = () => {
     NetInfo.fetch().then(state => {
       if (state.isConnected === true) {
         axios
-          .post(
+          .get(
             REF_URL,
             {
               appName: 'orientation-21',
@@ -189,8 +189,9 @@ const SplashScreen = () => {
                 style={{
                   height: scale(200),
                   width: scale(200),
-                  alignSelf: 'center',
+                  marginTop: verticalScale(-54),
                 }}
+                resizeMode="contain"
                 source={require('../../assets/images/orientationLogo.png')}></Image>
             </View>
             <View style={styles.bottom}>
@@ -204,8 +205,8 @@ const SplashScreen = () => {
                   style={{
                     height: scale(50),
                     width: scale(100),
-                    alignSelf: 'center',
                   }}
+                  resizeMode="contain"
                   source={require('../../assets/images/spiderLogo.png')}></Image>
               </View>
             </View>
@@ -231,37 +232,6 @@ const SplashScreen = () => {
 export default SplashScreen;
 
 const styles = StyleSheet.create({
-  main: {
-    fontSize: scale(26) / PixelRatio.getFontScale(),
-    color: 'black',
-    top: verticalScale(-35),
-    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
-
-    fontWeight: 'bold',
-  },
-
-  num: {
-    fontSize: scale(32) / PixelRatio.getFontScale(),
-    color: '#f13e4d',
-    top: verticalScale(-36),
-    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
-
-    //fontFamily: 'Montserrat-Bold',
-  },
-
-  spiderTexts: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: scale(14) / PixelRatio.getFontScale(),
-    // fontWeight:"bold",
-    color: 'white',
-    elevation: 1,
-    fontFamily: Platform.OS === 'android' ? 'serif' : 'arial',
-    //fontFamily: 'Montserrat-Bold',
-    textAlignVertical: 'center',
-  },
   bottom: {
     justifyContent: 'space-between',
     position: 'absolute',

@@ -50,7 +50,7 @@ export const iconColorFade = '#a1aabc';
 
 //CalendarStrip
 export const PRIMARY = '#f6f5f5';
-export const SECONDARY = '#070d59';
+export const SECONDARY = '#000000';
 export const background_dark = Transparent;
 export const GRAY_LIGHT = '#e6e6e6';
 export const daySelectionAnimationColor = PRIMARY;
