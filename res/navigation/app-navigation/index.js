@@ -15,6 +15,7 @@ import {UserData} from '../../mobx/userStore';
 import AdminScreen from '../../screens/adminScreen';
 import {observer} from 'mobx-react';
 import AdminHeader from '../../components/adminHeader';
+import Game from '../../screens/game';
 const stack = createNativeStackNavigator();
 
 const AppNavigator = observer(() => {
@@ -110,6 +111,15 @@ const AppNavigator = observer(() => {
               header: props => (
                 <Header props={props} title="Academic Calendar" />
               ),
+            }}
+          />
+          <stack.Screen
+            name="Game"
+            component={Game}
+            options={{
+              animation: 'slide_from_right',
+              headerShown: true,
+              header: props => <Header props={props} title="Mystery Hunt" />,
             }}
           />
           <stack.Screen

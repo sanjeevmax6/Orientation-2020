@@ -29,6 +29,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as KEYS from '../../utils/STORAGE_KEYS';
 import VersionCheck from 'react-native-version-check';
 import {APP_PLAYSTORE_URL} from '../../utils/APIConstants';
+import {Dimensions} from 'react-native';
+
+//Width is same as two normal mainmenu cards (width of normal card is 130) + the space between them
+const gameCardWidth =
+  (Dimensions.get('window').width - 2 * scale(130)) / 3 + 2 * scale(130);
 
 const MainMenu = ({navigation}) => {
   const [logoutVisible, setLogoutVisible] = useState(false);
@@ -319,6 +324,24 @@ const MainMenu = ({navigation}) => {
               </TouchableOpacity>
             </Card>
           </View>
+
+          <View style={styles.cardRow}>
+            <Card style={styles.gameCard}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Game');
+                }}>
+                <ImageBackground
+                  source={require('../../assets/images/gameImages/menu.png')}
+                  style={{
+                    height: verticalScale(80),
+                    width: scale(gameCardWidth),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}></ImageBackground>
+              </TouchableOpacity>
+            </Card>
+          </View>
         </View>
       </Layout>
     </SafeAreaView>
@@ -430,6 +453,16 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(20),
     height: verticalScale(110),
     width: scale(130),
+    borderRadius: scale(borderRadiusLarge),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.Card6Color,
+    borderWidth: 0,
+  },
+  gameCard: {
+    marginTop: verticalScale(20),
+    height: verticalScale(80),
+    width: gameCardWidth,
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     alignItems: 'center',
