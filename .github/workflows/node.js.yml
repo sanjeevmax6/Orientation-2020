@@ -18,10 +18,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
             node-version: 14.x
-      - name: Decode google-services.json
-        env: 
-          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
-        run: echo $FIREBASE_SECRET > ./android/app/google-services.json
+ 
 
       - run: ci=false && npm ci && npx jetify
       - run: chmod +x ./gradlew && ./gradlew assembleDebug -Dorg.gradle.logging.level=info
