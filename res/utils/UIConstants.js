@@ -25,3 +25,4 @@ export const academicCalendarCardHeight = 80;
 
 //Font Name
 export const FONT = 'SourceSansPro-Regular';
+export const squidGameFont = 'GameOfSquids-1GMVL';

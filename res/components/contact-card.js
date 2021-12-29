@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   content: {
     borderTopLeftRadius: moderateScale(borderRadius),
     borderTopRightRadius: moderateScale(borderRadius),
-    padding: scale(10),
+    padding: scale(16),
     backgroundColor: 'rgba(204, 198, 204, 0.8)',
     justifyContent: 'center',
     flex: 1,

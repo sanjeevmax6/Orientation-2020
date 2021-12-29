@@ -65,6 +65,13 @@ export const disabledDateNumberStyleColor = GRAY_LIGHT;
 export const CalendarStripcontainerColor = background_dark;
 export const dateContainerColor = PRIMARY;
 
+//Colors for Squid Game
+export const squidGamePink = '#ed1b76';
+export const squidGameGreen = '#037a76';
+export const squidGameBlue = '#309eb5';
+export const squidGameYellow = '#eae317';
+export const squidGameOrange = '#cc7639';
+
 //Universal
 export const ORANGE = '#f27d00'; //icon colors
 export const TOAST_COLOR = '#DA5844';

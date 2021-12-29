@@ -30,6 +30,7 @@ import * as KEYS from '../../utils/STORAGE_KEYS';
 import VersionCheck from 'react-native-version-check';
 import {APP_PLAYSTORE_URL} from '../../utils/APIConstants';
 import {Dimensions} from 'react-native';
+import {GAME_Store} from '../../mobx/gameStore';
 
 //Width is same as two normal mainmenu cards (width of normal card is 130) + the space between them
 const gameCardWidth =
