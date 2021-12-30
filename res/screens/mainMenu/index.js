@@ -330,7 +330,7 @@ const MainMenu = ({navigation}) => {
             <Card style={styles.gameCard}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Game');
+                  navigation.navigate('GameNavigator');
                 }}>
                 <ImageBackground
                   source={require('../../assets/images/gameImages/menu.png')}

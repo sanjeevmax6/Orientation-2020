@@ -15,9 +15,7 @@ import {UserData} from '../../mobx/userStore';
 import AdminScreen from '../../screens/adminScreen';
 import {observer} from 'mobx-react';
 import AdminHeader from '../../components/adminHeader';
-import Game from '../../screens/game';
-import QuestionScreen from '../../screens/game/questionScreen';
-import {GAME_Store} from '../../mobx/gameStore';
+import GameNavigator from '../game-navigation';
 
 const stack = createNativeStackNavigator();
 
@@ -117,21 +115,11 @@ const AppNavigator = observer(() => {
             }}
           />
           <stack.Screen
-            name="QuestionScreen"
-            component={QuestionScreen}
+            name="GameNavigator"
+            component={GameNavigator}
             options={{
               animation: 'slide_from_right',
               headerShown: false,
-              header: props => <Header props={props} title="Mystery Hunt" />,
-            }}
-          />
-          <stack.Screen
-            name="Game"
-            component={Game}
-            options={{
-              animation: 'slide_from_right',
-              headerShown: false,
-              header: props => <Header props={props} title="Mystery Hunt" />,
             }}
           />
           <stack.Screen

@@ -3,3 +3,4 @@ export const USER_NAME = 'name';
 export const USER_ROLL_NO = 'rollNo';
 export const USER_DEPARTMENT = 'department';
 export const IS_USER_ADMIN = 'isAdmin';
+export const IS_GAME_START = 'isGameStart';

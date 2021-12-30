@@ -1,5 +1,6 @@
 import {Layout, Card} from '@ui-kitten/components';
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   StyleSheet,
   Text,
@@ -22,6 +23,7 @@ import {
   paddingMedium,
   paddingBig,
 } from '../../utils/UIConstants';
+import {IS_GAME_START} from '../../utils/STORAGE_KEYS';
 
 const game = ({navigation}) => {
   return (
@@ -46,7 +48,8 @@ const game = ({navigation}) => {
             <Card style={styles.card}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('QuestionScreen');
+                  GAME_Store.setOnPressStartGame(true);
+                  AsyncStorage.setItem(IS_GAME_START, 'true');
                 }}>
                 <ImageBackground
                   source={require('../../assets/images/gameImages/buttonImage.jpg')}

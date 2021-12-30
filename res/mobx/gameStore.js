@@ -2,7 +2,8 @@ import {action, makeObservable, observable, computed} from 'mobx';
 
 class GameData {
   state = {
-    startGame: false,
+    startGame: true,
+    onPressStartGame: false, //when user presses start game
   };
 
   setStartGame = val => {
@@ -13,12 +14,23 @@ class GameData {
     return this.state.startGame;
   }
 
+  setOnPressStartGame = val => {
+    this.state.onPressStartGame = val;
+  };
+
+  get getOnPressStartGame() {
+    return this.state.onPressStartGame;
+  }
+
   constructor() {
     makeObservable(this, {
       state: observable,
 
       setStartGame: action,
       getStartGame: computed,
+
+      setOnPressStartGame: action,
+      getOnPressStartGame: computed,
     });
   }
 }
