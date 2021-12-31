@@ -1,13 +1,6 @@
 import React from 'react';
 import {Card} from '@ui-kitten/components';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import * as Colors from '../../utils/colors';
 import {
@@ -33,7 +26,8 @@ const styles = StyleSheet.create({
     borderRadius: scale(75),
     borderTopLeftRadius: 0,
     backgroundColor: Colors.squidGamePink,
-    borderWidth: 0,
+    borderColor: Colors.White,
+    borderWidth: scale(4),
   },
 });
 

@@ -38,6 +38,7 @@ const questionScreen = () => {
         <ScrollView>
           <View style={styles.cardsContainer}>
             <Gamecard1 />
+
             <Gamecard2 />
             <Gamecard3 />
             <Gamecard4 />

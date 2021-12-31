@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     borderRadius: scale(75),
     borderBottomRightRadius: 0,
     backgroundColor: Colors.squidGamePink,
-    borderWidth: 0,
+    borderColor: Colors.White,
+    borderWidth: scale(4),
   },
 });
 

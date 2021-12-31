@@ -28,5 +28,5 @@ export const FONT = 'SourceSansPro-Regular';
 export const squidGameFont = 'GameOfSquids-1GMVL';
 
 //Mystery Hunt Card Dimensions
-export const gameCardHeight = 275;
+export const gameCardHeight = 200;
 export const gameCardWidth = 275;
