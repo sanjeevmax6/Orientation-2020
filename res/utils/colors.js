@@ -71,6 +71,8 @@ export const squidGameGreen = '#037a76';
 export const squidGameBlue = '#309eb5';
 export const squidGameYellow = '#eae317';
 export const squidGameOrange = '#cc7639';
+export const squidGameCyan = '#00ffff';
+export const squidGameBg = '#000000c0';
 
 //Universal
 export const ORANGE = '#f27d00'; //icon colors
