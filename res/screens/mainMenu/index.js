@@ -31,12 +31,14 @@ import VersionCheck from 'react-native-version-check';
 import {APP_PLAYSTORE_URL} from '../../utils/APIConstants';
 import {Dimensions} from 'react-native';
 import {GAME_Store} from '../../mobx/gameStore';
+import {leaderAPI} from '../game/leaderAPI.js';
+import {observer} from 'mobx-react';
 
 //Width is same as two normal mainmenu cards (width of normal card is 130) + the space between them
 const gameCardWidth =
   (Dimensions.get('window').width - 2 * scale(130)) / 3 + 2 * scale(130);
 
-const MainMenu = ({navigation}) => {
+const MainMenu = observer(({navigation}) => {
   const [logoutVisible, setLogoutVisible] = useState(false);
 
   const data = {
@@ -45,6 +47,13 @@ const MainMenu = ({navigation}) => {
     studentRollNo: UserData.userRollNo,
     studentBranch: UserData.userDepartment,
   };
+
+  //To Check if Game Card should be rendered or not
+
+  const isLeader = GAME_Store.getLeader;
+  if (!GAME_Store.getLeaderAPISuccess) {
+    leaderAPI();
+  }
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -325,29 +334,30 @@ const MainMenu = ({navigation}) => {
               </TouchableOpacity>
             </Card>
           </View>
-
-          <View style={styles.cardRow}>
-            <Card style={styles.gameCard}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('GameNavigator');
-                }}>
-                <ImageBackground
-                  source={require('../../assets/images/gameImages/menu.png')}
-                  style={{
-                    height: verticalScale(80),
-                    width: scale(gameCardWidth),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}></ImageBackground>
-              </TouchableOpacity>
-            </Card>
-          </View>
+          {GAME_Store.getLeader ? (
+            <View style={styles.cardRow}>
+              <Card style={styles.gameCard}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('GameNavigator');
+                  }}>
+                  <ImageBackground
+                    source={require('../../assets/images/gameImages/menu.png')}
+                    style={{
+                      height: verticalScale(80),
+                      width: scale(gameCardWidth),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}></ImageBackground>
+                </TouchableOpacity>
+              </Card>
+            </View>
+          ) : null}
         </View>
       </Layout>
     </SafeAreaView>
   );
-};
+});
 
 const styles = StyleSheet.create({
   dashboard: {

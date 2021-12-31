@@ -22,6 +22,11 @@ import {
   paddingMedium,
   paddingBig,
 } from '../../utils/UIConstants';
+import Gamecard1 from './gameCard1';
+import Gamecard2 from './gameCard2';
+import Gamecard3 from './gameCard3';
+import Gamecard4 from './gameCard4';
+import Gamecard5 from './gameCard5';
 
 const questionScreen = () => {
   return (
@@ -32,11 +37,11 @@ const questionScreen = () => {
         </View>
         <ScrollView>
           <View style={styles.cardsContainer}>
-            <Card style={styles.card1}></Card>
-            <Card style={styles.card2}></Card>
-            <Card style={styles.card3}></Card>
-            <Card style={styles.card4}></Card>
-            <Card style={styles.card5}></Card>
+            <Gamecard1 />
+            <Gamecard2 />
+            <Gamecard3 />
+            <Gamecard4 />
+            <Gamecard5 />
           </View>
         </ScrollView>
         <View style={styles.leaderboardContainer}>
@@ -60,61 +65,6 @@ const styles = StyleSheet.create({
   },
   cardsContainer: {
     alignItems: 'center',
-  },
-  card1: {
-    marginBottom: verticalScale(paddingMedium),
-    height: verticalScale(300),
-    width: scale(300),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: scale(75),
-    borderTopLeftRadius: 0,
-    backgroundColor: Colors.squidGamePink,
-    borderWidth: 0,
-  },
-  card2: {
-    marginBottom: verticalScale(paddingMedium),
-    height: verticalScale(300),
-    width: scale(300),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: scale(75),
-    borderBottomRightRadius: 0,
-    backgroundColor: Colors.squidGamePink,
-    borderWidth: 0,
-  },
-  card3: {
-    marginBottom: verticalScale(paddingMedium),
-    height: verticalScale(300),
-    width: scale(300),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: scale(75),
-    borderTopRightRadius: 0,
-    backgroundColor: Colors.squidGamePink,
-    borderWidth: 0,
-  },
-  card4: {
-    marginBottom: verticalScale(paddingMedium),
-    height: verticalScale(300),
-    width: scale(300),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: scale(75),
-    borderBottomLeftRadius: 0,
-    backgroundColor: Colors.squidGameBlue,
-    borderWidth: 0,
-  },
-  card5: {
-    marginBottom: verticalScale(paddingMedium),
-    height: verticalScale(300),
-    width: scale(300),
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: scale(75),
-    borderTopLeftRadius: 0,
-    backgroundColor: Colors.squidGameBlue,
-    borderWidth: 0,
   },
   leaderboardContainer: {
     marginVertical: scale(paddingMedium),

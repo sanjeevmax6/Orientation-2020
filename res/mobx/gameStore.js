@@ -4,6 +4,8 @@ class GameData {
   state = {
     startGame: true,
     onPressStartGame: false, //when user presses start game
+    leader: false,
+    leaderAPISuccess: false,
   };
 
   setStartGame = val => {
@@ -22,6 +24,22 @@ class GameData {
     return this.state.onPressStartGame;
   }
 
+  setLeader = val => {
+    this.state.leader = val;
+  };
+
+  get getLeader() {
+    return this.state.leader;
+  }
+
+  setLeaderAPISuccess = val => {
+    this.state.leaderAPISuccess = val;
+  };
+
+  get getLeaderAPISuccess() {
+    return this.state.leaderAPISuccess;
+  }
+
   constructor() {
     makeObservable(this, {
       state: observable,
@@ -31,6 +49,12 @@ class GameData {
 
       setOnPressStartGame: action,
       getOnPressStartGame: computed,
+
+      setLeader: action,
+      getLeader: computed,
+
+      setLeaderAPISuccess: action,
+      getLeaderAPISuccess: computed,
     });
   }
 }

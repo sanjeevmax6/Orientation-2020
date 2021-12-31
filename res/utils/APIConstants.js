@@ -14,6 +14,13 @@ export const API_GET_MAP_DATA = 'api/map';
 
 export const API_GET_CONTACTS = 'api/contacts';
 
+//Game API
+export const GAME_BASE_URL = 'https://mystery-hunt.cloudns.nz/';
+export const API_GAME_CHECK_LEADER = GAME_BASE_URL + '/user/leader';
+export const API_GAME_LEADERBOARD = GAME_BASE_URL + '/game/leaderboard';
+export const API_GAME_GETLINK = GAME_BASE_URL + '/game/gameLinks';
+export const API_GAME_TOKEN = 'spidernitt123orientation21';
+
 //Sign up
 export const API_REGISTER = 'auth/register';
 export const API_SEND_OTP = 'auth/send-otp';
