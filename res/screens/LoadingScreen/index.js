@@ -3,7 +3,12 @@ import {View} from 'react-native';
 import LottieView from 'lottie-react-native';
 import externalLottie from '../../assets/lottieFiles/loading2.json';
 import internalLottie from '../../assets/lottieFiles/loadingInside.json';
-import {LOADING_EXTERNAL, LOADING_INTERNAL} from '../../utils/LOADING_TYPES';
+import squidLottie from '../../assets/lottieFiles/squidLoading.json';
+import {
+  LOADING_EXTERNAL,
+  LOADING_INTERNAL,
+  LOADING_SQUID,
+} from '../../utils/LOADING_TYPES';
 
 const LoaderPage = ({navigation, LoaderType = LOADING_INTERNAL}) => {
   const [STATE, setSTATE] = useState(1);
@@ -18,6 +23,7 @@ const LoaderPage = ({navigation, LoaderType = LOADING_INTERNAL}) => {
   const getLottie = () => {
     if (LoaderType === LOADING_INTERNAL) return internalLottie;
     else if (LoaderType === LOADING_EXTERNAL) return externalLottie;
+    else if (LoaderType === LOADING_SQUID) return squidLottie;
   };
   return (
     <>

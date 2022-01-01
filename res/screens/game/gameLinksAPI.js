@@ -2,9 +2,11 @@ import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import {GAME_Store} from '../../mobx/gameStore';
 import {API_GAME_LINKS} from '../../utils/APIConstants';
-import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import * as ERROR_MSGS from '../../utils/ERROR_MESSAGES';
 
-export const gameLinksAPI = ({navigation}) => {
+export const gameLinksAPI = (setLoading, setError) => {
+  setLoading(true);
+  setError(false);
   var url = API_GAME_LINKS;
   NetInfo.fetch().then(state => {
     if (state.isConnected === true) {
@@ -18,10 +20,28 @@ export const gameLinksAPI = ({navigation}) => {
         .then(response => {
           if (response.status === 200) {
             GAME_Store.setLinks(response.data.links);
+            console.log('RESPONSE' + JSON.stringify(response.data.links));
+            GAME_Store.setCurrentTime(response.headers.date);
+            setLoading(false);
+            setError(false);
           }
         })
-        .catch(error => {});
+        .catch(error => {
+          setLoading(false);
+          if (error.response) {
+            console.log(error.response.data.message);
+            setError(error.response.data.message);
+          } else if (error.request) {
+            console.log(error.request);
+            setError(ERROR_MSGS.TIME_OUT);
+          } else {
+            console.log(error);
+            setError(ERROR_MSGS.UNEXPECTED);
+          }
+        });
     } else {
+      setError(ERROR_MSGS.NO_NETWORK);
+      setLoading(false);
     }
   });
 };

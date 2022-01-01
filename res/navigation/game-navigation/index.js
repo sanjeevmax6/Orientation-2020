@@ -17,7 +17,7 @@ AsyncStorage.getItem(IS_GAME_START).then(val => {
 const GameNavigator = observer(() => {
   return (
     <stack.Navigator>
-      {GAME_Store.getOnPressStartGame && GAME_Store.getOnPressStartGame ? (
+      {GAME_Store.getOnPressStartGame && GAME_Store.getStartGame ? (
         <>
           <stack.Screen
             name="QuestionScreen"

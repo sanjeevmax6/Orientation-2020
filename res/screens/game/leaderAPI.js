@@ -23,9 +23,12 @@ export const leaderAPI = () => {
         )
         .then(response => {
           if (response.status === 200) {
+            console.log(JSON.stringify(response));
             console.log('From Leader Check API :' + response.data.isLeader);
             GAME_Store.setLeader(response.data.isLeader);
             GAME_Store.setLeaderAPISuccess(true);
+            GAME_Store.setCurrentTime(response.headers.date);
+            console.log('Get current time' + response.headers.date);
           } else {
             GAME_Store.setLeader(false);
             GAME_Store.setLeaderAPISuccess(true);

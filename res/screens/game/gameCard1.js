@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  Linking,
 } from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import * as Colors from '../../utils/colors';
@@ -18,10 +19,16 @@ import {
   squidGameFont,
 } from '../../utils/UIConstants';
 
-const gameCard1 = (link, startTime, endTime) => {
+const gameCard1 = ({link, isDone, startTime, endTime}) => {
   return (
-    <Card style={styles.card}>
-      <TouchableOpacity activeOpacity={0.5}>
+    <Card
+      style={{
+        ...styles.card,
+        borderColor: isDone ? Colors.squidGameGreen : Colors.White,
+      }}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => Linking.openURL(link)}>
         <ImageBackground
           source={require('../../assets/images/gameImages/card2.jpg')}
           resizeMode="stretch"
