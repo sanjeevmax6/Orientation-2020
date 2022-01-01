@@ -34,3 +34,6 @@ export const SUBSCRIBE_NOTIFICATION = 'api/notification/subscribeToAll';
 
 //Admin
 export const TRIGGER_NOTIFICATION = 'api/notification/sendToAll';
+
+//Game
+export const API_GAME_LINKS = 'https://mystery-hunt.cloudns.nz/game/gameLinks';

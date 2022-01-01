@@ -4,13 +4,12 @@ class GameData {
   state = {
     startGame: true,
     onPressStartGame: false, //when user presses start game
+<<<<<<< HEAD
     leader: false,
     leaderAPISuccess: false,
+=======
     roundInfo: [],
-  };
-
-  setLinks = data => {
-    this.state.roundInfo = data;
+>>>>>>> 2b4ac1e (Integrated: Get links API & Added: First two cards)
   };
 
   setStartGame = val => {
@@ -29,6 +28,7 @@ class GameData {
     return this.state.onPressStartGame;
   }
 
+<<<<<<< HEAD
   setLeader = val => {
     this.state.leader = val;
   };
@@ -45,17 +45,23 @@ class GameData {
     return this.state.leaderAPISuccess;
   }
 
+=======
+  setLinks = data => {
+    this.state.roundInfo = data;
+  };
+
+>>>>>>> 2b4ac1e (Integrated: Get links API & Added: First two cards)
   constructor() {
     makeObservable(this, {
       state: observable,
 
       setStartGame: action,
       getStartGame: computed,
+      setLinks: action,
 
       setOnPressStartGame: action,
       getOnPressStartGame: computed,
 
-      setLinks: action,
       setLeader: action,
       getLeader: computed,
 
