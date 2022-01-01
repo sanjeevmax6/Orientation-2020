@@ -6,6 +6,7 @@ import {GAME_Store} from '../../mobx/gameStore';
 import {observer} from 'mobx-react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IS_GAME_START} from '../../utils/STORAGE_KEYS';
+import LeaderboardScreen from '../../screens/game/leaderBoard';
 
 const stack = createNativeStackNavigator();
 
@@ -42,6 +43,15 @@ const GameNavigator = observer(() => {
           />
         </>
       )}
+      <stack.Screen
+        name="LeaderboardScreen"
+        component={LeaderboardScreen}
+        options={{
+          animation: 'slide_from_right',
+          headerShown: false,
+          header: props => <Header props={props} title="Mystery Hunt" />,
+        }}
+      />
     </stack.Navigator>
   );
 });

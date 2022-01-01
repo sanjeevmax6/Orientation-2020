@@ -14,7 +14,16 @@ import {Layout, Card} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {verticalScale, scale} from 'react-native-size-matters';
 import * as Colors from '../../utils/colors';
-import {squidGameFont, paddingMedium} from '../../utils/UIConstants';
+import {
+  borderRadiusLarge,
+  squidGameFont,
+  fontSizeVeryLarge,
+  fontSizeBig,
+  paddingSmall,
+  paddingMedium,
+  paddingBig,
+  borderRadiusMedium,
+} from '../../utils/UIConstants';
 import Gamecard1 from './gameCard1';
 import Gamecard2 from './gameCard2';
 import Gamecard3 from './gameCard3';
@@ -50,24 +59,24 @@ const questionScreen = ({navigation}) => {
     console.log('links' + links);
     if (!loading) {
       console.log('inside Loading');
-      setStartTime([
-        moment(links[qn].startTime, 'HH:mm').format('HH'),
-        moment(links[qn].startTime, 'HH:mm').format('mm'),
-      ]);
-      setEndTime([
-        moment(links[qn].endTime, 'HH:mm').format('HH'),
-        moment(links[qn].endTime, 'HH:mm').format('mm'),
-      ]);
+
       var dur = null;
 
-      /*const st = 55;
+      /*const st = 38;
       var timlist = [st, st + 1, st + 2, st + 3, st + 4];
       var etimlist = [st + 1, st + 2, st + 3, st + 4, st + 5];*/
 
       var currentTime = moment(new Date(GAME_Store.getCurrentTime));
       for (var i = 0; i < 5; i++) {
         var eTime = moment(
-          new Date(GAME_YEAR, GAME_MONTH, GAME_DAY, endTime[i], endTime[i], 0),
+          new Date(
+            GAME_YEAR,
+            GAME_MONTH,
+            GAME_DAY,
+            moment(links[i].endTime, 'HH:mm').format('HH'),
+            moment(links[i].endTime, 'HH:mm').format('mm'),
+            0,
+          ),
         );
         var diff = moment.duration(eTime.diff(currentTime)).asMilliseconds();
         console.log('i loop' + i + diff);
@@ -78,6 +87,10 @@ const questionScreen = ({navigation}) => {
           break;
         }
       }
+      setStartTime([
+        moment(links[qn + 1].startTime, 'HH:mm').format('HH'),
+        moment(links[qn + 1].startTime, 'HH:mm').format('mm'),
+      ]);
       var sTime = moment(
         new Date(
           GAME_YEAR,
@@ -186,22 +199,25 @@ const questionScreen = ({navigation}) => {
         <LoaderPage navigation={navigation} LoaderType={LOADING_SQUID} />
       ) : (
         <Layout style={{flex: 1, backgroundColor: Colors.Black}}>
-          <View style={styles.headingContainer}>
-            <Text style={styles.headingText}>MYSTERY HUNT</Text>
+          <Card style={styles.headingContainer}>
+            <Text style={styles.headingText}>
+              MYSTERY HUNT
+              <Text style={{color: Colors.squidGameGreen}}>{' {O}'}</Text>
+            </Text>
+          </Card>
+          <View style={styles.container}>
+            <Text
+              style={{
+                ...styles.cardText,
+                color: Colors.White,
+                fontSize: scale(15),
+              }}>
+              {'Time till the next question'}
+            </Text>
+            <Text style={styles.cardText}>{dispTime}</Text>
           </View>
           <ScrollView>
             <View style={styles.cardsContainer}>
-              <View style={styles.container}>
-                <Text
-                  style={{
-                    ...styles.cardText,
-                    color: Colors.White,
-                    fontSize: scale(15),
-                  }}>
-                  {'Time till the next question'}
-                </Text>
-                <Text style={styles.cardText}>{dispTime}</Text>
-              </View>
               <>
                 {qn >= 0 ? (
                   <Gamecard1 link={links[0].link} isDone={qn > 0} />
@@ -231,9 +247,25 @@ const questionScreen = ({navigation}) => {
               </>
             </View>
           </ScrollView>
-          <View style={styles.leaderboardContainer}>
-            <Text style={styles.leaderboardText}>LEADERBOARDS : .......</Text>
-          </View>
+          <Card style={styles.leaderboardContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('LeaderboardScreen');
+              }}>
+              <View
+                style={{
+                  height: verticalScale(30),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={styles.leaderboardText}>
+                  {' '}
+                  <Text style={{color: Colors.Black}}>{'{O} '}</Text>
+                  LEADERBOARD
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </Card>
         </Layout>
       )}
     </SafeAreaView>
@@ -244,9 +276,13 @@ export default questionScreen;
 const styles = StyleSheet.create({
   headingContainer: {
     marginVertical: scale(paddingMedium),
+    backgroundColor: Colors.Black,
+    marginHorizontal: scale(paddingSmall),
+    borderWidth: scale(5),
+    borderRadius: scale(borderRadiusMedium),
   },
   headingText: {
-    color: Colors.squidGameGreen,
+    color: Colors.squidGamePink,
     fontSize: scale(20),
     fontFamily: squidGameFont,
     textAlign: 'center',
@@ -255,11 +291,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   leaderboardContainer: {
-    marginVertical: scale(paddingMedium),
+    marginBottom: verticalScale(paddingMedium),
+    marginTop: verticalScale(15),
+    marginHorizontal: scale(paddingMedium),
+    borderRadius: scale(borderRadiusMedium),
+    backgroundColor: Colors.squidGameGreen,
+    borderColor: Colors.White,
+    borderWidth: scale(5),
   },
   leaderboardText: {
-    color: Colors.squidGameGreen,
-    fontSize: scale(20),
+    color: Colors.White,
+    fontSize: scale(18),
     fontFamily: squidGameFont,
     textAlign: 'center',
   },

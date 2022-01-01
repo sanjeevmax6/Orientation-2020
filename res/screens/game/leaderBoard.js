@@ -6,41 +6,100 @@ import {
   StyleSheet,
   Text,
   View,
+  ViewBase,
 } from 'react-native';
-import {squidGameCyan, squidGameOrange, squidGameYellow, White, squidGameBg} from '../../utils/colors';
+import {
+  squidGameCyan,
+  squidGameYellow,
+  White,
+  squidGameBg,
+  squidGamePink,
+  Black,
+} from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
 import NetInfo from '@react-native-community/netinfo';
+import {API_GAME_TOKEN, API_GAME_LEADERBOARD} from '../../utils/APIConstants';
+import {
+  borderRadiusLarge,
+  borderRadiusMedium,
+  squidGameFont,
+  paddingSmall,
+} from '../../utils/UIConstants';
+import {Card} from '@ui-kitten/components';
+import LoaderPage from '../LoadingScreen';
+import ErrorScreen from '../../components/errorScreen';
+import * as ERRORS from '../../utils/ERROR_MESSAGES';
+import {LOADING_SQUID} from '../../utils/LOADING_TYPES';
 
-const LeaderBoard = () => {
+const LeaderBoard = ({navigation}) => {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [errorText, setErrorText] = useState(null);
+
   const getUsers = () => {
     const axios = require('axios');
     NetInfo.fetch().then(state => {
       if (state.isConnected === true) {
+        setLoading(true);
         axios
-          .get('https://mystery-hunt.cloudns.nz/game/leaderboard', {
+          .get(API_GAME_LEADERBOARD, {
             headers: {
-              token: 'spidernitt123orientation21',
+              token: API_GAME_TOKEN,
             },
           })
           .then(response => {
-            console.log(JSON.stringify(response));
-            console.log(response.data.result);
-            setUsers(response.data.result);
+            if (response.status === 200) {
+              //console.log(JSON.stringify(response.data));
+              //console.log(response.data.result);
+              //console.log('Done');
+              setLoading(false);
+              if (response.data.status === 400) {
+                setErrorText(response.data.message);
+                setError(true);
+              } else {
+                setUsers(response.data.result);
+              }
+            } else if (response.status >= 400) {
+              setLoading(false);
+              if (response.data.message == null) {
+                setErrorText('Server Error, Try Again Later');
+              } else {
+                setErrorText(response.data.message);
+              }
+              setError(true);
+            }
+          })
+          .catch(error => {
+            setLoading(false);
+            setError(true);
+            if (error.response) {
+              setErrorText(error.response.data.message);
+            } else if (error.request) {
+              setErrorText(ERRORS.TIME_OUT);
+            } else {
+              setErrorText(ERRORS.UNEXPECTED);
+            }
           });
+      } else {
+        setLoading(false);
+        setError(true);
+        setErrorText('No Internet Connection');
       }
     });
   };
 
   const renderItem = ({item}) => {
     return (
-      <View style={styles.title}>
-        <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>
+      <Card style={styles.itemContainer}>
+        <Text style={styles.itemName} ellipsizeMode="tail" numberOfLines={1}>
           {item.teamName}
         </Text>
-        <Text style={styles.teamPoint}>{item.teamPoints}</Text>
-        <Text style={styles.rollNo}>{item.teamLeaderRollNumber} </Text>
-      </View>
+        <Text style={styles.itemTeamPoint}>
+          {item.teamPoints === null ? 0 : item.teamPoints}
+        </Text>
+        <Text style={styles.itemRollNo}>{item.teamLeaderRollNumber} </Text>
+      </Card>
     );
   };
 
@@ -50,20 +109,35 @@ const LeaderBoard = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
-        source={require('../game/resources/leader.webp')}
-        resizeMode="cover"
-        style={styles.image}>
-        <Text style={styles.text}>LEADER BOARD</Text>
-        <View style={styles.title}>
-          <Text style={styles.titleName}>Name:</Text>
-          <Text style={styles.titlePoint}>Points:</Text>
-          <Text style={styles.titleRollNo}>Team Leader Roll No.:</Text>
-        </View>
-        <View style={styles.list}>
-          <FlatList data={users} renderItem={renderItem} />
-        </View>
-      </ImageBackground>
+      {error ? (
+        <ErrorScreen errorMessage={errorText} navigation={navigation} />
+      ) : isLoading ? (
+        <LoaderPage navigation={navigation} LoaderType={LOADING_SQUID} />
+      ) : (
+        <ImageBackground
+          source={require('../../assets/images/gameImages/leader.webp')}
+          resizeMode="cover"
+          style={styles.image}>
+          <Card style={styles.headingView}>
+            <Text style={styles.headingText}>LEADERBOARD</Text>
+          </Card>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleName}>NAME</Text>
+            <Text style={styles.titlePoint}>SCORE</Text>
+            <Text style={styles.titleRollNo}>TEAM LEADER ROLL NO</Text>
+          </View>
+          <FlatList
+            data={users}
+            renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
+            style={{
+              marginBottom: verticalScale(paddingSmall),
+            }}
+            bounces={false}
+            bouncesZoom={false}
+          />
+        </ImageBackground>
+      )}
     </SafeAreaView>
   );
 };
@@ -75,69 +149,93 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
-  text: {
+  headingView: {
+    backgroundColor: squidGameBg,
+    borderRadius: scale(borderRadiusMedium),
+    borderWidth: 0,
+    marginTop: verticalScale(20),
+    marginBottom: verticalScale(10),
+    marginHorizontal: scale(10),
+    borderColor: White,
+    borderWidth: scale(4),
+  },
+  headingText: {
     color: squidGameCyan,
-    fontSize: scale(30),
-    marginTop: verticalScale(18),
-    marginBottom: verticalScale(60),
-    fontWeight: 'bold',
+    fontSize: scale(25),
+    fontFamily: squidGameFont,
     textAlign: 'center',
+  },
+  titleContainer: {
+    marginHorizontal: scale(10),
+    marginBottom: verticalScale(20),
+    borderRadius: scale(borderRadiusLarge),
+    justifyContent: 'center',
+    padding: scale(10),
+    borderColor: White,
+    borderWidth: scale(4),
     backgroundColor: squidGameBg,
   },
-  title: {
+  itemContainer: {
+    marginHorizontal: scale(25),
+    marginVertical: verticalScale(5),
+    borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
-    marginTop: verticalScale(10),
+    padding: scale(10),
     borderColor: White,
-    borderWidth: verticalScale(1),
+    borderWidth: scale(4),
     backgroundColor: squidGameBg,
-    opacity: verticalScale(0.9),
+    elevation: 5,
   },
   titleName: {
-    color: squidGameOrange,
+    color: squidGameYellow,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: squidGameFont,
     fontSize: scale(18),
   },
   titlePoint: {
-    color: squidGameYellow,
+    color: squidGamePink,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: squidGameFont,
     fontSize: scale(18),
   },
   titleRollNo: {
     color: White,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: squidGameFont,
     fontSize: scale(18),
   },
-  name: {
-    color: squidGameOrange,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: scale(20),
-  },
-  teamPoint: {
+  itemName: {
     color: squidGameYellow,
     textAlign: 'center',
+    fontFamily: squidGameFont,
     fontSize: scale(20),
   },
-  rollNo: {
+  itemTeamPoint: {
+    color: squidGamePink,
+    textAlign: 'center',
+    fontSize: scale(20),
+  },
+  itemRollNo: {
     color: White,
     textAlign: 'center',
     fontSize: scale(18),
   },
-  names: {
-    color: White,
-    textAlign: 'center',
-    fontSize: scale(27),
+  updateMessageContainer: {
+    marginHorizontal: scale(10),
+    marginBottom: verticalScale(20),
+    borderRadius: scale(borderRadiusLarge),
+    justifyContent: 'center',
+    padding: scale(10),
+    borderColor: White,
+    borderWidth: scale(4),
+    backgroundColor: squidGameBg,
   },
-  points: {
-    color: White,
-    fontSize: scale(27),
-    textAlign: 'right',
-    marginLeft: verticalScale(30),
+  updateMessageText: {
+    color: squidGamePink,
+    textAlign: 'center',
+    fontFamily: squidGameFont,
+    fontSize: scale(18),
   },
 });
 
 export default LeaderBoard;
-

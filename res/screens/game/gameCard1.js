@@ -30,19 +30,17 @@ const gameCard1 = ({link, isDone, startTime, endTime}) => {
         activeOpacity={0.5}
         onPress={() => Linking.openURL(link)}>
         <ImageBackground
-          source={require('../../assets/images/gameImages/card2.jpg')}
+          source={require('../../assets/images/gameImages/card1.jpg')}
           resizeMode="stretch"
           style={{
             width: scale(275),
             height: verticalScale(200),
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
           }}>
           <View
             style={{
               flexDirection: 'row',
-              marginBottom: verticalScale(30),
-              marginRight: scale(25),
             }}>
             <Text style={styles.cardText}>
               <Text style={{color: Colors.squidGameBlue}}>{'{ '}</Text>
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
     fontSize: scale(22),
     fontFamily: squidGameFont,
     textAlign: 'center',
+    transform: [{rotate: '90deg'}],
   },
 });
 

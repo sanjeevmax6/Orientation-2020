@@ -1,7 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import {GAME_Store} from '../../mobx/gameStore';
-import {API_GAME_LINKS} from '../../utils/APIConstants';
+import {API_GAME_LINKS, API_GAME_TOKEN} from '../../utils/APIConstants';
 import * as ERROR_MSGS from '../../utils/ERROR_MESSAGES';
 
 export const gameLinksAPI = (setLoading, setError) => {
@@ -14,7 +14,7 @@ export const gameLinksAPI = (setLoading, setError) => {
         .get(url, {
           headers: {
             'Content-Type': 'application/json',
-            token: 'spidernitt123orientation21',
+            token: API_GAME_TOKEN,
           },
         })
         .then(response => {

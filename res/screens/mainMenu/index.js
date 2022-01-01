@@ -140,7 +140,12 @@ const MainMenu = observer(({navigation}) => {
             </View>
           </ImageBackground>
         </View>
-        <ScrollView style={{backgroundColor: '#f2f2f2'}}>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'center',
+            backgroundColor: '#f2f2f2',
+          }}>
           <View style={styles.mainMenu}>
             {GAME_Store.getLeader ? (
               <View style={styles.cardRow}>
@@ -416,6 +421,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   card1: {
+    marginTop: verticalScale(20),
     height: verticalScale(130),
     width: scale(130),
     justifyContent: 'center',
@@ -425,6 +431,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   card2: {
+    marginTop: verticalScale(20),
     height: verticalScale(90),
     width: scale(130),
     borderRadius: scale(borderRadiusLarge),
@@ -475,7 +482,6 @@ const styles = StyleSheet.create({
   },
   gameCard: {
     marginTop: verticalScale(20),
-    marginBottom: verticalScale(20),
     height: verticalScale(80),
     width: gameCardWidth,
     borderRadius: scale(borderRadiusLarge),
