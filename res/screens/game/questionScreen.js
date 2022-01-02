@@ -141,7 +141,7 @@ const questionScreen = ({navigation}) => {
 
       appState.current = nextAppState;
       setAppStateVisible(appState.current);
-      console.log('AppState', appState.current);
+      //console.log('AppState', appState.current);
     });
 
     return () => {
@@ -164,9 +164,9 @@ const questionScreen = ({navigation}) => {
 
         if (parseInt(seconds / 10) === 0) seconds = '0' + seconds;
         if (parseInt(minutes / 10) === 0) minutes = '0' + minutes;
-        setDispTime('00' + minutes + ':' + seconds);
+        setDispTime('00' + ':' + minutes + ':' + seconds);
 
-        console.log(qn);
+        //console.log(qn);
         if (time < 0 && !lockQn) {
           console.log('Bot Dur called');
           setLockQn(true);
@@ -195,7 +195,6 @@ const questionScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {console.log(error)}
       {error ? (
         <ErrorScreen navigation={navigation} errorMessage={error} />
       ) : loading ? (

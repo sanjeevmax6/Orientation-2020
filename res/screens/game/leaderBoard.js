@@ -15,6 +15,7 @@ import {
   squidGameBg,
   squidGamePink,
   Black,
+  squidGameGreen,
 } from '../../utils/colors';
 import {scale, verticalScale} from 'react-native-size-matters';
 import NetInfo from '@react-native-community/netinfo';
@@ -30,12 +31,15 @@ import LoaderPage from '../LoadingScreen';
 import ErrorScreen from '../../components/errorScreen';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import {LOADING_SQUID} from '../../utils/LOADING_TYPES';
+import {UserData} from '../../mobx/userStore';
 
 const LeaderBoard = ({navigation}) => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [errorText, setErrorText] = useState(null);
+  const [success, setSuccess] = useState(false);
+  var userScore, userTeam, userPoints;
 
   const getUsers = () => {
     const axios = require('axios');
@@ -58,7 +62,9 @@ const LeaderBoard = ({navigation}) => {
                 setErrorText(response.data.message);
                 setError(true);
               } else {
+                console.log(JSON.stringify(response.data.result));
                 setUsers(response.data.result);
+                setSuccess(true);
               }
             } else if (response.status >= 400) {
               setLoading(false);
@@ -89,16 +95,22 @@ const LeaderBoard = ({navigation}) => {
     });
   };
 
+  function checkIndex(element) {
+    return element.teamLeaderRollNumber == this;
+  }
+
   const renderItem = ({item}) => {
     return (
       <Card style={styles.itemContainer}>
-        <Text style={styles.itemName} ellipsizeMode="tail" numberOfLines={1}>
+        <Text style={styles.itemRank}>
+          RANK: {users.findIndex(checkIndex, item.teamLeaderRollNumber) + 1}
+        </Text>
+        <Text style={styles.itemName} ellipsizeMode="tail" numberOfLines={2}>
           {item.teamName}
         </Text>
         <Text style={styles.itemTeamPoint}>
           {item.teamPoints === null ? 0 : item.teamPoints}
         </Text>
-        <Text style={styles.itemRollNo}>{item.teamLeaderRollNumber} </Text>
       </Card>
     );
   };
@@ -107,13 +119,23 @@ const LeaderBoard = ({navigation}) => {
     getUsers();
   }, []);
 
+  if (success) {
+    console.log('Inside Success:');
+    userScore = users.filter(function (item) {
+      return UserData.userRollNo == item.teamLeaderRollNumber;
+    });
+    userTeam = userScore[0].teamName;
+    userPoints = userScore[0].teamPoints;
+    console.log('User Score: ' + JSON.stringify(userScore));
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       {error ? (
         <ErrorScreen errorMessage={errorText} navigation={navigation} />
       ) : isLoading ? (
         <LoaderPage navigation={navigation} LoaderType={LOADING_SQUID} />
-      ) : (
+      ) : success ? (
         <ImageBackground
           source={require('../../assets/images/gameImages/leader.webp')}
           resizeMode="cover"
@@ -122,9 +144,18 @@ const LeaderBoard = ({navigation}) => {
             <Text style={styles.headingText}>LEADERBOARD</Text>
           </Card>
           <View style={styles.titleContainer}>
-            <Text style={styles.titleName}>NAME</Text>
-            <Text style={styles.titlePoint}>SCORE</Text>
-            <Text style={styles.titleRollNo}>TEAM LEADER ROLL NO</Text>
+            <Text style={styles.titleRank}>
+              RANK:{' '}
+              {users.findIndex(checkIndex, userScore[0].teamLeaderRollNumber) +
+                1}
+            </Text>
+            <Text
+              style={styles.titleName}
+              ellipsizeMode="tail"
+              numberOfLines={2}>
+              {userTeam}
+            </Text>
+            <Text style={styles.titlePoint}>{userPoints}</Text>
           </View>
           <FlatList
             data={users}
@@ -135,9 +166,10 @@ const LeaderBoard = ({navigation}) => {
             }}
             bounces={false}
             bouncesZoom={false}
+            load
           />
         </ImageBackground>
-      )}
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -171,7 +203,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(borderRadiusLarge),
     justifyContent: 'center',
     padding: scale(10),
-    borderColor: White,
+    borderColor: squidGameGreen,
     borderWidth: scale(4),
     backgroundColor: squidGameBg,
   },
@@ -186,17 +218,26 @@ const styles = StyleSheet.create({
     backgroundColor: squidGameBg,
     elevation: 5,
   },
+  titleRank: {
+    marginTop: verticalScale(10),
+    color: White,
+    textAlign: 'center',
+    fontFamily: squidGameFont,
+    fontSize: scale(18),
+  },
   titleName: {
-    color: squidGameYellow,
+    marginTop: verticalScale(20),
+    color: White,
     textAlign: 'center',
     fontFamily: squidGameFont,
     fontSize: scale(18),
   },
   titlePoint: {
-    color: squidGamePink,
+    color: White,
     textAlign: 'center',
     fontFamily: squidGameFont,
     fontSize: scale(18),
+    marginBottom: verticalScale(20),
   },
   titleRollNo: {
     color: White,
@@ -205,6 +246,7 @@ const styles = StyleSheet.create({
     fontSize: scale(18),
   },
   itemName: {
+    marginTop: verticalScale(20),
     color: squidGameYellow,
     textAlign: 'center',
     fontFamily: squidGameFont,
@@ -214,11 +256,14 @@ const styles = StyleSheet.create({
     color: squidGamePink,
     textAlign: 'center',
     fontSize: scale(20),
+    fontFamily: squidGameFont,
   },
-  itemRollNo: {
+  itemRank: {
     color: White,
     textAlign: 'center',
     fontSize: scale(18),
+    //transform: [{rotate: '90deg'}],
+    fontFamily: squidGameFont,
   },
   updateMessageContainer: {
     marginHorizontal: scale(10),

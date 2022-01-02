@@ -403,9 +403,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   mainMenu: {
+    flexGrow: 1,
     // backgroundColor: '#f2f2f2',
     justifyContent: 'center',
     paddingBottom: verticalScale(10),
+    justifyContent: 'center',
   },
   cardGrid: {
     justifyContent: 'center',
