@@ -161,7 +161,10 @@ const questionScreen = ({navigation}) => {
 
         minutes = minutes == null ? 0 : minutes < 0 ? 0 : minutes;
         seconds = seconds == null ? 0 : seconds < 0 ? 0 : seconds;
-        setDispTime('' + minutes + ':' + seconds);
+
+        if (parseInt(seconds / 10) === 0) seconds = '0' + seconds;
+        if (parseInt(minutes / 10) === 0) minutes = '0' + minutes;
+        setDispTime('00' + minutes + ':' + seconds);
 
         console.log(qn);
         if (time < 0 && !lockQn) {
@@ -174,7 +177,7 @@ const questionScreen = ({navigation}) => {
     } else {
       clearImmediate(interval);
       //setQn(4);
-      setDispTime('' + 0 + ':' + 0);
+      setDispTime('00:00:00');
       if (qn >= 5) {
         //navigate  to leaderboard
       }

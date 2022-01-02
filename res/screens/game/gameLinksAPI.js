@@ -19,6 +19,7 @@ export const gameLinksAPI = (setLoading, setError) => {
         })
         .then(response => {
           if (response.status === 200) {
+            console.log(response.data.links);
             GAME_Store.setLinks(response.data.links);
             console.log('RESPONSE' + JSON.stringify(response.data.links));
             GAME_Store.setCurrentTime(response.headers.date);

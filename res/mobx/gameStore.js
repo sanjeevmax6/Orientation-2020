@@ -13,6 +13,7 @@ class GameData {
   setLinks = data => {
     this.state.roundInfo = data;
   };
+
   get getLinks() {
     return this.state.roundInfo;
   }

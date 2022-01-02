@@ -123,6 +123,10 @@ const game = observer(({navigation}) => {
         var seconds = Math.floor((time / 1000) % 60);
         var minutes = Math.floor((time / (1000 * 60)) % 60);
         var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+        if (parseInt(seconds / 10) === 0) seconds = '0' + seconds;
+        if (parseInt(minutes / 10) === 0) minutes = '0' + minutes;
+        if (parseInt(hours / 10) === 0) hours = '0' + hours;
+
         setDispTime('' + hours + ':' + minutes + ':' + seconds);
         console.log(seconds);
       }, 1000);

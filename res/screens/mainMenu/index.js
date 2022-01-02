@@ -7,6 +7,7 @@ import {
   Text,
   Alert,
   Linking,
+  Pressable,
 } from 'react-native';
 import CustomAlert from '../../components/customAlert';
 import {Layout, Card, Icon} from '@ui-kitten/components';
@@ -140,17 +141,12 @@ const MainMenu = observer(({navigation}) => {
             </View>
           </ImageBackground>
         </View>
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: 'center',
-            backgroundColor: '#f2f2f2',
-          }}>
+        <ScrollView contentContainerStyle={styles.mainMenu}>
           <View style={styles.mainMenu}>
             {GAME_Store.getLeader ? (
               <View style={styles.cardRow}>
                 <Card style={styles.gameCard}>
-                  <TouchableOpacity
+                  <Pressable
                     onPress={() => {
                       navigation.navigate('GameNavigator');
                     }}>
@@ -162,7 +158,7 @@ const MainMenu = observer(({navigation}) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                       }}></ImageBackground>
-                  </TouchableOpacity>
+                  </Pressable>
                 </Card>
               </View>
             ) : null}
@@ -407,9 +403,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   mainMenu: {
-    flex: 1,
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
     justifyContent: 'center',
+    paddingBottom: verticalScale(10),
   },
   cardGrid: {
     justifyContent: 'center',
@@ -417,7 +413,7 @@ const styles = StyleSheet.create({
   },
   cardRow: {
     flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
     justifyContent: 'space-evenly',
   },
   card1: {
