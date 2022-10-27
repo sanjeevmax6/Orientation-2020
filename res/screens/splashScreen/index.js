@@ -22,7 +22,7 @@ import {
   REF_URL,
   APP_PLAYSTORE_URL,
 } from '../../utils/APIConstants';
-import VersionCheck from 'react-native-version-check';
+// import VersionCheck from 'react-native-version-check';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import ErrorScreen from '../../components/errorScreen';
 import CustomAlert from '../../components/customAlert';
@@ -41,58 +41,62 @@ const SplashScreen = () => {
       //fail - no internet connection
       setState(2);
     } else if (URL_STATE === 3) {
-      // all okay go ahead
       Login_Store.closeSplash();
     }
   };
 
   const getBaseURL = () => {
+
     setURL_STATE(1);
-    NetInfo.fetch().then(state => {
-      if (state.isConnected === true) {
-        axios
-          .get(
-            REF_URL,
-            {
-              appName: 'orientation-21',
-            },
-            {timeout: 5000},
-          )
-          .then(response => {
-            if (response.status === 200) {
-              console.log(response.data);
-              if (
-                response.data === '' ||
-                response.data === null ||
-                response.data === '0' ||
-                response.data === 0
-              ) {
-                console.log('Using Default');
-                UserData.setBaseUrl(DEFAULT_BASE_URL);
-                setURL_STATE(3);
-              } else {
-                console.log('using api');
-                UserData.setBaseUrl(response.data);
-                setURL_STATE(3);
-              }
-            } else {
-              //if the response code is not 200
-              console.log('Using Default');
-              UserData.setBaseUrl(DEFAULT_BASE_URL);
-              setURL_STATE(3);
-            }
-          })
-          .catch(error => {
-            //incase of any error
-            console.log('Using Default');
-            UserData.setBaseUrl(DEFAULT_BASE_URL);
-            setURL_STATE(3);
-          });
-      } else {
-        UserData.setErrorText(ERRORS.NO_NETWORK);
-        setURL_STATE(2);
-      }
-    });
+    // UserData.setBaseUrl(response.data);
+    UserData.setBaseUrl(DEFAULT_BASE_URL);
+    setURL_STATE(3);
+    // navigate();
+    // NetInfo.fetch().then(state => {
+    //   if (state.isConnected === true) {
+    //     axios
+    //       .get(
+    //         REF_URL,
+    //         {
+    //           appName: 'orientation-21',
+    //         },
+    //         {timeout: 5000},
+    //       )
+    //       .then(response => {
+    //         if (response.status === 200) {
+    //           console.log(response.data);
+    //           if (
+    //             response.data === '' ||
+    //             response.data === null ||
+    //             response.data === '0' ||
+    //             response.data === 0
+    //           ) {
+    //             console.log('Using Default');
+    //             UserData.setBaseUrl(DEFAULT_BASE_URL);
+    //             setURL_STATE(3);
+    //           } else {
+    //             console.log('using api');
+    //             UserData.setBaseUrl(response.data);
+    //             setURL_STATE(3);
+    //           }
+    //         } else {
+    //           //if the response code is not 200
+    //           console.log('Using Default');
+    //           UserData.setBaseUrl(DEFAULT_BASE_URL);
+    //           setURL_STATE(3);
+    //         }
+    //       })
+    //       .catch(error => {
+    //         //incase of any error
+    //         console.log('Using Default');
+    //         UserData.setBaseUrl(DEFAULT_BASE_URL);
+    //         setURL_STATE(3);
+    //       });
+    //   } else {
+    //     UserData.setErrorText(ERRORS.NO_NETWORK);
+    //     setURL_STATE(2);
+    //   }
+    // });
   };
 
   const setupMobx = () => {
@@ -139,15 +143,16 @@ const SplashScreen = () => {
   }, []);
 
   setTimeout(function () {
-    VersionCheck.needUpdate({
-      depth: 3,
-    }).then(res => {
-      if (res.isNeeded) {
-        setUpdateVisible(true);
-      } else {
-        navigate();
-      }
-    });
+    navigate();
+    // VersionCheck.needUpdate({
+    //   depth: 3,
+    // }).then(res => {
+    //   if (res.isNeeded) {
+    //     setUpdateVisible(true);
+    //   } else {
+    //     navigate();
+    //   }
+    // });
   }, 2000);
 
   return (
