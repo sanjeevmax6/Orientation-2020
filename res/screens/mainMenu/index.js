@@ -40,8 +40,24 @@ import {ScrollView} from 'react-native-gesture-handler';
 const gameCardWidth =
   (Dimensions.get('window').width - 2 * scale(130)) / 3 + 2 * scale(130);
 
+const windowHeight = Dimensions.get('window').height
+const windowWidth = Dimensions.get('window').width
+
+
 const MainMenu = observer(({navigation}) => {
   const [logoutVisible, setLogoutVisible] = useState(false);
+  const [sideNavVisible, setSideNavVisible] = useState(false);
+
+
+let sideNavItemsList = [
+  {name:'QR code', icon:'grid-outline', key:1},
+  {name:'Reference Materials', icon:'book-open-outline', key:2},
+  {name:"What's your club calling?", icon:'paper-plane-outline', key:3},
+  {name:'Notifications', icon:'bell-outline', key:4},
+  {name:'Feedback', icon:'question-mark-circle-outline', key:5},
+  {name:'Settings', icon:'settings-2-outline', key:6},
+  {name:'Logout', icon:'log-out-outline', onPress:()=>{setSideNavVisible(false); setLogoutVisible(true)}, key:7 },
+]
 
   const data = {
     orientationTitle: 'Orientation 2021',
@@ -85,6 +101,36 @@ const MainMenu = observer(({navigation}) => {
             },
           ]}
         />
+        {sideNavVisible && 
+        <View style={styles.sideNav}>
+          <View style={styles.sideNavTop}>   
+            <Text style={styles.sideNavHeading}>
+              Orientation'22
+            </Text>
+          </View>
+          {sideNavItemsList.map((item, i)=>(
+            <TouchableOpacity 
+              style={styles.sideNavItems}
+              onPress={item.onPress}
+              key={i}
+            >
+              <Icon
+                      style={styles.iconDashBoard}
+                      fill={Colors.Tertiary}
+                      name={item.icon}
+                    />
+              <Text style={styles.sideNavItemsText}>{item.name}</Text>
+            </TouchableOpacity>
+          ))}
+      
+        </View>
+        }
+        {sideNavVisible && 
+          <TouchableOpacity onPress={() => setSideNavVisible(false)} style={styles.sideNavRest} activeOpacity={0.5}>
+          </TouchableOpacity>
+
+        }
+
         <View style={styles.dashboard}>
           <ImageBackground
             source={require('../../assets/images/dashboardBackground.png')}
@@ -98,12 +144,12 @@ const MainMenu = observer(({navigation}) => {
                   {data.orientationTitle}
                 </Text>
               </View>
-              <View style={styles.logoutContainer}>
-                <TouchableOpacity onPress={() => setLogoutVisible(true)}>
+              <View style={styles.sideNavBarBtn}>
+                <TouchableOpacity onPress={() => setSideNavVisible(true)}>
                   <Icon
                     style={styles.iconDashBoard}
                     fill={Colors.DashboardLogo}
-                    name="log-out-outline"
+                    name="menu-outline"
                   />
                 </TouchableOpacity>
               </View>
@@ -376,10 +422,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logoutContainer: {
+  sideNavBarBtn: {
     marginTop: verticalScale(-30),
     paddingRight: scale(paddingSmall),
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
+    paddingLeft: 5,
+  },
+  sideNav: {
+    width:300,
+    backgroundColor: '#f2f2f2',
+    zIndex:2,
+    position:'absolute',
+    height:windowHeight,
+  },
+  sideNavHeading: {
+    fontSize: scale(fontSizeVeryLarge),
+    fontWeight: '500',
+
+  },
+  sideNavTop :{
+    padding:scale(10),
+    paddingTop:scale(50),
+    marginBottom:scale(15),
+    backgroundColor:Colors.Tertiary
+  },
+  sideNavRest : {
+    height:windowHeight,
+    position:'absolute',
+    width: windowWidth,
+    backgroundColor:Colors.Black,
+    zIndex:1,
+    opacity:0.5,
+  },
+  sideNavItems : {
+    margin:15,
+    display:'flex',
+    flexDirection: 'row', 
+    alignItems: 'center',
+  },
+  sideNavItemsText : {
+    paddingLeft:10,
   },
   detailsContainer: {
     flex: 1,
