@@ -1,5 +1,7 @@
 import Orientation from './orientationContacts';
 import Admin from './adminContacts';
+import Transportation from './transportationContact';
+import Food from './foodContact';
 import React, {useState, useEffect} from 'react';
 import {Text} from '@ui-kitten/components';
 import {contactsStore} from '../../mobx/contactsStore';
@@ -38,7 +40,7 @@ const Contacts = observer(({navigation}) => {
           <Tab.Navigator
             screenOptions={{
               tabBarLabelStyle: {
-                fontSize: scale(12),
+                fontSize: scale(8),
                 fontFamily: FONT,
               },
               tabBarIndicatorStyle: {backgroundColor: 'red'},
@@ -46,6 +48,8 @@ const Contacts = observer(({navigation}) => {
             }}>
             <Tab.Screen name="Orientation Team" component={Orientation} />
             <Tab.Screen name="Admin" component={Admin} />
+            <Tab.Screen name="Transport" component={Transportation} />
+            <Tab.Screen name="Food" component={Food} />
           </Tab.Navigator>
         </>
       )}

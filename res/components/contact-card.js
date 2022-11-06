@@ -74,7 +74,7 @@ const ContactCard = ({item}) => {
               position: 'absolute',
               zIndex: 1,
               right: scale(6),
-              top: verticalScale(6),
+              top: verticalScale(40),
 
               backgroundColor: '#e2e2df',
               margin: scale(3),
