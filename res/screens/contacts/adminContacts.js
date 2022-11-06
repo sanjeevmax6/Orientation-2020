@@ -36,7 +36,7 @@ const Admin = observer(({navigation}) => {
       {contactsStore.state.isAdminLoading ? (
         <LoaderPage navigation={navigation} />
       ) : (
-        <SafeAreaView style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <FlatList
             ListFooterComponent={footer}
             showsVerticalScrollIndicator={false}
@@ -46,7 +46,7 @@ const Admin = observer(({navigation}) => {
             }
             renderItem={({item}) => <GroupCard category={item} />}
           />
-        </SafeAreaView>
+        </View>
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {RefreshControl, StyleSheet} from 'react-native';
 import {View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native';
 import ContactCard from '../../components/contact-card';
 import {observer} from 'mobx-react';
 import {contactsStore} from '../../mobx/contactsStore';
