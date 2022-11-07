@@ -76,12 +76,8 @@ const MainMenu = observer(({navigation}) => {
   };
 
   let sideNavItemsList = [
-    {name: 'QR code', icon: 'grid-outline', key: 1},
-    {name: 'Reference Materials', icon: 'book-open-outline', key: 2},
-    {name: "What's your club calling?", icon: 'paper-plane-outline', key: 3},
-    {name: 'Notifications', icon: 'bell-outline', key: 4},
-    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 5},
-    {name: 'Settings', icon: 'settings-2-outline', key: 6},
+    {name: "What's your club calling?", icon: 'paper-plane-outline', key: 1},
+    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2},
     {
       name: 'Logout',
       icon: 'log-out-outline',
