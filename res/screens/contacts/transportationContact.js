@@ -9,6 +9,7 @@ import {Dimensions} from 'react-native';
 import LoaderPage from '../LoadingScreen';
 import {getContacts} from './API_CALLS';
 import {verticalScale} from 'react-native-size-matters';
+import { White } from '../../utils/colors';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
   return <View style={{height: verticalScale(10)}} />;
@@ -47,9 +48,10 @@ const Transport = observer(({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'whitesmoke',
   },
 });
 export default Transport;

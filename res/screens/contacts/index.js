@@ -14,6 +14,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {FONT} from '../../utils/UIConstants';
 import {scale} from 'react-native-size-matters';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {Platform} from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -37,20 +38,38 @@ const Contacts = observer(({navigation}) => {
         />
       ) : (
         <>
-          <Tab.Navigator
-            screenOptions={{
-              tabBarLabelStyle: {
-                fontSize: scale(8),
-                fontFamily: FONT,
-              },
-              tabBarIndicatorStyle: {backgroundColor: 'red'},
-              tabBarStyle: {backgroundColor: 'white'},
-            }}>
-            <Tab.Screen name="Orientation Team" component={Orientation} />
-            <Tab.Screen name="Admin" component={Admin} />
-            <Tab.Screen name="Transport" component={Transportation} />
-            <Tab.Screen name="Food" component={Food} />
-          </Tab.Navigator>
+          {Platform.OS === 'ios' ? (
+            <Tab.Navigator
+              lazy={true}
+              screenOptions={{
+                tabBarLabelStyle: {
+                  fontSize: scale(8),
+                  fontFamily: FONT,
+                },
+                tabBarIndicatorStyle: {backgroundColor: 'red'},
+                tabBarStyle: {backgroundColor: 'white'},
+              }}>
+              <Tab.Screen name="Orientation Team" component={Orientation} />
+              <Tab.Screen name="Admin" component={Admin} />
+              <Tab.Screen name="Transport" component={Transportation} />
+              <Tab.Screen name="Food" component={Food} />
+            </Tab.Navigator>
+          ) : (
+            <Tab.Navigator
+              screenOptions={{
+                tabBarLabelStyle: {
+                  fontSize: scale(8),
+                  fontFamily: FONT,
+                },
+                tabBarIndicatorStyle: {backgroundColor: 'red'},
+                tabBarStyle: {backgroundColor: 'white'},
+              }}>
+              <Tab.Screen name="Orientation Team" component={Orientation} />
+              <Tab.Screen name="Admin" component={Admin} />
+              <Tab.Screen name="Transport" component={Transportation} />
+              <Tab.Screen name="Food" component={Food} />
+            </Tab.Navigator>
+          )}
         </>
       )}
     </SafeAreaView>

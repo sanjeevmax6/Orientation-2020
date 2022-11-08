@@ -8,7 +8,7 @@ import {
 import {FONT, paddingSmall} from '../utils/UIConstants';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
-import {Black} from '../utils/colors';
+import {Black, White} from '../utils/colors';
 import {useToast} from 'react-native-toast-notifications';
 import {borderRadiusMedium} from '../utils/UIConstants';
 import {isAtom} from 'mobx/dist/internal';
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   card: {
     marginVertical: verticalScale(5),
     marginHorizontal: scale(paddingSmall),
-    backgroundColor: 'coral',
+    backgroundColor: White,
     borderRadius: scale(borderRadiusMedium),
     width: scale(320),
   },

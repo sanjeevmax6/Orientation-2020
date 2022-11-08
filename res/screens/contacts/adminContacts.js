@@ -16,6 +16,7 @@ import {Dimensions} from 'react-native';
 import {useCallback} from 'react';
 import {getContacts} from './API_CALLS';
 import LoaderPage from '../LoadingScreen';
+import { White } from '../../utils/colors';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
   return <View style={{height: verticalScale(20)}} />;
@@ -36,7 +37,7 @@ const Admin = observer(({navigation}) => {
       {contactsStore.state.isAdminLoading ? (
         <LoaderPage navigation={navigation} />
       ) : (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1 , backgroundColor: White}}>
           <FlatList
             ListFooterComponent={footer}
             showsVerticalScrollIndicator={false}
