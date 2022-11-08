@@ -82,7 +82,7 @@ const MainMenu = observer(({navigation}) => {
       name: 'Logout',
       icon: 'log-out-outline',
       onPress: () => {
-        setsideNavVisible(false);
+        setSideNavVisible(false);
         logOut();
       },
       key: 7,
