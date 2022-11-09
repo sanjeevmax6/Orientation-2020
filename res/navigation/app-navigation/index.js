@@ -7,6 +7,7 @@ import VirtualMap from '../../screens/virtualMap';
 import MagazineAndSymposium from '../../screens/magazineAndSymposium';
 import ClubsAndFests from '../../screens/clubsAndFests';
 import Timetable from '../../screens/academicCalendar';
+import ClubCallingQuiz from "../../screens/clubCallingQuiz"
 import Header from '../../components/header';
 import Admin from '../../screens/contacts/adminContacts';
 import Orientation from '../../screens/contacts/orientationContacts';
@@ -111,6 +112,17 @@ const AppNavigator = observer(() => {
               headerShown: true,
               header: props => (
                 <Header props={props} title="Academic Calendar" />
+              ),
+            }}
+          />
+          <stack.Screen
+            name="ClubCallingQuiz"
+            component={ClubCallingQuiz}
+            options={{
+              animation: 'slide_from_right',
+              headerShown: true,
+              header: props => (
+                <Header props={props} title="What's your club calling?" />
               ),
             }}
           />

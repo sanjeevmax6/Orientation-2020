@@ -75,8 +75,9 @@ const MainMenu = observer(({navigation}) => {
     );
   };
 
+
   let sideNavItemsList = [
-    {name: "What's your club calling?", icon: 'paper-plane-outline', key: 1},
+    {name:"What's your club calling?", icon:'paper-plane-outline', key:3, onPress:()=>{ navigation.navigate('ClubCallingQuiz'); setSideNavVisible(false);}},
     {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2},
     {
       name: 'Logout',
@@ -88,6 +89,7 @@ const MainMenu = observer(({navigation}) => {
       key: 7,
     },
   ];
+
 
   const data = {
     orientationTitle: 'Orientation 2021',
