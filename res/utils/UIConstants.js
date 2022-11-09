@@ -24,7 +24,8 @@ export const iconLarge = 40;
 export const academicCalendarCardHeight = 80;
 
 //Font Name
-export const FONT = 'SourceSansPro-Regular';
+export const FONT = 
+  Platform.OS === 'android' ? 'SourceSansPro-Regular' : 'HelveticaNeue-Bold';
 export const squidGameFont = 'GameOfSquids-1GMVL';
 
 //Mystery Hunt Card Dimensions

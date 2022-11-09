@@ -11,6 +11,9 @@ export const getContacts = ({navigation}) => {
     if (state.isConnected === true) {
       contactsStore.setIsAdminLoading(true);
       contactsStore.setIsOrientationLoading(true);
+      contactsStore.setIsTransportationLoading(true);
+      contactsStore.setIsFoodLoading(true);
+
       axios
         .get(url, {
           headers: {
@@ -22,8 +25,12 @@ export const getContacts = ({navigation}) => {
           if (response.status === 200) {
             contactsStore.setIsOrientationLoading(false);
             contactsStore.setIsAdminLoading(false);
+            contactsStore.setIsTransportationLoading(false);
+            contactsStore.setIsFoodLoading(false);
             contactsStore.setOrientationData(response.data.Orientation);
             contactsStore.setAdminData(response.data.Admin);
+            contactsStore.setTransportationData(response.data.Transportation);
+            contactsStore.setFoodData(response.data.Food);
 
             contactsStore.setError(false);
           }
@@ -40,6 +47,8 @@ export const getContacts = ({navigation}) => {
 
           contactsStore.setIsOrientationLoading(false);
           contactsStore.setIsAdminLoading(false);
+          contactsStore.setIsTransportationLoading(false);
+          contactsStore.setIsFoodLoading(false);
         });
     } else {
       contactsStore.setError(true);
