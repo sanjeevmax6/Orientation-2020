@@ -11,7 +11,7 @@ import {paddingSmall, fontSizeMedium, FONT} from '../../utils/UIConstants';
 import {useToast} from 'react-native-toast-notifications';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 import Links from './Links';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
