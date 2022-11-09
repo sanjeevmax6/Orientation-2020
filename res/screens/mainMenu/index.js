@@ -34,30 +34,62 @@ import {Dimensions} from 'react-native';
 import {GAME_Store} from '../../mobx/gameStore';
 import {leaderAPI} from '../game/leaderAPI.js';
 import {observer} from 'mobx-react';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 
 //Width is same as two normal mainmenu cards (width of normal card is 130) + the space between them
 const gameCardWidth =
   (Dimensions.get('window').width - 2 * scale(130)) / 3 + 2 * scale(130);
 
-const windowHeight = Dimensions.get('window').height
-const windowWidth = Dimensions.get('window').width
-
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 const MainMenu = observer(({navigation}) => {
   const [logoutVisible, setLogoutVisible] = useState(false);
   const [sideNavVisible, setSideNavVisible] = useState(false);
+  const logOut = () => {
+    Alert.alert(
+      'Logout?',
+      'You will return to login screen',
+      [
+        {
+          text: 'NO',
+          style: 'cancel',
+        },
+        {
+          text: 'YES',
+          onPress: () => {
+            AsyncStorage.removeItem(KEYS.USER_TOKEN);
+            AsyncStorage.removeItem(KEYS.USER_DEPARTMENT);
+            AsyncStorage.removeItem(KEYS.USER_NAME);
+            AsyncStorage.removeItem(KEYS.USER_ROLL_NO);
+            AsyncStorage.removeItem(KEYS.IS_USER_ADMIN);
+            UserData.setToken('');
+            UserData.setDepartment('');
+            UserData.setName('');
+            UserData.setRollNo('');
+            UserData.setAdmin(false);
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
 
 
-let sideNavItemsList = [
-  {name:'QR code', icon:'grid-outline', key:1},
-  {name:'Reference Materials', icon:'book-open-outline', key:2},
-  {name:"What's your club calling?", icon:'paper-plane-outline', key:3, onPress:()=>{ navigation.navigate('ClubCallingQuiz'); setSideNavVisible(false);}},
-  {name:'Notifications', icon:'bell-outline', key:4},
-  {name:'Feedback', icon:'question-mark-circle-outline', key:5},
-  {name:'Settings', icon:'settings-2-outline', key:6},
-  {name:'Logout', icon:'log-out-outline', onPress:()=>{setSideNavVisible(false); setLogoutVisible(true)}, key:7 },
-]
+  let sideNavItemsList = [
+    {name:"What's your club calling?", icon:'paper-plane-outline', key:3, onPress:()=>{ navigation.navigate('ClubCallingQuiz'); setSideNavVisible(false);}},
+    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2},
+    {
+      name: 'Logout',
+      icon: 'log-out-outline',
+      onPress: () => {
+        setSideNavVisible(false);
+        logOut();
+      },
+      key: 7,
+    },
+  ];
+
 
   const data = {
     orientationTitle: 'Orientation 2021',
@@ -101,35 +133,32 @@ let sideNavItemsList = [
             },
           ]}
         />
-        {sideNavVisible && 
-        <View style={styles.sideNav}>
-          <View style={styles.sideNavTop}>   
-            <Text style={styles.sideNavHeading}>
-              Orientation'22
-            </Text>
+        {sideNavVisible && (
+          <View style={styles.sideNav}>
+            <View style={styles.sideNavTop}>
+              <Text style={styles.sideNavHeading}>Orientation'22</Text>
+            </View>
+            {sideNavItemsList.map((item, i) => (
+              <TouchableOpacity
+                style={styles.sideNavItems}
+                onPress={item.onPress}
+                key={i}>
+                <Icon
+                  style={styles.iconDashBoard}
+                  fill={Colors.Tertiary}
+                  name={item.icon}
+                />
+                <Text style={styles.sideNavItemsText}>{item.name}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
-          {sideNavItemsList.map((item, i)=>(
-            <TouchableOpacity 
-              style={styles.sideNavItems}
-              onPress={item.onPress}
-              key={i}
-            >
-              <Icon
-                      style={styles.iconDashBoard}
-                      fill={Colors.Tertiary}
-                      name={item.icon}
-                    />
-              <Text style={styles.sideNavItemsText}>{item.name}</Text>
-            </TouchableOpacity>
-          ))}
-      
-        </View>
-        }
-        {sideNavVisible && 
-          <TouchableOpacity onPress={() => setSideNavVisible(false)} style={styles.sideNavRest} activeOpacity={0.5}>
-          </TouchableOpacity>
-
-        }
+        )}
+        {sideNavVisible && (
+          <TouchableOpacity
+            onPress={() => setSideNavVisible(false)}
+            style={styles.sideNavRest}
+            activeOpacity={0.5}></TouchableOpacity>
+        )}
 
         <View style={styles.dashboard}>
           <ImageBackground
@@ -429,39 +458,38 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   sideNav: {
-    width:300,
+    width: 300,
     backgroundColor: '#f2f2f2',
-    zIndex:2,
-    position:'absolute',
-    height:windowHeight,
+    zIndex: 2,
+    position: 'absolute',
+    height: windowHeight,
   },
   sideNavHeading: {
     fontSize: scale(fontSizeVeryLarge),
     fontWeight: '500',
-
   },
-  sideNavTop :{
-    padding:scale(10),
-    paddingTop:scale(50),
-    marginBottom:scale(15),
-    backgroundColor:Colors.Tertiary
+  sideNavTop: {
+    padding: scale(10),
+    paddingTop: scale(50),
+    marginBottom: scale(15),
+    backgroundColor: Colors.Tertiary,
   },
-  sideNavRest : {
-    height:windowHeight,
-    position:'absolute',
+  sideNavRest: {
+    height: windowHeight,
+    position: 'absolute',
     width: windowWidth,
-    backgroundColor:Colors.Black,
-    zIndex:1,
-    opacity:0.5,
+    backgroundColor: Colors.Black,
+    zIndex: 1,
+    opacity: 0.5,
   },
-  sideNavItems : {
-    margin:15,
-    display:'flex',
-    flexDirection: 'row', 
+  sideNavItems: {
+    margin: 15,
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  sideNavItemsText : {
-    paddingLeft:10,
+  sideNavItemsText: {
+    paddingLeft: 10,
   },
   detailsContainer: {
     flex: 1,

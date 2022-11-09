@@ -14,7 +14,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import Toast from 'react-native-toast-notifications';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {paddingSmall, borderRadius, FONT} from '../../utils/UIConstants';
@@ -361,6 +361,7 @@ const styles = StyleSheet.create({
     padding: scale(14),
     backgroundColor: 'rgba(204, 198, 204, 0.8)',
     flex: 1,
+    marginTop: scale(30),
   },
   text: {
     alignItems: 'center',

@@ -17,7 +17,7 @@ import {
 } from '../../utils/UIConstants';
 import * as defaultStyle from '../../../node_modules/react-native-calendars/src/style';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import {FlatList, ScrollView} from 'react-native';
 import {View} from 'react-native-animatable';
 import EventCard from './EventCard';
 import Icon from 'react-native-vector-icons/Feather';

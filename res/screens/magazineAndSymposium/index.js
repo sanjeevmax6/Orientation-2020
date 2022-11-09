@@ -340,9 +340,10 @@ const MagazineAndSymposium = observer(({navigation}) => {
 const styles = StyleSheet.create({
   content: {
     borderRadius: borderRadius,
-    padding: scale(10),
+    padding: scale(20),
     backgroundColor: 'rgba(204, 198, 204, 0.8)',
     flex: 1,
+    marginTop: scale(40),
   },
   text: {
     alignItems: 'center',
