@@ -13,8 +13,8 @@ import {
 import ClubCard from './clubCards';
 import {clubApis, festApis} from '../clubsAndFests/API_CALLS';
 
-const Timetable = ({navigation}) => {
-  let questions = [
+const ClubCallingQuiz = ({navigation}) => {
+  const questions = [
     {
       question: 'Are you a techie?',
       ansYes:
@@ -76,7 +76,7 @@ const Timetable = ({navigation}) => {
       ansNo: 'no',
     },
   ];
-  let clubs = [
+  const clubs = [
     [
       'Spider',
       'Delta Force',
@@ -385,4 +385,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Timetable;
+export default ClubCallingQuiz;
