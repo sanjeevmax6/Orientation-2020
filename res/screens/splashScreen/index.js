@@ -192,8 +192,8 @@ const SplashScreen = () => {
               }}>
               <Image
                 style={{
-                  height: scale(200),
-                  width: scale(200),
+                  height: scale(300),
+                  width: scale(300),
                   marginTop: verticalScale(-54),
                 }}
                 resizeMode="contain"
