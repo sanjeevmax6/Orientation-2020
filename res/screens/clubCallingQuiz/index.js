@@ -31,6 +31,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'No, by codes you mean Barcodes right?',
       lottieInd: 0,
       lottieBot: 55,
+      key: 1,
     },
     {
       question:
@@ -40,6 +41,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'Eww no I do not subscribe to capitalism 🤡',
       lottieInd: 1,
       lottieBot: 40,
+      key: 2,
     },
     {
       question:
@@ -49,6 +51,7 @@ const ClubCallingQuiz = ({navigation}) => {
         'Do NOT remind me of the D I got in drawing and photography classes 🥲',
       lottieInd: 2,
       lottieBot: 0,
+      key: 3,
     },
     {
       question:
@@ -57,6 +60,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'No, this is not my calling',
       lottieInd: 0,
       lottieBot: 40,
+      key: 4,
     },
     {
       question: 'Wanna show off your literary skills?',
@@ -64,6 +68,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'No, wordplays and classics aren’t really my arena',
       lottieInd: 1,
       lottieBot: 65,
+      key: 5,
     },
     {
       question:
@@ -72,6 +77,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: "Umm..I'm more of a person who enjoys watching it happen",
       lottieInd: 2,
       lottieBot: 20,
+      key: 6,
     },
     {
       question:
@@ -80,6 +86,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: "It's not my cup of tea",
       lottieInd: 0,
       lottieBot: 30,
+      key: 7,
     },
     {
       question:
@@ -88,6 +95,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'I’m more of a low-key person',
       lottieInd: 1,
       lottieBot: 25,
+      key: 8,
     },
     {
       question:
@@ -96,6 +104,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'No',
       lottieInd: 2,
       lottieBot: 25,
+      key: 9,
     },
     {
       question: 'Are you looking for clubs from within your haven? ',
@@ -103,6 +112,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo: 'No',
       lottieInd: 0,
       lottieBot: 40,
+      key: 10,
     },
   ];
   const clubs = [
