@@ -7,7 +7,8 @@ import VirtualMap from '../../screens/virtualMap';
 import MagazineAndSymposium from '../../screens/magazineAndSymposium';
 import ClubsAndFests from '../../screens/clubsAndFests';
 import Timetable from '../../screens/academicCalendar';
-import ClubCallingQuiz from "../../screens/clubCallingQuiz"
+import ClubCallingQuiz from "../../screens/clubCallingQuiz";
+import FeedbackScreen from "../../screens/feedbackScreen";
 import Header from '../../components/header';
 import Admin from '../../screens/contacts/adminContacts';
 import Orientation from '../../screens/contacts/orientationContacts';
@@ -123,6 +124,17 @@ const AppNavigator = observer(() => {
               headerShown: true,
               header: props => (
                 <Header props={props} title="What's your club calling?" />
+              ),
+            }}
+          />
+          <stack.Screen
+            name="FeedbackScreen"
+            component={FeedbackScreen}
+            options={{
+              animation: 'slide_from_right',
+              headerShown: true,
+              header: props => (
+                <Header props={props} title="Feedback" />
               ),
             }}
           />

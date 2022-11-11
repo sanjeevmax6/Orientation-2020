@@ -77,16 +77,8 @@ const MainMenu = observer(({navigation}) => {
   };
 
   let sideNavItemsList = [
-    {
-      name: "What's your club calling?",
-      icon: 'paper-plane-outline',
-      key: 3,
-      onPress: () => {
-        navigation.navigate('ClubCallingQuiz');
-        setSideNavVisible(false);
-      },
-    },
-    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2},
+    {name:"What's your club calling?", icon:'paper-plane-outline', key:3, onPress:()=>{ navigation.navigate('ClubCallingQuiz'); setSideNavVisible(false);}},
+    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2,onPress:()=>{ navigation.navigate('FeedbackScreen'); setSideNavVisible(false);}},
     {
       name: 'Logout',
       icon: 'log-out-outline',
