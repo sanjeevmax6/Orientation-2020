@@ -28,7 +28,7 @@ const ErrorScreen = ({
     if (useOnlyFn) {
       fn();
     } else {
-      navigation.goBack();
+      // navigation.goBack();
       fn();
     }
   };

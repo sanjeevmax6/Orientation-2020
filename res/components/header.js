@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import {scale, verticalScale} from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
+import { FEEDBACK_STORE } from '../mobx/feedbackStore';
 
 import {Icon} from '@ui-kitten/components';
 import {FONT, fontSizeBig, paddingSmall} from '../utils/UIConstants';
@@ -15,7 +16,7 @@ const Header = ({props, title = 'HEADER'}) => {
       style={styles.header}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => props.navigation.goBack()}>
+        onPress={() => {props.navigation.goBack(); FEEDBACK_STORE.reset()}}>
         {Platform.OS === 'ios' ? (
           <Icon
             fill="white"

@@ -14,6 +14,8 @@ export const API_GET_MAP_DATA = 'api/map';
 
 export const API_GET_CONTACTS = 'api/contacts';
 
+export const API_POST_FEEDBACK = 'api/feedback';
+
 //Game API
 export const GAME_BASE_URL = 'https://mystery-hunt.cloudns.nz/';
 export const API_GAME_CHECK_LEADER = GAME_BASE_URL + '/user/leader';
