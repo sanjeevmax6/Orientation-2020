@@ -1,6 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react';
 import ErrorScreen from '../../components/errorScreen';
 
+import LottieView from 'lottie-react-native';
+import LoadingLottie from '../../assets/lottieFiles/clubCalling-loadingScreen.json';
+import Qn1lottie from '../../assets/lottieFiles/clubCalling-question1.json';
+import Qn2lottie from '../../assets/lottieFiles/clubCalling-question2.json';
+import Qn3lottie from '../../assets/lottieFiles/clubCalling-question3.json';
+
 import {
   View,
   Text,
@@ -8,18 +14,24 @@ import {
   ScrollView,
   Pressable,
   Image,
+  Dimensions,
 } from 'react-native';
 
 import ClubCard from './clubCards';
 import {clubApis, festApis} from '../clubsAndFests/API_CALLS';
+import {verticalScale} from 'react-native-size-matters';
 
 const ClubCallingQuiz = ({navigation}) => {
+  const lottieFiles = [Qn1lottie, Qn2lottie, Qn3lottie];
   const questions = [
     {
       question: 'Are you a techie?',
       ansYes:
         'Yes, a snake is not the first thing I think of when you say python',
       ansNo: 'No, by codes you mean Barcodes right?',
+      lottieInd: 0,
+      lottieBot: 55,
+      key: 1,
     },
     {
       question:
@@ -27,6 +39,9 @@ const ClubCallingQuiz = ({navigation}) => {
       ansYes:
         'Oh yes! I can already see myself giving exclusive interviews in biz mags',
       ansNo: 'Eww no I do not subscribe to capitalism 🤡',
+      lottieInd: 1,
+      lottieBot: 40,
+      key: 2,
     },
     {
       question:
@@ -34,46 +49,70 @@ const ClubCallingQuiz = ({navigation}) => {
       ansYes: 'Ooh yeahhh that totally seems like my forté! 😋',
       ansNo:
         'Do NOT remind me of the D I got in drawing and photography classes 🥲',
+      lottieInd: 2,
+      lottieBot: 0,
+      key: 3,
     },
     {
       question:
         'Are you someone who love to pour your heart into work if it were for upliftment?',
       ansYes: 'Yes, that’s the coolest thing',
       ansNo: 'No, this is not my calling',
+      lottieInd: 0,
+      lottieBot: 40,
+      key: 4,
     },
     {
       question: 'Wanna show off your literary skills?',
       ansYes: 'Oh yes! My way with words is incomparable',
       ansNo: 'No, wordplays and classics aren’t really my arena',
+      lottieInd: 1,
+      lottieBot: 65,
+      key: 5,
     },
     {
       question:
         'Does the thought of making a fest come to life excite you? Do you enjoy working with diverse groups of people to put together a huge project? ',
       ansYes: "Yaay it's so exciting ",
       ansNo: "Umm..I'm more of a person who enjoys watching it happen",
+      lottieInd: 2,
+      lottieBot: 20,
+      key: 6,
     },
     {
       question:
         ' Did fancy dress competitions excite you as a kid? Are you someone who enjoys cultural activities? ',
       ansYes: "It's interesting",
       ansNo: "It's not my cup of tea",
+      lottieInd: 0,
+      lottieBot: 30,
+      key: 7,
     },
     {
       question:
         'Do you enjoy the rush of adrenaline when speaking in front of a crowd or wish to be a fearless speaker ? Are discussions and debates your type of pastime?',
       ansYes: 'It is the best!',
       ansNo: 'I’m more of a low-key person',
+      lottieInd: 1,
+      lottieBot: 25,
+      key: 8,
     },
     {
       question:
         ' Are you looking for something else entirely than the above clubs? Fret not, we got you covered.',
-      ansYes: 'yes',
-      ansNo: 'no',
+      ansYes: 'Yes',
+      ansNo: 'No',
+      lottieInd: 2,
+      lottieBot: 25,
+      key: 9,
     },
     {
       question: 'Are you looking for clubs from within your haven? ',
-      ansYes: 'yes',
-      ansNo: 'no',
+      ansYes: 'Yes',
+      ansNo: 'No',
+      lottieInd: 0,
+      lottieBot: 40,
+      key: 10,
     },
   ];
   const clubs = [
@@ -135,6 +174,15 @@ const ClubCallingQuiz = ({navigation}) => {
   const [questionNum, setQuestionNum] = useState(0);
   const [clubsView, setClubsView] = useState(false);
   const [currentSel, setCurrentSel] = useState(0);
+  const [quizStart, setQuizStart] = useState(false);
+  const [repeatQuiz, setRepeatQuiz] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuizStart(true);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [repeatQuiz]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -146,6 +194,8 @@ const ClubCallingQuiz = ({navigation}) => {
         //no
         setQuestionNum(num => {
           if (num == 9) {
+            setQuizStart(false);
+            setRepeatQuiz(num => num + 1);
             return 0;
           } else {
             return num + 1;
@@ -261,72 +311,112 @@ const ClubCallingQuiz = ({navigation}) => {
   }, []);
 
   return (
-    <View>
-      {clubsView == false &&
-        questions.map(
-          (question, i) =>
-            i == questionNum && (
-              <View>
-                <Text style={styles.questionNumberText}>Question {i + 1}</Text>
-                <View style={styles.questionNumberLine}></View>
-                <Text style={styles.question}>{question.question}</Text>
-                <Pressable
-                  onPress={() => {
-                    setCurrentSel(1);
-                  }}
-                  style={({pressed}) => [
-                    {
-                      backgroundColor: pressed
-                        ? 'rgba(255, 103, 0, 0.5)'
-                        : 'white',
-                    },
-                    styles.answerOutline,
-                  ]}>
-                  <Text style={{fontSize: 15, textAlign: 'center'}}>
-                    {question.ansYes}
-                  </Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => {
-                    setCurrentSel(-1);
-                  }}
-                  style={({pressed}) => [
-                    {
-                      backgroundColor: pressed
-                        ? 'rgba(255, 103, 0, 0.5)'
-                        : 'white',
-                    },
-                    styles.answerOutline,
-                  ]}>
-                  <Text style={{fontSize: 15, textAlign: 'center'}}>
-                    {question.ansNo}
-                  </Text>
-                </Pressable>
-              </View>
-            ),
-        )}
-
-      <ScrollView showsVerticalScrollIndicator={false} style={{padding: 10}}>
-        <View>
-          {isConnected == false ? (
-            <ErrorScreen
-              errorMessage={errorText}
-              navigation={navigation}
-              buttonText="GO BACK"
-              showIconInButton={true}
-            />
-          ) : (
-            <View style={styles.clubView}>
-              {clubsView == true &&
-                clubs[questionNum].map(clubName => (
-                  <View>
-                    <ClubCard clubName={clubName} img={findImg(clubName)} />
-                  </View>
-                ))}
-            </View>
-          )}
+    <View style={{backgroundColor: 'white'}}>
+      {quizStart == false && (
+        <View style={{height: Dimensions.get('window').height}}>
+          <LottieView
+            source={LoadingLottie}
+            speed={1}
+            resizeMode="contain"
+            autoPlay={true}
+            loop
+            style={{bottom: verticalScale(40)}}
+          />
         </View>
-      </ScrollView>
+      )}
+      {quizStart == true && (
+        <View>
+          {clubsView == false &&
+            questions.map(
+              (question, i) =>
+                i == questionNum && (
+                  <View style={{height: Dimensions.get('window').height}}>
+                    <Text style={styles.questionNumberText}>
+                      Question {i + 1}
+                    </Text>
+                    <View style={styles.questionNumberLine}></View>
+                    <Text style={styles.question}>{question.question}</Text>
+                    <LottieView
+                      source={lottieFiles[question.lottieInd]}
+                      style={
+                        question.lottieInd == 2
+                          ? {
+                              top: verticalScale(question.lottieBot),
+                              left: (1 / 12) * Dimensions.get('window').width,
+                              width: (2 / 3) * Dimensions.get('window').width,
+                            }
+                          : {
+                              bottom: verticalScale(question.lottieBot),
+                            }
+                      }
+                      speed={1}
+                      resizeMode="contain"
+                      autoPlay={true}
+                      loop
+                    />
+                    <View style={styles.answers}>
+                      <Pressable
+                        onPress={() => {
+                          setCurrentSel(1);
+                        }}
+                        style={({pressed}) => [
+                          {
+                            backgroundColor: pressed
+                              ? 'rgba(255, 103, 0, 0.5)'
+                              : 'white',
+                          },
+                          styles.answerOutline,
+                        ]}>
+                        <Text style={{fontSize: 15, textAlign: 'center'}}>
+                          {question.ansYes}
+                        </Text>
+                      </Pressable>
+                      <Pressable
+                        onPress={() => {
+                          setCurrentSel(-1);
+                        }}
+                        style={({pressed}) => [
+                          {
+                            backgroundColor: pressed
+                              ? 'rgba(255, 103, 0, 0.5)'
+                              : 'white',
+                          },
+                          styles.answerOutline,
+                        ]}>
+                        <Text style={{fontSize: 15, textAlign: 'center'}}>
+                          {question.ansNo}
+                        </Text>
+                      </Pressable>
+                    </View>
+                  </View>
+                ),
+            )}
+
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{padding: 10}}>
+            <View>
+              {isConnected == false ? (
+                <ErrorScreen
+                  errorMessage={errorText}
+                  navigation={navigation}
+                  buttonText="GO BACK"
+                  showIconInButton={true}
+                />
+              ) : (
+                <View style={styles.clubView}>
+                  {clubsView == true &&
+                    clubs[questionNum].map(clubName => (
+                      <View>
+                        <ClubCard clubName={clubName} img={findImg(clubName)} />
+                      </View>
+                    ))}
+                </View>
+              )}
+            </View>
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 };
@@ -356,13 +446,13 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   answerOutline: {
-    width: '80%',
+    width: (4 / 5) * Dimensions.get('window').width,
     marginLeft: '10%',
     borderRadius: 20,
     borderColor: '#FF6700',
     borderWidth: 1,
     padding: 20,
-    marginTop: 40,
+    marginTop: 20,
   },
   clubOutline: {
     width: '80%',
@@ -382,6 +472,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingBottom: 50,
     paddingTop: 20,
+  },
+  answers: {
+    position: 'absolute',
+    bottom: verticalScale(100),
   },
 });
 
