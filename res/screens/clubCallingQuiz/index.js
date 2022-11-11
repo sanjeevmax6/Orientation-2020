@@ -48,7 +48,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansNo:
         'Do NOT remind me of the D I got in drawing and photography classes 🥲',
       lottieInd: 2,
-      lottieBot: 20,
+      lottieBot: 0,
     },
     {
       question:
@@ -95,7 +95,7 @@ const ClubCallingQuiz = ({navigation}) => {
       ansYes: 'Yes',
       ansNo: 'No',
       lottieInd: 2,
-      lottieBot: 20,
+      lottieBot: 25,
     },
     {
       question: 'Are you looking for clubs from within your haven? ',
@@ -328,7 +328,17 @@ const ClubCallingQuiz = ({navigation}) => {
                     <Text style={styles.question}>{question.question}</Text>
                     <LottieView
                       source={lottieFiles[question.lottieInd]}
-                      style={{bottom: verticalScale(question.lottieBot)}}
+                      style={
+                        question.lottieInd == 2
+                          ? {
+                              top: verticalScale(question.lottieBot),
+                              left: (1 / 12) * Dimensions.get('window').width,
+                              width: (2 / 3) * Dimensions.get('window').width,
+                            }
+                          : {
+                              bottom: verticalScale(question.lottieBot),
+                            }
+                      }
                       speed={1}
                       resizeMode="contain"
                       autoPlay={true}
