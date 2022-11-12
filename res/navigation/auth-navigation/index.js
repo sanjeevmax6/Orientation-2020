@@ -12,22 +12,30 @@ function AuthNavigator() {
       <stack.Screen
         name="Login"
         component={Login}
-        options={{headerShown: false}}
+        options={{headerShown: false, gestureEnabled: false}}
       />
       <stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{headerShown: false, animation: 'slide_from_right'}}
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
       />
       <stack.Screen
         name="Reset"
         component={Reset}
-        options={{headerShown: false, animation: 'slide_from_right'}}
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
       />
       <stack.Screen
         name="API_Loader"
         component={API_LoaderPage}
-        options={{headerShown: false}}
+        options={{headerShown: false, gestureEnabled: false}}
       />
     </stack.Navigator>
   );

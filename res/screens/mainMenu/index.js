@@ -77,8 +77,24 @@ const MainMenu = observer(({navigation}) => {
   };
 
   let sideNavItemsList = [
-    {name:"What's your club calling?", icon:'paper-plane-outline', key:3, onPress:()=>{ navigation.navigate('ClubCallingQuiz'); setSideNavVisible(false);}},
-    {name: 'Feedback', icon: 'question-mark-circle-outline', key: 2,onPress:()=>{ navigation.navigate('FeedbackScreen'); setSideNavVisible(false);}},
+    {
+      name: "What's your club calling?",
+      icon: 'question-mark-circle',
+      key: 3,
+      onPress: () => {
+        navigation.navigate('ClubCallingQuiz');
+        setSideNavVisible(false);
+      },
+    },
+    {
+      name: 'Feedback',
+      icon: 'message-square',
+      key: 2,
+      onPress: () => {
+        navigation.navigate('FeedbackScreen');
+        setSideNavVisible(false);
+      },
+    },
     {
       name: 'Logout',
       icon: 'log-out-outline',
@@ -244,13 +260,14 @@ const MainMenu = observer(({navigation}) => {
                   marginLeft: scale(40),
                   fontSize: scale(20),
                   fontWeight: 'bold',
+                  fontFamily: FONT,
                 }}>
                 {title.welcomeTitle}
               </Text>
             </View>
             <View style={styles.cardRow}>
               <View style={styles.shadow}>
-                <Card style={styles.card1}>
+                <Card style={[styles.card1, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Scheduler');
@@ -271,7 +288,7 @@ const MainMenu = observer(({navigation}) => {
                 </Card>
               </View>
               <View style={styles.shadow}>
-                <Card style={styles.card2}>
+                <Card style={[styles.card2, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('VirtualMap');
@@ -295,7 +312,7 @@ const MainMenu = observer(({navigation}) => {
 
             <View style={styles.cardRow}>
               <View style={styles.shadow}>
-                <Card style={styles.card3}>
+                <Card style={[styles.card3, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Contacts');
@@ -306,12 +323,12 @@ const MainMenu = observer(({navigation}) => {
                         height: verticalScale(70),
                         width: scale(110),
                         justifyContent: 'center',
-                        alignItems: 'center',
+                        alignSelf: 'center',
                       }}></ImageBackground>
                     <View
                       style={{
                         justifyContent: 'center',
-                        marginTop: verticalScale(10),
+                        alignItems: 'center',
                       }}>
                       <Text style={styles.textMainMenu}>Contacts</Text>
                     </View>
@@ -319,7 +336,7 @@ const MainMenu = observer(({navigation}) => {
                 </Card>
               </View>
               <View style={styles.shadow}>
-                <Card style={styles.card4}>
+                <Card style={[styles.card4, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('ClubsAndFests');
@@ -330,13 +347,14 @@ const MainMenu = observer(({navigation}) => {
                         height: verticalScale(40),
                         width: scale(100),
                         justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: verticalScale(25),
+                        alignSelf: 'center',
+                        marginTop: verticalScale(10),
+                        marginBottom: verticalScale(20),
                       }}></ImageBackground>
                     <View
                       style={{
                         justifyContent: 'center',
-                        marginTop: verticalScale(30),
+                        alignItems: 'center',
                       }}>
                       <Text style={styles.textMainMenu}>Clubs & Fests</Text>
                     </View>
@@ -347,7 +365,7 @@ const MainMenu = observer(({navigation}) => {
 
             <View style={styles.cardRow}>
               <View style={styles.shadow}>
-                <Card style={styles.card5}>
+                <Card style={[styles.card5, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Timetable');
@@ -358,13 +376,13 @@ const MainMenu = observer(({navigation}) => {
                         height: verticalScale(65),
                         width: scale(100),
                         justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: verticalScale(10),
+                        alignSelf: 'center',
+                        marginBottom: verticalScale(10),
                       }}></ImageBackground>
                     <View
                       style={{
                         justifyContent: 'center',
-                        marginTop: verticalScale(10),
+                        alignItems: 'center',
                       }}>
                       <Text style={styles.textMainMenu}>Academic Calendar</Text>
                     </View>
@@ -372,7 +390,7 @@ const MainMenu = observer(({navigation}) => {
                 </Card>
               </View>
               <View style={styles.shadow}>
-                <Card style={styles.card6}>
+                <Card style={[styles.card6, styles.elevation]}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('MagazineAndSymposium');
@@ -383,14 +401,13 @@ const MainMenu = observer(({navigation}) => {
                         height: verticalScale(80),
                         width: scale(55),
                         justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: verticalScale(10),
-                        marginLeft: scale(15),
+                        alignSelf: 'center',
+                        marginBottom: verticalScale(5),
                       }}></ImageBackground>
                     <View
                       style={{
                         justifyContent: 'center',
-                        marginTop: verticalScale(5),
+                        alignItems: 'center',
                       }}>
                       <Text style={styles.textMainMenu}>Symposiums</Text>
                     </View>
@@ -458,6 +475,7 @@ const styles = StyleSheet.create({
   },
   sideNavItemsText: {
     paddingLeft: 10,
+    fontFamily: FONT,
   },
   detailsContainer: {
     flex: 1,
@@ -503,7 +521,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: scale(borderRadiusLarge),
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   card2: {
@@ -514,7 +532,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.White,
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   card3: {
@@ -525,7 +543,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(borderRadiusLarge),
     alignItems: 'center',
     backgroundColor: Colors.White,
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   card4: {
@@ -536,7 +554,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(borderRadiusLarge),
     alignItems: 'center',
     backgroundColor: Colors.White,
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   card5: {
@@ -547,7 +565,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.White,
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   card6: {
@@ -558,7 +576,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.White,
-    borderWidth: scale(0.2),
+    borderWidth: scale(1),
     borderColor: Colors.Tertiary,
   },
   gameCard: {
@@ -576,6 +594,11 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 7, height: 7},
     shadowOpacity: 0.8,
     shadowRadius: 3,
+  },
+  elevation: {
+    elevation: 5,
+    shadowColor: Colors.Coral,
+    backgroundColor: Colors.White,
   },
   textMainMenu: {
     textAlign: 'center',

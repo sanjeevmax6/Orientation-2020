@@ -9,7 +9,7 @@ import {Dimensions} from 'react-native';
 import LoaderPage from '../LoadingScreen';
 import {getContacts} from './API_CALLS';
 import {verticalScale} from 'react-native-size-matters';
-import { White } from '../../utils/colors';
+import {White} from '../../utils/colors';
 const windowHeight = Dimensions.get('window').height;
 const footer = () => {
   return <View style={{height: verticalScale(10)}} />;

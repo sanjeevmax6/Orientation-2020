@@ -14,6 +14,7 @@ class ContactsStore {
     categories: [],
     categories2: [],
     categories3: [],
+    categories4: [],
     isLoading: true,
     hasErrorOccurred: false,
     errorText: '',
@@ -62,13 +63,18 @@ class ContactsStore {
     this.state.transportationData = data;
     const set2 = new Set();
     data.forEach(element => {
-      set2.add(element.category2);
+      set2.add(element);
     });
     this.state.categories2 = set2.slice();
   };
 
   setFoodData = data => {
     this.state.foodData = data;
+    const set3 = new Set();
+    data.forEach(element => {
+      set3.add(element);
+    });
+    this.state.categories3 = set3.slice();
   };
 
   get isLoading() {
