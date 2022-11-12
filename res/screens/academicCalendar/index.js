@@ -37,6 +37,7 @@ import {UserData} from '../../mobx/userStore';
 import * as ERRORS from '../../utils/ERROR_MESSAGES';
 import LoaderPage from '../LoadingScreen';
 import axios from 'axios';
+import {Platform} from 'react-native';
 
 //To convert UTC to IST
 function indianTime(date) {
@@ -639,9 +640,17 @@ const Timetable = ({navigation}) => {
                   bounces={false}
                   bouncesZoom={false}
                   renderItem={({item, index}) => (
-                    <Pressable onPress={() => onNoticePress(item)}>
-                      <AcademicCalendarCard notice={item} />
-                    </Pressable>
+                    <>
+                      {Platform.OS === 'ios' ? (
+                        <Pressable>
+                          <AcademicCalendarCard notice={item} />
+                        </Pressable>
+                      ) : (
+                        <Pressable onPress={() => onNoticePress(item)}>
+                          <AcademicCalendarCard notice={item} />
+                        </Pressable>
+                      )}
+                    </>
                   )}
                 />
               </View>
