@@ -19,7 +19,8 @@ import {
 
 import ClubCard from './clubCards';
 import {clubApis, festApis} from '../clubsAndFests/API_CALLS';
-import {verticalScale} from 'react-native-size-matters';
+import {scale, verticalScale} from 'react-native-size-matters';
+import {White} from '../../utils/colors';
 
 const ClubCallingQuiz = ({navigation}) => {
   const lottieFiles = [Qn1lottie, Qn2lottie, Qn3lottie];
@@ -363,11 +364,12 @@ const ClubCallingQuiz = ({navigation}) => {
                           {
                             backgroundColor: pressed
                               ? 'rgba(255, 103, 0, 0.5)'
-                              : 'white',
+                              : White,
                           },
                           styles.answerOutline,
                         ]}>
-                        <Text style={{fontSize: 15, textAlign: 'center'}}>
+                        <Text
+                          style={{fontSize: scale(15), textAlign: 'center'}}>
                           {question.ansYes}
                         </Text>
                       </Pressable>
@@ -383,7 +385,8 @@ const ClubCallingQuiz = ({navigation}) => {
                           },
                           styles.answerOutline,
                         ]}>
-                        <Text style={{fontSize: 15, textAlign: 'center'}}>
+                        <Text
+                          style={{fontSize: scale(15), textAlign: 'center'}}>
                           {question.ansNo}
                         </Text>
                       </Pressable>
@@ -394,7 +397,7 @@ const ClubCallingQuiz = ({navigation}) => {
 
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{padding: 10}}>
+            style={{padding: scale(10)}}>
             <View>
               {isConnected == false ? (
                 <ErrorScreen

@@ -46,7 +46,6 @@ const SplashScreen = () => {
   };
 
   const getBaseURL = () => {
-
     setURL_STATE(1);
     // UserData.setBaseUrl(response.data);
     UserData.setBaseUrl(DEFAULT_BASE_URL);
@@ -192,8 +191,8 @@ const SplashScreen = () => {
               }}>
               <Image
                 style={{
-                  height: scale(300),
-                  width: scale(300),
+                  height: scale(200),
+                  width: scale(200),
                   marginTop: verticalScale(-54),
                 }}
                 resizeMode="contain"
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
   bottom: {
     justifyContent: 'space-between',
     position: 'absolute',
-    bottom: verticalScale(30), //
+    bottom: verticalScale(30),
     width: '100%',
   },
   top: {
