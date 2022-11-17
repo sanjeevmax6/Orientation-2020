@@ -4,6 +4,11 @@ class API_CALL {
   state = {
     isError: false,
     errorText: '',
+    success: true,
+  };
+
+  setSuccess = val => {
+    this.state.success = val;
   };
 
   setError = () => {
@@ -29,16 +34,22 @@ class API_CALL {
     return this.state.isError;
   }
 
+  get successStatus() {
+    return this.state.success;
+  }
+
   constructor() {
     makeObservable(this, {
       state: observable,
       setError: action,
+      setSuccess: action,
       resetError: action,
       setErrorText: action,
       reset: action,
 
       errorStatus: computed,
       errorText: computed,
+      successStatus: computed,
     });
   }
 }
