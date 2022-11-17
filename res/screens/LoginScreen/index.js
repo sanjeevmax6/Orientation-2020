@@ -17,7 +17,7 @@ import loginLottie from '../../assets/lottieFiles/login.json';
 import {Icon} from '@ui-kitten/components';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {Black} from '../../utils/colors';
+import {Black, Coral, White} from '../../utils/colors';
 import {
   FONT,
   fontSizeBig,
@@ -299,10 +299,29 @@ const Login = ({navigation}) => {
           </View>
         </View>
       )}
+      <View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.push('LynxLogin', {screenType: 'LYNX LOGIN'})
+          }>
+          <Text
+            style={{
+              color: White,
+              fontWeight: 'bold',
+              fontSize: scale(14),
+              fontFamily: FONT,
+              textAlign: 'center',
+            }}>
+            {' '}
+            Login with Lynx Auth
+          </Text>
+        </TouchableOpacity>
+      </View>
 
       <View
         style={{
-          height: verticalScale(390),
+          height: verticalScale(250),
           width: '100%',
           alignSelf: 'center',
           justifyContent: 'center',
@@ -341,6 +360,15 @@ const styles = StyleSheet.create({
     fontSize: scale(fontSizeVeryLarge),
     fontWeight: 'bold',
     fontFamily: FONT,
+  },
+  button: {
+    marginTop: verticalScale(40),
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: Coral,
+    height: verticalScale(40),
+    width: scale(180),
+    borderRadius: scale(25),
   },
 });
 

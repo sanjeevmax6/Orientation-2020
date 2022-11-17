@@ -4,6 +4,7 @@ import Login from '../../screens/LoginScreen';
 import SignUp from '../../screens/signUp';
 import API_LoaderPage from '../../screens/apiCallScreen';
 import Reset from '../../screens/Reset';
+import LynxLogin from '../../screens/lynxAuthScreen';
 const stack = createNativeStackNavigator();
 
 function AuthNavigator() {
@@ -26,6 +27,15 @@ function AuthNavigator() {
       <stack.Screen
         name="Reset"
         component={Reset}
+        options={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
+      />
+      <stack.Screen
+        name="LynxLogin"
+        component={LynxLogin}
         options={{
           headerShown: false,
           animation: 'slide_from_right',
