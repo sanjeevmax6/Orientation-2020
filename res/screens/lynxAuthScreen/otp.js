@@ -2,7 +2,7 @@ import React from 'react';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput} from 'react-native-element-textinput';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LottieView from 'lottie-react-native';
 import loginLottie from '../../assets/lottieFiles/signup.json';
 import {UserData} from '../../mobx/userStore';
@@ -18,85 +18,195 @@ import {
   paddingSmall,
 } from '../../utils/UIConstants';
 import NetInfo from '@react-native-community/netinfo';
-import {API_VERIFY_OTP} from '../../utils/APIConstants';
+import {
+  API_STUDENT_LYNX_OTP,
+  API_VERIFY_OTP,
+  SUBSCRIBE_NOTIFICATION,
+} from '../../utils/APIConstants';
 import axios from 'axios';
 import Button from '../signUp/button';
+import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
+import {Platform} from 'react-native';
+import * as KEYS from '../../utils/STORAGE_KEYS';
+import { observer } from 'mobx-react';
 
-const OTPScreenlynx = () => {
+const OTPScreenlynx = observer(({navigation}) => {
   const backHandler = () => {
     
+    // API_SCREEN_Store.setSuccess(false);
+    navigation.push('Login', {screenType: 'LOGIN'});
+    // navigation.push('LynxLogin', {screenType: 'LYNX LOGIN'})
+    API_SCREEN_Store.reset();
   };
 
   const nextHandler = () => {
-    SIGN_UP_STORE.setDoingApiCall(true);
     handleAPI_CALL();
   };
 
-  React.useEffect(() => {
-    if (SIGN_UP_STORE.getToken != '') {
-      console.log(SIGN_UP_STORE.getToken);
-    }
-  }, [SIGN_UP_STORE.getToken]);
-
-  function validData() {
-    if (SIGN_UP_STORE.getOTP == '') {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  const maskEmail = email => {
-    let rollLength = email.length;
-    email = email + '@nitt.edu';
-    let length = email.length;
-    let temp = 'x'.repeat(rollLength) + '@nitt.edu';
-    let x = length / 4;
-    let masked = email.slice(0, x) + temp.slice(x);
-    return masked;
-  };
-
   const handleAPI_CALL = () => {
-    var url = UserData.getBaseUrl + API_VERIFY_OTP;
+    var url = UserData.getBaseUrl + API_STUDENT_LYNX_OTP;
+    var scrburl = UserData.getBaseUrl + SUBSCRIBE_NOTIFICATION;
     NetInfo.fetch().then(state => {
-      if (state.isConnected == true) {
-        if (validData()) {
+      if (state.isConnected === true) {
+        console.log('logging In');
+        API_SCREEN_Store.setIsLoading(true);
+        var otp = API_SCREEN_Store.getOtp;
+        var rollNo = API_SCREEN_Store.getRollNo;
+        console.log(otp);
+        console.log(url);
+        if (otp.trim() === '') {
+          API_SCREEN_Store.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+          API_SCREEN_Store.setError(true);
+          API_SCREEN_Store.setIsLoading(false);
+        } else if (otp.replace(/[^0-9]/g, '').length !== 6) {
+          API_SCREEN_Store.setErrorText(ERRORS.INVALID_OTP);
+          API_SCREEN_Store.setError(true);
+          API_SCREEN_Store.setIsLoading(false);
+        } else {
+          rollNo = Number.parseInt(rollNo, 10);
+          otp = Number.parseInt(otp, 10);
           axios
             .post(url, {
-              email: SIGN_UP_STORE.getEmail + '@nitt.edu',
-              otp: SIGN_UP_STORE.getOTP,
+              rollNo,
+              otp,
             })
             .then(response => {
               if (response.status === 200) {
-                SIGN_UP_STORE.setToken(response.data.token);
-                setIndex(index + 1);
-              } else {
-                SIGN_UP_STORE.setErrorText(response.data.message);
-                SIGN_UP_STORE.setFailState(true);
+                if (Platform.OS === 'ios') {
+                  console.log(response.data.token);
+                  AsyncStorage.setItem(KEYS.USER_TOKEN, response.data.token);
+                  AsyncStorage.setItem(KEYS.USER_NAME, response.data.name);
+                  AsyncStorage.setItem(
+                    KEYS.USER_ROLL_NO,
+                    response.data.rollNo + '',
+                  );
+                  AsyncStorage.setItem(
+                    KEYS.USER_DEPARTMENT,
+                    response.data.department,
+                  );
+                  AsyncStorage.setItem(
+                    KEYS.IS_USER_ADMIN,
+                    response.data.isAdmin + '',
+                  ); //Async can't handle bool or numbers
+
+                  UserData.setName(response.data.name);
+                  UserData.setDepartment(response.data.department);
+                  UserData.setRollNo(response.data.rollNo + '');
+                  UserData.setAdmin(response.data.isAdmin);
+                  //once the token is set it will go to DASHBOARD
+                  UserData.setToken(response.data.token); // only token is coming in response as of now
+                } else {
+                  console.log('Subscribing');
+                  console.log(response.data.token);
+                  console.log("firebase token "+UserData.getFireBaseToken)
+                  axios
+                    .post(
+                      scrburl,
+                      {},
+                      {
+                        headers: {
+                          firebaseToken: UserData.getFireBaseToken,
+                          token: response.data.token,
+                        },
+                      },
+                    )
+                    .then(subscribe => {
+                      if (subscribe.status === 200) {
+                        console.log(subscribe.data.message + ' hello');
+                        AsyncStorage.setItem(
+                          KEYS.USER_TOKEN,
+                          response.data.token,
+                        );
+                        AsyncStorage.setItem(
+                          KEYS.USER_NAME,
+                          response.data.name,
+                        );
+                        AsyncStorage.setItem(
+                          KEYS.USER_ROLL_NO,
+                          response.data.rollNo + '',
+                        );
+                        AsyncStorage.setItem(
+                          KEYS.USER_DEPARTMENT,
+                          response.data.department,
+                        );
+                        AsyncStorage.setItem(
+                          KEYS.IS_USER_ADMIN,
+                          response.data.isAdmin + '',
+                        ); //Async can't handle bool or numbers
+                        
+                        UserData.setName(response.data.name);
+                        UserData.setDepartment(response.data.department);
+                        UserData.setRollNo(response.data.rollNo + '');
+                        UserData.setAdmin(response.data.isAdmin);
+                        //once the token is set it will go to DASHBOARD
+                        
+                        UserData.setToken(response.data.token);
+                        
+
+                        // only token is coming in response as of now
+                      } else {
+                        API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                        API_SCREEN_Store.setError(true);
+                        API_SCREEN_Store.setIsLoading(false);
+                      }
+                    })
+                    .catch(error => {
+                      if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+
+                        API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                        
+                      } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+
+                        API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                        
+                      } else {
+                        // Something happened in setting up the request that triggered an Error
+                        API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                        
+                      }
+
+                      API_SCREEN_Store.setError(true);
+                      API_SCREEN_Store.setIsLoading(false);
+                    });
+                }
+                
+                API_SCREEN_Store.setError(false);
+                // API_SCREEN_Store.setIsLoading(false);
               }
-              SIGN_UP_STORE.setDoingApiCall(false);
             })
             .catch(error => {
               if (error.response) {
-                SIGN_UP_STORE.setErrorText(error.response.data.message);
-              } else if (error.request) {
-                SIGN_UP_STORE.setErrorText(ERRORS.TIME_OUT);
-              } else {
-                SIGN_UP_STORE.setErrorText(ERRORS.UNEXPECTED);
-              }
-              SIGN_UP_STORE.setFailState(true);
-              SIGN_UP_STORE.setDoingApiCall(false);
-            });
-        } else {
-          SIGN_UP_STORE.setErrorText(ERRORS.SIGN_UP_FILL_ALL);
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
 
-          SIGN_UP_STORE.setFailState(true);
-          SIGN_UP_STORE.setDoingApiCall(false);
+                API_SCREEN_Store.setErrorText(error.response.data.message);
+                
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+
+                API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
+                
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
+                
+              }
+
+              API_SCREEN_Store.setError(true);
+              API_SCREEN_Store.setIsLoading(false);
+            });
         }
       } else {
-        SIGN_UP_STORE.setErrorText(ERRORS.NO_NETWORK);
-
-        SIGN_UP_STORE.setFailState(true);
-        SIGN_UP_STORE.setDoingApiCall(false);
+        API_SCREEN_Store.setIsLoading(false);
+        API_SCREEN_Store.setError(true);
+        API_SCREEN_Store.setErrorText(ERRORS.NO_NETWORK);
       }
     });
   };
@@ -120,7 +230,7 @@ const OTPScreenlynx = () => {
           focusColor="black"
           value={SIGN_UP_STORE.getOTP}
           onChangeText={OTP => {
-            SIGN_UP_STORE.setOTP(OTP);
+            API_SCREEN_Store.setOtp(OTP);
           }}
           // textError={rollNo.length === 0 ? 'Please enter' : ''}
         />
@@ -136,8 +246,18 @@ const OTPScreenlynx = () => {
               fontSize: scale(12),
               fontFamily: FONT,
             }}>
-            An OTP has been sent to your Lynx app.
+            An OTP has been sent to your Lynx app. 
           </Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: scale(12),
+              fontFamily: FONT,
+            }}>
+            Open your Lynx App {'->'} Go to your profile {'->'} {'\n'}
+            Click on Spider Security {'->'} Allow and copy the OTP 
+          </Text>
+
         </View>
         <View
           style={{
@@ -164,7 +284,7 @@ const OTPScreenlynx = () => {
       </View>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   textInput: {

@@ -36,6 +36,7 @@ import {leaderAPI} from '../game/leaderAPI.js';
 import {observer} from 'mobx-react';
 import {ScrollView} from 'react-native';
 import {autoAction} from 'mobx/dist/internal';
+import { API_SCREEN_Store } from '../../mobx/apiCallScreenStore';
 
 //Width is same as two normal mainmenu cards (width of normal card is 130) + the space between them
 const gameCardWidth =
@@ -69,6 +70,7 @@ const MainMenu = observer(({navigation}) => {
             UserData.setName('');
             UserData.setRollNo('');
             UserData.setAdmin(false);
+            API_SCREEN_Store.reset();
           },
         },
       ],
