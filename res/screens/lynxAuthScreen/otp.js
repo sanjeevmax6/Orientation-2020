@@ -28,11 +28,11 @@ import Button from '../signUp/button';
 import {API_SCREEN_Store} from '../../mobx/apiCallScreenStore';
 import {Platform} from 'react-native';
 import * as KEYS from '../../utils/STORAGE_KEYS';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
+import {Coral, GRAY_LIGHT, Primary, Tertiary} from '../../utils/colors';
 
 const OTPScreenlynx = observer(({navigation}) => {
   const backHandler = () => {
-    
     // API_SCREEN_Store.setSuccess(false);
     navigation.push('Login', {screenType: 'LOGIN'});
     // navigation.push('LynxLogin', {screenType: 'LYNX LOGIN'})
@@ -41,6 +41,11 @@ const OTPScreenlynx = observer(({navigation}) => {
 
   const nextHandler = () => {
     handleAPI_CALL();
+  };
+
+  const instruction = {
+    message:
+      'Open your Lynx App -> Go to your profile -> \n Click on Lynx Authenticator-> Allow and copy the OTP',
   };
 
   const handleAPI_CALL = () => {
@@ -98,7 +103,7 @@ const OTPScreenlynx = observer(({navigation}) => {
                 } else {
                   console.log('Subscribing');
                   console.log(response.data.token);
-                  console.log("firebase token "+UserData.getFireBaseToken)
+                  console.log('firebase token ' + UserData.getFireBaseToken);
                   axios
                     .post(
                       scrburl,
@@ -133,15 +138,14 @@ const OTPScreenlynx = observer(({navigation}) => {
                           KEYS.IS_USER_ADMIN,
                           response.data.isAdmin + '',
                         ); //Async can't handle bool or numbers
-                        
+
                         UserData.setName(response.data.name);
                         UserData.setDepartment(response.data.department);
                         UserData.setRollNo(response.data.rollNo + '');
                         UserData.setAdmin(response.data.isAdmin);
                         //once the token is set it will go to DASHBOARD
-                        
+
                         UserData.setToken(response.data.token);
-                        
 
                         // only token is coming in response as of now
                       } else {
@@ -156,25 +160,22 @@ const OTPScreenlynx = observer(({navigation}) => {
                         // that falls out of the range of 2xx
 
                         API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
-                        
                       } else if (error.request) {
                         // The request was made but no response was received
                         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                         // http.ClientRequest in node.js
 
                         API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
-                        
                       } else {
                         // Something happened in setting up the request that triggered an Error
                         API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
-                        
                       }
 
                       API_SCREEN_Store.setError(true);
                       API_SCREEN_Store.setIsLoading(false);
                     });
                 }
-                
+
                 API_SCREEN_Store.setError(false);
                 // API_SCREEN_Store.setIsLoading(false);
               }
@@ -185,18 +186,14 @@ const OTPScreenlynx = observer(({navigation}) => {
                 // that falls out of the range of 2xx
 
                 API_SCREEN_Store.setErrorText(error.response.data.message);
-                
               } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                 // http.ClientRequest in node.js
-
                 API_SCREEN_Store.setErrorText(ERRORS.TIME_OUT);
-                
               } else {
                 // Something happened in setting up the request that triggered an Error
                 API_SCREEN_Store.setErrorText(ERRORS.UNEXPECTED);
-                
               }
 
               API_SCREEN_Store.setError(true);
@@ -236,7 +233,7 @@ const OTPScreenlynx = observer(({navigation}) => {
         />
         <View
           style={{
-            height: verticalScale(30),
+            height: verticalScale(50),
             alignContent: 'center',
             justifyContent: 'center',
           }}>
@@ -246,18 +243,17 @@ const OTPScreenlynx = observer(({navigation}) => {
               fontSize: scale(12),
               fontFamily: FONT,
             }}>
-            An OTP has been sent to your Lynx app. 
+            An OTP has been sent to your Lynx app.
           </Text>
           <Text
             style={{
               textAlign: 'center',
-              fontSize: scale(12),
+              fontSize: scale(11),
               fontFamily: FONT,
+              color: Coral,
             }}>
-            Open your Lynx App {'->'} Go to your profile {'->'} {'\n'}
-            Click on Spider Security {'->'} Allow and copy the OTP 
+            {instruction.message}
           </Text>
-
         </View>
         <View
           style={{
