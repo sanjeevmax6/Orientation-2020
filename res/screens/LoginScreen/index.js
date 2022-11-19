@@ -26,6 +26,7 @@ import {
   paddingSmall,
 } from '../../utils/UIConstants';
 import {studentLogin} from './studentLoginAPI';
+import { API_SCREEN_Store } from '../../mobx/apiCallScreenStore';
 
 const Login = ({navigation}) => {
   const [rollNo, setRollNo] = useState('');
@@ -302,9 +303,10 @@ const Login = ({navigation}) => {
       <View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() =>
+          onPress={() => {
+            API_SCREEN_Store.reset();
             navigation.push('LynxLogin', {screenType: 'LYNX LOGIN'})
-          }>
+          }}>
           <Text
             style={{
               color: White,
