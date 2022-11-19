@@ -12,7 +12,7 @@ const Header = ({backHandler, title = 'HEADER', showBackIcon = true}) => {
         <TouchableOpacity style={styles.button} onPress={() => backHandler()}>
           {Platform.OS === 'ios' ? (
             <Icon
-              fill="white"
+              fill="red"
               style={{width: verticalScale(30), height: verticalScale(30)}}
               name="arrow-ios-back-outline"
             />
