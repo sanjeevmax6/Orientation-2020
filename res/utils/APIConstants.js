@@ -9,6 +9,8 @@ export const API_GET_NOTICE = 'api/academic_calendar';
 export const API_GET_CLUB_DATA = 'api/clubs';
 export const API_GET_FEST_DATA = 'api/fests';
 export const API_GET_SYMP_DATA = 'api/symposiums';
+export const API_STUDENT_LYNX_LOGIN = 'lauth/generateOtp';
+export const API_STUDENT_LYNX_OTP = 'lauth/verifyOtp';
 
 export const API_GET_MAP_DATA = 'api/map';
 

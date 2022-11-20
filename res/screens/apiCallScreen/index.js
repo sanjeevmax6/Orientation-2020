@@ -42,6 +42,7 @@ const API_LoaderPage = observer(({navigation}) => {
           buttonText="TRY AGAIN"
           fn={() => {
             reset();
+            navigation.push('Login', {screenType: 'LOGIN'});
           }}
         />
       ) : (

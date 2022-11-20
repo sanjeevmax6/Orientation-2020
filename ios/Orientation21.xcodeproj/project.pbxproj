@@ -570,7 +570,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 458ZNJP62Z;
+				DEVELOPMENT_TEAM = 4LL8SA2F54;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Orientation21/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -582,7 +582,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.spider.Orientation;
+				PRODUCT_BUNDLE_IDENTIFIER = org.spider.orientation;
 				PRODUCT_NAME = Orientation21;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -597,7 +597,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 458ZNJP62Z;
+				DEVELOPMENT_TEAM = 4LL8SA2F54;
 				INFOPLIST_FILE = Orientation21/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -608,7 +608,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.spider.Orientation;
+				PRODUCT_BUNDLE_IDENTIFIER = org.spider.orientation;
 				PRODUCT_NAME = Orientation21;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
