@@ -1,4 +1,7 @@
-export const DEFAULT_BASE_URL = 'https://orientationdevapis.spider-nitt.org/';
+//production
+export const DEFAULT_BASE_URL = 'https://orientationapis.spider-nitt.org/';
+// developement
+// export const DEFAULT_BASE_URL = 'https://orientationdevapis.spider-nitt.org/';
 export const REF_URL = 'https://nsi319.github.io/orientation/';
 export const APP_PLAYSTORE_URL =
   'https://play.google.com/store/apps/details?id=org.spider.orientation2021';
