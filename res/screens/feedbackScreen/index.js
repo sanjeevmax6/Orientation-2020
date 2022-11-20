@@ -19,13 +19,14 @@ import {PostFeedback} from './API_CALLS';
 import {INVALID_FEEDBACK} from '../../utils/ERROR_MESSAGES';
 import {verticalScale, scale} from 'react-native-size-matters';
 import FeedbackLottie from '../../assets/lottieFiles/feedbackLottie.json';
-import {Coral} from '../../utils/colors';
+import {Black, Coral, White} from '../../utils/colors';
 import {
   FONT,
   fontSizeBig,
   paddingMedium,
   paddingSmall,
 } from '../../utils/UIConstants';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const FeedbackScreen = observer(({navigation}) => {
   const onPressHandler = () => {
@@ -79,7 +80,6 @@ const FeedbackScreen = observer(({navigation}) => {
                         style={styles.input}
                         inputStyle={{
                           fontSize: scale(fontSizeBig),
-                          color: 'black',
                         }}
                         labelStyle={{fontSize: scale(fontSizeBig)}}
                         placeholder="Give your feedback here"
@@ -143,6 +143,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     borderRadius: scale(8),
     fontFamily: FONT,
+    color: Black
+
   },
   button: {
     marginTop: verticalScale(40),
