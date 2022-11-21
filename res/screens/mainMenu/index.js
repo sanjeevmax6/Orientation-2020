@@ -275,7 +275,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('Scheduler');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card1.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome1.png')}
                       style={{
                         height: verticalScale(70),
                         width: scale(110),
@@ -296,7 +296,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('VirtualMap');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card2.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome2.png')}
                       style={{
                         height: verticalScale(70),
                         width: scale(100),
@@ -320,7 +320,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('Contacts');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card3.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome3.png')}
                       style={{
                         height: verticalScale(70),
                         width: scale(110),
@@ -344,7 +344,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('ClubsAndFests');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card4.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome4.png')}
                       style={{
                         height: verticalScale(40),
                         width: scale(100),
@@ -373,7 +373,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('Timetable');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card5.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome5.png')}
                       style={{
                         height: verticalScale(65),
                         width: scale(100),
@@ -398,7 +398,7 @@ const MainMenu = observer(({navigation}) => {
                       navigation.navigate('MagazineAndSymposium');
                     }}>
                     <ImageBackground
-                      source={require('../../assets/images/dashboardCards/card6.png')}
+                      source={require('../../assets/images/dashboardCards/cardHome6.png')}
                       style={{
                         height: verticalScale(80),
                         width: scale(55),

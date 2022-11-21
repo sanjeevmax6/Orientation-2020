@@ -45,7 +45,7 @@ const OTPScreenlynx = observer(({navigation}) => {
 
   const instruction = {
     message:
-      'Open your Lynx App -> Go to your profile -> \n Click on Lynx Authenticator-> Allow and copy the OTP',
+      'Open your Lynx App -> Go to your profile -> \n Click on Spider Security/Lynx Authenticator-> Allow and copy the OTP',
   };
 
   const handleAPI_CALL = () => {
@@ -184,8 +184,11 @@ const OTPScreenlynx = observer(({navigation}) => {
               if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-
+                if(error.response.status === 400 ) {
+                  API_SCREEN_Store.setErrorText(ERRORS.INVALID_OTP);
+                } else { 
                 API_SCREEN_Store.setErrorText(error.response.data.message);
+                }
               } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

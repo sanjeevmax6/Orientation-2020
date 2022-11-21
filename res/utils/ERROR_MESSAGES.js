@@ -12,5 +12,5 @@ export const SIGN_UP_PASSWORD_NO_MATCH = "Passwords don't match. Try again";
 export const INVALID_NAME = 'Please enter a valid name';
 export const INVALID_ROLL_NUMBER = 'Please enter a valid roll number';
 export const INVALID_FEEDBACK = 'Please enter a valid feedback';
-export const INVALID_OTP = 'Please enter a valid OTP';
+export const INVALID_OTP = 'Invalid OTP, try again';
 

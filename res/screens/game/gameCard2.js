@@ -32,7 +32,7 @@ const gameCard2 = ({link, isDone}) => {
         activeOpacity={0.5}
         onPress={() => Linking.openURL(link)}>
         <ImageBackground
-          source={require('../../assets/images/gameImages/card2.jpg')}
+          source={require('../../assets/images/gameImages/cardG2.jpg')}
           resizeMode="cover"
           style={{
             width: scale(275),

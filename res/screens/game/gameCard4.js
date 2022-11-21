@@ -32,7 +32,7 @@ const ClubCard = ({link, isDone}) => {
         activeOpacity={0.5}
         onPress={() => Linking.openURL(link)}>
         <ImageBackground
-          source={require('../../assets/images/gameImages/card4.jpg')}
+          source={require('../../assets/images/gameImages/cardG4.jpg')}
           resizeMode="cover"
           style={{
             width: scale(gameCardWidth),
